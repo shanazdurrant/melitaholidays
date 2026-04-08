@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Melita Holidays</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+
+:root {
+    --gold: #e09a42;
+    --teal: #29787f;
+}
+
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    color: #222;
+}
+
+/* NAVBAR */
+.navbar {
+    position: fixed;
+    width: 100%;
+    background: white;
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 30px;
+    align-items: center;
+    z-index: 1000;
+}
+
+.logo { height: 40px; }
+
+.nav-btn {
+    background: var(--gold);
+    padding: 10px 20px;
+    border-radius: 25px;
+    color: white;
+    text-decoration: none;
+}
+
+/* HERO */
+.hero {
+    height: 100vh;
+    background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
+    url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e') center/cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-align: center;
+}
+
+.hero h1 {
+    font-family: 'Playfair Display';
+    font-size: 3.5em;
+}
+
+.btn {
+    background: var(--gold);
+    padding: 14px 28px;
+    border-radius: 30px;
+    text-decoration: none;
+    color: white;
+}
+
+/* SECTIONS */
+.section {
+    padding: 80px 20px;
+    max-width: 1100px;
+    margin: auto;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.8s ease;
+}
+
+.section.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* DESTINATIONS */
+.destinations {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
+    gap: 20px;
+}
+
+.dest {
+    height: 250px;
+    border-radius: 15px;
+    background-size: cover;
+    background-position: center;
+    color: white;
+    display: flex;
+    align-items: flex-end;
+    padding: 20px;
+    font-weight: bold;
+    transition: 0.4s;
+}
+
+.dest:hover {
+    transform: scale(1.03);
+}
+
+/* TESTIMONIALS */
+.testimonial {
+    background: #f9f9f9;
+    padding: 30px;
+    border-radius: 10px;
+    margin: 10px;
+    transition: 0.3s;
+}
+
+.testimonial:hover {
+    transform: translateY(-5px);
+}
+
+/* GALLERY */
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px,1fr));
+    gap: 10px;
+}
+
+.gallery img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+/* FOOTER */
+footer {
+    background: var(--teal);
+    color: white;
+    padding: 30px;
+    text-align: center;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+    <img src="logo.png" class="logo">
+    <a href="#form" class="nav-btn">Book Now</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+    <div>
+        <h1>Melita Holidays</h1>
+        <p>Luxury travel curated just for you</p>
+        <a href="#form" class="btn">Start Your Journey</a>
+    </div>
+</section>
+
+<!-- ABOUT -->
+<section class="section">
+    <h2>About Us</h2>
+    <p>We create bespoke travel experiences with access to 200+ suppliers worldwide.</p>
+</section>
+
+<!-- DESTINATIONS -->
+<section class="section">
+    <h2>Featured Destinations</h2>
+    <div class="destinations">
+        <div class="dest" style="background-image:url('https://images.unsplash.com/photo-1500375592092-40eb2168fd21')">Maldives</div>
+        <div class="dest" style="background-image:url('https://images.unsplash.com/photo-1502602898657-3e91760cbb34')">Dubai</div>
+        <div class="dest" style="background-image:url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e')">Caribbean</div>
+    </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="section">
+    <h2>What Our Clients Say</h2>
+    <div class="testimonial">“Amazing service from start to finish!”</div>
+    <div class="testimonial">“Best holiday I’ve ever had, stress free!”</div>
+</section>
+
+<!-- GALLERY -->
+<section class="section">
+    <h2>Travel Inspiration</h2>
+    <div class="gallery">
+        <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e">
+        <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470">
+        <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee">
+    </div>
+</section>
+
+<!-- FORM -->
+<section id="form" class="section">
+    <h2>Start Your Journey</h2>
+
+    <iframe 
+    src="https://form.jotform.com/243554201551347"
+    width="100%"
+    height="700"
+    frameborder="0">
+    </iframe>
+
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <p>© 2026 Melita Holidays | ATOL Protected</p>
+</footer>
+
+<script>
+// SCROLL ANIMATION
+const sections = document.querySelectorAll('.section');
+
+window.addEventListener('scroll', () => {
+    sections.forEach(sec => {
+        const top = sec.getBoundingClientRect().top;
+        if(top < window.innerHeight - 100){
+            sec.classList.add('visible');
+        }
+    });
+});
+</script>
+
+</body>
+</html>
