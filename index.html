@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Melita Holidays</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+
+:root {
+    --gold:#e09a42;
+    --teal:#29787f;
+    --light:#f5f7f6;
+}
+
+body {
+    margin:0;
+    font-family:'Poppins',sans-serif;
+}
+
+/* NAV */
+.navbar {
+    position:fixed;
+    width:100%;
+    background:white;
+    display:flex;
+    justify-content:space-between;
+    padding:20px 40px;
+    z-index:1000;
+}
+
+.logo {
+    height:80px;
+}
+
+/* HERO */
+.hero {
+    height:100vh;
+    background:
+    linear-gradient(rgba(0,0,0,0.35),rgba(0,0,0,0.35)),
+    url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e');
+    background-size:cover;
+    background-position:center;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    color:white;
+}
+
+.hero h1 {
+    font-family:'Playfair Display';
+    font-size:4em;
+}
+
+.btn {
+    background:var(--gold);
+    padding:15px 30px;
+    border-radius:30px;
+    color:white;
+    text-decoration:none;
+}
+
+/* SECTIONS */
+.section {
+    padding:80px 20px;
+    max-width:1000px;
+    margin:auto;
+    text-align:center;
+}
+
+h2 {
+    font-family:'Playfair Display';
+    font-size:2.5em;
+}
+
+/* ALT SECTION */
+.alt {
+    background:var(--light);
+}
+
+/* FEATURE STRIP */
+.split {
+    display:flex;
+    flex-wrap:wrap;
+}
+
+.split div {
+    flex:1;
+    min-height:300px;
+}
+
+.split .text {
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:40px;
+}
+
+.split img {
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+/* TESTIMONIAL */
+.testimonial {
+    background:white;
+    border-left:5px solid var(--gold);
+    padding:25px;
+    margin:20px 0;
+    text-align:left;
+}
+
+/* CONTACT */
+.contact {
+    background:var(--teal);
+    color:white;
+    text-align:center;
+    padding:25px;
+}
+
+.contact a {
+    color:white;
+    margin:0 10px;
+    text-decoration:none;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- NAV -->
+<div class="navbar">
+<img src="Melita Holidays logo.jpg" class="logo">
+</div>
+
+<!-- HERO -->
+<section class="hero">
+<div>
+<h1>Melita Holidays</h1>
+<p>Travel made personal, simple and unforgettable</p>
+<a href="#form" class="btn">Start Your Journey</a>
+</div>
+</section>
+
+<!-- ABOUT -->
+<section class="section">
+<h2>About Us</h2>
+<p>
+At Melita Holidays, we specialise in creating personalised travel experiences designed around you.
+From family holidays to luxury escapes and group trips, we take care of every detail from start to finish.
+</p>
+</section>
+
+<!-- IMAGE + TEXT -->
+<div class="split">
+<div>
+<img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470">
+</div>
+<div class="text">
+<p>
+With access to over 200 trusted suppliers, we combine expert knowledge, flexibility and care to ensure your trip is seamless, stress-free and unforgettable.
+</p>
+</div>
+</div>
+
+<!-- REVIEWS -->
+<section class="section alt">
+<h2>What Our Clients Say</h2>
+
+<div class="testimonial">
+I booked my ten day holiday to Turkey... they took all the stress out of planning.
+</div>
+
+<div class="testimonial">
+A huge thank you for an unforgettable holiday to South India...
+</div>
+
+<div class="testimonial">
+I arranged a surprise 40th trip and it was completely stress free...
+</div>
+
+<div class="testimonial">
+We are so grateful for our Dominican Republic trip...
+</div>
+
+</section>
+
+<!-- FORM -->
+<section id="form" class="section">
+<h2>Start Your Journey</h2>
+
+<iframe src="https://form.jotform.com/243554201551347"
+width="100%" height="700"></iframe>
+
+</section>
+
+<!-- CONTACT -->
+<div class="contact">
+<a href="tel:+447821343925">📞 Call</a> |
+<a href="https://www.instagram.com/melitaholidays/" target="_blank">Instagram</a> |
+<a href="https://www.facebook.com/people/Melita-Holidays/61572085736517/" target="_blank">Facebook</a>
+</div>
+
+</body>
+</html>
