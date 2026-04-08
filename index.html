@@ -10,14 +10,13 @@
 
 <style>
 
-/* BRAND */
-:root {
+:root{
 --teal:#2f7f82;
 --gold:#e09a42;
 --cream:#f6f4f2;
 }
 
-body {
+body{
 margin:0;
 font-family:'Poppins',sans-serif;
 background:var(--teal);
@@ -25,135 +24,160 @@ color:white;
 }
 
 /* HERO */
-.hero {
+.hero{
 height:100vh;
 display:flex;
-justify-content:center;
 align-items:center;
+justify-content:center;
 background:linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),
 url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e');
 background-size:cover;
-background-position:center;
 }
 
-.hero img {
-width:80%;
-max-width:750px;
+.hero img{
+width:85%;
+max-width:800px;
 }
 
-/* LIGHT SECTION */
-.section-light {
+/* TEXT SECTION */
+.section-light{
 background:var(--cream);
 color:#222;
-padding:60px 20px;
 text-align:center;
+padding:60px 20px;
 }
 
-.section-light h2 {
-font-family:'Playfair Display',serif;
-font-size:48px;
+.section-light h2{
+font-family:'Playfair Display';
+font-size:52px;
 color:var(--gold);
-margin-bottom:15px;
+margin-bottom:10px;
 }
 
-.section-light p {
+.section-light p{
 font-size:20px;
-max-width:800px;
-margin:auto;
 }
 
 /* STATS */
-.stats {
+.stats{
 display:flex;
-flex-wrap:wrap;
 gap:30px;
-padding:60px 40px;
-background:var(--teal);
+padding:60px;
 }
 
-.stat {
+.stat{
 flex:1;
-border:4px solid var(--gold);
-padding:40px;
+border:5px solid var(--gold);
+padding:50px;
 text-align:center;
 }
 
-.stat h3 {
-font-size:52px;
+.stat h3{
+font-size:56px;
 margin:0;
-font-weight:700;
 }
 
-.stat p {
-font-size:20px;
-margin-top:10px;
+.stat p{
+font-size:22px;
 }
 
-/* HOW IT WORKS */
-.how-section {
+/* HOW */
+.how{
 display:flex;
 flex-wrap:wrap;
-background:var(--teal);
-padding:60px 0;
 }
 
-.how-image {
+.how-img{
 flex:1;
 min-height:450px;
 background:url('https://images.unsplash.com/photo-1526772662000-3f88f10405ff');
 background-size:cover;
-background-position:center;
 }
 
-.how-content {
+.how-text{
 flex:1;
-padding:40px;
+padding:50px;
 text-align:center;
 }
 
-.how-content h2 {
-font-size:42px;
-margin-bottom:10px;
-}
-
-.how-content p {
-color:var(--gold);
-margin-bottom:30px;
-}
-
-.steps {
+.steps{
 display:grid;
 grid-template-columns:1fr 1fr;
 gap:30px;
 }
 
-.step h3 {
-font-size:22px;
-margin-bottom:10px;
+/* EXPERIENCE */
+.experience{
+text-align:center;
+padding:80px 20px;
 }
 
-.step p {
-font-size:16px;
-color:#ddd;
+.experience h2{
+font-size:48px;
 }
 
-/* FORM */
-.form-section {
-background:var(--cream);
+.cards{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+gap:30px;
 padding:40px;
 }
 
-iframe {
+.card{
+height:220px;
+position:relative;
+background-size:cover;
+border-radius:10px;
+overflow:hidden;
+}
+
+.card-overlay{
+position:absolute;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.5);
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
+}
+
+/* REVIEWS */
+.reviews{
+background:var(--cream);
+color:#222;
+padding:60px;
+text-align:center;
+}
+
+.review{
+display:none;
+max-width:700px;
+margin:auto;
+font-size:18px;
+}
+
+.review.active{
+display:block;
+}
+
+/* CONTACT */
+.contact{
+text-align:center;
+padding:40px;
+}
+
+.social img{
+width:30px;
+margin:10px;
+}
+
+/* FORM */
+iframe{
 width:100%;
 height:650px;
 border:none;
-}
-
-/* FOOTER */
-.footer {
-background:#111;
-padding:30px;
-text-align:center;
 }
 
 </style>
@@ -166,7 +190,7 @@ text-align:center;
 <img src="logo.png">
 </section>
 
-<!-- FIND ESCAPE -->
+<!-- INTRO -->
 <section class="section-light">
 <h2>Find Your Perfect Escape</h2>
 <p>Whether you know exactly where you want to go or need inspiration, we’ll help you find the perfect destination.</p>
@@ -174,67 +198,113 @@ text-align:center;
 
 <!-- STATS -->
 <section class="stats">
-<div class="stat">
-<h3>200+</h3>
-<p>Trusted Suppliers</p>
-</div>
-
-<div class="stat">
-<h3>100%</h3>
-<p>ATOL Protected</p>
-</div>
-
-<div class="stat">
-<h3>100%</h3>
-<p>Personalised Travel</p>
-</div>
+<div class="stat"><h3>200+</h3><p>Trusted Suppliers</p></div>
+<div class="stat"><h3>100%</h3><p>ATOL Protected</p></div>
+<div class="stat"><h3>100%</h3><p>Personalised Travel</p></div>
 </section>
 
 <!-- HOW IT WORKS -->
-<section class="how-section">
+<section class="how">
 
-<div class="how-image"></div>
+<div class="how-img"></div>
 
-<div class="how-content">
+<div class="how-text">
 <h2>HOW IT WORKS</h2>
-<p>Planning your holiday is easy</p>
+<p style="color:var(--gold)">Planning your holiday is easy</p>
 
 <div class="steps">
-
-<div class="step">
-<h3>1. Tell Us What You Want</h3>
-<p>Share your destination ideas, budget, and travel style.</p>
-</div>
-
-<div class="step">
-<h3>2. We Build Your Trip</h3>
-<p>We create a personalised itinerary tailored just for you.</p>
-</div>
-
-<div class="step">
-<h3>3. You Approve & Relax</h3>
-<p>We refine everything until it’s perfect.</p>
-</div>
-
-<div class="step">
-<h3>4. We Handle The Rest</h3>
-<p>Flights, hotels, transfers — all taken care of.</p>
+<div><h3>1. Tell Us What You Want</h3><p>Share your destination ideas, budget, and travel style.</p></div>
+<div><h3>2. We Build Your Trip</h3><p>We create a personalised itinerary tailored just for you.</p></div>
+<div><h3>3. You Approve & Relax</h3><p>We refine everything until it’s perfect.</p></div>
+<div><h3>4. We Handle The Rest</h3><p>Flights, hotels, transfers — all taken care of.</p></div>
 </div>
 
 </div>
+
+</section>
+
+<!-- EXPERIENCE -->
+<section class="experience">
+<h2>The Melita Holidays Experience</h2>
+
+<div class="cards">
+
+<div class="card" style="background-image:url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e')">
+<div class="card-overlay">
+<h3>All-Inclusive Beach Escapes</h3>
+<p>Relax in stunning beachfront resorts</p>
 </div>
+</div>
+
+<div class="card" style="background-image:url('https://images.unsplash.com/photo-1491553895911-0055eca6402d')">
+<div class="card-overlay">
+<h3>City Breaks</h3>
+<p>Discover iconic cities</p>
+</div>
+</div>
+
+<div class="card" style="background-image:url('https://images.unsplash.com/photo-1501785888041-af3ef285b470')">
+<div class="card-overlay">
+<h3>Group Holidays</h3>
+<p>Perfect for friends & families</p>
+</div>
+</div>
+
+</div>
+
+</section>
+
+<!-- REVIEWS -->
+<section class="reviews">
+
+<h2>Client Reviews</h2>
+
+<div class="review active">
+I booked my ten day holiday to Turkey with my husband and daughter. Melita Holidays were fantastic from start to finish. They were patient, knowledgeable and helped us find the perfect hotel.
+</div>
+
+<div class="review">
+A huge thank you for our unforgettable trip to South India. Everything was handled with care and professionalism. Would definitely book again.
+</div>
+
+<div class="review">
+Melita Holidays made my partner’s 40th surprise trip stress free. Everything was organised beautifully and felt so personal.
+</div>
+
+</section>
+
+<!-- CONTACT -->
+<section class="contact">
+
+<p><a href="tel:07821343925" style="color:white;font-size:22px;">Call Us</a></p>
+
+<div class="social">
+<a href="https://www.instagram.com/melitaholidays/">
+<img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png">
+</a>
+
+<a href="https://www.facebook.com/people/Melita-Holidays/61572085736517/">
+<img src="https://cdn-icons-png.flaticon.com/512/733/733547.png">
+</a>
+</div>
+
+<img src="ATOL.png" style="width:200px;margin-top:20px;">
 
 </section>
 
 <!-- FORM -->
-<section class="form-section">
 <iframe src="https://form.jotform.com/243554201551347"></iframe>
-</section>
 
-<!-- FOOTER -->
-<div class="footer">
-<p>Melita Holidays</p>
-</div>
+<script>
+let index=0;
+const reviews=document.querySelectorAll('.review');
+
+setInterval(()=>{
+reviews[index].classList.remove('active');
+index=(index+1)%reviews.length;
+reviews[index].classList.add('active');
+},4000);
+</script>
 
 </body>
 </html>
