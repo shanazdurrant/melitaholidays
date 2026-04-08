@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Melita Holidays</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+
+:root {
+--gold:#e09a42;
+--teal:#29787f;
+--cream:#f6f4f2;
+}
+
+body {
+margin:0;
+font-family:'Poppins',sans-serif;
+background:var(--teal);
+color:white;
+}
+
+/* HERO WITH LOGO */
+.hero {
+height:100vh;
+background:
+linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),
+url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e');
+background-size:cover;
+display:flex;
+align-items:center;
+justify-content:center;
+}
+
+.hero img {
+width:80%;
+max-width:800px;
+}
+
+/* LIGHT SECTION */
+.section-light {
+background:var(--cream);
+color:#222;
+padding:100px 20px;
+text-align:center;
+}
+
+/* TITLES */
+.gold-title {
+color:var(--gold);
+font-size:3em;
+font-family:'Playfair Display';
+}
+
+/* STATS */
+.stats {
+display:flex;
+gap:20px;
+padding:60px;
+background:var(--teal);
+flex-wrap:wrap;
+}
+
+.stat {
+flex:1;
+border:2px solid var(--gold);
+padding:40px;
+text-align:center;
+}
+
+/* HOW */
+.section {
+padding:100px 20px;
+text-align:center;
+}
+
+/* WHY BOOK */
+.cards {
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+}
+
+.card {
+border:2px solid var(--gold);
+padding:30px;
+margin:20px;
+width:250px;
+}
+
+/* FLIP CARDS */
+.flip-container {
+display:flex;
+flex-wrap:wrap;
+gap:20px;
+justify-content:center;
+}
+
+.flip {
+width:300px;
+height:200px;
+perspective:1000px;
+}
+
+.flip-inner {
+position:relative;
+width:100%;
+height:100%;
+transition:transform 0.8s;
+transform-style:preserve-3d;
+}
+
+.flip:hover .flip-inner {
+transform:rotateY(180deg);
+}
+
+.flip-front, .flip-back {
+position:absolute;
+width:100%;
+height:100%;
+backface-visibility:hidden;
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+padding:20px;
+}
+
+.flip-front {
+background-size:cover;
+color:white;
+}
+
+.flip-back {
+background:var(--teal);
+transform:rotateY(180deg);
+}
+
+/* REVIEWS */
+.carousel {
+overflow:hidden;
+max-width:900px;
+margin:auto;
+}
+
+.carousel-track {
+display:flex;
+animation:scroll 40s infinite;
+}
+
+.review {
+min-width:100%;
+padding:40px;
+background:white;
+color:#222;
+}
+
+@keyframes scroll {
+0% {transform:translateX(0);}
+25% {transform:translateX(-100%);}
+50% {transform:translateX(-200%);}
+75% {transform:translateX(-300%);}
+100% {transform:translateX(0);}
+}
+
+/* FOOTER */
+.footer {
+background:#111;
+text-align:center;
+padding:30px;
+}
+
+.social img {
+width:30px;
+margin:10px;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- HERO -->
+<section class="hero">
+<img src="logo.png">
+</section>
+
+<!-- FIND ESCAPE -->
+<section class="section-light">
+<h2 class="gold-title">Find Your Perfect Escape</h2>
+<p>Whether you know exactly where you want to go or need inspiration, we’ll help you find the perfect destination.</p>
+</section>
+
+<!-- STATS -->
+<div class="stats">
+<div class="stat">200+<br>Trusted Suppliers</div>
+<div class="stat">100%<br>ATOL Protected</div>
+<div class="stat">100%<br>Personalised Travel</div>
+</div>
+
+<!-- HOW -->
+<section class="section">
+<h2>HOW IT WORKS</h2>
+<p style="color:var(--gold)">Planning your holiday is easy</p>
+</section>
+
+<!-- WHY -->
+<section class="section">
+<h2 class="gold-title">Why Book With Melita Holidays?</h2>
+
+<div class="cards">
+<div class="card">🤝 Expert Support</div>
+<div class="card">🔒 Protected Holidays</div>
+<div class="card">✨ Personalised Planning</div>
+<div class="card">🌍 Trusted Suppliers</div>
+</div>
+
+</section>
+
+<!-- PLAN HOLIDAY FLIP -->
+<section class="section">
+<h2 class="gold-title">Plan Your Perfect Holiday</h2>
+
+<div class="flip-container">
+
+<div class="flip">
+<div class="flip-inner">
+<div class="flip-front" style="background-image:url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e')">
+All-Inclusive Beach Escapes
+</div>
+<div class="flip-back">
+Relax in stunning beachfront resorts where everything is taken care of.
+</div>
+</div>
+</div>
+
+<div class="flip">
+<div class="flip-inner">
+<div class="flip-front" style="background-image:url('https://images.unsplash.com/photo-1494526585095-c41746248156')">
+City Breaks
+</div>
+<div class="flip-back">
+Discover iconic cities, culture and nightlife.
+</div>
+</div>
+</div>
+
+</div>
+
+</section>
+
+<!-- EXPERIENCE -->
+<section class="section">
+<h2 class="gold-title">The Melita Holidays Experience</h2>
+<p>We don’t just book holidays — we create unforgettable experiences tailored to you.</p>
+</section>
+
+<!-- REVIEWS -->
+<section class="section-light">
+<h2>What Our Clients Say</h2>
+
+<div class="carousel">
+<div class="carousel-track">
+
+<div class="review">
+I booked my ten day holiday to Turkey… they took all the stress out of it.
+</div>
+
+<div class="review">
+A huge thank you for our unforgettable holiday…
+</div>
+
+<div class="review">
+Completely stress free from start to finish…
+</div>
+
+<div class="review">
+Our Dominican Republic trip was incredible…
+</div>
+
+</div>
+</div>
+
+</section>
+
+<!-- FORM -->
+<section class="section-light">
+<iframe src="https://form.jotform.com/243554201551347" width="100%" height="700"></iframe>
+</section>
+
+<!-- TRUST -->
+<section class="section">
+<img src="ATOL.png" height="80">
+</section>
+
+<!-- FOOTER -->
+<div class="footer">
+
+<a href="tel:+447821343925">📞 Call 07821 343925</a>
+
+<div class="social">
+<a href="https://www.instagram.com/melitaholidays/">
+<img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png">
+</a>
+
+<a href="https://www.facebook.com/people/Melita-Holidays/61572085736517/">
+<img src="https://cdn-icons-png.flaticon.com/512/733/733547.png">
+</a>
+</div>
+
+</div>
+
+</body>
+</html>
