@@ -471,6 +471,14 @@ nav{
   font-family:'Montserrat',sans-serif;font-size:12px;font-weight:700;
   letter-spacing:1px;text-transform:uppercase;color:var(--gold);
 }
+/* ── MOBILE TAP TO FLIP ── */
+.review-card.flipped .review-inner{transform:rotateY(180deg);}
+@media(hover:none){
+  .review-card:hover .review-inner{transform:none;}
+  .review-card.flipped .review-inner{transform:rotateY(180deg);}
+  .hint-text{display:none;}
+  .flip-hint::after{content:'Tap to read';}
+}
 
 /* ══════════════════════════════════
    CTA / FORM
@@ -598,8 +606,8 @@ footer{background:var(--teal-dark);color:#fff;padding:50px 60px 28px;}
   <div class="hero-video-wrap">
     <!-- Free travel stock video from Pixabay / Pexels CDN -->
     <video autoplay muted loop playsinline poster="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1400&q=80">
+      <source src="hero.mp4" type="video/mp4">
       <source src="https://videos.pexels.com/video-files/1739010/1739010-uhd_2560_1440_24fps.mp4" type="video/mp4">
-      <source src="https://videos.pexels.com/video-files/3571264/3571264-uhd_2560_1440_25fps.mp4" type="video/mp4">
     </video>
   </div>
   <div class="hero-content reveal from-bottom">
@@ -890,7 +898,7 @@ footer{background:var(--teal-dark);color:#fff;padding:50px 60px 28px;}
           <div class="overlay"></div>
           <div class="review-front-content">
             <h3>Turkey</h3>
-            <div class="flip-hint"><i class="fas fa-sync-alt"></i> Hover to read</div>
+            <div class="flip-hint"><i class="fas fa-sync-alt"></i> <span class="hint-text">Hover to read</span></div>
           </div>
         </div>
         <div class="review-back">
@@ -911,7 +919,7 @@ footer{background:var(--teal-dark);color:#fff;padding:50px 60px 28px;}
           <div class="overlay"></div>
           <div class="review-front-content">
             <h3>South India</h3>
-            <div class="flip-hint"><i class="fas fa-sync-alt"></i> Hover to read</div>
+            <div class="flip-hint"><i class="fas fa-sync-alt"></i> <span class="hint-text">Hover to read</span></div>
           </div>
         </div>
         <div class="review-back">
@@ -932,7 +940,7 @@ footer{background:var(--teal-dark);color:#fff;padding:50px 60px 28px;}
           <div class="overlay"></div>
           <div class="review-front-content">
             <h3>Dominican Republic</h3>
-            <div class="flip-hint"><i class="fas fa-sync-alt"></i> Hover to read</div>
+            <div class="flip-hint"><i class="fas fa-sync-alt"></i> <span class="hint-text">Hover to read</span></div>
           </div>
         </div>
         <div class="review-back">
@@ -1023,7 +1031,6 @@ function animateCounter(el) {
   function update(now) {
     const elapsed = now - start;
     const progress = Math.min(elapsed / duration, 1);
-    // ease out
     const eased = 1 - Math.pow(1 - progress, 3);
     const current = Math.floor(eased * target);
     el.textContent = current + suffix;
@@ -1039,9 +1046,20 @@ const statsObs = new IntersectionObserver((entries) => {
   if (entries[0].isIntersecting && !counted) {
     counted = true;
     document.querySelectorAll('.stat-num[data-target]').forEach(animateCounter);
+    statsObs.disconnect();
   }
-}, {threshold: 0.4});
-statsObs.observe(statsSection);
+}, {threshold: 0.1, rootMargin: '0px 0px -50px 0px'});
+if (statsSection) statsObs.observe(statsSection);
+
+// ── TAP TO FLIP (mobile) ──
+document.querySelectorAll('.review-card').forEach(card => {
+  card.addEventListener('click', () => {
+    // Only toggle on touch devices
+    if (window.matchMedia('(hover: none)').matches) {
+      card.classList.toggle('flipped');
+    }
+  });
+});
 
 // ── PARALLAX ──
 const parallaxImgs = document.querySelectorAll('[data-parallax]');
