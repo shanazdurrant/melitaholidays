@@ -6,7 +6,7 @@
 
 <title>Melita Holidays</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
@@ -23,8 +23,9 @@
 body{
 margin:0;
 font-family:'Poppins',sans-serif;
-background:linear-gradient(180deg,var(--teal),var(--teal-dark));
+background:var(--teal);
 color:white;
+overflow-x:hidden;
 }
 
 h1,h2,h3{
@@ -32,22 +33,42 @@ font-family:'Montserrat',sans-serif;
 font-weight:800;
 }
 
+/* ===== ANIMATION ===== */
+.fade-up{
+opacity:0;
+transform:translateY(40px);
+transition:all 0.8s ease;
+}
+
+.fade-up.show{
+opacity:1;
+transform:translateY(0);
+}
+
 /* ===== HERO ===== */
 .hero{
 text-align:center;
-padding:50px 20px;
+padding:40px 20px;
 }
 
 .hero img{
 width:90%;
 max-width:650px;
+animation:fadeIn 1.2s ease;
 }
 
 .hero h2{
 color:var(--gold);
-font-size:40px;
+font-size:34px;
+line-height:1.3;
 }
 
+@keyframes fadeIn{
+from{opacity:0; transform:translateY(20px);}
+to{opacity:1; transform:translateY(0);}
+}
+
+/* ===== BUTTONS ===== */
 .btn{
 display:block;
 margin:15px auto;
@@ -58,6 +79,12 @@ color:var(--teal);
 font-weight:bold;
 text-decoration:none;
 max-width:320px;
+transition:all 0.3s ease;
+}
+
+.btn:hover{
+transform:translateY(-3px);
+box-shadow:0 8px 20px rgba(0,0,0,0.2);
 }
 
 /* ===== EXPLORE ===== */
@@ -70,102 +97,139 @@ padding:60px 20px;
 
 .explore h2{
 color:var(--gold);
-font-size:44px;
-}
-
-/* ===== IMAGE ===== */
-.image{
-height:260px;
-background:url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e');
-background-size:cover;
+font-size:42px;
 }
 
 /* ===== STATS ===== */
 .stats{
 display:flex;
-flex-wrap:wrap;
+flex-direction:column;
 gap:20px;
-padding:40px;
-}
-
-.stat{
-flex:1;
-border:4px solid var(--gold);
-padding:40px;
-text-align:center;
-}
-
-.stat h3{
-font-size:60px;
-}
-
-/* ===== HOW ===== */
-.steps{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:40px;
 padding:30px;
 }
 
-.step{
+.stat{
+border:4px solid var(--gold);
+padding:30px;
 text-align:center;
+transition:0.3s;
+}
+
+.stat:hover{
+transform:translateY(-5px);
+box-shadow:0 10px 25px rgba(0,0,0,0.2);
+}
+
+.stat h3{
+font-size:50px;
+margin:0;
+}
+
+/* ===== HOW ===== */
+.how{
+padding:40px 20px;
+text-align:center;
+}
+
+.steps{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:30px;
+margin-top:30px;
+}
+
+.step{
+transition:0.3s;
+}
+
+.step:hover{
+transform:scale(1.05);
 }
 
 .step i{
 color:var(--gold);
-font-size:35px;
+font-size:32px;
 }
 
-/* ===== FLIP ===== */
+/* ===== FLIP CARDS ===== */
 .cards{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+display:flex;
+flex-direction:column;
 gap:25px;
-padding:30px;
+padding:20px;
 }
 
-.flip{
+.flip-card{
 perspective:1000px;
-height:260px;
+height:220px;
 }
 
 .flip-inner{
 position:relative;
 width:100%;
 height:100%;
+transition:transform 0.7s;
 transform-style:preserve-3d;
-transition:0.8s;
 }
 
-.flip:hover .flip-inner{
+.flip-card:hover .flip-inner{
 transform:rotateY(180deg);
 }
 
-.flip-front,.flip-back{
+.flip-front, .flip-back{
 position:absolute;
 width:100%;
 height:100%;
 backface-visibility:hidden;
+border-radius:12px;
 display:flex;
 align-items:center;
 justify-content:center;
 text-align:center;
+padding:20px;
 }
 
 .flip-front{
 background-size:cover;
+background-position:center;
+font-weight:bold;
 }
 
 .flip-back{
-background:var(--teal);
+background:var(--teal-dark);
 transform:rotateY(180deg);
+}
+
+/* ===== WHY ===== */
+.why{
+padding:40px 20px;
+text-align:center;
+}
+
+.why-box{
+border:4px solid var(--gold);
+margin:15px;
 padding:20px;
+transition:0.3s;
+}
+
+.why-box:hover{
+transform:translateY(-5px);
+box-shadow:0 8px 20px rgba(0,0,0,0.2);
 }
 
 /* ===== REVIEWS ===== */
+.reviews{
+background:var(--cream);
+color:#333;
+text-align:center;
+padding:50px 20px;
+}
+
 .review{
 display:none;
-max-width:700px;
+font-size:20px;
+max-width:500px;
 margin:auto;
 }
 
@@ -173,36 +237,17 @@ margin:auto;
 display:block;
 }
 
-/* ===== PREMIUM FORM SECTION ===== */
+/* ===== FORM ===== */
 .form-section{
-display:flex;
-flex-wrap:wrap;
-gap:40px;
-padding:60px 20px;
-}
-
-.form-text{
-flex:1;
-min-width:300px;
-}
-
-.form-text h2{
-font-size:42px;
-}
-
-.form-card{
-flex:1;
-min-width:300px;
-background:white;
-border-radius:12px;
-overflow:hidden;
-box-shadow:0 10px 30px rgba(0,0,0,0.3);
+padding:40px 20px;
 }
 
 iframe{
 width:100%;
 height:600px;
 border:none;
+border-radius:12px;
+box-shadow:0 10px 25px rgba(0,0,0,0.2);
 }
 
 /* ===== CONTACT ===== */
@@ -212,8 +257,22 @@ padding:40px;
 }
 
 .contact img{
-margin:10px;
 width:35px;
+margin:10px;
+}
+
+/* ===== FLOAT BUTTON ===== */
+.floating-btn{
+position:fixed;
+bottom:20px;
+right:20px;
+background:var(--gold);
+color:white;
+padding:14px 18px;
+border-radius:50px;
+font-weight:bold;
+box-shadow:0 8px 20px rgba(0,0,0,0.3);
+text-decoration:none;
 }
 
 </style>
@@ -222,36 +281,36 @@ width:35px;
 <body>
 
 <!-- HERO -->
-<section class="hero">
+<section class="hero fade-up">
 <img src="logo.png">
+
 <h2>Your Dream Holiday, Designed Around You</h2>
+
+<p>Personalised travel planning, exclusive deals, and full ATOL & PTS protection — all in one place.</p>
 
 <a href="#form" class="btn">Start Planning Your Holiday</a>
 <a href="#form" class="btn">Get a Free Quote</a>
 </section>
 
 <!-- EXPLORE -->
-<section class="explore">
+<section class="explore fade-up">
 <h2>EXPLORE</h2>
 <p>✔ ATOL & PTS Protected</p>
 <p>✔ 200+ Trusted Travel Partners</p>
 <p>✔ UK-Based Independent Travel Experts</p>
-
-<img src="ATOL.png" style="width:90%;max-width:400px;">
 </section>
 
-<div class="image"></div>
-
 <!-- STATS -->
-<section class="stats">
+<section class="stats fade-up">
 <div class="stat"><h3>200+</h3><p>Trusted Suppliers</p></div>
 <div class="stat"><h3>100%</h3><p>ATOL Protected</p></div>
 <div class="stat"><h3>100%</h3><p>Personalised Travel</p></div>
 </section>
 
 <!-- HOW -->
-<section>
-<h2 style="text-align:center;">HOW IT WORKS</h2>
+<section class="how fade-up">
+<h2>HOW IT WORKS</h2>
+
 <div class="steps">
 <div class="step"><i class="fas fa-pencil"></i><h3>Tell Us What You Want</h3></div>
 <div class="step"><i class="fas fa-map"></i><h3>We Build Your Trip</h3></div>
@@ -261,76 +320,102 @@ width:35px;
 </section>
 
 <!-- EXPERIENCE -->
-<section class="cards">
-<div class="flip"><div class="flip-inner">
-<div class="flip-front" style="background-image:url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e')">Beach</div>
-<div class="flip-back">Relax in beachfront resorts</div>
-</div></div>
+<section class="cards fade-up">
 
-<div class="flip"><div class="flip-inner">
-<div class="flip-front" style="background-image:url('https://images.unsplash.com/photo-1491553895911-0055eca6402d')">City</div>
-<div class="flip-back">Discover iconic cities</div>
-</div></div>
+<div class="flip-card">
+<div class="flip-inner">
+<div class="flip-front" style="background-image:url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e')">
+Beach Escapes
+</div>
+<div class="flip-back">
+Relax in stunning beachfront resorts where everything is taken care of.
+</div>
+</div>
+</div>
 
-<div class="flip"><div class="flip-inner">
-<div class="flip-front" style="background-image:url('https://images.unsplash.com/photo-1501785888041-af3ef285b470')">Group</div>
-<div class="flip-back">Perfect for groups</div>
-</div></div>
+<div class="flip-card">
+<div class="flip-inner">
+<div class="flip-front" style="background-image:url('https://images.unsplash.com/photo-1491553895911-0055eca6402d')">
+City Breaks
+</div>
+<div class="flip-back">
+Discover iconic cities with culture, food and nightlife.
+</div>
+</div>
+</div>
 
-<div class="flip"><div class="flip-inner">
-<div class="flip-front" style="background-image:url('https://images.unsplash.com/photo-1500375592092-40eb2168fd21')">Cruise</div>
-<div class="flip-back">Luxury cruising</div>
-</div></div>
+<div class="flip-card">
+<div class="flip-inner">
+<div class="flip-front" style="background-image:url('https://images.unsplash.com/photo-1501785888041-af3ef285b470')">
+Group Holidays
+</div>
+<div class="flip-back">
+Perfect for friends and families travelling together.
+</div>
+</div>
+</div>
+
+<div class="flip-card">
+<div class="flip-inner">
+<div class="flip-front" style="background-image:url('https://images.unsplash.com/photo-1500375592092-40eb2168fd21')">
+Cruises
+</div>
+<div class="flip-back">
+Experience multiple destinations in one luxury trip.
+</div>
+</div>
+</div>
+
 </section>
 
 <!-- REVIEWS -->
-<section class="explore">
+<section class="reviews fade-up">
 <h2>Client Reviews</h2>
 
-<div class="review active">Melita Holidays were fantastic from start to finish...</div>
-<div class="review">Everything was handled with care and professionalism...</div>
-<div class="review">The attention to detail made it unforgettable...</div>
+<div class="review active">"Everything was handled with care and professionalism."</div>
+<div class="review">"Stress-free from start to finish."</div>
+<div class="review">"Best holiday experience we've ever had."</div>
 
 </section>
 
-<!-- PREMIUM FORM SECTION -->
-<section class="form-section" id="form">
-
-<div class="form-text">
+<!-- FORM -->
+<section class="form-section fade-up" id="form">
 <h2>READY TO PLAN YOUR NEXT HOLIDAY?</h2>
 
-<p>Have a question or ready to start planning your next getaway?</p>
-<p>You’re in the right place.</p>
+<p>✔ No obligation enquiry</p>
+<p>✔ Personalised recommendations</p>
+<p>✔ Quick response within 48 hours</p>
 
-<p>At Melita Holidays, we make planning simple, personal, and stress-free — whether you need destination ideas, a tailored quote, or full trip support.</p>
-
-<p>✔ No obligation enquiry<br>
-✔ Personalised recommendations<br>
-✔ Quick response within 48 hours</p>
-
-</div>
-
-<div class="form-card">
 <iframe src="https://form.jotform.com/243554201551347"></iframe>
-</div>
-
 </section>
 
 <!-- CONTACT -->
-<section class="contact">
-<a href="tel:07821343925" style="color:white;font-size:22px;">Call Us</a><br>
+<section class="contact fade-up">
+<a href="tel:07821343925">07821 343925</a><br>
 
-<a href="https://www.instagram.com/melitaholidays/">
-<img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png">
-</a>
-
-<a href="https://www.facebook.com/people/Melita-Holidays/61572085736517/">
-<img src="https://cdn-icons-png.flaticon.com/512/733/733547.png">
-</a>
-
+<a href="#"><img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png"></a>
+<a href="#"><img src="https://cdn-icons-png.flaticon.com/512/733/733547.png"></a>
 </section>
 
+<!-- FLOAT BUTTON -->
+<a href="#form" class="floating-btn">Plan My Trip</a>
+
 <script>
+
+/* SCROLL ANIMATION */
+const elements=document.querySelectorAll('.fade-up');
+
+const observer=new IntersectionObserver(entries=>{
+entries.forEach(entry=>{
+if(entry.isIntersecting){
+entry.target.classList.add('show');
+}
+});
+});
+
+elements.forEach(el=>observer.observe(el));
+
+/* REVIEWS */
 let i=0;
 let reviews=document.querySelectorAll('.review');
 
@@ -339,6 +424,7 @@ reviews[i].classList.remove('active');
 i=(i+1)%reviews.length;
 reviews[i].classList.add('active');
 },4000);
+
 </script>
 
 </body>
