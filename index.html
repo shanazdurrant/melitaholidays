@@ -26,7 +26,55 @@ body{
   scroll-behavior:smooth;
 }
 
-/* ── NAV ── */
+/* \u2500\u2500 SECTION HEADING STYLE \u2500\u2500 */
+.section-heading{
+  text-align:center;
+  margin-bottom:50px;
+}
+.section-heading h2{
+  font-family:'Montserrat',sans-serif;
+  font-size:clamp(24px,3vw,36px);
+  font-weight:900;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  color:var(--text-dark);
+  margin-bottom:14px;
+}
+.section-heading h2 span{color:var(--teal);}
+.section-heading .heading-line{
+  width:60px;
+  height:4px;
+  background:var(--gold);
+  margin:0 auto 14px;
+  border-radius:2px;
+}
+.section-heading p{
+  font-size:15px;
+  color:#666;
+  max-width:600px;
+  margin:0 auto;
+  line-height:1.7;
+}
+/* On teal backgrounds */
+.heading-light h2{color:#fff;}
+.heading-light p{color:rgba(255,255,255,0.8);}
+
+/* \u2500\u2500 SECTION DIVIDERS \u2500\u2500 */
+.divider{
+  height:6px;
+  background:linear-gradient(90deg, var(--teal), var(--gold), var(--teal));
+}
+.divider-thin{
+  height:1px;
+  background:linear-gradient(90deg, transparent, var(--gold), transparent);
+  margin:0 60px;
+}
+
+/* \u2500\u2500 FADE \u2500\u2500 */
+.fade{opacity:0;transform:translateY(30px);transition:opacity .9s ease,transform .9s ease;}
+.fade.show{opacity:1;transform:translateY(0);}
+
+/* \u2500\u2500 NAV \u2500\u2500 */
 nav{
   position:sticky;
   top:0;
@@ -36,8 +84,10 @@ nav{
   align-items:center;
   justify-content:space-between;
   padding:14px 40px;
-  box-shadow:0 2px 12px rgba(0,0,0,0.08);
+  box-shadow:0 2px 16px rgba(0,0,0,0.1);
+  border-bottom:3px solid var(--gold);
 }
+.nav-logo img{height:50px;object-fit:contain;}
 .nav-links{
   display:flex;
   gap:30px;
@@ -47,29 +97,38 @@ nav{
   text-decoration:none;
   color:var(--text-dark);
   font-size:13px;
-  font-weight:500;
-  letter-spacing:0.5px;
+  font-weight:600;
+  letter-spacing:1px;
   text-transform:uppercase;
   transition:color .2s;
+  position:relative;
+}
+.nav-links a::after{
+  content:'';
+  position:absolute;
+  bottom:-4px;left:0;right:0;
+  height:2px;
+  background:var(--gold);
+  transform:scaleX(0);
+  transition:transform .2s;
 }
 .nav-links a:hover{color:var(--teal);}
+.nav-links a:hover::after{transform:scaleX(1);}
 .nav-cta{
   background:var(--teal);
   color:#fff!important;
-  padding:10px 22px;
+  padding:11px 26px;
   border-radius:50px;
   font-size:13px;
-  font-weight:600;
+  font-weight:700;
   text-decoration:none;
-  transition:background .2s;
+  letter-spacing:.5px;
+  transition:background .2s, transform .2s;
+  box-shadow:0 4px 12px rgba(47,127,130,0.3);
 }
-.nav-cta:hover{background:var(--teal-dark);}
+.nav-cta:hover{background:var(--teal-dark);transform:translateY(-1px);}
 
-/* ── FADE ── */
-.fade{opacity:0;transform:translateY(30px);transition:opacity .9s ease,transform .9s ease;}
-.fade.show{opacity:1;transform:translateY(0);}
-
-/* ── HERO ── */
+/* \u2500\u2500 HERO \u2500\u2500 */
 .hero{
   background:var(--teal);
   display:grid;
@@ -88,46 +147,59 @@ nav{
 }
 .hero-left h1{
   font-family:'Montserrat',sans-serif;
-  font-size:clamp(26px,3.5vw,42px);
-  font-weight:800;
+  font-size:clamp(26px,3.5vw,44px);
+  font-weight:900;
   color:var(--gold);
   line-height:1.2;
-  margin-bottom:16px;
+  margin-bottom:6px;
+  text-transform:uppercase;
+  letter-spacing:1px;
+}
+.hero-left .hero-sub{
+  font-family:'Montserrat',sans-serif;
+  font-size:13px;
+  font-weight:600;
+  color:rgba(255,255,255,0.6);
+  letter-spacing:3px;
+  text-transform:uppercase;
+  margin-bottom:20px;
 }
 .hero-left p{
   font-size:15px;
   opacity:.9;
-  margin-bottom:30px;
+  margin-bottom:34px;
   max-width:420px;
-  line-height:1.7;
+  line-height:1.8;
 }
 .hero-btns{display:flex;flex-direction:column;gap:12px;max-width:300px;}
 .btn-primary{
   display:block;
   padding:16px 28px;
   border-radius:50px;
-  background:var(--cream);
-  color:var(--teal);
+  background:var(--gold);
+  color:#fff;
   font-weight:700;
   font-size:14px;
   text-decoration:none;
   text-align:center;
+  letter-spacing:.5px;
   transition:background .2s, transform .2s;
+  box-shadow:0 4px 14px rgba(224,154,66,0.4);
 }
-.btn-primary:hover{background:#fff;transform:translateY(-2px);}
+.btn-primary:hover{background:#c8882e;transform:translateY(-2px);}
 .btn-outline{
   display:block;
   padding:15px 28px;
   border-radius:50px;
-  border:2px solid var(--cream);
-  color:var(--cream);
+  border:2px solid rgba(255,255,255,0.5);
+  color:#fff;
   font-weight:600;
   font-size:14px;
   text-decoration:none;
   text-align:center;
   transition:all .2s;
 }
-.btn-outline:hover{background:var(--cream);color:var(--teal);}
+.btn-outline:hover{border-color:#fff;background:rgba(255,255,255,0.1);}
 
 /* hero image mosaic */
 .hero-right{
@@ -145,43 +217,38 @@ nav{
   object-fit:cover;
   display:block;
 }
-.hero-right img:first-child{
-  grid-row:1/3;
-}
+.hero-right img:first-child{grid-row:1/3;}
 
-/* ── EXPLORE BAND ── */
+/* \u2500\u2500 EXPLORE BAND \u2500\u2500 */
 .explore-band{
   background:#fff;
   display:flex;
   align-items:center;
   justify-content:space-between;
-  padding:24px 60px;
+  padding:22px 60px;
   gap:30px;
-  border-bottom:1px solid #eee;
   flex-wrap:wrap;
 }
 .explore-band h2{
   font-family:'Montserrat',sans-serif;
-  font-size:18px;
+  font-size:16px;
+  font-weight:900;
   color:var(--teal);
-  letter-spacing:1px;
+  letter-spacing:2px;
+  text-transform:uppercase;
 }
 .explore-checks{
   display:flex;
-  flex-direction:column;
-  gap:4px;
+  gap:24px;
+  flex-wrap:wrap;
   font-size:13px;
   color:#555;
 }
-.explore-checks span::before{content:'✔  ';color:var(--teal);font-weight:700;}
-.supplier-logos img{
-  height:40px;
-  object-fit:contain;
-  filter:grayscale(1);
-  opacity:.6;
-}
+.explore-checks span{display:flex;align-items:center;gap:6px;}
+.explore-checks span::before{content:'\u2714';color:var(--teal);font-weight:700;font-size:12px;}
+.explore-atol img{height:55px;object-fit:contain;}
 
-/* ── STATS ── */
+/* \u2500\u2500 STATS \u2500\u2500 */
 .stats{
   background:var(--teal);
   color:#fff;
@@ -191,686 +258,246 @@ nav{
   padding:60px 40px;
   gap:20px;
 }
+.stats > div{border-right:1px solid rgba(255,255,255,0.15);}
+.stats > div:last-child{border-right:none;}
 .stat-num{
   font-family:'Montserrat',sans-serif;
-  font-size:clamp(36px,5vw,64px);
+  font-size:clamp(40px,5vw,68px);
   font-weight:900;
   color:var(--gold);
+  line-height:1;
 }
 .stat-label{
-  font-size:13px;
+  font-size:12px;
   text-transform:uppercase;
-  letter-spacing:1.5px;
-  opacity:.85;
-  margin-top:6px;
+  letter-spacing:2px;
+  opacity:.75;
+  margin-top:8px;
 }
 
-/* ── MOSAIC GALLERY ── */
+/* \u2500\u2500 MOSAIC GALLERY \u2500\u2500 */
 .gallery{
   display:grid;
   grid-template-columns:repeat(4,1fr);
   grid-template-rows:240px 240px;
   gap:4px;
 }
-.gallery img{width:100%;height:100%;object-fit:cover;display:block;}
+.gallery img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s;}
+.gallery img:hover{transform:scale(1.03);}
 .gallery img:first-child{grid-column:1/3;grid-row:1/3;}
 
-/* ── HOW IT WORKS ── */
+/* \u2500\u2500 HOW IT WORKS \u2500\u2500 */
 .how{
   background:var(--cream);
-  padding:80px 60px;
+  padding:90px 60px;
   text-align:center;
-}
-.how h2{
-  font-family:'Montserrat',sans-serif;
-  font-size:28px;
-  font-weight:800;
-  color:var(--text-dark);
-  letter-spacing:1px;
-}
-.how .sub{
-  color:var(--gold);
-  font-weight:600;
-  margin:8px 0 40px;
 }
 .steps-grid{
   display:grid;
   grid-template-columns:repeat(4,1fr);
   gap:24px;
-  max-width:900px;
+  max-width:960px;
   margin:0 auto;
 }
 .step-card{
   background:#fff;
-  padding:28px 20px;
-  border-radius:12px;
-  box-shadow:0 4px 20px rgba(0,0,0,0.06);
+  padding:32px 20px;
+  border-radius:14px;
+  box-shadow:0 4px 24px rgba(0,0,0,0.07);
+  border-top:4px solid var(--gold);
+  transition:transform .2s, box-shadow .2s;
 }
+.step-card:hover{transform:translateY(-4px);box-shadow:0 8px 30px rgba(0,0,0,0.1);}
 .step-num{
   font-family:'Montserrat',sans-serif;
-  font-size:36px;
+  font-size:42px;
   font-weight:900;
   color:var(--teal);
-  opacity:.15;
-  margin-bottom:8px;
+  opacity:.12;
+  line-height:1;
+  margin-bottom:4px;
 }
 .step-card i{
   font-size:28px;
-  color:var(--gold);
-  margin-bottom:12px;
+  color:var(--teal);
+  margin-bottom:14px;
+  display:block;
 }
 .step-card h3{
-  font-size:13px;
-  font-weight:700;
+  font-family:'Montserrat',sans-serif;
+  font-size:12px;
+  font-weight:800;
   text-transform:uppercase;
-  letter-spacing:.5px;
-  margin-bottom:8px;
+  letter-spacing:1px;
+  margin-bottom:10px;
+  color:var(--text-dark);
 }
-.step-card p{font-size:13px;color:#666;line-height:1.6;}
+.step-card p{font-size:13px;color:#777;line-height:1.6;}
 
-/* ── WHY BOOK ── */
+/* \u2500\u2500 WHY BOOK \u2500\u2500 */
 .why{
-  padding:80px 60px;
+  padding:90px 60px;
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:60px;
+  gap:70px;
   align-items:center;
+  background:#fff;
 }
 .why-img img{
   width:100%;
-  border-radius:12px;
+  border-radius:14px;
   object-fit:cover;
-  height:500px;
+  height:520px;
+  box-shadow:0 12px 40px rgba(0,0,0,0.12);
 }
 .why-content h2{
   font-family:'Montserrat',sans-serif;
-  font-size:26px;
-  font-weight:800;
+  font-size:clamp(22px,2.5vw,32px);
+  font-weight:900;
   color:var(--text-dark);
-  letter-spacing:1px;
-  margin-bottom:30px;
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+  margin-bottom:8px;
 }
+.why-content .heading-line{width:50px;height:4px;background:var(--gold);border-radius:2px;margin-bottom:28px;}
 .why-item{
   display:flex;
   gap:16px;
-  margin-bottom:24px;
+  margin-bottom:26px;
   align-items:flex-start;
+  padding-bottom:26px;
+  border-bottom:1px solid #eee;
 }
-.why-icon{
-  font-size:22px;
-  margin-top:2px;
-  flex-shrink:0;
-}
-.why-item h3{font-size:15px;font-weight:700;margin-bottom:4px;}
+.why-item:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0;}
+.why-icon{font-size:24px;margin-top:2px;flex-shrink:0;}
+.why-item h3{font-family:'Montserrat',sans-serif;font-size:14px;font-weight:800;margin-bottom:5px;letter-spacing:.5px;text-transform:uppercase;}
 .why-item p{font-size:13px;color:#666;line-height:1.6;}
 
-/* ── PLAN SECTION ── */
-.plan-section{
-  background:var(--teal);
-  color:#fff;
-}
-.plan-hero{
-  position:relative;
-  height:400px;
-  overflow:hidden;
-}
-.plan-hero img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  display:block;
-}
+/* \u2500\u2500 PLAN SECTION \u2500\u2500 */
+.plan-section{background:var(--teal);color:#fff;}
+.plan-hero{position:relative;height:420px;overflow:hidden;}
+.plan-hero img{width:100%;height:100%;object-fit:cover;display:block;}
 .plan-hero-overlay{
-  position:absolute;
-  inset:0;
-  background:rgba(0,0,0,0.45);
-  display:flex;
-  align-items:center;
-  justify-content:center;
+  position:absolute;inset:0;
+  background:rgba(0,0,0,0.5);
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  gap:16px;
 }
 .plan-hero-overlay h2{
   font-family:'Montserrat',sans-serif;
-  font-size:clamp(28px,4vw,50px);
+  font-size:clamp(28px,4vw,52px);
   font-weight:900;
   color:#fff;
   text-align:center;
-  letter-spacing:2px;
+  letter-spacing:3px;
+  text-transform:uppercase;
 }
-.plan-grid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:0;
-}
+.plan-hero-overlay .gold-line{width:70px;height:4px;background:var(--gold);border-radius:2px;}
+.plan-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:0;}
 .plan-card{
-  padding:50px 50px;
+  padding:48px 50px;
   border-top:1px solid rgba(255,255,255,0.12);
   border-right:1px solid rgba(255,255,255,0.12);
 }
 .plan-card:nth-child(even){border-right:none;}
 .plan-card h3{
   font-family:'Montserrat',sans-serif;
-  font-size:16px;
-  font-weight:700;
+  font-size:14px;
+  font-weight:800;
   color:var(--gold);
   margin-bottom:12px;
   text-transform:uppercase;
-  letter-spacing:.5px;
-}
-.plan-card p{font-size:14px;opacity:.85;line-height:1.7;}
-
-/* ── EXPERIENCE ── */
-.experience{
-  padding:80px 60px;
-  background:#fff;
-}
-.experience > h2{
-  font-family:'Montserrat',sans-serif;
-  font-size:26px;
-  font-weight:800;
-  text-align:center;
-  margin-bottom:8px;
   letter-spacing:1px;
 }
-.experience > p{
-  text-align:center;
-  color:#666;
-  max-width:680px;
-  margin:0 auto 40px;
-  font-size:14px;
-  line-height:1.7;
-}
+.plan-card p{font-size:14px;opacity:.82;line-height:1.75;}
+
+/* \u2500\u2500 EXPERIENCE \u2500\u2500 */
+.experience{padding:90px 60px;background:#fff;}
 .exp-grid{
   display:grid;
   grid-template-columns:repeat(4,1fr);
   gap:20px;
 }
 .exp-card{
-  border-radius:12px;
+  border-radius:14px;
   overflow:hidden;
   position:relative;
-  height:240px;
+  height:300px;
   cursor:pointer;
+  box-shadow:0 6px 24px rgba(0,0,0,0.1);
 }
 .exp-card img{
-  width:100%;
-  height:100%;
+  width:100%;height:100%;
   object-fit:cover;
   transition:transform .5s;
+  display:block;
 }
-.exp-card:hover img{transform:scale(1.06);}
+.exp-card:hover img{transform:scale(1.07);}
 .exp-overlay{
-  position:absolute;
-  inset:0;
-  background:linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 60%);
-  display:flex;
-  flex-direction:column;
+  position:absolute;inset:0;
+  background:linear-gradient(to top, rgba(0,0,0,0.78) 0%, rgba(0,0,0,0.1) 55%);
+  display:flex;flex-direction:column;
   justify-content:flex-end;
-  padding:20px;
+  padding:22px;
   color:#fff;
 }
 .exp-overlay h3{
   font-family:'Montserrat',sans-serif;
-  font-size:14px;
-  font-weight:800;
-  text-transform:uppercase;
-  letter-spacing:1px;
-  margin-bottom:4px;
+  font-size:13px;font-weight:900;
+  text-transform:uppercase;letter-spacing:1.5px;
+  margin-bottom:6px;
+}
+.exp-overlay .exp-tag{
+  font-size:11px;
+  background:var(--gold);
+  display:inline-block;
+  padding:3px 10px;
+  border-radius:20px;
+  font-weight:600;
+  margin-bottom:8px;
+  letter-spacing:.5px;
 }
 .exp-overlay p{
-  font-size:12px;
-  opacity:.85;
-  max-height:0;
-  overflow:hidden;
-  transition:max-height .4s ease;
+  font-size:12px;opacity:0;
+  line-height:1.5;
+  transition:opacity .35s ease, max-height .35s ease;
+  max-height:0;overflow:hidden;
 }
-.exp-card:hover .exp-overlay p{max-height:100px;}
+.exp-card:hover .exp-overlay p{opacity:.9;max-height:60px;}
 
-/* ── REVIEWS ── */
+/* \u2500\u2500 REVIEWS (FLIP CARDS) \u2500\u2500 */
 .reviews{
   background:var(--cream);
-  padding:80px 60px;
-}
-.reviews h2{
-  font-family:'Montserrat',sans-serif;
-  font-size:26px;
-  font-weight:800;
-  text-align:center;
-  letter-spacing:1px;
-  margin-bottom:40px;
+  padding:90px 60px;
 }
 .review-grid{
   display:grid;
   grid-template-columns:repeat(3,1fr);
-  gap:24px;
+  gap:28px;
 }
 .review-card{
-  background:#fff;
-  border-radius:12px;
-  overflow:hidden;
-  box-shadow:0 4px 20px rgba(0,0,0,0.07);
+  perspective:1000px;
+  height:420px;
+  cursor:pointer;
 }
-.review-card img{
-  width:100%;
-  height:180px;
-  object-fit:cover;
-}
-.review-body{
-  padding:24px;
-}
-.stars{color:var(--gold);font-size:13px;margin-bottom:10px;}
-.review-body p{font-size:13px;line-height:1.7;color:#555;font-style:italic;}
-.reviewer{
-  margin-top:14px;
-  font-size:13px;
-  font-weight:600;
-  color:var(--teal);
-}
-
-/* ── CTA / FORM ── */
-.cta-section{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  min-height:600px;
-}
-.cta-left{
-  background:var(--teal);
-  color:#fff;
-  padding:80px 60px;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-}
-.cta-left h2{
-  font-family:'Montserrat',sans-serif;
-  font-size:28px;
-  font-weight:800;
-  color:var(--gold);
-  margin-bottom:16px;
-  letter-spacing:1px;
-}
-.cta-left .cta-intro{font-size:14px;opacity:.9;margin-bottom:24px;line-height:1.7;}
-.cta-checks{list-style:none;margin-bottom:30px;}
-.cta-checks li{font-size:14px;margin-bottom:8px;opacity:.9;}
-.cta-checks li::before{content:'✔  ';color:var(--gold);font-weight:700;}
-.cta-img{
+.review-inner{
   position:relative;
+  width:100%;height:100%;
+  transform-style:preserve-3d;
+  transition:transform .75s cubic-bezier(.4,0,.2,1);
+}
+.review-card:hover .review-inner{transform:rotateY(180deg);}
+.review-front,.review-back{
+  position:absolute;
+  width:100%;height:100%;
+  backface-visibility:hidden;
+  border-radius:14px;
   overflow:hidden;
 }
-.cta-img img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  display:block;
+.review-front{
+  background-size:cover;
+  background-position:center;
 }
-.form-section{
-  background:var(--cream);
-  padding:60px;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-}
-.form-section h3{
-  font-family:'Montserrat',sans-serif;
-  font-size:20px;
-  font-weight:800;
-  margin-bottom:20px;
-  color:var(--teal);
-}
-.form-section iframe{
-  width:100%;
-  height:600px;
-  border:none;
-  border-radius:10px;
-}
-
-/* ── FOOTER ── */
-footer{
-  background:var(--teal-dark);
-  color:#fff;
-  padding:50px 60px 30px;
-}
-.footer-top{
-  display:flex;
-  justify-content:space-between;
-  align-items:flex-start;
-  flex-wrap:wrap;
-  gap:30px;
-  margin-bottom:40px;
-}
-.footer-logo img{width:180px;}
-.footer-contact a{
-  color:#fff;
-  text-decoration:none;
-  font-size:15px;
-  font-weight:600;
-}
-.footer-contact a:hover{color:var(--gold);}
-.footer-social{display:flex;gap:16px;}
-.social-link{
-  width:44px;height:44px;
-  border-radius:50%;
-  border:2px solid rgba(255,255,255,0.3);
-  display:flex;align-items:center;justify-content:center;
-  color:#fff;
-  font-size:18px;
-  text-decoration:none;
-  transition:all .2s;
-}
-.social-link:hover{border-color:var(--gold);color:var(--gold);}
-.footer-bottom{
-  border-top:1px solid rgba(255,255,255,0.15);
-  padding-top:20px;
-  font-size:12px;
-  opacity:.6;
-  text-align:center;
-}
-
-/* ── RESPONSIVE ── */
-@media(max-width:900px){
-  nav{padding:14px 20px;}
-  .nav-links{display:none;}
-  .hero{grid-template-columns:1fr;}
-  .hero-left{padding:50px 24px;}
-  .hero-right{min-height:300px;grid-template-rows:1fr;}
-  .hero-right img:first-child{grid-row:auto;}
-  .explore-band{padding:20px 24px;}
-  .stats{grid-template-columns:repeat(3,1fr);padding:40px 20px;}
-  .gallery{grid-template-columns:1fr 1fr;grid-template-rows:200px 200px;}
-  .gallery img:first-child{grid-column:1/3;grid-row:1;}
-  .how{padding:60px 24px;}
-  .steps-grid{grid-template-columns:1fr 1fr;}
-  .why{grid-template-columns:1fr;padding:60px 24px;}
-  .why-img{display:none;}
-  .plan-grid{grid-template-columns:1fr;}
-  .plan-card{border-right:none;}
-  .experience{padding:60px 24px;}
-  .exp-grid{grid-template-columns:1fr 1fr;}
-  .reviews{padding:60px 24px;}
-  .review-grid{grid-template-columns:1fr;}
-  .cta-section{grid-template-columns:1fr;}
-  .cta-img{display:none;}
-  .cta-left{padding:50px 24px;}
-  .form-section{padding:40px 24px;}
-  footer{padding:40px 24px 20px;}
-  .footer-top{flex-direction:column;}
-}
-
-</style>
-</head>
-<body>
-
-<!-- NAV -->
-<nav>
-  <div style="font-family:'Montserrat',sans-serif;font-weight:800;font-size:16px;color:var(--teal);">MELITA HOLIDAYS</div>
-  <ul class="nav-links">
-    <li><a href="#destinations">Destinations</a></li>
-    <li><a href="#how">How It Works</a></li>
-    <li><a href="#reviews">Reviews</a></li>
-  </ul>
-  <a href="#form" class="nav-cta">Get Started</a>
-</nav>
-
-<!-- HERO -->
-<section class="hero fade">
-  <div class="hero-left">
-    <img src="logo.png" alt="Melita Holidays" onerror="this.style.display='none'">
-    <h1>Your Dream Holiday,<br>Designed Around You</h1>
-    <p>Personalised travel planning, exclusive deals, and full ATOL & PTS protection — all in one place.</p>
-    <div class="hero-btns">
-      <a href="#form" class="btn-primary">Start Planning Your Holiday</a>
-      <a href="#form" class="btn-outline">Get a Free Quote</a>
-    </div>
-  </div>
-  <div class="hero-right">
-    <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80" alt="Beach">
-    <img src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=400&q=80" alt="Travel">
-    <img src="https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?w=400&q=80" alt="Resort pool">
-  </div>
-</section>
-
-<!-- EXPLORE BAND -->
-<div class="explore-band fade">
-  <h2>EXPLORE</h2>
-  <div class="explore-checks">
-    <span>ATOL & PTS Protected</span>
-    <span>200+ Trusted Travel Partners</span>
-    <span>UK-Based Independent Travel Experts</span>
-  </div>
-  <img src="ATOL.png" alt="ATOL Protected" style="height:60px;object-fit:contain;">
-</div>
-
-<!-- STATS -->
-<div class="stats fade">
-  <div>
-    <div class="stat-num">200+</div>
-    <div class="stat-label">Trusted Suppliers</div>
-  </div>
-  <div>
-    <div class="stat-num">100%</div>
-    <div class="stat-label">ATOL Protected</div>
-  </div>
-  <div>
-    <div class="stat-num">100%</div>
-    <div class="stat-label">Personalised Planning</div>
-  </div>
-</div>
-
-<!-- GALLERY -->
-<div id="destinations" class="gallery fade">
-  <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80" alt="Beach">
-  <img src="https://images.unsplash.com/photo-1499678329028-101435549a4e?w=400&q=80" alt="Tropical">
-  <img src="https://images.unsplash.com/photo-1568454537842-d933259bb258?w=400&q=80" alt="Cruise">
-  <img src="https://images.unsplash.com/photo-1516483638261-f4dbaf036963?w=400&q=80" alt="Italy">
-  <img src="https://images.unsplash.com/photo-1506197603052-3cc9c3a201bd?w=400&q=80" alt="Santorini">
-</div>
-
-<!-- HOW IT WORKS -->
-<section id="how" class="how fade">
-  <h2>HOW IT WORKS</h2>
-  <p class="sub">Planning Your Holiday Is Easy!</p>
-  <div class="steps-grid">
-    <div class="step-card">
-      <div class="step-num">1</div>
-      <i class="fas fa-pencil"></i>
-      <h3>Tell Us What You Want</h3>
-      <p>Share your destination ideas, budget, and travel style.</p>
-    </div>
-    <div class="step-card">
-      <div class="step-num">2</div>
-      <i class="fas fa-map"></i>
-      <h3>We Build Your Trip</h3>
-      <p>We create a personalised itinerary tailored just for you.</p>
-    </div>
-    <div class="step-card">
-      <div class="step-num">3</div>
-      <i class="fas fa-check-circle"></i>
-      <h3>You Approve & Relax</h3>
-      <p>We refine everything until it's perfect.</p>
-    </div>
-    <div class="step-card">
-      <div class="step-num">4</div>
-      <i class="fas fa-plane"></i>
-      <h3>We Handle The Rest</h3>
-      <p>Flights, hotels, transfers — all taken care of.</p>
-    </div>
-  </div>
-</section>
-
-<!-- WHY BOOK -->
-<section class="why fade">
-  <div class="why-img">
-    <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600&q=80" alt="Luxury hotel">
-  </div>
-  <div class="why-content">
-    <h2>WHY BOOK WITH<br>MELITA HOLIDAYS?</h2>
-    <div class="why-item">
-      <span class="why-icon">🤝</span>
-      <div>
-        <h3>Expert Support From Start to Finish</h3>
-        <p>We're with you from enquiry to your return home.</p>
-      </div>
-    </div>
-    <div class="why-item">
-      <span class="why-icon">✨</span>
-      <div>
-        <h3>Personalised Travel Planning</h3>
-        <p>Every holiday is tailored to your preferences, style, and budget.</p>
-      </div>
-    </div>
-    <div class="why-item">
-      <span class="why-icon">🔒</span>
-      <div>
-        <h3>Fully Protected Holidays</h3>
-        <p>Book with confidence with ATOL & PTS protection.</p>
-      </div>
-    </div>
-    <div class="why-item">
-      <span class="why-icon">🌍</span>
-      <div>
-        <h3>200+ Trusted Suppliers</h3>
-        <p>Access exclusive deals with leading travel partners.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- PLAN -->
-<section class="plan-section fade">
-  <div class="plan-hero">
-    <img src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=1400&q=80" alt="Travel planning">
-    <div class="plan-hero-overlay">
-      <h2>PLAN YOUR PERFECT HOLIDAY</h2>
-    </div>
-  </div>
-  <div class="plan-grid">
-    <div class="plan-card">
-      <h3>Personalised Travel Planning</h3>
-      <p>Your holiday is tailored to you. Whether it's a relaxing all-inclusive escape, a romantic city break, or a group trip with friends, every detail is carefully arranged with your preferences in mind.</p>
-    </div>
-    <div class="plan-card">
-      <h3>ATOL & PTS Protected Holidays</h3>
-      <p>Book with confidence knowing your holiday is fully protected through ATOL and Protected Trust Services (PTS).</p>
-    </div>
-    <div class="plan-card">
-      <h3>200+ Trusted Travel Suppliers</h3>
-      <p>We work with over 200 established travel partners including TUI, Jet2 Holidays, EasyJet Holidays and Virgin Voyages, giving you access to a wide range of destinations, resorts, cruises and exclusive deals.</p>
-    </div>
-    <div class="plan-card">
-      <h3>Expert Travel Advice & Support</h3>
-      <p>Not sure where to go? We'll help you discover destinations and resorts that match your travel style. From your first enquiry to the moment you return home, we're here every step of the way.</p>
-    </div>
-  </div>
-</section>
-
-<!-- EXPERIENCE -->
-<section id="destinations" class="experience fade">
-  <h2>THE MELITA HOLIDAYS EXPERIENCE</h2>
-  <p>We don't just book holidays — we create unforgettable experiences tailored to you. From the moment you enquire to the moment you return home, we're here every step of the way.</p>
-  <div class="exp-grid">
-    <div class="exp-card">
-      <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=500&q=80" alt="Beach Escapes">
-      <div class="exp-overlay">
-        <h3>All-Inclusive Beach Escapes</h3>
-        <p>Relax in stunning beachfront resorts where everything is taken care of.</p>
-      </div>
-    </div>
-    <div class="exp-card">
-      <img src="https://images.unsplash.com/photo-1491553895911-0055eca6402d?w=500&q=80" alt="City Breaks">
-      <div class="exp-overlay">
-        <h3>City Breaks</h3>
-        <p>Discover iconic cities, culture, food and nightlife.</p>
-      </div>
-    </div>
-    <div class="exp-card">
-      <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=500&q=80" alt="Group Holidays">
-      <div class="exp-overlay">
-        <h3>Group Holidays</h3>
-        <p>Perfect for friends and families travelling together.</p>
-      </div>
-    </div>
-    <div class="exp-card">
-      <img src="https://images.unsplash.com/photo-1500375592092-40eb2168fd21?w=500&q=80" alt="Cruises">
-      <div class="exp-overlay">
-        <h3>Cruises</h3>
-        <p>Experience multiple destinations in one luxury trip.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- REVIEWS -->
-<section id="reviews" class="reviews fade">
-  <h2>CLIENT REVIEWS</h2>
-  <div class="review-grid">
-    <div class="review-card">
-      <img src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=600&q=80" alt="Turkey holiday">
-      <div class="review-body">
-        <div class="stars">★★★★★</div>
-        <p>"Melita Holidays were fantastic from start to finish. They were patient, understanding and very knowledgeable about all the hotel choices we considered. I will definitely use them again!"</p>
-        <div class="reviewer">— Satisfied Customer, Turkey 2025</div>
-      </div>
-    </div>
-    <div class="review-card">
-      <img src="https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?w=600&q=80" alt="Holiday">
-      <div class="review-body">
-        <div class="stars">★★★★★</div>
-        <p>"Planning a trip can be so time consuming, but they took all the stress out of it for me. The hotel recommendation was perfect in every way."</p>
-        <div class="reviewer">— Happy Traveller, 2025</div>
-      </div>
-    </div>
-    <div class="review-card">
-      <img src="https://images.unsplash.com/photo-1506197603052-3cc9c3a201bd?w=600&q=80" alt="Greece holiday">
-      <div class="review-body">
-        <div class="stars">★★★★★</div>
-        <p>"From the moment I got in touch to the day I returned, they were incredibly helpful and responsive. Couldn't recommend more highly."</p>
-        <div class="reviewer">— Delighted Client, 2025</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- FORM / CTA -->
-<section id="form" class="cta-section fade">
-  <div class="cta-left">
-    <h2>READY TO PLAN YOUR NEXT HOLIDAY?</h2>
-    <p class="cta-intro">Have a question or ready to start planning your next getaway? You're in the right place. We make planning simple, personal, and stress-free.</p>
-    <ul class="cta-checks">
-      <li>No obligation enquiry</li>
-      <li>Personalised recommendations</li>
-      <li>Quick response within 48 hours</li>
-    </ul>
-  </div>
-  <div class="form-section">
-    <h3>Get in Touch</h3>
-    <iframe src="https://form.jotform.com/243554201551347" title="Contact Form"></iframe>
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer>
-  <div class="footer-top">
-    <div class="footer-logo">
-      <img src="logo.png" alt="Melita Holidays" style="height:60px;object-fit:contain;" onerror="this.outerHTML='<div style=\'font-family:Montserrat,sans-serif;font-weight:900;font-size:20px;color:var(--gold);\'>MELITA HOLIDAYS</div>'">
-    </div>
-    <div class="footer-contact">
-      <a href="tel:07821343925"><i class="fas fa-phone" style="margin-right:8px;"></i>07821 343925</a>
-    </div>
-    <div class="footer-social">
-      <a href="https://www.facebook.com/people/Melita-Holidays/61572085736517/" class="social-link" target="_blank"><i class="fab fa-facebook-f"></i></a>
-      <a href="https://www.instagram.com/melitaholidays/" class="social-link" target="_blank"><i class="fab fa-instagram"></i></a>
-    </div>
-  </div>
-  <div class="footer-bottom">© 2026 Melita Holidays. All rights reserved.</div>
-</footer>
-
-<script>
-const obs = new IntersectionObserver(entries=>{
-  entries.forEach(e=>{
-    if(e.isIntersecting) e.target.classList.add('show');
-  });
-},{threshold:0.1});
-document.querySelectorAll('.fade').forEach(el=>obs.observe(el));
-</script>
-
-</body>
-</html>
+.review-front .overlay{
+  position:absolute;
