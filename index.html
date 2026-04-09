@@ -35,45 +35,84 @@ body{
   background:#fff;
   color:var(--text-dark);
   scroll-behavior:smooth;
+  overflow-x:hidden;
 }
 
-/* ── SECTION HEADING STYLE ── */
-.section-heading{
-  text-align:center;
-  margin-bottom:50px;
+/* ══════════════════════════════════
+   LOADING SCREEN
+══════════════════════════════════ */
+#loader{
+  position:fixed;inset:0;
+  background:var(--teal);
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  z-index:9999;
+  transition:opacity .6s ease, visibility .6s ease;
 }
+#loader.hidden{opacity:0;visibility:hidden;}
+#loader img{width:220px;object-fit:contain;animation:loaderPulse 1.5s ease-in-out infinite;}
+#loader .loader-text{
+  margin-top:24px;
+  font-family:'Montserrat',sans-serif;
+  font-size:11px;font-weight:700;
+  letter-spacing:4px;text-transform:uppercase;
+  color:rgba(255,255,255,0.6);
+}
+#loader .loader-bar{
+  width:160px;height:3px;
+  background:rgba(255,255,255,0.2);
+  border-radius:2px;margin-top:16px;overflow:hidden;
+}
+#loader .loader-fill{
+  height:100%;width:0;
+  background:var(--gold);border-radius:2px;
+  animation:loaderFill 1.8s ease forwards;
+}
+@keyframes loaderPulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.8;transform:scale(.97);}}
+@keyframes loaderFill{0%{width:0;}100%{width:100%;}}
+
+/* ══════════════════════════════════
+   SCROLL ANIMATIONS
+══════════════════════════════════ */
+.reveal{opacity:0;transition:opacity .8s ease, transform .8s ease;}
+.reveal.from-bottom{transform:translateY(50px);}
+.reveal.from-left{transform:translateX(-60px);}
+.reveal.from-right{transform:translateX(60px);}
+.reveal.zoom-in{transform:scale(.92);}
+.reveal.visible{opacity:1;transform:none;}
+
+/* stagger children */
+.stagger > *{opacity:0;transform:translateY(30px);transition:opacity .6s ease,transform .6s ease;}
+.stagger.visible > *:nth-child(1){opacity:1;transform:none;transition-delay:.1s;}
+.stagger.visible > *:nth-child(2){opacity:1;transform:none;transition-delay:.2s;}
+.stagger.visible > *:nth-child(3){opacity:1;transform:none;transition-delay:.3s;}
+.stagger.visible > *:nth-child(4){opacity:1;transform:none;transition-delay:.4s;}
+
+/* ══════════════════════════════════
+   SECTION HEADINGS
+══════════════════════════════════ */
+.section-heading{text-align:center;margin-bottom:50px;}
 .section-heading h2{
   font-family:'Montserrat',sans-serif;
-  font-size:clamp(24px,3vw,36px);
-  font-weight:900;
-  letter-spacing:2px;
-  text-transform:uppercase;
-  color:var(--text-dark);
-  margin-bottom:14px;
+  font-size:clamp(24px,3vw,36px);font-weight:900;
+  letter-spacing:2px;text-transform:uppercase;
+  color:var(--text-dark);margin-bottom:14px;
 }
 .section-heading h2 span{color:var(--teal);}
 .section-heading .heading-line{
-  width:60px;height:4px;
-  background:var(--gold);
-  margin:0 auto 16px;
-  border-radius:2px;
+  width:60px;height:4px;background:var(--gold);
+  margin:0 auto 16px;border-radius:2px;
 }
-.section-heading p{
-  font-size:15px;color:#666;
-  max-width:600px;margin:0 auto;line-height:1.7;
-}
+.section-heading p{font-size:15px;color:#666;max-width:600px;margin:0 auto;line-height:1.7;}
 
-/* ── SECTION DIVIDERS ── */
-.divider{
-  height:6px;
-  background:linear-gradient(90deg, var(--teal), var(--gold), var(--teal));
-}
+/* ══════════════════════════════════
+   DIVIDERS
+══════════════════════════════════ */
+.divider{height:6px;background:linear-gradient(90deg,var(--teal),var(--gold),var(--teal));}
 
-/* ── FADE ── */
-.fade{opacity:0;transform:translateY(30px);transition:opacity .9s ease,transform .9s ease;}
-.fade.show{opacity:1;transform:translateY(0);}
-
-/* ── NAV ── */
+/* ══════════════════════════════════
+   NAV
+══════════════════════════════════ */
 nav{
   position:sticky;top:0;z-index:100;
   background:var(--teal);
@@ -81,8 +120,6 @@ nav{
   padding:12px 30px;
   box-shadow:0 2px 16px rgba(0,0,0,0.15);
 }
-.nav-logo{display:none;}
-.nav-links{display:none;}
 .nav-cta{
   background:var(--gold);color:#fff!important;
   padding:11px 26px;border-radius:50px;
@@ -93,53 +130,74 @@ nav{
 }
 .nav-cta:hover{background:#c8882e;transform:translateY(-1px);}
 
-/* ── HERO ── */
+/* ══════════════════════════════════
+   HERO — VIDEO BACKGROUND
+══════════════════════════════════ */
 .hero{
+  position:relative;
+  min-height:95vh;
+  display:flex;align-items:center;
+  overflow:hidden;
   background:var(--teal);
-  display:grid;grid-template-columns:1fr 1fr;
-  min-height:90vh;align-items:center;
 }
-.hero-left{padding:80px 60px;color:#fff;}
-.hero-left img{width:260px;margin-bottom:30px;display:block;}
-.hero-left .hero-sub{
-  font-family:'Montserrat',sans-serif;
-  font-size:12px;font-weight:600;
-  color:rgba(255,255,255,0.6);
-  letter-spacing:3px;text-transform:uppercase;margin-bottom:14px;
+.hero-video-wrap{
+  position:absolute;inset:0;z-index:0;
 }
-.hero-left h1{
+.hero-video-wrap video{
+  width:100%;height:100%;object-fit:cover;display:block;
+}
+.hero-video-wrap::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(10,60,63,0.78) 0%,rgba(10,60,63,0.45) 60%,rgba(0,0,0,0.3) 100%);
+}
+.hero-content{
+  position:relative;z-index:1;
+  padding:80px 60px;
+  color:#fff;
+  max-width:680px;
+}
+.hero-content img{
+  width:240px;margin-bottom:28px;display:block;
+  filter:drop-shadow(0 4px 16px rgba(0,0,0,0.3));
+}
+.hero-sub{
   font-family:'Montserrat',sans-serif;
-  font-size:clamp(26px,3.5vw,44px);font-weight:900;
-  color:var(--gold);line-height:1.2;
-  margin-bottom:18px;
+  font-size:11px;font-weight:700;
+  color:rgba(255,255,255,0.65);
+  letter-spacing:4px;text-transform:uppercase;margin-bottom:16px;
+}
+.hero-content h1{
+  font-family:'Montserrat',sans-serif;
+  font-size:clamp(32px,5vw,58px);font-weight:900;
+  color:var(--gold);line-height:1.1;
+  margin-bottom:20px;
   text-transform:uppercase;letter-spacing:1px;
+  text-shadow:0 2px 20px rgba(0,0,0,0.3);
 }
-.hero-left p{font-size:15px;opacity:.9;margin-bottom:34px;max-width:420px;line-height:1.8;}
-.hero-btns{display:flex;flex-direction:column;gap:12px;max-width:300px;}
+.hero-content p{
+  font-size:16px;opacity:.92;
+  margin-bottom:36px;max-width:460px;line-height:1.8;
+}
+.hero-btns{display:flex;flex-direction:column;gap:14px;max-width:320px;}
 .btn-primary{
-  display:block;padding:16px 28px;border-radius:50px;
+  display:block;padding:18px 32px;border-radius:50px;
   background:var(--gold);color:#fff;
-  font-weight:700;font-size:14px;text-decoration:none;text-align:center;
+  font-weight:700;font-size:15px;text-decoration:none;text-align:center;
   letter-spacing:.5px;transition:background .2s,transform .2s;
-  box-shadow:0 4px 14px rgba(224,154,66,0.4);
+  box-shadow:0 6px 20px rgba(224,154,66,0.5);
 }
-.btn-primary:hover{background:#c8882e;transform:translateY(-2px);}
+.btn-primary:hover{background:#c8882e;transform:translateY(-3px);}
 .btn-outline{
-  display:block;padding:15px 28px;border-radius:50px;
+  display:block;padding:16px 32px;border-radius:50px;
   border:2px solid rgba(255,255,255,0.5);color:#fff;
-  font-weight:600;font-size:14px;text-decoration:none;text-align:center;
-  transition:all .2s;
+  font-weight:600;font-size:15px;text-decoration:none;text-align:center;
+  transition:all .2s;backdrop-filter:blur(4px);
 }
-.btn-outline:hover{border-color:#fff;background:rgba(255,255,255,0.1);}
-.hero-right{
-  height:100%;min-height:90vh;
-  display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;
-  gap:4px;overflow:hidden;
-}
-.hero-right img{width:100%;height:100%;object-fit:cover;display:block;}
-.hero-right img:first-child{grid-row:1/3;}
+.btn-outline:hover{border-color:#fff;background:rgba(255,255,255,0.12);}
 
-/* ── EXPLORE BAND ── */
+/* ══════════════════════════════════
+   EXPLORE BAND
+══════════════════════════════════ */
 .explore-band{
   background:#fff;
   display:flex;align-items:center;justify-content:space-between;
@@ -155,32 +213,81 @@ nav{
 .explore-checks span::before{content:'✔';color:var(--teal);font-weight:700;font-size:12px;}
 .explore-atol img{height:38px;object-fit:contain;}
 
-/* ── STATS ── */
+/* ══════════════════════════════════
+   STATS — ANIMATED COUNTERS
+══════════════════════════════════ */
 .stats{
   background:var(--teal);color:#fff;
   display:grid;grid-template-columns:repeat(3,1fr);
-  text-align:center;padding:60px 40px;gap:20px;
+  text-align:center;padding:70px 40px;gap:20px;
 }
 .stats > div{border-right:1px solid rgba(255,255,255,0.15);}
 .stats > div:last-child{border-right:none;}
 .stat-num{
   font-family:'Montserrat',sans-serif;
-  font-size:clamp(40px,5vw,68px);font-weight:900;
+  font-size:clamp(44px,5vw,72px);font-weight:900;
   color:var(--gold);line-height:1;
 }
-.stat-label{font-size:12px;text-transform:uppercase;letter-spacing:2px;opacity:.75;margin-top:8px;}
+.stat-label{font-size:12px;text-transform:uppercase;letter-spacing:2px;opacity:.75;margin-top:10px;}
 
-/* ── MOSAIC GALLERY ── */
+/* ══════════════════════════════════
+   SUPPLIER MARQUEE
+══════════════════════════════════ */
+.marquee-section{
+  background:#fff;
+  padding:30px 0;
+  overflow:hidden;
+  border-top:1px solid #eee;
+  border-bottom:1px solid #eee;
+}
+.marquee-label{
+  text-align:center;
+  font-family:'Montserrat',sans-serif;
+  font-size:11px;font-weight:700;
+  letter-spacing:3px;text-transform:uppercase;
+  color:#aaa;margin-bottom:20px;
+}
+.marquee-track{
+  display:flex;gap:60px;
+  animation:marquee 22s linear infinite;
+  width:max-content;
+}
+.marquee-track:hover{animation-play-state:paused;}
+@keyframes marquee{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+.supplier-item{
+  display:flex;flex-direction:column;align-items:center;
+  gap:6px;flex-shrink:0;
+}
+.supplier-item .sup-name{
+  font-family:'Montserrat',sans-serif;
+  font-size:18px;font-weight:900;
+  color:#bbb;letter-spacing:1px;
+  white-space:nowrap;
+  transition:color .3s;
+}
+.supplier-item:hover .sup-name{color:var(--teal);}
+
+/* ══════════════════════════════════
+   MOSAIC GALLERY — PARALLAX
+══════════════════════════════════ */
 .gallery{
   display:grid;
   grid-template-columns:repeat(4,1fr);
   grid-template-rows:240px 240px;gap:4px;
+  overflow:hidden;
 }
-.gallery img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s;}
-.gallery img:hover{transform:scale(1.03);}
-.gallery img:first-child{grid-column:1/3;grid-row:1/3;}
+.gallery-item{overflow:hidden;}
+.gallery-item img{
+  width:100%;height:100%;object-fit:cover;display:block;
+  transition:transform .6s ease;
+  will-change:transform;
+}
+.gallery-item:hover img{transform:scale(1.06);}
+.gallery-item:first-child{grid-column:1/3;grid-row:1/3;}
 
-/* ── HOW IT WORKS ── */
+/* ══════════════════════════════════
+   HOW IT WORKS
+══════════════════════════════════ */
 .how{background:var(--cream);padding:90px 60px;text-align:center;}
 .steps-grid{
   display:grid;grid-template-columns:repeat(4,1fr);
@@ -190,9 +297,9 @@ nav{
   background:#fff;padding:32px 20px;border-radius:14px;
   box-shadow:0 4px 24px rgba(0,0,0,0.07);
   border-top:4px solid var(--gold);
-  transition:transform .2s,box-shadow .2s;
+  transition:transform .3s,box-shadow .3s;
 }
-.step-card:hover{transform:translateY(-4px);box-shadow:0 8px 30px rgba(0,0,0,0.1);}
+.step-card:hover{transform:translateY(-6px);box-shadow:0 12px 36px rgba(0,0,0,0.12);}
 .step-num{
   font-family:'Montserrat',sans-serif;
   font-size:42px;font-weight:900;color:var(--teal);opacity:.12;line-height:1;margin-bottom:4px;
@@ -204,14 +311,19 @@ nav{
 }
 .step-card p{font-size:13px;color:#777;line-height:1.6;}
 
-/* ── WHY BOOK ── */
+/* ══════════════════════════════════
+   WHY BOOK
+══════════════════════════════════ */
 .why{
   padding:90px 60px;
   display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center;background:#fff;
 }
+.why-img{overflow:hidden;border-radius:14px;}
 .why-img img{
   width:100%;border-radius:14px;object-fit:cover;height:520px;
   box-shadow:0 12px 40px rgba(0,0,0,0.12);
+  transition:transform .6s ease;
+  will-change:transform;
 }
 .why-content h2{
   font-family:'Montserrat',sans-serif;
@@ -232,10 +344,15 @@ nav{
 }
 .why-item p{font-size:13px;color:#666;line-height:1.6;}
 
-/* ── PLAN SECTION ── */
+/* ══════════════════════════════════
+   PLAN SECTION
+══════════════════════════════════ */
 .plan-section{background:var(--teal);color:#fff;}
 .plan-hero{position:relative;height:420px;overflow:hidden;}
-.plan-hero img{width:100%;height:100%;object-fit:cover;display:block;}
+.plan-hero img{
+  width:100%;height:120%;object-fit:cover;display:block;
+  margin-top:-10%;will-change:transform;
+}
 .plan-hero-overlay{
   position:absolute;inset:0;background:rgba(0,0,0,0.5);
   display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;
@@ -259,18 +376,22 @@ nav{
 }
 .plan-card p{font-size:14px;opacity:.82;line-height:1.75;}
 
-/* ── EXPERIENCE ── */
+/* ══════════════════════════════════
+   EXPERIENCE
+══════════════════════════════════ */
 .experience{padding:90px 60px;background:#fff;}
 .exp-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
 .exp-card{
   border-radius:14px;overflow:hidden;position:relative;height:300px;cursor:pointer;
   box-shadow:0 6px 24px rgba(0,0,0,0.1);
+  transition:transform .3s,box-shadow .3s;
 }
+.exp-card:hover{transform:translateY(-6px);box-shadow:0 14px 40px rgba(0,0,0,0.15);}
 .exp-card img{width:100%;height:100%;object-fit:cover;transition:transform .5s;display:block;}
 .exp-card:hover img{transform:scale(1.07);}
 .exp-overlay{
   position:absolute;inset:0;
-  background:linear-gradient(to top, rgba(0,0,0,0.78) 0%, rgba(0,0,0,0.1) 55%);
+  background:linear-gradient(to top,rgba(0,0,0,0.78) 0%,rgba(0,0,0,0.1) 55%);
   display:flex;flex-direction:column;justify-content:flex-end;
   padding:22px;color:#fff;
 }
@@ -288,7 +409,9 @@ nav{
 }
 .exp-card:hover .exp-overlay p{opacity:.9;max-height:60px;}
 
-/* ── REVIEWS (FLIP CARDS) ── */
+/* ══════════════════════════════════
+   REVIEWS
+══════════════════════════════════ */
 .reviews{background:var(--cream);padding:90px 60px;}
 .review-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;}
 .review-card{perspective:1000px;height:480px;cursor:pointer;}
@@ -305,11 +428,9 @@ nav{
 .review-front{background-size:cover;background-position:center;}
 .review-front .overlay{
   position:absolute;inset:0;
-  background:linear-gradient(to top, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.1) 60%);
+  background:linear-gradient(to top,rgba(0,0,0,0.72) 0%,rgba(0,0,0,0.1) 60%);
 }
-.review-front-content{
-  position:absolute;bottom:0;left:0;right:0;padding:28px;color:#fff;
-}
+.review-front-content{position:absolute;bottom:0;left:0;right:0;padding:28px;color:#fff;}
 .review-front-content h3{
   font-family:'Montserrat',sans-serif;
   font-size:24px;font-weight:900;
@@ -335,7 +456,9 @@ nav{
   letter-spacing:1px;text-transform:uppercase;color:var(--gold);
 }
 
-/* ── CTA / FORM ── */
+/* ══════════════════════════════════
+   CTA / FORM
+══════════════════════════════════ */
 .cta-section{display:grid;grid-template-columns:1fr 1fr;min-height:600px;}
 .cta-left{
   background:var(--teal);color:#fff;
@@ -350,10 +473,7 @@ nav{
 .cta-left .gold-line{width:50px;height:4px;background:var(--gold);border-radius:2px;margin:14px 0 20px;}
 .cta-left .cta-intro{font-size:14px;opacity:.88;margin-bottom:24px;line-height:1.8;}
 .cta-checks{list-style:none;margin-bottom:30px;}
-.cta-checks li{
-  font-size:14px;margin-bottom:10px;opacity:.9;
-  display:flex;align-items:center;gap:8px;
-}
+.cta-checks li{font-size:14px;margin-bottom:10px;opacity:.9;display:flex;align-items:center;gap:8px;}
 .cta-checks li::before{content:'✔';color:var(--gold);font-weight:700;font-size:13px;}
 .form-section{
   background:var(--cream);padding:60px;
@@ -365,7 +485,9 @@ nav{
 }
 .form-section iframe{width:100%;height:600px;border:none;border-radius:10px;}
 
-/* ── FOOTER ── */
+/* ══════════════════════════════════
+   FOOTER
+══════════════════════════════════ */
 footer{background:var(--teal-dark);color:#fff;padding:50px 60px 28px;}
 .footer-top{
   display:flex;justify-content:space-between;align-items:center;
@@ -388,19 +510,34 @@ footer{background:var(--teal-dark);color:#fff;padding:50px 60px 28px;}
 .social-link:hover{border-color:var(--gold);color:var(--gold);}
 .footer-bottom{font-size:12px;opacity:.5;text-align:center;}
 
-/* ── RESPONSIVE ── */
+/* ══════════════════════════════════
+   BACK TO TOP
+══════════════════════════════════ */
+#backToTop{
+  position:fixed;bottom:30px;right:30px;z-index:200;
+  width:48px;height:48px;border-radius:50%;
+  background:var(--gold);color:#fff;
+  border:none;cursor:pointer;font-size:18px;
+  box-shadow:0 4px 16px rgba(0,0,0,0.2);
+  opacity:0;visibility:hidden;
+  transition:opacity .3s,visibility .3s,transform .3s,background .2s;
+  display:flex;align-items:center;justify-content:center;
+}
+#backToTop.visible{opacity:1;visibility:visible;}
+#backToTop:hover{background:#c8882e;transform:translateY(-3px);}
+
+/* ══════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════ */
 @media(max-width:900px){
   nav{padding:12px 20px;}
-  .nav-links{display:none;}
-  .hero{grid-template-columns:1fr;}
-  .hero-left{padding:50px 24px;}
-  .hero-right{min-height:300px;grid-template-rows:1fr;}
-  .hero-right img:first-child{grid-row:auto;}
+  .hero-content{padding:50px 24px;}
+  .hero-content h1{font-size:clamp(28px,7vw,42px);}
   .explore-band{padding:20px 24px;flex-direction:column;align-items:flex-start;}
   .explore-checks{flex-direction:column;gap:8px;}
   .stats{padding:40px 20px;}
   .gallery{grid-template-columns:1fr 1fr;grid-template-rows:200px 200px;}
-  .gallery img:first-child{grid-column:1/3;grid-row:1;}
+  .gallery-item:first-child{grid-column:1/3;grid-row:1;}
   .how{padding:60px 24px;}
   .steps-grid{grid-template-columns:1fr 1fr;}
   .why{grid-template-columns:1fr;padding:60px 24px;gap:30px;}
@@ -417,21 +554,39 @@ footer{background:var(--teal-dark);color:#fff;padding:50px 60px 28px;}
   .form-section{padding:40px 24px;}
   footer{padding:40px 24px 20px;}
   .footer-top{flex-direction:column;align-items:flex-start;}
+  #backToTop{bottom:20px;right:20px;}
 }
 
 </style>
 </head>
 <body>
 
-<!-- NAV -->
+<!-- ══ LOADING SCREEN ══ -->
+<div id="loader">
+  <img src="logo.png" alt="Melita Holidays" onerror="this.outerHTML='<div style=\'font-family:Montserrat,sans-serif;font-weight:900;font-size:32px;color:#e09a42;\'>MELITA HOLIDAYS</div>'">
+  <div class="loader-text">Loading your holiday...</div>
+  <div class="loader-bar"><div class="loader-fill"></div></div>
+</div>
+
+<!-- ══ BACK TO TOP ══ -->
+<button id="backToTop" aria-label="Back to top"><i class="fas fa-chevron-up"></i></button>
+
+<!-- ══ NAV ══ -->
 <nav>
   <div></div>
   <a href="#form" class="nav-cta">Get Started</a>
 </nav>
 
-<!-- HERO -->
-<section class="hero fade">
-  <div class="hero-left">
+<!-- ══ HERO — VIDEO BACKGROUND ══ -->
+<section class="hero">
+  <div class="hero-video-wrap">
+    <!-- Free travel stock video from Pixabay / Pexels CDN -->
+    <video autoplay muted loop playsinline poster="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1400&q=80">
+      <source src="https://videos.pexels.com/video-files/1739010/1739010-uhd_2560_1440_24fps.mp4" type="video/mp4">
+      <source src="https://videos.pexels.com/video-files/3571264/3571264-uhd_2560_1440_25fps.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="hero-content reveal from-bottom">
     <img src="logo.png" alt="Melita Holidays" onerror="this.style.display='none'">
     <div class="hero-sub">Independent Travel Experts</div>
     <h1>Your Dream Holiday,<br>Designed Around You</h1>
@@ -441,17 +596,12 @@ footer{background:var(--teal-dark);color:#fff;padding:50px 60px 28px;}
       <a href="#form" class="btn-outline">Get a Free Quote</a>
     </div>
   </div>
-  <div class="hero-right">
-    <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80" alt="Beach">
-    <img src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=400&q=80" alt="Travel">
-    <img src="https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?w=400&q=80" alt="Resort pool">
-  </div>
 </section>
 
 <div class="divider"></div>
 
-<!-- EXPLORE BAND -->
-<div class="explore-band fade">
+<!-- ══ EXPLORE BAND ══ -->
+<div class="explore-band reveal from-bottom">
   <h2>EXPLORE</h2>
   <div class="explore-checks">
     <span>ATOL & PTS Protected</span>
@@ -465,43 +615,84 @@ footer{background:var(--teal-dark);color:#fff;padding:50px 60px 28px;}
 
 <div class="divider"></div>
 
-<!-- STATS -->
-<div class="stats fade">
+<!-- ══ STATS — ANIMATED COUNTERS ══ -->
+<div class="stats" id="stats-section">
   <div>
-    <div class="stat-num">200+</div>
+    <div class="stat-num" data-target="200" data-suffix="+">0+</div>
     <div class="stat-label">Trusted Suppliers</div>
   </div>
   <div>
-    <div class="stat-num">100%</div>
+    <div class="stat-num" data-target="100" data-suffix="%">0%</div>
     <div class="stat-label">ATOL Protected</div>
   </div>
   <div>
-    <div class="stat-num">100%</div>
+    <div class="stat-num" data-target="100" data-suffix="%">0%</div>
     <div class="stat-label">Personalised Planning</div>
   </div>
 </div>
 
 <div class="divider"></div>
 
-<!-- GALLERY -->
-<div id="destinations" class="gallery fade">
-  <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80" alt="Beach">
-  <img src="https://images.unsplash.com/photo-1499678329028-101435549a4e?w=400&q=80" alt="Tropical">
-  <img src="https://images.unsplash.com/photo-1568454537842-d933259bb258?w=400&q=80" alt="Cruise">
-  <img src="https://images.unsplash.com/photo-1516483638261-f4dbaf036963?w=400&q=80" alt="Italy">
-  <img src="https://images.unsplash.com/photo-1506197603052-3cc9c3a201bd?w=400&q=80" alt="Santorini">
+<!-- ══ SUPPLIER MARQUEE ══ -->
+<div class="marquee-section reveal from-bottom">
+  <div class="marquee-label">Our Trusted Partners</div>
+  <div class="marquee-track">
+    <!-- Set 1 -->
+    <div class="supplier-item"><span class="sup-name">TUI</span></div>
+    <div class="supplier-item"><span class="sup-name">Jet2 Holidays</span></div>
+    <div class="supplier-item"><span class="sup-name">EasyJet Holidays</span></div>
+    <div class="supplier-item"><span class="sup-name">Virgin Voyages</span></div>
+    <div class="supplier-item"><span class="sup-name">easyJet</span></div>
+    <div class="supplier-item"><span class="sup-name">Ryanair</span></div>
+    <div class="supplier-item"><span class="sup-name">British Airways</span></div>
+    <div class="supplier-item"><span class="sup-name">Marriott</span></div>
+    <div class="supplier-item"><span class="sup-name">Hilton</span></div>
+    <div class="supplier-item"><span class="sup-name">MSC Cruises</span></div>
+    <!-- Set 2 (duplicate for seamless loop) -->
+    <div class="supplier-item"><span class="sup-name">TUI</span></div>
+    <div class="supplier-item"><span class="sup-name">Jet2 Holidays</span></div>
+    <div class="supplier-item"><span class="sup-name">EasyJet Holidays</span></div>
+    <div class="supplier-item"><span class="sup-name">Virgin Voyages</span></div>
+    <div class="supplier-item"><span class="sup-name">easyJet</span></div>
+    <div class="supplier-item"><span class="sup-name">Ryanair</span></div>
+    <div class="supplier-item"><span class="sup-name">British Airways</span></div>
+    <div class="supplier-item"><span class="sup-name">Marriott</span></div>
+    <div class="supplier-item"><span class="sup-name">Hilton</span></div>
+    <div class="supplier-item"><span class="sup-name">MSC Cruises</span></div>
+  </div>
 </div>
 
 <div class="divider"></div>
 
-<!-- HOW IT WORKS -->
-<section id="how" class="how fade">
-  <div class="section-heading">
+<!-- ══ GALLERY ══ -->
+<div id="destinations" class="gallery">
+  <div class="gallery-item">
+    <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80" alt="Beach" data-parallax="0.15">
+  </div>
+  <div class="gallery-item">
+    <img src="https://images.unsplash.com/photo-1499678329028-101435549a4e?w=400&q=80" alt="Tropical" data-parallax="0.1">
+  </div>
+  <div class="gallery-item">
+    <img src="https://images.unsplash.com/photo-1568454537842-d933259bb258?w=400&q=80" alt="Cruise" data-parallax="0.12">
+  </div>
+  <div class="gallery-item">
+    <img src="https://images.unsplash.com/photo-1516483638261-f4dbaf036963?w=400&q=80" alt="Italy" data-parallax="0.1">
+  </div>
+  <div class="gallery-item">
+    <img src="https://images.unsplash.com/photo-1506197603052-3cc9c3a201bd?w=400&q=80" alt="Santorini" data-parallax="0.08">
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ══ HOW IT WORKS ══ -->
+<section id="how" class="how">
+  <div class="section-heading reveal from-bottom">
     <h2>How It <span>Works</span></h2>
     <div class="heading-line"></div>
     <p>Planning your holiday is easy — we handle everything so you don't have to.</p>
   </div>
-  <div class="steps-grid">
+  <div class="steps-grid stagger">
     <div class="step-card">
       <div class="step-num">1</div>
       <i class="fas fa-pencil"></i>
@@ -531,12 +722,12 @@ footer{background:var(--teal-dark);color:#fff;padding:50px 60px 28px;}
 
 <div class="divider"></div>
 
-<!-- WHY BOOK -->
-<section class="why fade">
-  <div class="why-img">
-    <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600&q=80" alt="Luxury hotel">
+<!-- ══ WHY BOOK ══ -->
+<section class="why">
+  <div class="why-img reveal from-left">
+    <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600&q=80" alt="Luxury hotel" data-parallax="0.1">
   </div>
-  <div class="why-content">
+  <div class="why-content reveal from-right">
     <h2>Why Book With<br>Melita Holidays?</h2>
     <div class="heading-line"></div>
     <div class="why-item">
@@ -572,16 +763,16 @@ footer{background:var(--teal-dark);color:#fff;padding:50px 60px 28px;}
 
 <div class="divider"></div>
 
-<!-- PLAN -->
-<section class="plan-section fade">
+<!-- ══ PLAN ══ -->
+<section class="plan-section">
   <div class="plan-hero">
-    <img src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=1400&q=80" alt="Travel planning">
+    <img src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=1400&q=80" alt="Travel planning" id="plan-parallax-img">
     <div class="plan-hero-overlay">
-      <h2>Plan Your Perfect Holiday</h2>
+      <h2 class="reveal from-bottom">Plan Your Perfect Holiday</h2>
       <div class="gold-line"></div>
     </div>
   </div>
-  <div class="plan-grid">
+  <div class="plan-grid stagger">
     <div class="plan-card">
       <h3>Personalised Travel Planning</h3>
       <p>Your holiday is tailored to you. Whether it's a relaxing all-inclusive escape, a romantic city break, or a group trip with friends, every detail is carefully arranged with your preferences in mind.</p>
@@ -603,15 +794,14 @@ footer{background:var(--teal-dark);color:#fff;padding:50px 60px 28px;}
 
 <div class="divider"></div>
 
-<!-- EXPERIENCE -->
-<section class="experience fade">
-  <div class="section-heading">
+<!-- ══ EXPERIENCE ══ -->
+<section class="experience">
+  <div class="section-heading reveal from-bottom">
     <h2>The Melita Holidays <span>Experience</span></h2>
     <div class="heading-line"></div>
     <p>We don't just book holidays — we create unforgettable experiences tailored to you.</p>
   </div>
-  <div class="exp-grid">
-
+  <div class="exp-grid stagger">
     <div class="exp-card">
       <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&q=80" alt="Beach Escapes">
       <div class="exp-overlay">
@@ -620,9 +810,7 @@ footer{background:var(--teal-dark);color:#fff;padding:50px 60px 28px;}
         <p>Relax in stunning beachfront resorts where everything is taken care of.</p>
       </div>
     </div>
-
     <div class="exp-card">
-      <!-- Times Square / New York City at night -->
       <img src="https://images.unsplash.com/photo-1534430480872-3498386e7856?w=600&q=80" alt="City Breaks">
       <div class="exp-overlay">
         <span class="exp-tag">Culture & Food</span>
@@ -630,9 +818,7 @@ footer{background:var(--teal-dark);color:#fff;padding:50px 60px 28px;}
         <p>Discover iconic cities, culture, food and nightlife.</p>
       </div>
     </div>
-
     <div class="exp-card">
-      <!-- Group of friends laughing on holiday -->
       <img src="https://images.unsplash.com/photo-1539635278303-d4002c07eae3?w=600&q=80" alt="Group Holidays">
       <div class="exp-overlay">
         <span class="exp-tag">Friends & Family</span>
@@ -640,9 +826,7 @@ footer{background:var(--teal-dark);color:#fff;padding:50px 60px 28px;}
         <p>Perfect for friends and families travelling together.</p>
       </div>
     </div>
-
     <div class="exp-card">
-      <!-- Large cruise ship at sea -->
       <img src="https://images.unsplash.com/photo-1548574505-5e239809ee19?w=600&q=80" alt="Cruises">
       <div class="exp-overlay">
         <span class="exp-tag">Luxury</span>
@@ -650,23 +834,20 @@ footer{background:var(--teal-dark);color:#fff;padding:50px 60px 28px;}
         <p>Experience multiple destinations in one luxury voyage.</p>
       </div>
     </div>
-
   </div>
 </section>
 
 <div class="divider"></div>
 
-<!-- REVIEWS -->
-<section id="reviews" class="reviews fade">
-  <div class="section-heading">
+<!-- ══ REVIEWS ══ -->
+<section id="reviews" class="reviews">
+  <div class="section-heading reveal from-bottom">
     <h2><span>Client</span> Experiences</h2>
     <div class="heading-line"></div>
     <p>Don't just take our word for it — here's what our clients say. Hover over a card to read their story.</p>
   </div>
+  <div class="review-grid stagger">
 
-  <div class="review-grid">
-
-    <!-- TURKEY — Turkish coast/Antalya -->
     <div class="review-card">
       <div class="review-inner">
         <div class="review-front" style="background-image:url('https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?w=700&q=80')">
@@ -688,7 +869,6 @@ footer{background:var(--teal-dark);color:#fff;padding:50px 60px 28px;}
       </div>
     </div>
 
-    <!-- INDIA — Chennai / South India temple -->
     <div class="review-card">
       <div class="review-inner">
         <div class="review-front" style="background-image:url('https://images.unsplash.com/photo-1524492412937-b28074a5d7da?w=700&q=80')">
@@ -710,7 +890,6 @@ footer{background:var(--teal-dark);color:#fff;padding:50px 60px 28px;}
       </div>
     </div>
 
-    <!-- DOMINICAN REPUBLIC — Caribbean beach -->
     <div class="review-card">
       <div class="review-inner">
         <div class="review-front" style="background-image:url('dominican.jpg')">
@@ -737,9 +916,9 @@ footer{background:var(--teal-dark);color:#fff;padding:50px 60px 28px;}
 
 <div class="divider"></div>
 
-<!-- FORM / CTA -->
-<section id="form" class="cta-section fade">
-  <div class="cta-left">
+<!-- ══ FORM / CTA ══ -->
+<section id="form" class="cta-section">
+  <div class="cta-left reveal from-left">
     <h2>Ready to Plan Your Next Holiday?</h2>
     <div class="gold-line"></div>
     <p class="cta-intro">Have a question or ready to start planning your next getaway? You're in the right place. We make planning simple, personal, and stress-free.</p>
@@ -749,13 +928,13 @@ footer{background:var(--teal-dark);color:#fff;padding:50px 60px 28px;}
       <li>Quick response within 48 hours</li>
     </ul>
   </div>
-  <div class="form-section">
+  <div class="form-section reveal from-right">
     <h3>Get in Touch</h3>
     <iframe src="https://form.jotform.com/243554201551347" title="Contact Form"></iframe>
   </div>
 </section>
 
-<!-- FOOTER -->
+<!-- ══ FOOTER ══ -->
 <footer>
   <div class="footer-top">
     <div class="footer-logo">
@@ -773,12 +952,82 @@ footer{background:var(--teal-dark);color:#fff;padding:50px 60px 28px;}
 </footer>
 
 <script>
-const obs = new IntersectionObserver(entries=>{
-  entries.forEach(e=>{
-    if(e.isIntersecting) e.target.classList.add('show');
+// ── LOADING SCREEN ──
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    document.getElementById('loader').classList.add('hidden');
+  }, 2000);
+});
+
+// ── BACK TO TOP ──
+const btn = document.getElementById('backToTop');
+window.addEventListener('scroll', () => {
+  btn.classList.toggle('visible', window.scrollY > 400);
+});
+btn.addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
+
+// ── SCROLL REVEAL ──
+const revealEls = document.querySelectorAll('.reveal, .stagger');
+const revealObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      revealObs.unobserve(e.target);
+    }
   });
-},{threshold:0.1});
-document.querySelectorAll('.fade').forEach(el=>obs.observe(el));
+}, {threshold: 0.12});
+revealEls.forEach(el => revealObs.observe(el));
+
+// ── ANIMATED COUNTERS ──
+function animateCounter(el) {
+  const target = parseInt(el.dataset.target);
+  const suffix = el.dataset.suffix || '';
+  const duration = 1800;
+  const start = performance.now();
+  function update(now) {
+    const elapsed = now - start;
+    const progress = Math.min(elapsed / duration, 1);
+    // ease out
+    const eased = 1 - Math.pow(1 - progress, 3);
+    const current = Math.floor(eased * target);
+    el.textContent = current + suffix;
+    if (progress < 1) requestAnimationFrame(update);
+    else el.textContent = target + suffix;
+  }
+  requestAnimationFrame(update);
+}
+
+const statsSection = document.getElementById('stats-section');
+let counted = false;
+const statsObs = new IntersectionObserver((entries) => {
+  if (entries[0].isIntersecting && !counted) {
+    counted = true;
+    document.querySelectorAll('.stat-num[data-target]').forEach(animateCounter);
+  }
+}, {threshold: 0.4});
+statsObs.observe(statsSection);
+
+// ── PARALLAX ──
+const parallaxImgs = document.querySelectorAll('[data-parallax]');
+function doParallax() {
+  parallaxImgs.forEach(img => {
+    const rect = img.closest('.gallery-item, .why-img') 
+                 ? img.closest('.gallery-item, .why-img').getBoundingClientRect() 
+                 : img.getBoundingClientRect();
+    const speed = parseFloat(img.dataset.parallax);
+    const offset = (rect.top + rect.height / 2 - window.innerHeight / 2) * speed;
+    img.style.transform = `translateY(${offset}px)`;
+  });
+  // Plan section parallax
+  const planImg = document.getElementById('plan-parallax-img');
+  if (planImg) {
+    const rect = planImg.parentElement.getBoundingClientRect();
+    const offset = (rect.top + rect.height / 2 - window.innerHeight / 2) * 0.12;
+    planImg.style.transform = `translateY(calc(-10% + ${offset}px))`;
+  }
+}
+window.addEventListener('scroll', doParallax, {passive: true});
+doParallax();
 </script>
 
 </body>
