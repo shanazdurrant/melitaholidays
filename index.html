@@ -280,7 +280,7 @@ nav{
 /* ── REVIEWS (FLIP CARDS) ── */
 .reviews{background:var(--cream);padding:90px 60px;}
 .review-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;}
-.review-card{perspective:1000px;height:420px;cursor:pointer;}
+.review-card{perspective:1000px;height:480px;cursor:pointer;}
 .review-inner{
   position:relative;width:100%;height:100%;
   transform-style:preserve-3d;
@@ -311,13 +311,14 @@ nav{
 .flip-hint i{font-size:10px;}
 .review-back{
   background:var(--teal);transform:rotateY(180deg);
-  padding:32px 28px;
-  display:flex;flex-direction:column;justify-content:space-between;color:#fff;
+  padding:28px;
+  display:flex;flex-direction:column;color:#fff;
+  overflow-y:auto;
 }
-.review-back .stars{color:var(--gold);font-size:20px;margin-bottom:16px;letter-spacing:3px;}
-.review-back p{font-size:14px;line-height:1.8;opacity:.92;flex:1;font-style:italic;}
+.review-back .stars{color:var(--gold);font-size:20px;margin-bottom:14px;letter-spacing:3px;flex-shrink:0;}
+.review-back p{font-size:13.5px;line-height:1.8;opacity:.92;font-style:italic;}
 .reviewer-name{
-  margin-top:20px;padding-top:16px;
+  margin-top:20px;padding-top:16px;flex-shrink:0;
   border-top:1px solid rgba(255,255,255,0.2);
   font-family:'Montserrat',sans-serif;font-size:12px;font-weight:700;
   letter-spacing:1px;text-transform:uppercase;color:var(--gold);
@@ -399,7 +400,7 @@ footer{background:var(--teal-dark);color:#fff;padding:50px 60px 28px;}
   .exp-grid{grid-template-columns:1fr 1fr;}
   .reviews{padding:60px 24px;}
   .review-grid{grid-template-columns:1fr;}
-  .review-card{height:380px;}
+  .review-card{height:460px;}
   .cta-section{grid-template-columns:1fr;}
   .cta-left{padding:50px 24px;}
   .form-section{padding:40px 24px;}
@@ -701,7 +702,7 @@ footer{background:var(--teal-dark);color:#fff;padding:50px 60px 28px;}
     <!-- DOMINICAN REPUBLIC — Caribbean beach -->
     <div class="review-card">
       <div class="review-inner">
-        <div class="review-front" style="background-image:url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=700&q=80')">
+        <div class="review-front" style="background-image:url('dominican.jpg')">
           <div class="overlay"></div>
           <div class="review-front-content">
             <h3>Dominican Republic</h3>
