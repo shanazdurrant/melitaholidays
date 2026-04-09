@@ -98,13 +98,16 @@ nav{
 .hero{position:relative;min-height:95vh;display:flex;align-items:center;overflow:hidden;background:var(--teal);}
 .hero-video-wrap{position:absolute;inset:0;z-index:0;}
 .hero-video-wrap::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(10,60,63,0.82) 0%,rgba(10,60,63,0.5) 60%,rgba(0,0,0,0.3) 100%);z-index:1;}
-.kb-slide{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;}
-.kb-slide:nth-child(1){background-image:url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1600&q=85');animation:kbZoom1 24s infinite 0s;}
-.kb-slide:nth-child(2){background-image:url('https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=1600&q=85');animation:kbZoom2 24s infinite 6s;}
-.kb-slide:nth-child(3){background-image:url('https://images.unsplash.com/photo-1499678329028-101435549a4e?w=1600&q=85');animation:kbZoom1 24s infinite 12s;}
-.kb-slide:nth-child(4){background-image:url('https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?w=1600&q=85');animation:kbZoom2 24s infinite 18s;}
-@keyframes kbZoom1{0%{opacity:0;transform:scale(1);}5%{opacity:1;}25%{opacity:1;transform:scale(1.08);}30%{opacity:0;transform:scale(1.1);}100%{opacity:0;transform:scale(1);}}
-@keyframes kbZoom2{0%{opacity:0;transform:scale(1.08);}5%{opacity:1;}25%{opacity:1;transform:scale(1);}30%{opacity:0;transform:scale(.98);}100%{opacity:0;transform:scale(1.08);}}
+.kb-slide{position:absolute;inset:0;background-size:cover;background-position:center;}
+.kb-slide:nth-child(1){
+  background-image:url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1600&q=85');
+  animation:kbSingle 20s ease-in-out infinite alternate;
+}
+.kb-slide:nth-child(2),.kb-slide:nth-child(3),.kb-slide:nth-child(4){display:none;}
+@keyframes kbSingle{
+  0%{transform:scale(1);opacity:1;}
+  100%{transform:scale(1.12);opacity:1;}
+}
 .hero-content{position:relative;z-index:1;padding:80px 60px;color:#fff;max-width:700px;}
 .hero-content img{width:240px;margin-bottom:28px;display:block;filter:drop-shadow(0 4px 16px rgba(0,0,0,0.3));}
 .hero-sub{font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;color:rgba(255,255,255,0.65);letter-spacing:4px;text-transform:uppercase;margin-bottom:16px;}
@@ -567,7 +570,7 @@ footer{background:var(--teal-dark);color:#fff;padding:40px 60px 28px;}
     <!-- TURKEY — All-inclusive resort -->
     <div class="review-card">
       <div class="review-inner">
-        <div class="review-front" style="background-image:url('https://images.unsplash.com/photo-1540541338537-1220bd7de651?w=700&q=80')">
+        <div class="review-front" style="background-image:url('turkey.jpg')">
           <div class="overlay"></div>
           <div class="review-front-content">
             <h3>Turkey</h3>
@@ -589,7 +592,7 @@ footer{background:var(--teal-dark);color:#fff;padding:40px 60px 28px;}
     <!-- INDIA — Market/street scene -->
     <div class="review-card">
       <div class="review-inner">
-        <div class="review-front" style="background-image:url('https://images.unsplash.com/photo-1558862107-d49ef2a04d72?w=700&q=80')">
+        <div class="review-front" style="background-image:url('india.jpg')">
           <div class="overlay"></div>
           <div class="review-front-content">
             <h3>South India</h3>
