@@ -121,24 +121,17 @@ nav{
 
 /* ── ABOUT ME ── */
 .about{
-  padding:90px 60px;
-  display:grid;grid-template-columns:1fr 1.6fr;gap:70px;align-items:center;
+  padding:80px 60px;
   background:#fff;
+  text-align:center;
 }
-.about-img{position:relative;}
-.about-img img{width:100%;border-radius:16px;object-fit:cover;height:480px;box-shadow:0 16px 50px rgba(0,0,0,0.13);}
-.about-badge{
-  position:absolute;bottom:-18px;right:-18px;
-  background:var(--gold);color:#fff;
-  border-radius:12px;padding:18px 22px;
-  text-align:center;box-shadow:0 8px 24px rgba(224,154,66,0.35);
-}
-.about-badge .badge-num{font-family:'Montserrat',sans-serif;font-size:28px;font-weight:900;line-height:1;}
-.about-badge .badge-label{font-size:10px;font-weight:600;letter-spacing:1px;text-transform:uppercase;opacity:.9;margin-top:4px;}
+.about-content{max-width:680px;margin:0 auto;}
+.about-img{display:none;}
+.about-badge{display:none;}
 .about-content h2{font-family:'Montserrat',sans-serif;font-size:clamp(20px,2vw,28px);font-weight:900;color:var(--text-dark);letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;}
-.about-content .heading-line{width:50px;height:4px;background:var(--gold);border-radius:2px;margin-bottom:24px;}
+.about-content .heading-line{width:50px;height:4px;background:var(--gold);border-radius:2px;margin:0 auto 24px;}
 .about-content p{font-size:15px;color:#555;line-height:1.85;margin-bottom:16px;}
-.about-trust{display:flex;gap:16px;flex-wrap:wrap;margin-top:24px;}
+.about-trust{display:flex;gap:16px;flex-wrap:wrap;margin-top:24px;justify-content:center;}
 .trust-badge{
   display:flex;align-items:center;gap:8px;
   background:var(--cream);border-radius:50px;
@@ -333,7 +326,7 @@ footer{background:var(--teal-dark);color:#fff;padding:40px 60px 28px;}
     <p>From all-inclusive escapes to city breaks, personally planned and fully protected.</p>
     <div class="hero-btns">
       <a href="#form" class="btn-primary">Let's Start Planning Your Holiday</a>
-      <a href="https://melitaholidays.com/manage" class="btn-outline">Manage My Booking</a>
+      <a href="https://eu.jotform.com/app/260453683271357" target="_blank" class="btn-outline">Manage My Booking</a>
     </div>
   </div>
 </section>
