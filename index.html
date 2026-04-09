@@ -235,7 +235,7 @@ nav{
 ══════════════════════════════════ */
 .marquee-section{
   background:#fff;
-  padding:30px 0;
+  padding:36px 0;
   overflow:hidden;
   border-top:1px solid #eee;
   border-bottom:1px solid #eee;
@@ -243,29 +243,45 @@ nav{
 .marquee-label{
   text-align:center;
   font-family:'Montserrat',sans-serif;
-  font-size:11px;font-weight:700;
-  letter-spacing:3px;text-transform:uppercase;
-  color:#aaa;margin-bottom:20px;
+  font-size:12px;font-weight:700;
+  letter-spacing:2px;text-transform:uppercase;
+  color:#999;margin-bottom:24px;
 }
 .marquee-track{
-  display:flex;gap:60px;
-  animation:marquee 22s linear infinite;
+  display:flex;gap:70px;align-items:center;
+  animation:marquee 28s linear infinite;
   width:max-content;
 }
 .marquee-track:hover{animation-play-state:paused;}
 @keyframes marquee{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
 .supplier-item{
-  display:flex;flex-direction:column;align-items:center;
-  gap:6px;flex-shrink:0;
+  display:flex;align-items:center;
+  flex-shrink:0;
 }
-.supplier-item .sup-name{
+.sup-name{
   font-family:'Montserrat',sans-serif;
-  font-size:18px;font-weight:900;
-  color:#bbb;letter-spacing:1px;
+  font-size:20px;font-weight:900;
   white-space:nowrap;
-  transition:color .3s;
+  letter-spacing:0.5px;
+  transition:opacity .3s;
 }
-.supplier-item:hover .sup-name{color:var(--teal);}
+.supplier-item:hover .sup-name{opacity:.7;}
+/* Brand colours */
+.sup-tui{color:#e2001a;}
+.sup-jet2{color:#f47920;}
+.sup-easyjet{color:#ff6600;}
+.sup-virgin{color:#e10a0a;}
+.sup-ba{color:#075aaa;}
+.sup-ryanair{color:#073590;}
+.sup-marriott{color:#9b2335;}
+.sup-hilton{color:#003087;}
+.sup-msc{color:#00338d;}
+.sup-thomascook{color:#00a3e0;}
+/* Divider dot between items */
+.sup-dot{
+  font-size:22px;color:#ddd;
+  flex-shrink:0;margin:0 -20px;
+}
 
 /* ══════════════════════════════════
    MOSAIC GALLERY — PARALLAX
@@ -635,30 +651,50 @@ footer{background:var(--teal-dark);color:#fff;padding:50px 60px 28px;}
 
 <!-- ══ SUPPLIER MARQUEE ══ -->
 <div class="marquee-section reveal from-bottom">
-  <div class="marquee-label">Our Trusted Partners</div>
+  <div class="marquee-label">We work with the world's leading travel brands</div>
   <div class="marquee-track">
     <!-- Set 1 -->
-    <div class="supplier-item"><span class="sup-name">TUI</span></div>
-    <div class="supplier-item"><span class="sup-name">Jet2 Holidays</span></div>
-    <div class="supplier-item"><span class="sup-name">EasyJet Holidays</span></div>
-    <div class="supplier-item"><span class="sup-name">Virgin Voyages</span></div>
-    <div class="supplier-item"><span class="sup-name">easyJet</span></div>
-    <div class="supplier-item"><span class="sup-name">Ryanair</span></div>
-    <div class="supplier-item"><span class="sup-name">British Airways</span></div>
-    <div class="supplier-item"><span class="sup-name">Marriott</span></div>
-    <div class="supplier-item"><span class="sup-name">Hilton</span></div>
-    <div class="supplier-item"><span class="sup-name">MSC Cruises</span></div>
+    <div class="supplier-item"><span class="sup-name sup-tui">TUI</span></div>
+    <div class="sup-dot">·</div>
+    <div class="supplier-item"><span class="sup-name sup-jet2">Jet2 Holidays</span></div>
+    <div class="sup-dot">·</div>
+    <div class="supplier-item"><span class="sup-name sup-easyjet">easyJet Holidays</span></div>
+    <div class="sup-dot">·</div>
+    <div class="supplier-item"><span class="sup-name sup-virgin">Virgin Voyages</span></div>
+    <div class="sup-dot">·</div>
+    <div class="supplier-item"><span class="sup-name sup-ba">British Airways</span></div>
+    <div class="sup-dot">·</div>
+    <div class="supplier-item"><span class="sup-name sup-ryanair">Ryanair</span></div>
+    <div class="sup-dot">·</div>
+    <div class="supplier-item"><span class="sup-name sup-marriott">Marriott</span></div>
+    <div class="sup-dot">·</div>
+    <div class="supplier-item"><span class="sup-name sup-hilton">Hilton</span></div>
+    <div class="sup-dot">·</div>
+    <div class="supplier-item"><span class="sup-name sup-msc">MSC Cruises</span></div>
+    <div class="sup-dot">·</div>
+    <div class="supplier-item"><span class="sup-name sup-thomascook">Thomas Cook</span></div>
+    <div class="sup-dot">·</div>
     <!-- Set 2 (duplicate for seamless loop) -->
-    <div class="supplier-item"><span class="sup-name">TUI</span></div>
-    <div class="supplier-item"><span class="sup-name">Jet2 Holidays</span></div>
-    <div class="supplier-item"><span class="sup-name">EasyJet Holidays</span></div>
-    <div class="supplier-item"><span class="sup-name">Virgin Voyages</span></div>
-    <div class="supplier-item"><span class="sup-name">easyJet</span></div>
-    <div class="supplier-item"><span class="sup-name">Ryanair</span></div>
-    <div class="supplier-item"><span class="sup-name">British Airways</span></div>
-    <div class="supplier-item"><span class="sup-name">Marriott</span></div>
-    <div class="supplier-item"><span class="sup-name">Hilton</span></div>
-    <div class="supplier-item"><span class="sup-name">MSC Cruises</span></div>
+    <div class="supplier-item"><span class="sup-name sup-tui">TUI</span></div>
+    <div class="sup-dot">·</div>
+    <div class="supplier-item"><span class="sup-name sup-jet2">Jet2 Holidays</span></div>
+    <div class="sup-dot">·</div>
+    <div class="supplier-item"><span class="sup-name sup-easyjet">easyJet Holidays</span></div>
+    <div class="sup-dot">·</div>
+    <div class="supplier-item"><span class="sup-name sup-virgin">Virgin Voyages</span></div>
+    <div class="sup-dot">·</div>
+    <div class="supplier-item"><span class="sup-name sup-ba">British Airways</span></div>
+    <div class="sup-dot">·</div>
+    <div class="supplier-item"><span class="sup-name sup-ryanair">Ryanair</span></div>
+    <div class="sup-dot">·</div>
+    <div class="supplier-item"><span class="sup-name sup-marriott">Marriott</span></div>
+    <div class="sup-dot">·</div>
+    <div class="supplier-item"><span class="sup-name sup-hilton">Hilton</span></div>
+    <div class="sup-dot">·</div>
+    <div class="supplier-item"><span class="sup-name sup-msc">MSC Cruises</span></div>
+    <div class="sup-dot">·</div>
+    <div class="supplier-item"><span class="sup-name sup-thomascook">Thomas Cook</span></div>
+    <div class="sup-dot">·</div>
   </div>
 </div>
 
