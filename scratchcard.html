@@ -174,10 +174,17 @@ function getImageForDest(dest){
 // ── DECODE ──
 function decodeData(token){
   try{
-    const json = decodeURIComponent(escape(atob(token)));
+    // Method 1: Modern approach
+    const json = atob(token);
     return JSON.parse(json);
   } catch(e){
-    return null;
+    try{
+      // Method 2: With URI decoding for special characters
+      const json = decodeURIComponent(escape(atob(token)));
+      return JSON.parse(json);
+    } catch(e2){
+      return null;
+    }
   }
 }
 
@@ -190,6 +197,19 @@ window.addEventListener('DOMContentLoaded', () => {
   // confetti toggle — c=0 disables it
   if(params.get('c') === '0') confettiEnabled = false;
 
+  // Also support old-style URLs just in case
+  const legacyDest = params.get('d');
+  if(legacyDest){
+    const data = {
+      n: params.get('n') || '',
+      d: legacyDest,
+      m: params.get('m') || '',
+      t: params.get('t') || ''
+    };
+    renderCard(data);
+    return;
+  }
+
   if(!token){
     document.getElementById('invalidMsg').style.display = 'block';
     return;
@@ -201,6 +221,10 @@ window.addEventListener('DOMContentLoaded', () => {
     return;
   }
 
+  renderCard(data);
+});
+
+function renderCard(data){
   const {n: name='', d: dest, m: msg='', t: date=''} = data;
 
   document.getElementById('displayName').textContent =
@@ -222,7 +246,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
   document.getElementById('cardScreen').style.display = 'flex';
   setTimeout(initScratch, 150);
-});
+}
 
 function initScratch(){
   const wrap   = document.getElementById('scratchWrap');
