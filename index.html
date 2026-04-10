@@ -18,7 +18,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800;900&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <style>
-
+ 
 :root{
   --teal:#2f7f82;
   --teal-dark:#256c6f;
@@ -30,7 +30,7 @@
 *{box-sizing:border-box;margin:0;padding:0;}
 html{overflow-x:hidden;}
 body{font-family:'Poppins',sans-serif;background:#fff;color:var(--text-dark);scroll-behavior:smooth;overflow-x:hidden;}
-
+ 
 /* ── LOADING SCREEN ── */
 #loader{position:fixed;inset:0;background:var(--teal);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9999;transition:opacity .6s ease,visibility .6s ease;}
 #loader.hidden{opacity:0;visibility:hidden;}
@@ -40,7 +40,7 @@ body{font-family:'Poppins',sans-serif;background:#fff;color:var(--text-dark);scr
 #loader .loader-fill{height:100%;width:0;background:var(--gold);border-radius:2px;animation:loaderFill 1.8s ease forwards;}
 @keyframes loaderPulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.8;transform:scale(.97);}}
 @keyframes loaderFill{0%{width:0;}100%{width:100%;}}
-
+ 
 /* ── SCROLL ANIMATIONS ── */
 .reveal{opacity:0;transition:opacity .8s ease,transform .8s ease;}
 .reveal.from-bottom{transform:translateY(50px);}
@@ -52,17 +52,17 @@ body{font-family:'Poppins',sans-serif;background:#fff;color:var(--text-dark);scr
 .stagger.visible > *:nth-child(2){opacity:1;transform:none;transition-delay:.2s;}
 .stagger.visible > *:nth-child(3){opacity:1;transform:none;transition-delay:.3s;}
 .stagger.visible > *:nth-child(4){opacity:1;transform:none;transition-delay:.4s;}
-
+ 
 /* ── SECTION HEADINGS ── */
 .section-heading{text-align:center;margin-bottom:50px;}
 .section-heading h2{font-family:'Montserrat',sans-serif;font-size:clamp(24px,3vw,36px);font-weight:900;letter-spacing:2px;text-transform:uppercase;color:var(--text-dark);margin-bottom:14px;}
 .section-heading h2 span{color:var(--teal);}
 .section-heading .heading-line{width:60px;height:4px;background:var(--gold);margin:0 auto 16px;border-radius:2px;}
 .section-heading p{font-size:15px;color:#666;max-width:620px;margin:0 auto;line-height:1.7;}
-
+ 
 /* ── DIVIDERS ── */
 .divider{height:6px;background:linear-gradient(90deg,var(--teal),var(--gold),var(--teal));}
-
+ 
 /* ── NAV ── */
 nav{
   position:sticky;top:0;z-index:200;
@@ -94,7 +94,7 @@ nav{
 .nav-mobile{display:none;flex-direction:column;gap:4px;padding:10px 20px 16px;background:var(--teal-dark);}
 .nav-mobile a{color:rgba(255,255,255,0.9);text-decoration:none;font-size:13px;font-weight:600;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.1);letter-spacing:.5px;}
 .nav-mobile.open{display:flex;}
-
+ 
 /* ── HERO — KEN BURNS ── */
 .hero{position:relative;min-height:95vh;display:flex;align-items:center;overflow:hidden;background:var(--teal);}
 .hero-video-wrap{position:absolute;inset:0;z-index:0;}
@@ -119,7 +119,7 @@ nav{
 .btn-primary:hover{background:#c8882e;transform:translateY(-3px);}
 .btn-outline{display:block;padding:16px 32px;border-radius:50px;border:2px solid rgba(255,255,255,0.5);color:#fff;font-weight:600;font-size:15px;text-decoration:none;text-align:center;transition:all .2s;backdrop-filter:blur(4px);}
 .btn-outline:hover{border-color:#fff;background:rgba(255,255,255,0.12);}
-
+ 
 /* ── ABOUT ME ── */
 .about{
   padding:80px 60px;
@@ -139,7 +139,7 @@ nav{
   padding:8px 16px;font-size:12px;font-weight:600;color:var(--teal);
 }
 .trust-badge i{color:var(--gold);}
-
+ 
 /* ── MARQUEE ── */
 .marquee-section{background:#fff;padding:36px 0;overflow:hidden;border-top:1px solid #eee;border-bottom:1px solid #eee;}
 .marquee-label{text-align:center;font-family:'Montserrat',sans-serif;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#999;margin-bottom:24px;}
@@ -150,14 +150,14 @@ nav{
 .supplier-item img{height:44px;width:auto;max-width:140px;object-fit:contain;transition:opacity .3s;}
 .supplier-item:hover img{opacity:.75;}
 .sup-dot{font-size:18px;color:#ddd;flex-shrink:0;margin:0 -10px;}
-
+ 
 /* ── GALLERY ── */
 .gallery{display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:240px 240px;gap:4px;overflow:hidden;}
 .gallery-item{overflow:hidden;}
 .gallery-item img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s ease;will-change:transform;}
 .gallery-item:hover img{transform:scale(1.06);}
 .gallery-item:first-child{grid-column:1/3;grid-row:1/3;}
-
+ 
 /* ── WHY BOOK ── */
 .why{padding:90px 60px;display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center;background:var(--cream);}
 .why-img{overflow:hidden;border-radius:14px;}
@@ -169,7 +169,7 @@ nav{
 .why-icon{font-size:24px;margin-top:2px;flex-shrink:0;}
 .why-item h3{font-family:'Montserrat',sans-serif;font-size:13px;font-weight:800;margin-bottom:5px;letter-spacing:.5px;text-transform:uppercase;}
 .why-item p{font-size:13px;color:#666;line-height:1.6;}
-
+ 
 /* ── HOW IT WORKS ── */
 .how{background:#fff;padding:90px 60px;text-align:center;}
 .steps-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;max-width:960px;margin:0 auto;}
@@ -179,7 +179,7 @@ nav{
 .step-card i{font-size:28px;color:var(--teal);margin-bottom:14px;display:block;}
 .step-card h3{font-family:'Montserrat',sans-serif;font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;color:var(--text-dark);}
 .step-card p{font-size:13px;color:#777;line-height:1.6;}
-
+ 
 /* ── FIND YOUR HOLIDAY (EXPERIENCE) ── */
 .experience{padding:90px 60px;background:var(--cream);}
 .exp-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
@@ -193,7 +193,7 @@ nav{
 .exp-sub{font-size:11px;opacity:.8;margin-bottom:4px;font-style:italic;}
 .exp-overlay p{font-size:12px;opacity:0;line-height:1.5;transition:opacity .35s ease,max-height .35s ease;max-height:0;overflow:hidden;}
 .exp-card:hover .exp-overlay p{opacity:.9;max-height:80px;}
-
+ 
 /* ── REVIEWS ── */
 .reviews{background:#fff;padding:90px 60px;}
 .review-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;}
@@ -216,7 +216,7 @@ nav{
   .review-card:hover .review-inner{transform:none;}
   .review-card.flipped .review-inner{transform:rotateY(180deg);}
 }
-
+ 
 /* ── CTA / FORM ── */
 .cta-section{display:grid;grid-template-columns:1fr 1fr;min-height:600px;}
 .cta-left{background:var(--teal);color:#fff;padding:80px 60px;display:flex;flex-direction:column;justify-content:center;}
@@ -228,7 +228,7 @@ nav{
 .cta-checks li::before{content:'✔';color:var(--gold);font-weight:700;font-size:13px;}
 .form-section{background:var(--cream);padding:60px;display:flex;flex-direction:column;justify-content:center;}
 .form-section iframe{width:100%;height:600px;border:none;border-radius:10px;}
-
+ 
 /* ── FOOTER ── */
 footer{background:var(--teal-dark);color:#fff;padding:40px 60px 28px;}
 .footer-atol{display:flex;justify-content:center;align-items:center;padding-bottom:30px;margin-bottom:30px;border-bottom:1px solid rgba(255,255,255,0.12);}
@@ -241,12 +241,12 @@ footer{background:var(--teal-dark);color:#fff;padding:40px 60px 28px;}
 .social-link.whatsapp{background:#25D366;border-color:#25D366;font-size:22px;}
 .social-link.whatsapp:hover{background:#1ebe5d;border-color:#1ebe5d;color:#fff;}
 .footer-bottom{font-size:12px;opacity:.5;text-align:center;}
-
+ 
 /* ── BACK TO TOP ── */
 #backToTop{position:fixed;bottom:30px;right:30px;z-index:200;width:48px;height:48px;border-radius:50%;background:var(--gold);color:#fff;border:none;cursor:pointer;font-size:18px;box-shadow:0 4px 16px rgba(0,0,0,0.2);opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s,transform .3s,background .2s;display:flex;align-items:center;justify-content:center;}
 #backToTop.visible{opacity:1;visibility:visible;}
 #backToTop:hover{background:#c8882e;transform:translateY(-3px);}
-
+ 
 /* ── RESPONSIVE ── */
 @media(max-width:900px){
   nav{padding:12px 20px;}
@@ -278,21 +278,21 @@ footer{background:var(--teal-dark);color:#fff;padding:40px 60px 28px;}
   .marquee-section{padding:24px 0;}
   section, .why, .how, .experience, .reviews, .about{max-width:100%;overflow-x:hidden;}
 }
-
+ 
 </style>
 </head>
 <body>
-
+ 
 <!-- LOADING SCREEN -->
 <div id="loader">
   <img src="logo.png" alt="Melita Holidays" onerror="this.outerHTML='<div style=\'font-family:Montserrat,sans-serif;font-weight:900;font-size:32px;color:#e09a42;\'>MELITA HOLIDAYS</div>'">
   <div class="loader-text">Loading your holiday...</div>
   <div class="loader-bar"><div class="loader-fill"></div></div>
 </div>
-
+ 
 <!-- BACK TO TOP -->
 <button id="backToTop" aria-label="Back to top"><i class="fas fa-chevron-up"></i></button>
-
+ 
 <!-- NAV -->
 <nav>
   <ul class="nav-links">
@@ -313,7 +313,7 @@ footer{background:var(--teal-dark);color:#fff;padding:40px 60px 28px;}
   <a href="#reviews" onclick="closeMenu()">Client Experiences</a>
   <a href="#form" onclick="closeMenu()">Start Planning</a>
 </div>
-
+ 
 <!-- HERO -->
 <section class="hero">
   <div class="hero-video-wrap">
@@ -334,9 +334,9 @@ footer{background:var(--teal-dark);color:#fff;padding:40px 60px 28px;}
     </div>
   </div>
 </section>
-
+ 
 <div class="divider"></div>
-
+ 
 <!-- ABOUT ME -->
 <section id="about" class="about">
   <div class="about-img reveal from-left">
@@ -359,12 +359,12 @@ footer{background:var(--teal-dark);color:#fff;padding:40px 60px 28px;}
     </div>
   </div>
 </section>
-
+ 
 <div class="divider"></div>
-
+ 
 <!-- MARQUEE -->
 <div class="marquee-section reveal from-bottom">
-  <div class="marquee-label">We work with the world's leading travel brands</div>
+  <div class="marquee-label">I work with the world's leading travel brands</div>
   <div class="marquee-track">
     <!-- Set 1 -->
     <div class="supplier-item"><img src="tui.png" alt="TUI"></div>
@@ -434,9 +434,9 @@ footer{background:var(--teal-dark);color:#fff;padding:40px 60px 28px;}
     <div class="sup-dot">·</div>
   </div>
 </div>
-
+ 
 <div class="divider"></div>
-
+ 
 <!-- GALLERY -->
 <div id="destinations" class="gallery">
   <div class="gallery-item"><img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80" alt="Beach" data-parallax="0.15"></div>
@@ -445,9 +445,9 @@ footer{background:var(--teal-dark);color:#fff;padding:40px 60px 28px;}
   <div class="gallery-item"><img src="https://images.unsplash.com/photo-1516483638261-f4dbaf036963?w=400&q=80" alt="Italy" data-parallax="0.1"></div>
   <div class="gallery-item"><img src="https://images.unsplash.com/photo-1506197603052-3cc9c3a201bd?w=400&q=80" alt="Santorini" data-parallax="0.08"></div>
 </div>
-
+ 
 <div class="divider"></div>
-
+ 
 <!-- WHY BOOK -->
 <section id="why" class="why">
   <div class="why-img reveal from-left">
@@ -486,9 +486,9 @@ footer{background:var(--teal-dark);color:#fff;padding:40px 60px 28px;}
     </div>
   </div>
 </section>
-
+ 
 <div class="divider"></div>
-
+ 
 <!-- HOW IT WORKS -->
 <section id="how" class="how">
   <div class="section-heading reveal from-bottom">
@@ -523,9 +523,9 @@ footer{background:var(--teal-dark);color:#fff;padding:40px 60px 28px;}
     </div>
   </div>
 </section>
-
+ 
 <div class="divider"></div>
-
+ 
 <!-- FIND YOUR HOLIDAY -->
 <section id="holidays" class="experience">
   <div class="section-heading reveal from-bottom">
@@ -534,7 +534,7 @@ footer{background:var(--teal-dark);color:#fff;padding:40px 60px 28px;}
     <p>Explore a range of holidays tailored to your style, from all-inclusive beach escapes, to city breaks and beyond.</p>
   </div>
   <div class="exp-grid stagger">
-
+ 
     <div class="exp-card">
       <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&q=80" alt="Beach Escapes">
       <div class="exp-overlay">
@@ -544,7 +544,7 @@ footer{background:var(--teal-dark);color:#fff;padding:40px 60px 28px;}
         <p>Relax in stunning beachfront resorts where everything is taken care of.</p>
       </div>
     </div>
-
+ 
     <div class="exp-card">
       <img src="https://images.unsplash.com/photo-1534430480872-3498386e7856?w=600&q=80" alt="City Breaks">
       <div class="exp-overlay">
@@ -554,7 +554,7 @@ footer{background:var(--teal-dark);color:#fff;padding:40px 60px 28px;}
         <p>Discover iconic cities, culture, food and nightlife.</p>
       </div>
     </div>
-
+ 
     <div class="exp-card">
       <img src="https://images.unsplash.com/photo-1539635278303-d4002c07eae3?w=600&q=80" alt="Group Holidays">
       <div class="exp-overlay">
@@ -564,7 +564,7 @@ footer{background:var(--teal-dark);color:#fff;padding:40px 60px 28px;}
         <p>Perfect for friends and families travelling together.</p>
       </div>
     </div>
-
+ 
     <div class="exp-card">
       <img src="https://images.unsplash.com/photo-1548574505-5e239809ee19?w=600&q=80" alt="Cruises">
       <div class="exp-overlay">
@@ -574,12 +574,12 @@ footer{background:var(--teal-dark);color:#fff;padding:40px 60px 28px;}
         <p>Experience multiple destinations in one luxury voyage.</p>
       </div>
     </div>
-
+ 
   </div>
 </section>
-
+ 
 <div class="divider"></div>
-
+ 
 <!-- REVIEWS -->
 <section id="reviews" class="reviews">
   <div class="section-heading reveal from-bottom">
@@ -588,7 +588,7 @@ footer{background:var(--teal-dark);color:#fff;padding:40px 60px 28px;}
     <p>A few recent trips I have planned, each tailored to the client.</p>
   </div>
   <div class="review-grid stagger">
-
+ 
     <!-- TURKEY -->
     <div class="review-card">
       <div class="review-inner">
@@ -610,7 +610,7 @@ footer{background:var(--teal-dark);color:#fff;padding:40px 60px 28px;}
         </div>
       </div>
     </div>
-
+ 
     <!-- SOUTH INDIA -->
     <div class="review-card">
       <div class="review-inner">
@@ -632,7 +632,7 @@ footer{background:var(--teal-dark);color:#fff;padding:40px 60px 28px;}
         </div>
       </div>
     </div>
-
+ 
     <!-- DOMINICAN REPUBLIC -->
     <div class="review-card">
       <div class="review-inner">
@@ -654,12 +654,12 @@ footer{background:var(--teal-dark);color:#fff;padding:40px 60px 28px;}
         </div>
       </div>
     </div>
-
+ 
   </div>
 </section>
-
+ 
 <div class="divider"></div>
-
+ 
 <!-- FORM / CTA -->
 <section id="form" class="cta-section">
   <div class="cta-left reveal from-left">
@@ -676,7 +676,7 @@ footer{background:var(--teal-dark);color:#fff;padding:40px 60px 28px;}
     <iframe src="https://form.jotform.com/243554201551347" title="Contact Form"></iframe>
   </div>
 </section>
-
+ 
 <!-- FOOTER -->
 <footer>
   <div class="footer-atol">
@@ -694,30 +694,30 @@ footer{background:var(--teal-dark);color:#fff;padding:40px 60px 28px;}
   </div>
   <div class="footer-bottom">© 2026 Melita Holidays. All rights reserved.</div>
 </footer>
-
+ 
 <script>
 // ── LOADING SCREEN ──
 window.addEventListener('load', () => {
   setTimeout(() => document.getElementById('loader').classList.add('hidden'), 2000);
 });
-
+ 
 // ── MOBILE NAV ──
 function closeMenu(){document.getElementById('navMobile').classList.remove('open');}
 document.getElementById('hamburger').addEventListener('click', () => {
   document.getElementById('navMobile').classList.toggle('open');
 });
-
+ 
 // ── BACK TO TOP ──
 const btn = document.getElementById('backToTop');
 window.addEventListener('scroll', () => btn.classList.toggle('visible', window.scrollY > 400));
 btn.addEventListener('click', () => window.scrollTo({top:0,behavior:'smooth'}));
-
+ 
 // ── SCROLL REVEAL ──
 const revealObs = new IntersectionObserver((entries) => {
   entries.forEach(e => { if(e.isIntersecting){e.target.classList.add('visible');revealObs.unobserve(e.target);}});
 },{threshold:0.12});
 document.querySelectorAll('.reveal,.stagger').forEach(el => revealObs.observe(el));
-
+ 
 // ── ANIMATED COUNTERS ──
 function animateCounter(el){
   const target = parseInt(el.dataset.target);
@@ -743,14 +743,14 @@ if(statsSection){
     }
   },{threshold:0.1,rootMargin:'0px 0px -50px 0px'}).observe(statsSection);
 }
-
+ 
 // ── TAP TO FLIP (mobile) ──
 document.querySelectorAll('.review-card').forEach(card => {
   card.addEventListener('click', () => {
     if(window.matchMedia('(hover:none)').matches) card.classList.toggle('flipped');
   });
 });
-
+ 
 // ── PARALLAX ──
 const parallaxImgs = document.querySelectorAll('[data-parallax]');
 function doParallax(){
@@ -765,6 +765,6 @@ function doParallax(){
 window.addEventListener('scroll', doParallax, {passive:true});
 doParallax();
 </script>
-
+ 
 </body>
 </html>
