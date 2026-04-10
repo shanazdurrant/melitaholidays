@@ -174,13 +174,17 @@ function getImageForDest(dest){
 // ── DECODE ──
 function decodeData(token){
   try{
-    // Method 1: Modern approach
-    const json = atob(token);
+    // Handle URL-safe base64 (- and _ instead of + and /)
+    const b64 = token.replace(/-/g, '+').replace(/_/g, '/');
+    // Add padding if needed
+    const padded = b64 + '=='.slice(0, (4 - b64.length % 4) % 4);
+    const json = decodeURIComponent(escape(atob(padded)));
     return JSON.parse(json);
   } catch(e){
     try{
-      // Method 2: With URI decoding for special characters
-      const json = decodeURIComponent(escape(atob(token)));
+      // Fallback for old-style tokens
+      const cleaned = decodeURIComponent(token).replace(/ /g, '+');
+      const json = atob(cleaned);
       return JSON.parse(json);
     } catch(e2){
       return null;
