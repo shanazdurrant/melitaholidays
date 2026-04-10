@@ -28,18 +28,38 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(circle
 .card-tagline{color:rgba(255,255,255,0.65);font-size:12px;letter-spacing:.5px;}
  
 .scratchcard-wrap{position:relative;width:100%;border-radius:20px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.4);background:#fff;cursor:crosshair;}
-.reveal-layer{width:100%;min-height:320px;background:var(--teal-dark);display:flex;flex-direction:column;align-items:flex-end;justify-content:flex-end;padding:0;text-align:center;position:relative;overflow:hidden;}
-.reveal-bg{position:absolute;top:0;left:0;right:0;height:55%;background-size:cover;background-position:center;opacity:0;transition:opacity 1.4s ease;filter:brightness(1.1);}
+.reveal-layer{
+  width:100%;
+  background:var(--teal-dark);
+  display:flex;
+  flex-direction:column;
+  position:relative;
+  overflow:hidden;
+}
+.reveal-bg{
+  width:100%;
+  height:220px;
+  flex-shrink:0;
+  background-size:cover;
+  background-position:center;
+  opacity:0;
+  transition:opacity 1.4s ease;
+  filter:brightness(1.1);
+}
 .reveal-bg.show{opacity:1;}
 .reveal-overlay{display:none;}
 .reveal-content{
-  position:relative;z-index:2;color:#fff;
-  display:flex;flex-direction:column;align-items:center;
+  position:relative;
+  z-index:2;
+  color:#fff;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
   width:100%;
-  margin-top:55%;
-  background:linear-gradient(135deg,var(--teal-dark),#1a5558);
   padding:20px 24px 24px;
+  background:linear-gradient(135deg,var(--teal-dark),#1a5558);
   border-top:3px solid var(--gold);
+  flex:1;
 }
 .dest-label{font-size:10px;font-weight:600;letter-spacing:3px;text-transform:uppercase;opacity:0;transition:opacity .8s .2s;margin-bottom:8px;color:rgba(255,255,255,0.7);}
 .dest-label.pop{opacity:1;}
@@ -132,9 +152,12 @@ const destImages = {
   'PORTUGAL':      'https://images.unsplash.com/photo-1555881400-74d7acaacd8b?w=900&q=80&auto=format&fit=crop',
   'ITALY':         'https://images.unsplash.com/photo-1516483638261-f4dbaf036963?w=900&q=80&auto=format&fit=crop',
   'FLORIDA':       'https://images.unsplash.com/photo-1533106418989-88406c7cc8ca?w=900&q=80&auto=format&fit=crop',
-  'JAMAICA':       'https://images.unsplash.com/photo-1564867904986-3f8bcc5e5e3c?w=900&q=80&auto=format&fit=crop',
-  'GREECE':        'https://images.unsplash.com/photo-1597975014450-d1ba6e3d67fd?w=900&q=80&auto=format&fit=crop',
+  'JAMAICA':       'https://images.unsplash.com/photo-1583417319070-4a69db38a482?w=900&q=80&auto=format&fit=crop',
+  'GREECE':        'https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=900&q=80&auto=format&fit=crop',
   'MOROCCO':       'https://images.unsplash.com/photo-1489493887464-892be6d1daae?w=900&q=80&auto=format&fit=crop',
+  'SOUTH KOREA':   'https://images.unsplash.com/photo-1538485399081-7191377e8241?w=900&q=80&auto=format&fit=crop',
+  'KOREA':         'https://images.unsplash.com/photo-1538485399081-7191377e8241?w=900&q=80&auto=format&fit=crop',
+  'SEOUL':         'https://images.unsplash.com/photo-1538485399081-7191377e8241?w=900&q=80&auto=format&fit=crop',
   'PARIS':         'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=900&q=80&auto=format&fit=crop',
   'LONDON':        'https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=900&q=80&auto=format&fit=crop',
   'AMSTERDAM':     'https://images.unsplash.com/photo-1534351590666-13e3e96b5017?w=900&q=80&auto=format&fit=crop',
@@ -378,3 +401,4 @@ function shareWA(){
 </script>
 </body>
 </html>
+ 
