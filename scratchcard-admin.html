@@ -195,6 +195,18 @@ select{cursor:pointer;}
 
       <div class="divider-line"></div>
 
+      <div class="field" style="display:flex;align-items:center;justify-content:space-between;background:#f7f7f7;border-radius:10px;padding:12px 16px;">
+        <div>
+          <div style="font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--teal);margin-bottom:2px;">🎉 Confetti Animation</div>
+          <div style="font-size:11px;color:#aaa;">Show confetti when destination is revealed</div>
+        </div>
+        <div style="position:relative;display:inline-block;width:44px;height:24px;flex-shrink:0;">
+          <input type="checkbox" id="confettiToggle" checked onchange="liveUpdate();updateToggle();" style="opacity:0;width:0;height:0;position:absolute;">
+          <div id="toggleTrack" onclick="document.getElementById('confettiToggle').click()" style="position:absolute;inset:0;background:var(--teal);border-radius:24px;cursor:pointer;transition:background .3s;"></div>
+          <div id="toggleThumb" onclick="document.getElementById('confettiToggle').click()" style="position:absolute;top:3px;left:23px;width:18px;height:18px;background:#fff;border-radius:50%;cursor:pointer;transition:left .3s;box-shadow:0 1px 4px rgba(0,0,0,0.2);"></div>
+        </div>
+      </div>
+
       <div class="field">
         <label>Generated Link <span class="opt">(destination is hidden)</span></label>
         <div class="url-preview" id="urlPreview">Fill in a destination to generate a link...</div>
@@ -234,7 +246,7 @@ select{cursor:pointer;}
         </div>
         <div class="email-preview" id="emailPreview">
           <div class="email-header">
-            <div class="email-row"><span class="email-label">From</span><span class="email-val">justine@melitaholidays.com</span></div>
+            <div class="email-row"><span class="email-label">From</span><span class="email-val"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b4dec1c7c0dddad1f4d9d1d8ddc0d5dcdbd8ddd0d5cdc79ad7dbd9">[email&#160;protected]</a></span></div>
             <div class="email-row"><span class="email-label">To</span><span class="email-val" id="previewTo">—</span></div>
             <div class="email-row"><span class="email-label">Re</span><span class="email-val" id="previewSubject">—</span></div>
           </div>
@@ -254,8 +266,8 @@ select{cursor:pointer;}
   </div>
 </div>
 
-<script>
-const ADMIN_PASSWORD = 'Jhene2019';
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+const ADMIN_PASSWORD = 'melita2025';
 const SESSION_KEY = 'mh_admin_auth';
 const BASE_URL = 'https://melitaholidays.com/scratchcard.html';
 
@@ -300,6 +312,12 @@ function onMsgInput(){
   liveUpdate();
 }
 
+function updateToggle(){
+  const on = document.getElementById('confettiToggle').checked;
+  document.getElementById('toggleTrack').style.background = on ? 'var(--teal)' : '#ddd';
+  document.getElementById('toggleThumb').style.left = on ? '23px' : '3px';
+}
+
 // ── ENCODING ──
 // Encodes all data into a single opaque token — no readable params in URL
 function encodeData(name, dest, msg, date){
@@ -316,7 +334,8 @@ function buildUrl(){
   const date = document.getElementById('travelDate').value.trim();
   if(!dest) return null;
   const token = encodeData(name, dest, msg, date);
-  return BASE_URL + '?s=' + token;
+  const confetti = document.getElementById('confettiToggle').checked ? '' : '&c=0';
+  return BASE_URL + '?s=' + token + confetti;
 }
 
 function getDest(){
@@ -533,14 +552,4 @@ function togglePw(){
 
 function showAdmin(){
   document.getElementById('loginScreen').style.display='none';
-  document.getElementById('adminScreen').style.display='block';
-  renderPresets();
-  renderSaved();
-}
-
-window.addEventListener('DOMContentLoaded',()=>{
-  if(sessionStorage.getItem(SESSION_KEY)==='1') showAdmin();
-});
-</script>
-</body>
-</html>
+  docu
