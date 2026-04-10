@@ -9,21 +9,24 @@
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <style>
-:root{--teal:#2f7f82;--teal-dark:#256c6f;--gold:#e09a42;--gold-light:#f0b865;--cream:#f6f4f2;}
+:root{--teal:#2f7f82;--teal-dark:#256c6f;--gold:#e09a42;--gold-light:#f0b865;}
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:'Poppins',sans-serif;background:var(--teal);min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:30px 20px;overflow-x:hidden;position:relative;}
 body::before{content:'';position:fixed;inset:0;background:radial-gradient(circle at 20% 20%,rgba(224,154,66,0.15) 0%,transparent 50%),radial-gradient(circle at 80% 80%,rgba(255,255,255,0.06) 0%,transparent 50%);pointer-events:none;}
-#invalidMsg{text-align:center;color:#fff;max-width:360px;animation:fadeUp .6s ease both;display:none;}
+
+#invalidMsg{text-align:center;color:#fff;max-width:360px;display:none;animation:fadeUp .6s ease both;}
 #invalidMsg i{font-size:48px;opacity:.4;margin-bottom:20px;display:block;}
 #invalidMsg h2{font-family:'Montserrat',sans-serif;font-size:22px;font-weight:900;margin-bottom:10px;}
 #invalidMsg p{opacity:.7;font-size:14px;line-height:1.7;}
 #invalidMsg a{display:inline-block;margin-top:24px;padding:14px 28px;border-radius:50px;background:var(--gold);color:#fff;text-decoration:none;font-weight:700;font-size:13px;}
+
 #cardScreen{display:none;flex-direction:column;align-items:center;max-width:520px;width:100%;animation:fadeUp .7s ease both;}
 .card-logo{margin-bottom:22px;text-align:center;}
 .card-logo img{height:58px;object-fit:contain;}
 .card-intro{text-align:center;margin-bottom:26px;}
 .recipient-name{font-family:'Montserrat',sans-serif;font-size:clamp(18px,4vw,26px);font-weight:900;color:#fff;letter-spacing:1px;margin-bottom:6px;}
 .card-tagline{color:rgba(255,255,255,0.65);font-size:13px;letter-spacing:.5px;}
+
 .scratchcard-wrap{position:relative;width:100%;border-radius:24px;overflow:hidden;box-shadow:0 28px 80px rgba(0,0,0,0.4);background:#fff;cursor:crosshair;}
 .reveal-layer{width:100%;min-height:420px;background:var(--teal-dark);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:50px 32px;text-align:center;position:relative;overflow:hidden;}
 .reveal-bg{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transition:opacity 1.4s ease;}
@@ -40,12 +43,14 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(circle
 .dest-date.pop{opacity:1;}
 .dest-sig{font-size:11px;opacity:0;color:rgba(255,255,255,0.5);letter-spacing:1px;transition:opacity .8s 1.1s;}
 .dest-sig.pop{opacity:.5;}
+
 .scratch-canvas{position:absolute;top:0;left:0;width:100%;height:100%;touch-action:none;z-index:3;}
 .scratch-hint{position:absolute;bottom:18px;left:0;right:0;z-index:4;text-align:center;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.65);pointer-events:none;transition:opacity .5s;}
 .scratch-hint i{margin-right:6px;}
 .scratch-hint.hide{opacity:0;}
 .scratch-progress{position:absolute;bottom:0;left:0;right:0;height:5px;background:rgba(0,0,0,0.15);z-index:5;}
 .scratch-progress-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--gold),var(--gold-light));transition:width .08s;border-radius:0 3px 3px 0;}
+
 .share-bar{width:100%;margin-top:18px;display:flex;gap:10px;opacity:0;transform:translateY(12px);transition:opacity .7s 1.4s,transform .7s 1.4s;pointer-events:none;}
 .share-bar.show{opacity:1;transform:translateY(0);pointer-events:auto;}
 .share-btn{flex:1;padding:15px 10px;border:none;border-radius:14px;font-family:'Montserrat',sans-serif;font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;cursor:pointer;transition:transform .2s;display:flex;align-items:center;justify-content:center;gap:7px;text-decoration:none;}
@@ -58,13 +63,12 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(circle
 </style>
 </head>
 <body>
-
 <canvas id="confetti-canvas"></canvas>
 
 <div id="invalidMsg">
   <i class="fas fa-plane-slash"></i>
   <h2>No holiday found!</h2>
-  <p>This link doesn't have a destination attached. Ask Melita Holidays to resend your surprise link.</p>
+  <p>This link doesn't have a destination. Ask Melita Holidays to resend your surprise link.</p>
   <a href="https://melitaholidays.com">Visit Melita Holidays</a>
 </div>
 
@@ -81,7 +85,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(circle
       <div class="reveal-bg" id="revealBg"></div>
       <div class="reveal-overlay"></div>
       <div class="reveal-content">
-        <div class="dest-label" id="destLabel">Your destination is</div>
+        <div class="dest-label">Your destination is</div>
         <div class="dest-name" id="destName"></div>
         <div class="dest-msg" id="destMsg"></div>
         <div class="dest-date" id="destDate"></div>
@@ -100,92 +104,151 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(circle
 </div>
 
 <script>
-const destImages={
-  'MALDIVES':'https://images.unsplash.com/photo-1573843981267-be1fb176d3e1?w=900&q=90',
-  'SANTORINI':'https://images.unsplash.com/photo-1533105079780-92b9be482077?w=900&q=90',
-  'DUBAI':'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=900&q=90',
-  'BARBADOS':'https://images.unsplash.com/photo-1548777123-5b9f8d2e3dda?w=900&q=90',
-  'TURKEY':'https://images.unsplash.com/photo-1540541338537-1220bd7de651?w=900&q=90',
-  'BALI':'https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=900&q=90',
-  'TENERIFE':'https://images.unsplash.com/photo-1590523741831-ab7e8b8f9c7f?w=900&q=90',
-  'NEW YORK':'https://images.unsplash.com/photo-1534430480872-3498386e7856?w=900&q=90',
-  'CANCÚN':'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=900&q=90',
-  'THAILAND':'https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=900&q=90',
-  'MAURITIUS':'https://images.unsplash.com/photo-1483683804023-6ccbe24d92bb?w=900&q=90',
-  'IBIZA':'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=900&q=90',
-  'CYPRUS':'https://images.unsplash.com/photo-1488085061387-422e29b40080?w=900&q=90',
-  'LANZAROTE':'https://images.unsplash.com/photo-1502920917128-1aa500764cbd?w=900&q=90',
-  'PORTUGAL':'https://images.unsplash.com/photo-1555881400-74d7acaacd8b?w=900&q=90',
-  'ITALY':'https://images.unsplash.com/photo-1516483638261-f4dbaf036963?w=900&q=90',
-  'FLORIDA':'https://images.unsplash.com/photo-1568849676085-51415703900f?w=900&q=90',
+// ── DESTINATION IMAGES (matched to destination) ──
+const destImages = {
+  'MALDIVES':    'https://images.unsplash.com/photo-1573843981267-be1fb176d3e1?w=900&q=90',
+  'SANTORINI':   'https://images.unsplash.com/photo-1533105079780-92b9be482077?w=900&q=90',
+  'DUBAI':       'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=900&q=90',
+  'BARBADOS':    'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=900&q=90',
+  'TURKEY':      'https://images.unsplash.com/photo-1540541338537-1220bd7de651?w=900&q=90',
+  'BALI':        'https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=900&q=90',
+  'TENERIFE':    'https://images.unsplash.com/photo-1559827291-72ee739d0d9a?w=900&q=90',
+  'NEW YORK':    'https://images.unsplash.com/photo-1534430480872-3498386e7856?w=900&q=90',
+  'CANCÚN':      'https://images.unsplash.com/photo-1552074284-5e84b979df39?w=900&q=90',
+  'THAILAND':    'https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=900&q=90',
+  'MAURITIUS':   'https://images.unsplash.com/photo-1483683804023-6ccbe24d92bb?w=900&q=90',
+  'IBIZA':       'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=900&q=90',
+  'CYPRUS':      'https://images.unsplash.com/photo-1516426122078-c23e76319801?w=900&q=90',
+  'LANZAROTE':   'https://images.unsplash.com/photo-1586861635167-e5223aadc9fe?w=900&q=90',
+  'PORTUGAL':    'https://images.unsplash.com/photo-1555881400-74d7acaacd8b?w=900&q=90',
+  'ITALY':       'https://images.unsplash.com/photo-1516483638261-f4dbaf036963?w=900&q=90',
+  'FLORIDA':     'https://images.unsplash.com/photo-1533106418989-88406c7cc8ca?w=900&q=90',
+  'JAMAICA':     'https://images.unsplash.com/photo-1559494007-9f5847c49d94?w=900&q=90',
+  'GREECE':      'https://images.unsplash.com/photo-1533105079780-92b9be482077?w=900&q=90',
+  'MOROCCO':     'https://images.unsplash.com/photo-1489493887464-892be6d1daae?w=900&q=90',
 };
-const fallback='https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=900&q=90';
+const fallback = 'https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=900&q=90';
 
-let revealed=false,isScratching=false;
+// ── DECODE ──
+function decodeData(token){
+  try{
+    const json = decodeURIComponent(escape(atob(token)));
+    return JSON.parse(json);
+  } catch(e){
+    return null;
+  }
+}
 
-window.addEventListener('DOMContentLoaded',()=>{
-  const p=new URLSearchParams(window.location.search);
-  const dest=p.get('d');
-  if(!dest){document.getElementById('invalidMsg').style.display='block';return;}
-  const name=p.get('n')||'',msg=p.get('m')||'',date=p.get('t')||'';
-  document.getElementById('displayName').textContent=name?(name+(name.toLowerCase().endsWith('s')?"'":"'s")+' Holiday Surprise'):'Your Holiday Surprise';
-  document.getElementById('destName').textContent=dest;
-  document.getElementById('destMsg').textContent=msg;
-  if(date){document.getElementById('destDate').textContent='✈️  '+date;}else{document.getElementById('destDate').style.display='none';}
-  document.getElementById('revealBg').style.backgroundImage=`url('${destImages[dest.toUpperCase()]||fallback}')`;
-  document.getElementById('cardScreen').style.display='flex';
-  setTimeout(initScratch,150);
+let revealed = false, isScratching = false;
+
+window.addEventListener('DOMContentLoaded', () => {
+  const params = new URLSearchParams(window.location.search);
+  const token  = params.get('s');
+
+  if(!token){
+    document.getElementById('invalidMsg').style.display = 'block';
+    return;
+  }
+
+  const data = decodeData(token);
+  if(!data || !data.d){
+    document.getElementById('invalidMsg').style.display = 'block';
+    return;
+  }
+
+  const {n: name='', d: dest, m: msg='', t: date=''} = data;
+
+  document.getElementById('displayName').textContent =
+    name ? name + (name.toLowerCase().endsWith('s') ? "'" : "'s") + ' Holiday Surprise'
+         : 'Your Holiday Surprise';
+  document.getElementById('destName').textContent = dest;
+  document.getElementById('destMsg').textContent   = msg;
+  if(date){
+    document.getElementById('destDate').textContent = '✈️  ' + date;
+  } else {
+    document.getElementById('destDate').style.display = 'none';
+  }
+
+  const imgUrl = destImages[dest.toUpperCase()] || fallback;
+  document.getElementById('revealBg').style.backgroundImage = `url('${imgUrl}')`;
+
+  document.getElementById('cardScreen').style.display = 'flex';
+  setTimeout(initScratch, 150);
 });
 
 function initScratch(){
-  const wrap=document.getElementById('scratchWrap');
-  const canvas=document.getElementById('scratchCanvas');
-  const w=wrap.offsetWidth,h=wrap.offsetHeight;
-  canvas.width=w;canvas.height=h;
-  const ctx=canvas.getContext('2d');
-  const grad=ctx.createLinearGradient(0,0,w,h);
-  grad.addColorStop(0,'#2f7f82');grad.addColorStop(.5,'#256c6f');grad.addColorStop(1,'#1a5558');
-  ctx.fillStyle=grad;ctx.fillRect(0,0,w,h);
+  const wrap   = document.getElementById('scratchWrap');
+  const canvas = document.getElementById('scratchCanvas');
+  const w = wrap.offsetWidth, h = wrap.offsetHeight;
+  canvas.width = w; canvas.height = h;
+  const ctx = canvas.getContext('2d');
+
+  const grad = ctx.createLinearGradient(0,0,w,h);
+  grad.addColorStop(0,'#2f7f82'); grad.addColorStop(.5,'#256c6f'); grad.addColorStop(1,'#1a5558');
+  ctx.fillStyle = grad; ctx.fillRect(0,0,w,h);
+
   ctx.fillStyle='rgba(255,255,255,0.06)';
-  for(let x=20;x<w;x+=30)for(let y=20;y<h;y+=30){ctx.beginPath();ctx.arc(x,y,1.5,0,Math.PI*2);ctx.fill();}
-  ctx.fillStyle='rgba(255,255,255,0.85)';ctx.font=`900 ${Math.min(15,w*.03)}px Montserrat,sans-serif`;ctx.textAlign='center';
-  ctx.fillText('YOUR HOLIDAY SURPRISE',w/2,h/2-28);
-  ctx.fillStyle='rgba(255,255,255,0.45)';ctx.font=`500 ${Math.min(12,w*.025)}px Poppins,sans-serif`;
-  ctx.fillText('Scratch here to reveal your destination',w/2,h/2+8);
-  ctx.beginPath();ctx.arc(w/2,h/2+55,32,0,Math.PI*2);
+  for(let x=20;x<w;x+=30) for(let y=20;y<h;y+=30){ctx.beginPath();ctx.arc(x,y,1.5,0,Math.PI*2);ctx.fill();}
+
+  ctx.fillStyle='rgba(255,255,255,0.85)';
+  ctx.font=`900 ${Math.min(15,w*.03)}px Montserrat,sans-serif`;
+  ctx.textAlign='center';
+  ctx.fillText('YOUR HOLIDAY SURPRISE', w/2, h/2-28);
+  ctx.fillStyle='rgba(255,255,255,0.45)';
+  ctx.font=`500 ${Math.min(12,w*.025)}px Poppins,sans-serif`;
+  ctx.fillText('Scratch here to reveal your destination', w/2, h/2+8);
+
+  ctx.beginPath(); ctx.arc(w/2,h/2+55,32,0,Math.PI*2);
   const cg=ctx.createRadialGradient(w/2-8,h/2+47,4,w/2,h/2+55,32);
-  cg.addColorStop(0,'#f0b865');cg.addColorStop(1,'#e09a42');
-  ctx.fillStyle=cg;ctx.fill();
-  ctx.fillStyle='rgba(255,255,255,0.9)';ctx.font='22px sans-serif';ctx.fillText('✈',w/2,h/2+63);
-  const total=w*h;let sc=0;
-  function pos(e){const r=canvas.getBoundingClientRect();const sx=canvas.width/r.width,sy=canvas.height/r.height;if(e.touches)return{x:(e.touches[0].clientX-r.left)*sx,y:(e.touches[0].clientY-r.top)*sy};return{x:(e.clientX-r.left)*sx,y:(e.clientY-r.top)*sy};}
-  function scratch(e){e.preventDefault();if(!isScratching||revealed)return;const{x,y}=pos(e);ctx.globalCompositeOperation='destination-out';ctx.beginPath();ctx.arc(x,y,30,0,Math.PI*2);ctx.fill();document.getElementById('scratchHint').classList.add('hide');sc++;if(sc%8===0)check(ctx,w,h,total);}
-  canvas.addEventListener('mousedown',e=>{isScratching=true;scratch(e);});
-  canvas.addEventListener('mousemove',e=>scratch(e));
-  canvas.addEventListener('mouseup',()=>isScratching=false);
-  canvas.addEventListener('mouseleave',()=>isScratching=false);
-  canvas.addEventListener('touchstart',e=>{isScratching=true;scratch(e);},{passive:false});
-  canvas.addEventListener('touchmove',e=>scratch(e),{passive:false});
-  canvas.addEventListener('touchend',()=>isScratching=false);
+  cg.addColorStop(0,'#f0b865'); cg.addColorStop(1,'#e09a42');
+  ctx.fillStyle=cg; ctx.fill();
+  ctx.fillStyle='rgba(255,255,255,0.9)'; ctx.font='22px sans-serif'; ctx.fillText('✈',w/2,h/2+63);
+
+  const total = w*h; let sc=0;
+
+  function pos(e){
+    const r=canvas.getBoundingClientRect();
+    const sx=canvas.width/r.width, sy=canvas.height/r.height;
+    if(e.touches) return{x:(e.touches[0].clientX-r.left)*sx,y:(e.touches[0].clientY-r.top)*sy};
+    return{x:(e.clientX-r.left)*sx,y:(e.clientY-r.top)*sy};
+  }
+
+  function scratch(e){
+    e.preventDefault();
+    if(!isScratching||revealed) return;
+    const{x,y}=pos(e);
+    ctx.globalCompositeOperation='destination-out';
+    ctx.beginPath(); ctx.arc(x,y,30,0,Math.PI*2); ctx.fill();
+    document.getElementById('scratchHint').classList.add('hide');
+    sc++; if(sc%8===0) check(ctx,w,h,total);
+  }
+
+  canvas.addEventListener('mousedown',  e=>{isScratching=true; scratch(e);});
+  canvas.addEventListener('mousemove',  e=>scratch(e));
+  canvas.addEventListener('mouseup',    ()=>isScratching=false);
+  canvas.addEventListener('mouseleave', ()=>isScratching=false);
+  canvas.addEventListener('touchstart', e=>{isScratching=true; scratch(e);},{passive:false});
+  canvas.addEventListener('touchmove',  e=>scratch(e),{passive:false});
+  canvas.addEventListener('touchend',   ()=>isScratching=false);
 }
 
 function check(ctx,w,h,total){
-  const d=ctx.getImageData(0,0,w,h).data;let t=0;
-  for(let i=3;i<d.length;i+=16)if(d[i]<128)t+=4;
+  const d=ctx.getImageData(0,0,w,h).data; let t=0;
+  for(let i=3;i<d.length;i+=16) if(d[i]<128) t+=4;
   const pct=(t/total)*100;
   document.getElementById('progressFill').style.width=Math.min(pct,100)+'%';
-  if(pct>42&&!revealed)triggerReveal();
+  if(pct>42&&!revealed) triggerReveal();
 }
 
 function triggerReveal(){
   revealed=true;
   const canvas=document.getElementById('scratchCanvas');
-  canvas.style.transition='opacity .9s ease';canvas.style.opacity='0';
+  canvas.style.transition='opacity .9s ease'; canvas.style.opacity='0';
   setTimeout(()=>canvas.style.display='none',900);
   document.getElementById('revealBg').classList.add('show');
-  setTimeout(()=>{document.getElementById('destLabel').classList.add('pop');document.getElementById('destName').classList.add('pop');},500);
+  setTimeout(()=>{document.getElementById('destName').classList.add('pop'); document.querySelector('.dest-label').classList.add('pop');},500);
   setTimeout(()=>document.getElementById('destMsg').classList.add('pop'),900);
-  setTimeout(()=>{document.getElementById('destDate').classList.add('pop');document.querySelectorAll('.dest-sig').forEach(el=>el.classList.add('pop'));},1100);
+  setTimeout(()=>{document.getElementById('destDate').classList.add('pop'); document.querySelectorAll('.dest-sig').forEach(el=>el.classList.add('pop'));},1100);
   document.getElementById('scratchHint').style.display='none';
   document.getElementById('progressFill').style.width='100%';
   setTimeout(launchConfetti,600);
@@ -194,17 +257,21 @@ function triggerReveal(){
 
 function launchConfetti(){
   const cv=document.getElementById('confetti-canvas');
-  cv.width=window.innerWidth;cv.height=window.innerHeight;
+  cv.width=window.innerWidth; cv.height=window.innerHeight;
   const ctx=cv.getContext('2d');
   const cols=['#e09a42','#2f7f82','#ffffff','#f0b865','#1a8a8d','#ffd700'];
   const ps=Array.from({length:160},()=>({x:Math.random()*cv.width,y:-20-Math.random()*220,w:5+Math.random()*9,h:9+Math.random()*14,color:cols[Math.floor(Math.random()*cols.length)],rot:Math.random()*360,rs:(Math.random()-.5)*7,vx:(Math.random()-.5)*4,vy:1.5+Math.random()*4,op:1}));
   let f=0;
-  function draw(){ctx.clearRect(0,0,cv.width,cv.height);let alive=false;ps.forEach(p=>{if(p.y<cv.height+20)alive=true;p.x+=p.vx;p.y+=p.vy;p.rot+=p.rs;if(p.y>cv.height*.55)p.op-=.01;ctx.save();ctx.globalAlpha=Math.max(0,p.op);ctx.translate(p.x+p.w/2,p.y+p.h/2);ctx.rotate(p.rot*Math.PI/180);ctx.fillStyle=p.color;ctx.fillRect(-p.w/2,-p.h/2,p.w,p.h);ctx.restore();});if(alive&&f<360)requestAnimationFrame(draw);else ctx.clearRect(0,0,cv.width,cv.height);f++;}
+  function draw(){
+    ctx.clearRect(0,0,cv.width,cv.height); let alive=false;
+    ps.forEach(p=>{if(p.y<cv.height+20)alive=true; p.x+=p.vx; p.y+=p.vy; p.rot+=p.rs; if(p.y>cv.height*.55)p.op-=.01; ctx.save(); ctx.globalAlpha=Math.max(0,p.op); ctx.translate(p.x+p.w/2,p.y+p.h/2); ctx.rotate(p.rot*Math.PI/180); ctx.fillStyle=p.color; ctx.fillRect(-p.w/2,-p.h/2,p.w,p.h); ctx.restore();});
+    if(alive&&f<360) requestAnimationFrame(draw); else ctx.clearRect(0,0,cv.width,cv.height); f++;
+  }
   draw();
 }
 
 function shareWA(){
-  const dest=new URLSearchParams(window.location.search).get('d')||'my destination';
+  const dest = document.getElementById('destName').textContent || 'my destination';
   window.open('https://wa.me/?text='+encodeURIComponent(`🎉 I just found out I'm going to ${dest}! Melita Holidays planned everything — check them out: https://melitaholidays.com`),'_blank');
 }
 </script>
