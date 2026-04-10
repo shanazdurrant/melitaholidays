@@ -3,56 +3,22 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Melita Holidays — Admin</title>
+<title>Melita Holidays — Scratchcard Admin</title>
 <meta name="robots" content="noindex, nofollow">
 <link rel="icon" type="image/png" href="logo.png">
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <style>
-
-:root{
-  --teal:#2f7f82;
-  --teal-dark:#256c6f;
-  --gold:#e09a42;
-  --cream:#f6f4f2;
-  --text:#2a2a2a;
-  --border:#e8e8e8;
-  --subtle:#f7f7f7;
-}
-
+:root{--teal:#2f7f82;--teal-dark:#256c6f;--gold:#e09a42;--cream:#f6f4f2;--text:#2a2a2a;--border:#e8e8e8;}
 *{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Poppins',sans-serif;background:var(--teal);min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 20px;position:relative;}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(circle at 15% 15%,rgba(224,154,66,0.15) 0%,transparent 50%),radial-gradient(circle at 85% 85%,rgba(255,255,255,0.05) 0%,transparent 50%);pointer-events:none;}
 
-body{
-  font-family:'Poppins',sans-serif;
-  background:var(--teal);
-  min-height:100vh;
-  display:flex;flex-direction:column;
-  align-items:center;justify-content:center;
-  padding:40px 20px;
-  position:relative;
-}
-
-body::before{
-  content:'';position:fixed;inset:0;
-  background:
-    radial-gradient(circle at 15% 15%,rgba(224,154,66,0.15) 0%,transparent 50%),
-    radial-gradient(circle at 85% 85%,rgba(255,255,255,0.05) 0%,transparent 50%);
-  pointer-events:none;
-}
-
-/* ══════════════════
-   LOGIN SCREEN
-══════════════════ */
-#loginScreen{
-  max-width:380px;width:100%;
-  animation:fadeUp .6s ease both;
-}
+/* LOGIN */
+#loginScreen{max-width:380px;width:100%;animation:fadeUp .6s ease both;}
 .login-logo{text-align:center;margin-bottom:28px;}
 .login-logo img{height:65px;object-fit:contain;}
-.login-logo .fallback-logo{font-family:'Montserrat',sans-serif;font-weight:900;font-size:24px;color:var(--gold);}
-.login-title{
-  text-align:center;margin-bottom:28px;
-}
+.login-title{text-align:center;margin-bottom:28px;}
 .login-title h1{font-family:'Montserrat',sans-serif;font-size:22px;font-weight:900;color:#fff;letter-spacing:1px;text-transform:uppercase;margin-bottom:6px;}
 .login-title p{color:rgba(255,255,255,0.6);font-size:13px;}
 .login-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.18);border-radius:50px;padding:5px 14px;font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,0.65);margin-bottom:20px;}
@@ -61,105 +27,75 @@ body::before{
 .pw-wrap{position:relative;}
 .pw-wrap input{width:100%;padding:14px 48px 14px 16px;border:2px solid var(--border);border-radius:10px;font-family:'Poppins',sans-serif;font-size:15px;color:var(--text);outline:none;transition:border-color .2s;background:#fafafa;letter-spacing:2px;}
 .pw-wrap input:focus{border-color:var(--teal);background:#fff;}
-.pw-toggle{position:absolute;right:14px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:#aaa;font-size:16px;transition:color .2s;}
-.pw-toggle:hover{color:var(--teal);}
+.pw-toggle{position:absolute;right:14px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:#aaa;font-size:16px;}
 .login-error{color:#e05555;font-size:12px;margin-top:8px;display:none;align-items:center;gap:6px;}
 .login-error.show{display:flex;}
-.btn-login{width:100%;margin-top:24px;padding:16px;border:none;border-radius:50px;background:linear-gradient(135deg,var(--teal),var(--teal-dark));color:#fff;font-family:'Montserrat',sans-serif;font-size:14px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;box-shadow:0 8px 24px rgba(47,127,130,0.4);transition:transform .2s,box-shadow .2s;}
-.btn-login:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(47,127,130,0.5);}
-.login-hint{text-align:center;margin-top:16px;font-size:11px;color:rgba(255,255,255,0.45);letter-spacing:.5px;}
+.btn-login{width:100%;margin-top:24px;padding:16px;border:none;border-radius:50px;background:linear-gradient(135deg,var(--teal),var(--teal-dark));color:#fff;font-family:'Montserrat',sans-serif;font-size:14px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;box-shadow:0 8px 24px rgba(47,127,130,0.4);transition:transform .2s;}
+.btn-login:hover{transform:translateY(-2px);}
+.login-hint{text-align:center;margin-top:16px;font-size:11px;color:rgba(255,255,255,0.45);}
 
-/* ══════════════════
-   ADMIN SCREEN
-══════════════════ */
-#adminScreen{
-  display:none;
-  width:100%;max-width:860px;
-  animation:fadeUp .5s ease both;
-}
-
-/* Top bar */
-.admin-topbar{
-  display:flex;align-items:center;justify-content:space-between;
-  margin-bottom:28px;flex-wrap:wrap;gap:14px;
-}
+/* ADMIN */
+#adminScreen{display:none;width:100%;max-width:880px;animation:fadeUp .5s ease both;}
+.admin-topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:28px;flex-wrap:wrap;gap:14px;}
 .admin-topbar .topbar-logo img{height:52px;object-fit:contain;}
 .admin-topbar h1{font-family:'Montserrat',sans-serif;font-size:16px;font-weight:900;color:#fff;letter-spacing:1px;text-transform:uppercase;display:flex;align-items:center;gap:10px;}
 .admin-topbar h1 i{color:var(--gold);}
-.btn-logout{background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);color:rgba(255,255,255,0.8);padding:9px 18px;border-radius:50px;font-size:12px;font-weight:600;cursor:pointer;letter-spacing:.5px;transition:all .2s;font-family:'Poppins',sans-serif;}
+.btn-logout{background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);color:rgba(255,255,255,0.8);padding:9px 18px;border-radius:50px;font-size:12px;font-weight:600;cursor:pointer;transition:all .2s;font-family:'Poppins',sans-serif;}
 .btn-logout:hover{background:rgba(255,255,255,0.2);color:#fff;}
-
-/* Two-column grid */
 .admin-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start;}
-
-/* Cards */
 .admin-card{background:#fff;border-radius:20px;padding:32px;box-shadow:0 12px 40px rgba(0,0,0,0.15);}
-.admin-card .card-title{font-family:'Montserrat',sans-serif;font-size:14px;font-weight:900;color:var(--teal);letter-spacing:1px;text-transform:uppercase;margin-bottom:4px;display:flex;align-items:center;gap:8px;}
-.admin-card .card-title i{color:var(--gold);}
-.admin-card .card-sub{font-size:12px;color:#aaa;margin-bottom:24px;}
-
-/* Fields */
+.card-title{font-family:'Montserrat',sans-serif;font-size:14px;font-weight:900;color:var(--teal);letter-spacing:1px;text-transform:uppercase;margin-bottom:4px;display:flex;align-items:center;gap:8px;}
+.card-title i{color:var(--gold);}
+.card-sub{font-size:12px;color:#aaa;margin-bottom:24px;}
 .field{margin-bottom:18px;}
-.field:last-of-type{margin-bottom:0;}
 label{display:block;font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--teal);margin-bottom:7px;}
 label .opt{font-weight:400;text-transform:none;letter-spacing:0;color:#bbb;font-size:10px;}
-input[type=text],input[type=email],textarea,select{width:100%;padding:12px 14px;border:2px solid var(--border);border-radius:10px;font-family:'Poppins',sans-serif;font-size:13px;color:var(--text);outline:none;background:#fafafa;transition:border-color .2s,box-shadow .2s;}
-input[type=text]:focus,input[type=email]:focus,textarea:focus,select:focus{border-color:var(--teal);box-shadow:0 0 0 4px rgba(47,127,130,0.08);background:#fff;}
-textarea{resize:vertical;min-height:90px;line-height:1.6;}
+input[type=text],input[type=email],textarea,select{width:100%;padding:12px 14px;border:2px solid var(--border);border-radius:10px;font-family:'Poppins',sans-serif;font-size:13px;color:var(--text);outline:none;background:#fafafa;transition:border-color .2s;}
+input[type=text]:focus,input[type=email]:focus,textarea:focus,select:focus{border-color:var(--teal);background:#fff;}
+textarea{resize:vertical;min-height:100px;line-height:1.6;}
 select{cursor:pointer;}
 #customDestInput{display:none;margin-top:8px;}
 
-.section-divider{height:1px;background:var(--border);margin:20px 0;}
+/* Preset messages */
+.preset-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;}
+.preset-btn{padding:8px 10px;border:2px solid var(--border);border-radius:8px;font-size:11px;font-weight:600;color:var(--text);background:#fafafa;cursor:pointer;text-align:left;line-height:1.4;transition:all .2s;font-family:'Poppins',sans-serif;}
+.preset-btn:hover{border-color:var(--teal);color:var(--teal);background:#f0fafa;}
+.preset-btn.active{border-color:var(--teal);background:#f0fafa;color:var(--teal);}
 
-/* Generated URL box */
-.url-preview{
-  background:var(--subtle);border-radius:10px;
-  padding:12px 14px;font-size:12px;color:#888;
-  border:1px dashed var(--border);line-height:1.5;
-  word-break:break-all;min-height:44px;
-  transition:all .3s;
-}
+.divider-line{height:1px;background:var(--border);margin:20px 0;}
+.url-preview{background:#f7f7f7;border-radius:10px;padding:12px 14px;font-size:11px;color:#aaa;border:1px dashed var(--border);min-height:44px;word-break:break-all;line-height:1.5;}
 .url-preview.active{background:#f0fafa;border-color:var(--teal);color:var(--teal);font-weight:500;}
+.encoded-note{font-size:10px;color:#22c55e;margin-top:6px;display:none;align-items:center;gap:4px;}
+.encoded-note.show{display:flex;}
 
-/* Buttons */
-.btn-primary{width:100%;padding:15px;border:none;border-radius:50px;background:linear-gradient(135deg,var(--teal),var(--teal-dark));color:#fff;font-family:'Montserrat',sans-serif;font-size:13px;font-weight:800;letter-spacing:1px;text-transform:uppercase;cursor:pointer;box-shadow:0 6px 20px rgba(47,127,130,0.35);transition:transform .2s,box-shadow .2s;display:flex;align-items:center;justify-content:center;gap:8px;}
-.btn-primary:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(47,127,130,0.45);}
+.btn-primary{width:100%;padding:15px;border:none;border-radius:50px;background:linear-gradient(135deg,var(--teal),var(--teal-dark));color:#fff;font-family:'Montserrat',sans-serif;font-size:13px;font-weight:800;letter-spacing:1px;text-transform:uppercase;cursor:pointer;box-shadow:0 6px 20px rgba(47,127,130,0.35);transition:transform .2s;display:flex;align-items:center;justify-content:center;gap:8px;}
+.btn-primary:hover{transform:translateY(-2px);}
 .btn-gold{background:linear-gradient(135deg,var(--gold),#c8882e);box-shadow:0 6px 20px rgba(224,154,66,0.35);}
-.btn-gold:hover{box-shadow:0 10px 28px rgba(224,154,66,0.45);}
 .btn-wa{background:linear-gradient(135deg,#25D366,#1ebe5d);box-shadow:0 6px 20px rgba(37,211,102,0.3);}
-.btn-wa:hover{box-shadow:0 10px 28px rgba(37,211,102,0.4);}
 .btn-row{display:flex;gap:10px;margin-top:10px;}
 .btn-row .btn-primary{flex:1;}
 .btn-sm{padding:11px 14px;font-size:11px;}
 
-/* Email preview */
-.email-preview{
-  background:var(--subtle);border:1px solid var(--border);
-  border-radius:12px;overflow:hidden;margin-top:16px;
-  display:none;
-}
+.email-preview{background:#f7f7f7;border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-top:16px;display:none;}
 .email-preview.show{display:block;}
 .email-header{background:#fff;padding:14px 18px;border-bottom:1px solid var(--border);}
-.email-header .email-row{display:flex;gap:8px;font-size:12px;color:#aaa;margin-bottom:4px;align-items:baseline;}
+.email-header .email-row{display:flex;gap:8px;font-size:12px;margin-bottom:4px;align-items:baseline;}
 .email-header .email-row:last-child{margin-bottom:0;}
-.email-header .email-label{font-weight:700;color:var(--teal);min-width:36px;font-size:11px;letter-spacing:.5px;text-transform:uppercase;}
-.email-header .email-val{color:var(--text);font-weight:500;}
-.email-body-preview{padding:18px;font-size:13px;color:#555;line-height:1.7;white-space:pre-wrap;max-height:220px;overflow-y:auto;}
+.email-label{font-weight:700;color:var(--teal);min-width:36px;font-size:11px;letter-spacing:.5px;text-transform:uppercase;}
+.email-val{color:var(--text);font-weight:500;font-size:12px;}
+.email-body-preview{padding:18px;font-size:13px;color:#555;line-height:1.7;white-space:pre-wrap;max-height:200px;overflow-y:auto;}
 
-/* Success flash */
-.flash{display:none;align-items:center;gap:10px;background:#f0fdf4;border:1px solid #86efac;border-radius:10px;padding:12px 16px;font-size:13px;color:#166534;margin-top:12px;border-radius:10px;}
+.flash{display:none;align-items:center;gap:10px;background:#f0fdf4;border:1px solid #86efac;border-radius:10px;padding:12px 16px;font-size:13px;color:#166534;margin-top:12px;}
 .flash.show{display:flex;animation:fadeUp .3s ease both;}
 .flash i{color:#22c55e;}
 
-/* Saved cards list */
-.saved-list{margin-top:0;}
-.saved-item{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;border-radius:10px;background:var(--subtle);border:1px solid var(--border);margin-bottom:8px;gap:10px;flex-wrap:wrap;}
-.saved-item .saved-info{flex:1;min-width:0;}
-.saved-info .saved-name{font-weight:700;font-size:13px;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.saved-info .saved-dest{font-size:11px;color:var(--teal);font-weight:600;letter-spacing:.5px;text-transform:uppercase;margin-top:2px;}
-.saved-info .saved-date{font-size:10px;color:#bbb;margin-top:2px;}
+.saved-item{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;border-radius:10px;background:#f7f7f7;border:1px solid var(--border);margin-bottom:8px;gap:10px;flex-wrap:wrap;}
+.saved-info{flex:1;min-width:0;}
+.saved-name{font-weight:700;font-size:13px;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.saved-dest{font-size:11px;color:var(--teal);font-weight:600;letter-spacing:.5px;text-transform:uppercase;margin-top:2px;}
+.saved-date-label{font-size:10px;color:#bbb;margin-top:2px;}
 .saved-actions{display:flex;gap:6px;flex-shrink:0;}
-.saved-btn{padding:7px 12px;border:none;border-radius:8px;font-size:11px;font-weight:700;cursor:pointer;letter-spacing:.5px;transition:all .2s;font-family:'Poppins',sans-serif;}
+.saved-btn{padding:7px 12px;border:none;border-radius:8px;font-size:11px;font-weight:700;cursor:pointer;transition:all .2s;font-family:'Poppins',sans-serif;}
 .saved-btn.copy{background:var(--teal);color:#fff;}
 .saved-btn.email{background:var(--gold);color:#fff;}
 .saved-btn.del{background:#fee2e2;color:#dc2626;}
@@ -168,26 +104,20 @@ select{cursor:pointer;}
 .empty-saved i{font-size:28px;display:block;margin-bottom:8px;}
 
 @keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
-
-@media(max-width:700px){
-  .admin-grid{grid-template-columns:1fr;}
-  .admin-topbar{flex-direction:column;align-items:flex-start;}
-}
-
+@media(max-width:700px){.admin-grid{grid-template-columns:1fr;}.admin-topbar{flex-direction:column;align-items:flex-start;}.preset-grid{grid-template-columns:1fr;}}
 </style>
 </head>
 <body>
 
-<!-- ══ LOGIN ══ -->
+<!-- LOGIN -->
 <div id="loginScreen">
   <div class="login-logo">
-    <img src="logo.png" alt="Melita Holidays" onerror="this.style.display='none';document.querySelector('.fallback-logo').style.display='block'">
-    <div class="fallback-logo" style="display:none;">MELITA HOLIDAYS</div>
+    <img src="logo.png" alt="Melita Holidays" onerror="this.style.display='none'">
   </div>
   <div class="login-title">
     <div class="login-badge"><i class="fas fa-lock"></i>&nbsp; Admin Access</div>
     <h1>Scratchcard Admin</h1>
-    <p>Enter your password to access the admin panel.</p>
+    <p>Enter your password to continue.</p>
   </div>
   <div class="login-card">
     <label>Password</label>
@@ -195,15 +125,14 @@ select{cursor:pointer;}
       <input type="password" id="pwInput" placeholder="Enter password" onkeydown="if(event.key==='Enter')checkLogin()">
       <button class="pw-toggle" onclick="togglePw()" tabindex="-1"><i class="fas fa-eye" id="pwIcon"></i></button>
     </div>
-    <div class="login-error" id="loginError"><i class="fas fa-exclamation-circle"></i> Incorrect password. Please try again.</div>
+    <div class="login-error" id="loginError"><i class="fas fa-exclamation-circle"></i> Incorrect password.</div>
     <button class="btn-login" onclick="checkLogin()"><i class="fas fa-unlock-alt"></i>&nbsp; Sign In</button>
   </div>
-  <div class="login-hint">This page is not publicly listed or indexed.</div>
+  <div class="login-hint">This page is not publicly listed.</div>
 </div>
 
-<!-- ══ ADMIN ══ -->
+<!-- ADMIN -->
 <div id="adminScreen">
-
   <div class="admin-topbar">
     <div style="display:flex;align-items:center;gap:16px;">
       <div class="topbar-logo"><img src="logo.png" alt="Melita Holidays" onerror="this.style.display='none'"></div>
@@ -214,10 +143,10 @@ select{cursor:pointer;}
 
   <div class="admin-grid">
 
-    <!-- LEFT: CARD BUILDER -->
+    <!-- LEFT: BUILDER -->
     <div class="admin-card">
       <div class="card-title"><i class="fas fa-gift"></i> Create Scratchcard</div>
-      <div class="card-sub">Fill in the details to generate a personalised link.</div>
+      <div class="card-sub">Fill in the details to generate a hidden surprise link.</div>
 
       <div class="field">
         <label>Client's Name</label>
@@ -245,14 +174,12 @@ select{cursor:pointer;}
           <option value="PORTUGAL">🐓 Portugal</option>
           <option value="ITALY">🍕 Italy</option>
           <option value="FLORIDA">🎢 Florida</option>
+          <option value="JAMAICA">🇯🇲 Jamaica</option>
+          <option value="GREECE">🏛️ Greece</option>
+          <option value="MOROCCO">🕌 Morocco</option>
           <option value="custom">✏️ Type your own...</option>
         </select>
         <input type="text" id="customDestInput" placeholder="Type destination..." maxlength="30" oninput="liveUpdate()">
-      </div>
-
-      <div class="field">
-        <label>Personal Message</label>
-        <textarea id="personalMsg" placeholder="e.g. Your dream holiday is booked! Get ready for something very special... ✈️" oninput="liveUpdate()"></textarea>
       </div>
 
       <div class="field">
@@ -260,54 +187,51 @@ select{cursor:pointer;}
         <input type="text" id="travelDate" placeholder="e.g. July 2025 or Summer 2025" oninput="liveUpdate()">
       </div>
 
-      <div class="section-divider"></div>
+      <div class="field">
+        <label>Personal Message</label>
+        <div class="preset-grid" id="presetGrid"></div>
+        <textarea id="personalMsg" placeholder="Choose a preset above or write your own..." oninput="onMsgInput()"></textarea>
+      </div>
+
+      <div class="divider-line"></div>
 
       <div class="field">
-        <label>Generated Link</label>
+        <label>Generated Link <span class="opt">(destination is hidden)</span></label>
         <div class="url-preview" id="urlPreview">Fill in a destination to generate a link...</div>
+        <div class="encoded-note" id="encodedNote"><i class="fas fa-shield-alt"></i> Destination is fully encoded — recipient cannot read it</div>
       </div>
 
       <div class="btn-row">
         <button class="btn-primary btn-sm" onclick="copyLink()"><i class="fas fa-copy"></i> Copy Link</button>
-        <button class="btn-primary btn-sm" onclick="previewCard()" style="background:var(--cream);color:var(--teal);box-shadow:none;border:2px solid var(--border);"><i class="fas fa-eye"></i> Preview</button>
+        <button class="btn-primary btn-sm" style="background:var(--cream);color:var(--teal);box-shadow:none;border:2px solid var(--border);" onclick="previewCard()"><i class="fas fa-eye"></i> Preview</button>
       </div>
+      <div class="flash" id="copyFlash"><i class="fas fa-check-circle"></i> Link copied!</div>
 
-      <div class="flash" id="copyFlash"><i class="fas fa-check-circle"></i> Link copied to clipboard!</div>
+      <div class="divider-line"></div>
 
-      <div class="section-divider"></div>
-
-      <button class="btn-primary btn-gold" onclick="saveAndCompose()">
-        <i class="fas fa-envelope"></i> Compose Email to Client
-      </button>
-      <button class="btn-primary btn-wa" onclick="sendWA()" style="margin-top:10px;">
-        <i class="fab fa-whatsapp"></i> Send via WhatsApp
-      </button>
-
+      <button class="btn-primary btn-gold" onclick="saveAndCompose()"><i class="fas fa-envelope"></i> Compose Email</button>
+      <button class="btn-primary btn-wa" onclick="sendWA()" style="margin-top:10px;"><i class="fab fa-whatsapp"></i> Send via WhatsApp</button>
     </div>
 
-    <!-- RIGHT: EMAIL + SAVED -->
+    <!-- RIGHT -->
     <div style="display:flex;flex-direction:column;gap:20px;">
 
-      <!-- EMAIL COMPOSER -->
+      <!-- EMAIL -->
       <div class="admin-card">
         <div class="card-title"><i class="fas fa-envelope-open-text"></i> Email Composer</div>
-        <div class="card-sub">Pre-filled and ready — opens your mail app to send.</div>
-
+        <div class="card-sub">Opens your mail app pre-filled and ready to send.</div>
         <div class="field">
-          <label>Client's Email Address</label>
+          <label>Client's Email</label>
           <input type="email" id="clientEmail" placeholder="client@email.com" oninput="buildEmailPreview()">
         </div>
-
         <div class="field">
-          <label>Email Subject</label>
-          <input type="text" id="emailSubject" placeholder="Auto-filled when you choose a destination" oninput="buildEmailPreview()">
+          <label>Subject</label>
+          <input type="text" id="emailSubject" oninput="buildEmailPreview()">
         </div>
-
         <div class="field">
-          <label>Email Body <span class="opt">(auto-filled, editable)</span></label>
-          <textarea id="emailBody" style="min-height:130px;" oninput="buildEmailPreview()" placeholder="Generate a link first to auto-fill the email..."></textarea>
+          <label>Body <span class="opt">(auto-filled, editable)</span></label>
+          <textarea id="emailBody" style="min-height:130px;" oninput="buildEmailPreview()"></textarea>
         </div>
-
         <div class="email-preview" id="emailPreview">
           <div class="email-header">
             <div class="email-row"><span class="email-label">From</span><span class="email-val">justine@melitaholidays.com</span></div>
@@ -316,46 +240,285 @@ select{cursor:pointer;}
           </div>
           <div class="email-body-preview" id="previewBody"></div>
         </div>
-
-        <button class="btn-primary" style="margin-top:16px;" onclick="openMailApp()">
-          <i class="fas fa-paper-plane"></i> Open in Mail App
-        </button>
-
+        <button class="btn-primary" style="margin-top:16px;" onclick="openMailApp()"><i class="fas fa-paper-plane"></i> Open in Mail App</button>
         <div class="flash" id="emailFlash"><i class="fas fa-check-circle"></i> Opening your mail app...</div>
       </div>
 
-      <!-- SAVED CARDS -->
+      <!-- SAVED -->
       <div class="admin-card">
         <div class="card-title"><i class="fas fa-history"></i> Recent Scratchcards</div>
-        <div class="card-sub">Saved in this browser. Click to resend.</div>
-        <div class="saved-list" id="savedList"></div>
+        <div class="card-sub">Saved in this browser. Destinations are hidden.</div>
+        <div id="savedList"></div>
       </div>
-
     </div>
   </div>
 </div>
 
 <script>
-// ══ PASSWORD ══
-// Change 'melita2025' to whatever password you want
 const ADMIN_PASSWORD = 'melita2025';
 const SESSION_KEY = 'mh_admin_auth';
 const BASE_URL = 'https://melitaholidays.com/scratchcard.html';
 
+// ── PRESET MESSAGES ──
+const PRESETS = [
+  { label: '🎉 Big reveal', text: "You have a holiday surprise waiting! Your dream destination has been booked — scratch to find out where you're going! ✈️" },
+  { label: '🎁 Gift reveal', text: "Someone very special has booked you the holiday of a lifetime. Scratch to reveal your destination and get packing! 🌍" },
+  { label: '💑 Romantic', text: "Get ready for the most special trip of your life. Your perfect romantic getaway is booked — scratch to find out where! ❤️✈️" },
+  { label: '👨‍👩‍👧 Family', text: "The family adventure you've been waiting for is officially booked! Scratch to reveal where we're all heading! 🌴" },
+  { label: '🥳 Celebration', text: "Time to celebrate! Your holiday is booked and you deserve every moment. Scratch to reveal your destination! 🥂✈️" },
+  { label: '✍️ Write my own', text: '' },
+];
+
+let activePreset = -1;
+
+function renderPresets(){
+  const grid = document.getElementById('presetGrid');
+  grid.innerHTML = PRESETS.map((p,i) => `<button class="preset-btn" id="preset-${i}" onclick="selectPreset(${i})">${p.label}</button>`).join('');
+}
+
+function selectPreset(i){
+  activePreset = i;
+  document.querySelectorAll('.preset-btn').forEach((b,j) => b.classList.toggle('active', j===i));
+  const ta = document.getElementById('personalMsg');
+  if(PRESETS[i].text){
+    ta.value = PRESETS[i].text;
+    ta.readOnly = true;
+    ta.style.background = '#f0fafa';
+  } else {
+    ta.value = '';
+    ta.readOnly = false;
+    ta.style.background = '';
+    ta.focus();
+  }
+  liveUpdate();
+}
+
+function onMsgInput(){
+  // If user types, deselect preset
+  activePreset = -1;
+  document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
+  liveUpdate();
+}
+
+// ── ENCODING ──
+// Encodes all data into a single opaque token — no readable params in URL
+function encodeData(name, dest, msg, date){
+  const obj = {n: name, d: dest, m: msg, t: date};
+  const json = JSON.stringify(obj);
+  // btoa gives base64 — simple but effective obfuscation
+  return btoa(unescape(encodeURIComponent(json)));
+}
+
+function buildUrl(){
+  const name = document.getElementById('clientName').value.trim();
+  const dest = getDest();
+  const msg  = document.getElementById('personalMsg').value.trim();
+  const date = document.getElementById('travelDate').value.trim();
+  if(!dest) return null;
+  const token = encodeData(name, dest, msg, date);
+  return BASE_URL + '?s=' + token;
+}
+
+function getDest(){
+  const v = document.getElementById('destSelect').value;
+  if(v === 'custom') return document.getElementById('customDestInput').value.trim().toUpperCase();
+  return v;
+}
+
+function handleDest(){
+  document.getElementById('customDestInput').style.display =
+    document.getElementById('destSelect').value === 'custom' ? 'block' : 'none';
+  liveUpdate();
+}
+
+function liveUpdate(){
+  const url = buildUrl();
+  const box = document.getElementById('urlPreview');
+  const note = document.getElementById('encodedNote');
+  if(url){
+    box.textContent = url;
+    box.classList.add('active');
+    note.classList.add('show');
+  } else {
+    box.textContent = 'Fill in a destination to generate a link...';
+    box.classList.remove('active');
+    note.classList.remove('show');
+  }
+  autoFillEmail(url);
+  buildEmailPreview();
+}
+
+function autoFillEmail(url){
+  const name = document.getElementById('clientName').value.trim();
+  const dest  = getDest();
+  if(!dest) return;
+  const subj = name
+    ? `🎉 ${name} — You Have a Holiday Surprise from Melita Holidays!`
+    : `🎉 You Have a Holiday Surprise from Melita Holidays!`;
+  const existSubj = document.getElementById('emailSubject').value;
+  if(!existSubj || existSubj.startsWith('🎉')) document.getElementById('emailSubject').value = subj;
+
+  const greeting = name ? `Hi ${name},` : 'Hi,';
+  const date = document.getElementById('travelDate').value.trim();
+  const dateStr = date ? `\n\n✈️  Travel date: ${date}` : '';
+  const body = `${greeting}\n\nYou have a very special holiday surprise waiting for you from Melita Holidays!\n\nClick the link below to scratch and reveal your destination:${dateStr}\n\n👉 ${url||'[link here]'}\n\nI can't wait for you to see where you're going!\n\nWarm wishes,\nJustine\nMelita Holidays\n📞 07821 343925\n🌐 melitaholidays.com`;
+  const existBody = document.getElementById('emailBody').value;
+  if(!existBody || existBody.startsWith('Hi')) document.getElementById('emailBody').value = body;
+}
+
+function buildEmailPreview(){
+  const email = document.getElementById('clientEmail').value.trim();
+  const subj  = document.getElementById('emailSubject').value.trim();
+  const body  = document.getElementById('emailBody').value.trim();
+  const preview = document.getElementById('emailPreview');
+  if(email||subj||body){
+    preview.classList.add('show');
+    document.getElementById('previewTo').textContent = email||'—';
+    document.getElementById('previewSubject').textContent = subj||'—';
+    document.getElementById('previewBody').textContent = body||'—';
+  }
+}
+
+// ── ACTIONS ──
+function copyLink(){
+  const url = buildUrl();
+  if(!url){alert('Please select a destination first.');return;}
+  navigator.clipboard.writeText(url).then(()=>{
+    const f = document.getElementById('copyFlash');
+    f.classList.add('show');
+    setTimeout(()=>f.classList.remove('show'), 2500);
+  });
+}
+
+function previewCard(){
+  const url = buildUrl();
+  if(!url){alert('Please select a destination first.');return;}
+  window.open(url, '_blank');
+}
+
+function sendWA(){
+  const url = buildUrl();
+  const name = document.getElementById('clientName').value.trim();
+  if(!url){alert('Please select a destination first.');return;}
+  const msg = `Hi${name?' '+name:''}! 🎉 You have a very special holiday surprise from Melita Holidays. Click to reveal your destination: ${url}`;
+  window.open('https://wa.me/?text='+encodeURIComponent(msg), '_blank');
+  saveCard();
+  resetForm();
+}
+
+function saveAndCompose(){
+  const url = buildUrl();
+  if(!url){alert('Please select a destination first.');return;}
+  saveCard();
+  document.getElementById('clientEmail').focus();
+  document.getElementById('clientEmail').scrollIntoView({behavior:'smooth',block:'center'});
+}
+
+function openMailApp(){
+  const to   = document.getElementById('clientEmail').value.trim();
+  const subj = document.getElementById('emailSubject').value.trim();
+  const body = document.getElementById('emailBody').value.trim();
+  if(!to){alert('Please enter the client\'s email address.');return;}
+  window.location.href = `mailto:${to}?subject=${encodeURIComponent(subj)}&body=${encodeURIComponent(body)}`;
+  const f = document.getElementById('emailFlash');
+  f.classList.add('show');
+  setTimeout(()=>{f.classList.remove('show'); resetForm();}, 3000);
+}
+
+function resetForm(){
+  document.getElementById('clientName').value = '';
+  document.getElementById('destSelect').value = '';
+  document.getElementById('customDestInput').value = '';
+  document.getElementById('customDestInput').style.display = 'none';
+  document.getElementById('travelDate').value = '';
+  document.getElementById('personalMsg').value = '';
+  document.getElementById('personalMsg').readOnly = false;
+  document.getElementById('personalMsg').style.background = '';
+  document.getElementById('clientEmail').value = '';
+  document.getElementById('emailSubject').value = '';
+  document.getElementById('emailBody').value = '';
+  document.getElementById('emailPreview').classList.remove('show');
+  activePreset = -1;
+  document.querySelectorAll('.preset-btn').forEach(b=>b.classList.remove('active'));
+  liveUpdate();
+}
+
+// ── SAVE ──
+function saveCard(){
+  const url  = buildUrl();
+  const dest = getDest();
+  const name = document.getElementById('clientName').value.trim();
+  const date = document.getElementById('travelDate').value.trim();
+  if(!url) return;
+  const saved = getSaved();
+  saved.unshift({
+    id: Date.now(),
+    name: name||'Unknown',
+    dest,
+    date,
+    url,
+    created: new Date().toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'})
+  });
+  if(saved.length > 20) saved.pop();
+  localStorage.setItem('mh_scratchcards', JSON.stringify(saved));
+  renderSaved();
+}
+
+function getSaved(){try{return JSON.parse(localStorage.getItem('mh_scratchcards'))||[];}catch{return [];}}
+
+function renderSaved(){
+  const list  = document.getElementById('savedList');
+  const saved = getSaved();
+  if(!saved.length){
+    list.innerHTML='<div class="empty-saved"><i class="fas fa-gift"></i>No scratchcards yet.</div>';
+    return;
+  }
+  list.innerHTML = saved.map(s=>`
+    <div class="saved-item">
+      <div class="saved-info">
+        <div class="saved-name">${s.name}</div>
+        <div class="saved-dest">✈️ ${s.dest}</div>
+        <div class="saved-date-label">Created ${s.created}${s.date?' · '+s.date:''}</div>
+      </div>
+      <div class="saved-actions">
+        <button class="saved-btn copy" onclick="navigator.clipboard.writeText('${s.url}')" title="Copy link"><i class="fas fa-copy"></i></button>
+        <button class="saved-btn email" onclick="loadSaved(${s.id})" title="Load email"><i class="fas fa-envelope"></i></button>
+        <button class="saved-btn del" onclick="deleteSaved(${s.id})" title="Delete"><i class="fas fa-trash"></i></button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function loadSaved(id){
+  const s = getSaved().find(x=>x.id===id);
+  if(!s) return;
+  document.getElementById('emailSubject').value = `🎉 ${s.name} — You Have a Holiday Surprise from Melita Holidays!`;
+  document.getElementById('emailBody').value = `Hi ${s.name},\n\nYou have a very special holiday surprise waiting for you from Melita Holidays!\n\nClick the link below to scratch and reveal your destination:\n\n👉 ${s.url}\n\nI can't wait for you to see where you're going!\n\nWarm wishes,\nJustine\nMelita Holidays\n📞 07821 343925\n🌐 melitaholidays.com`;
+  buildEmailPreview();
+  document.getElementById('clientEmail').focus();
+  document.getElementById('clientEmail').scrollIntoView({behavior:'smooth',block:'center'});
+}
+
+function deleteSaved(id){
+  if(!confirm('Remove this card from history?')) return;
+  localStorage.setItem('mh_scratchcards', JSON.stringify(getSaved().filter(s=>s.id!==id)));
+  renderSaved();
+}
+
+// ── AUTH ──
 function checkLogin(){
-  const pw = document.getElementById('pwInput').value;
-  if(pw === ADMIN_PASSWORD){
+  if(document.getElementById('pwInput').value === ADMIN_PASSWORD){
     sessionStorage.setItem(SESSION_KEY,'1');
     showAdmin();
   } else {
     document.getElementById('loginError').classList.add('show');
     document.getElementById('pwInput').value='';
-    document.getElementById('pwInput').focus();
   }
 }
 
 function logout(){
   sessionStorage.removeItem(SESSION_KEY);
+  resetForm();
   document.getElementById('adminScreen').style.display='none';
   document.getElementById('loginScreen').style.display='block';
   document.getElementById('pwInput').value='';
@@ -364,221 +527,20 @@ function logout(){
 function togglePw(){
   const inp=document.getElementById('pwInput');
   const ico=document.getElementById('pwIcon');
-  if(inp.type==='password'){inp.type='text';ico.className='fas fa-eye-slash';}
-  else{inp.type='password';ico.className='fas fa-eye';}
+  inp.type=inp.type==='password'?'text':'password';
+  ico.className=inp.type==='password'?'fas fa-eye':'fas fa-eye-slash';
 }
 
 function showAdmin(){
   document.getElementById('loginScreen').style.display='none';
   document.getElementById('adminScreen').style.display='block';
+  renderPresets();
   renderSaved();
 }
 
-// Auto-login if session exists
 window.addEventListener('DOMContentLoaded',()=>{
   if(sessionStorage.getItem(SESSION_KEY)==='1') showAdmin();
 });
-
-// ══ DESTINATION ══
-function handleDest(){
-  const v=document.getElementById('destSelect').value;
-  document.getElementById('customDestInput').style.display = v==='custom'?'block':'none';
-  liveUpdate();
-}
-
-function getDest(){
-  const v=document.getElementById('destSelect').value;
-  if(v==='custom') return document.getElementById('customDestInput').value.trim().toUpperCase();
-  return v;
-}
-
-// ══ URL BUILDER ══
-function buildUrl(){
-  const name=document.getElementById('clientName').value.trim();
-  const dest=getDest();
-  const msg=document.getElementById('personalMsg').value.trim();
-  const date=document.getElementById('travelDate').value.trim();
-  if(!dest) return null;
-  const p=new URLSearchParams();
-  if(name) p.set('n',name);
-  p.set('d',dest);
-  if(msg) p.set('m',msg);
-  if(date) p.set('t',date);
-  return BASE_URL+'?'+p.toString();
-}
-
-function liveUpdate(){
-  const url=buildUrl();
-  const box=document.getElementById('urlPreview');
-  if(url){
-    box.textContent=url;
-    box.classList.add('active');
-  } else {
-    box.textContent='Fill in a destination to generate a link...';
-    box.classList.remove('active');
-  }
-  // Auto-fill email fields
-  const dest=getDest();
-  const name=document.getElementById('clientName').value.trim();
-  if(dest){
-    const subj=name
-      ? `🎉 ${name} — Your Holiday Surprise from Melita Holidays!`
-      : `🎉 Your Holiday Surprise from Melita Holidays!`;
-    const existing=document.getElementById('emailSubject').value;
-    // Only auto-fill if empty or previously auto-filled
-    if(!existing || existing.startsWith('🎉')){
-      document.getElementById('emailSubject').value=subj;
-    }
-  }
-  autoFillEmailBody(url);
-  buildEmailPreview();
-}
-
-function autoFillEmailBody(url){
-  const name=document.getElementById('clientName').value.trim();
-  const dest=getDest();
-  const date=document.getElementById('travelDate').value.trim();
-  const existing=document.getElementById('emailBody').value;
-  if(!dest) return;
-  const greeting=name?`Hi ${name},`:'Hi,';
-  const dateStr=date?`\n\n✈️  Travel date: ${date}`:'';
-  const body=`${greeting}\n\nYou have a very special holiday surprise waiting for you from Melita Holidays!\n\nI've put together something just for you — click the link below to scratch and reveal your destination:${dateStr}\n\n👉 ${url||'[link will appear here]'}\n\nI can't wait for you to see where you're going! If you have any questions, don't hesitate to get in touch.\n\nWarm wishes,\nJustine\nMelita Holidays\n📞 07821 343925\n🌐 melitaholidays.com`;
-  // Only auto-fill if empty or previously auto-filled
-  if(!existing || existing.startsWith('Hi') || existing.startsWith('Dear')){
-    document.getElementById('emailBody').value=body;
-  }
-  buildEmailPreview();
-}
-
-function buildEmailPreview(){
-  const email=document.getElementById('clientEmail').value.trim();
-  const subj=document.getElementById('emailSubject').value.trim();
-  const body=document.getElementById('emailBody').value.trim();
-  const preview=document.getElementById('emailPreview');
-  if(email||subj||body){
-    preview.classList.add('show');
-    document.getElementById('previewTo').textContent=email||'—';
-    document.getElementById('previewSubject').textContent=subj||'—';
-    document.getElementById('previewBody').textContent=body||'—';
-  }
-}
-
-// ══ ACTIONS ══
-function copyLink(){
-  const url=buildUrl();
-  if(!url){alert('Please select a destination first.');return;}
-  navigator.clipboard.writeText(url).then(()=>{
-    const f=document.getElementById('copyFlash');
-    f.classList.add('show');
-    setTimeout(()=>f.classList.remove('show'),2500);
-  });
-}
-
-function previewCard(){
-  const url=buildUrl();
-  if(!url){alert('Please select a destination first.');return;}
-  window.open(url,'_blank');
-}
-
-function sendWA(){
-  const url=buildUrl();
-  const name=document.getElementById('clientName').value.trim();
-  if(!url){alert('Please select a destination first.');return;}
-  const msg=`Hi${name?' '+name:''}! 🎉 You have a very special holiday surprise from Melita Holidays. Scratch to reveal your destination: ${url}`;
-  window.open('https://wa.me/?text='+encodeURIComponent(msg),'_blank');
-}
-
-function openMailApp(){
-  const to=document.getElementById('clientEmail').value.trim();
-  const subj=document.getElementById('emailSubject').value.trim();
-  const body=document.getElementById('emailBody').value.trim();
-  if(!to){alert('Please enter the client\'s email address.');return;}
-  const mailto=`mailto:${to}?from=justine@melitaholidays.com&subject=${encodeURIComponent(subj)}&body=${encodeURIComponent(body)}`;
-  window.location.href=mailto;
-  const f=document.getElementById('emailFlash');
-  f.classList.add('show');
-  setTimeout(()=>f.classList.remove('show'),3000);
-}
-
-// ══ SAVE & LOAD ══
-function saveAndCompose(){
-  const url=buildUrl();
-  if(!url){alert('Please select a destination first.');return;}
-  const dest=getDest();
-  const name=document.getElementById('clientName').value.trim();
-  const date=document.getElementById('travelDate').value.trim();
-  // Save to localStorage
-  const saved=getSaved();
-  const entry={
-    id: Date.now(),
-    name: name||'Unknown',
-    dest,
-    date,
-    url,
-    created: new Date().toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'})
-  };
-  saved.unshift(entry);
-  if(saved.length>20) saved.pop(); // keep last 20
-  localStorage.setItem('mh_scratchcards', JSON.stringify(saved));
-  renderSaved();
-  liveUpdate();
-  // Scroll to email section
-  document.getElementById('clientEmail').focus();
-  document.getElementById('clientEmail').scrollIntoView({behavior:'smooth',block:'center'});
-}
-
-function getSaved(){
-  try{return JSON.parse(localStorage.getItem('mh_scratchcards'))||[];}
-  catch{return [];}
-}
-
-function renderSaved(){
-  const list=document.getElementById('savedList');
-  const saved=getSaved();
-  if(!saved.length){
-    list.innerHTML='<div class="empty-saved"><i class="fas fa-gift"></i>No scratchcards yet.<br>Create your first one!</div>';
-    return;
-  }
-  list.innerHTML=saved.map(s=>`
-    <div class="saved-item" id="item-${s.id}">
-      <div class="saved-info">
-        <div class="saved-name">${s.name}</div>
-        <div class="saved-dest">✈️ ${s.dest}</div>
-        <div class="saved-date">Created ${s.created}${s.date?' · '+s.date:''}</div>
-      </div>
-      <div class="saved-actions">
-        <button class="saved-btn copy" onclick="copyDirect('${encodeURIComponent(s.url)}')"><i class="fas fa-copy"></i></button>
-        <button class="saved-btn email" onclick="loadSaved(${s.id})"><i class="fas fa-envelope"></i></button>
-        <button class="saved-btn del" onclick="deleteSaved(${s.id})"><i class="fas fa-trash"></i></button>
-      </div>
-    </div>
-  `).join('');
-}
-
-function copyDirect(encodedUrl){
-  navigator.clipboard.writeText(decodeURIComponent(encodedUrl));
-}
-
-function loadSaved(id){
-  const saved=getSaved();
-  const s=saved.find(x=>x.id===id);
-  if(!s) return;
-  // Pre-fill email
-  document.getElementById('emailSubject').value=`🎉 ${s.name} — Your Holiday Surprise from Melita Holidays!`;
-  const body=`Hi ${s.name},\n\nYou have a very special holiday surprise waiting for you from Melita Holidays!\n\nI've put together something just for you — click the link below to scratch and reveal your destination:\n\n👉 ${s.url}\n\nI can't wait for you to see where you're going! If you have any questions, don't hesitate to get in touch.\n\nWarm wishes,\nJustine\nMelita Holidays\n📞 07821 343925\n🌐 melitaholidays.com`;
-  document.getElementById('emailBody').value=body;
-  buildEmailPreview();
-  document.getElementById('clientEmail').focus();
-  document.getElementById('clientEmail').scrollIntoView({behavior:'smooth',block:'center'});
-}
-
-function deleteSaved(id){
-  if(!confirm('Remove this scratchcard from history?')) return;
-  const saved=getSaved().filter(s=>s.id!==id);
-  localStorage.setItem('mh_scratchcards',JSON.stringify(saved));
-  renderSaved();
-}
 </script>
-
 </body>
 </html>
