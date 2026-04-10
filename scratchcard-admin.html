@@ -552,4 +552,14 @@ function togglePw(){
 
 function showAdmin(){
   document.getElementById('loginScreen').style.display='none';
-  docu
+  document.getElementById('adminScreen').style.display='block';
+  renderPresets();
+  renderSaved();
+}
+
+window.addEventListener('DOMContentLoaded',()=>{
+  if(sessionStorage.getItem(SESSION_KEY)==='1') showAdmin();
+});
+</script>
+</body>
+</html>
