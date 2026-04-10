@@ -143,16 +143,13 @@ nav{
 /* ── MARQUEE ── */
 .marquee-section{background:#fff;padding:36px 0;overflow:hidden;border-top:1px solid #eee;border-bottom:1px solid #eee;}
 .marquee-label{text-align:center;font-family:'Montserrat',sans-serif;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#999;margin-bottom:24px;}
-.marquee-track{display:flex;gap:70px;align-items:center;animation:marquee 28s linear infinite;width:max-content;}
+.marquee-track{display:flex;gap:60px;align-items:center;animation:marquee 40s linear infinite;width:max-content;}
 .marquee-track:hover{animation-play-state:paused;}
 @keyframes marquee{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
 .supplier-item{display:flex;align-items:center;flex-shrink:0;}
-.sup-name{font-family:'Montserrat',sans-serif;font-size:20px;font-weight:900;white-space:nowrap;letter-spacing:0.5px;transition:opacity .3s;}
-.supplier-item:hover .sup-name{opacity:.7;}
-.sup-tui{color:#e2001a;}.sup-jet2{color:#f47920;}.sup-easyjet{color:#ff6600;}
-.sup-virgin{color:#e10a0a;}.sup-ba{color:#075aaa;}.sup-ryanair{color:#073590;}
-.sup-marriott{color:#9b2335;}.sup-hilton{color:#003087;}.sup-msc{color:#00338d;}.sup-thomascook{color:#00a3e0;}
-.sup-dot{font-size:22px;color:#ddd;flex-shrink:0;margin:0 -20px;}
+.supplier-item img{height:36px;object-fit:contain;filter:grayscale(100%);opacity:0.55;transition:filter .3s,opacity .3s;}
+.supplier-item:hover img{filter:grayscale(0%);opacity:1;}
+.sup-dot{font-size:18px;color:#ddd;flex-shrink:0;margin:0 -10px;}
 
 /* ── GALLERY ── */
 .gallery{display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:240px 240px;gap:4px;overflow:hidden;}
@@ -368,46 +365,71 @@ footer{background:var(--teal-dark);color:#fff;padding:40px 60px 28px;}
 <div class="marquee-section reveal from-bottom">
   <div class="marquee-label">We work with the world's leading travel brands</div>
   <div class="marquee-track">
-    <div class="supplier-item"><span class="sup-name sup-tui">TUI</span></div>
+    <!-- Set 1 -->
+    <div class="supplier-item"><img src="tui.png" alt="TUI"></div>
     <div class="sup-dot">·</div>
-    <div class="supplier-item"><span class="sup-name sup-jet2">Jet2 Holidays</span></div>
+    <div class="supplier-item"><img src="jet2holidays.png" alt="Jet2 Holidays"></div>
     <div class="sup-dot">·</div>
-    <div class="supplier-item"><span class="sup-name sup-easyjet">easyJet Holidays</span></div>
+    <div class="supplier-item"><img src="easyjet.png" alt="easyJet"></div>
     <div class="sup-dot">·</div>
-    <div class="supplier-item"><span class="sup-name sup-virgin">Virgin Voyages</span></div>
+    <div class="supplier-item"><img src="virgin voyages.png" alt="Virgin Voyages"></div>
     <div class="sup-dot">·</div>
-    <div class="supplier-item"><span class="sup-name sup-ba">British Airways</span></div>
+    <div class="supplier-item"><img src="royalcaribbean.png" alt="Royal Caribbean"></div>
     <div class="sup-dot">·</div>
-    <div class="supplier-item"><span class="sup-name sup-ryanair">Ryanair</span></div>
+    <div class="supplier-item"><img src="celebritycruises.png" alt="Celebrity Cruises"></div>
     <div class="sup-dot">·</div>
-    <div class="supplier-item"><span class="sup-name sup-marriott">Marriott</span></div>
+    <div class="supplier-item"><img src="sandals.png" alt="Sandals"></div>
     <div class="sup-dot">·</div>
-    <div class="supplier-item"><span class="sup-name sup-hilton">Hilton</span></div>
+    <div class="supplier-item"><img src="kuoni.png" alt="Kuoni"></div>
     <div class="sup-dot">·</div>
-    <div class="supplier-item"><span class="sup-name sup-msc">MSC Cruises</span></div>
+    <div class="supplier-item"><img src="ethiad.png" alt="Etihad"></div>
     <div class="sup-dot">·</div>
-    <div class="supplier-item"><span class="sup-name sup-thomascook">Thomas Cook</span></div>
+    <div class="supplier-item"><img src="eurostar.png" alt="Eurostar"></div>
     <div class="sup-dot">·</div>
-    <!-- duplicate -->
-    <div class="supplier-item"><span class="sup-name sup-tui">TUI</span></div>
+    <div class="supplier-item"><img src="holidayextras.png" alt="Holiday Extras"></div>
     <div class="sup-dot">·</div>
-    <div class="supplier-item"><span class="sup-name sup-jet2">Jet2 Holidays</span></div>
+    <div class="supplier-item"><img src="solmar.png" alt="Solmar"></div>
     <div class="sup-dot">·</div>
-    <div class="supplier-item"><span class="sup-name sup-easyjet">easyJet Holidays</span></div>
+    <div class="supplier-item"><img src="pandoheritage.png" alt="Pandaw Heritage"></div>
     <div class="sup-dot">·</div>
-    <div class="supplier-item"><span class="sup-name sup-virgin">Virgin Voyages</span></div>
+    <div class="supplier-item"><img src="hoseasons.png" alt="Hoseasons"></div>
     <div class="sup-dot">·</div>
-    <div class="supplier-item"><span class="sup-name sup-ba">British Airways</span></div>
+    <div class="supplier-item"><img src="lapland.png" alt="Lapland"></div>
     <div class="sup-dot">·</div>
-    <div class="supplier-item"><span class="sup-name sup-ryanair">Ryanair</span></div>
+    <div class="supplier-item"><img src="disneyland.png" alt="Disneyland"></div>
     <div class="sup-dot">·</div>
-    <div class="supplier-item"><span class="sup-name sup-marriott">Marriott</span></div>
+    <!-- Set 2 (duplicate for seamless loop) -->
+    <div class="supplier-item"><img src="tui.png" alt="TUI"></div>
     <div class="sup-dot">·</div>
-    <div class="supplier-item"><span class="sup-name sup-hilton">Hilton</span></div>
+    <div class="supplier-item"><img src="jet2holidays.png" alt="Jet2 Holidays"></div>
     <div class="sup-dot">·</div>
-    <div class="supplier-item"><span class="sup-name sup-msc">MSC Cruises</span></div>
+    <div class="supplier-item"><img src="easyjet.png" alt="easyJet"></div>
     <div class="sup-dot">·</div>
-    <div class="supplier-item"><span class="sup-name sup-thomascook">Thomas Cook</span></div>
+    <div class="supplier-item"><img src="virgin voyages.png" alt="Virgin Voyages"></div>
+    <div class="sup-dot">·</div>
+    <div class="supplier-item"><img src="royalcaribbean.png" alt="Royal Caribbean"></div>
+    <div class="sup-dot">·</div>
+    <div class="supplier-item"><img src="celebritycruises.png" alt="Celebrity Cruises"></div>
+    <div class="sup-dot">·</div>
+    <div class="supplier-item"><img src="sandals.png" alt="Sandals"></div>
+    <div class="sup-dot">·</div>
+    <div class="supplier-item"><img src="kuoni.png" alt="Kuoni"></div>
+    <div class="sup-dot">·</div>
+    <div class="supplier-item"><img src="ethiad.png" alt="Etihad"></div>
+    <div class="sup-dot">·</div>
+    <div class="supplier-item"><img src="eurostar.png" alt="Eurostar"></div>
+    <div class="sup-dot">·</div>
+    <div class="supplier-item"><img src="holidayextras.png" alt="Holiday Extras"></div>
+    <div class="sup-dot">·</div>
+    <div class="supplier-item"><img src="solmar.png" alt="Solmar"></div>
+    <div class="sup-dot">·</div>
+    <div class="supplier-item"><img src="pandoheritage.png" alt="Pandaw Heritage"></div>
+    <div class="sup-dot">·</div>
+    <div class="supplier-item"><img src="hoseasons.png" alt="Hoseasons"></div>
+    <div class="sup-dot">·</div>
+    <div class="supplier-item"><img src="lapland.png" alt="Lapland"></div>
+    <div class="sup-dot">·</div>
+    <div class="supplier-item"><img src="disneyland.png" alt="Disneyland"></div>
     <div class="sup-dot">·</div>
   </div>
 </div>
