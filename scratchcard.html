@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>You Have a Holiday Surprise — Melita Holidays</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/png" href="logo.png">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+:root{--teal:#2f7f82;--teal-dark:#256c6f;--gold:#e09a42;--gold-light:#f0b865;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Poppins',sans-serif;background:var(--teal);min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:30px 20px;overflow-x:hidden;position:relative;}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(circle at 20% 20%,rgba(224,154,66,0.15) 0%,transparent 50%),radial-gradient(circle at 80% 80%,rgba(255,255,255,0.06) 0%,transparent 50%);pointer-events:none;}
+
+#invalidMsg{text-align:center;color:#fff;max-width:360px;display:none;animation:fadeUp .6s ease both;}
+#invalidMsg i{font-size:48px;opacity:.4;margin-bottom:20px;display:block;}
+#invalidMsg h2{font-family:'Montserrat',sans-serif;font-size:22px;font-weight:900;margin-bottom:10px;}
+#invalidMsg p{opacity:.7;font-size:14px;line-height:1.7;}
+#invalidMsg a{display:inline-block;margin-top:24px;padding:14px 28px;border-radius:50px;background:var(--gold);color:#fff;text-decoration:none;font-weight:700;font-size:13px;}
+
+#cardScreen{display:none;flex-direction:column;align-items:center;max-width:400px;width:100%;animation:fadeUp .7s ease both;}
+.card-logo{margin-bottom:18px;text-align:center;}
+.card-logo img{height:50px;object-fit:contain;}
+.card-intro{text-align:center;margin-bottom:20px;}
+.recipient-name{font-family:'Montserrat',sans-serif;font-size:clamp(16px,4vw,22px);font-weight:900;color:#fff;letter-spacing:1px;margin-bottom:5px;}
+.card-tagline{color:rgba(255,255,255,0.65);font-size:12px;letter-spacing:.5px;}
+
+.scratchcard-wrap{position:relative;width:100%;border-radius:20px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.4);background:#fff;cursor:crosshair;}
+.reveal-layer{width:100%;min-height:320px;background:var(--teal-dark);display:flex;flex-direction:column;align-items:flex-end;justify-content:flex-end;padding:0;text-align:center;position:relative;overflow:hidden;}
+.reveal-bg{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transition:opacity 1.4s ease;filter:brightness(1.15);}
+.reveal-bg.show{opacity:1;}
+.reveal-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.72) 0%,rgba(0,0,0,0.1) 45%,rgba(0,0,0,0) 100%);}
+.reveal-content{position:relative;z-index:2;color:#fff;display:flex;flex-direction:column;align-items:center;width:100%;padding:20px 24px 24px;}
+.dest-label{font-size:10px;font-weight:600;letter-spacing:3px;text-transform:uppercase;opacity:0;transition:opacity .8s .2s;margin-bottom:10px;}
+.dest-label.pop{opacity:.7;}
+.dest-name{font-family:'Montserrat',sans-serif;font-size:clamp(30px,8vw,52px);font-weight:900;color:var(--gold);letter-spacing:2px;text-transform:uppercase;line-height:1;margin-bottom:16px;text-shadow:0 4px 24px rgba(0,0,0,0.5);opacity:0;transform:scale(.75) translateY(10px);transition:opacity .9s .4s,transform .9s .4s cubic-bezier(.175,.885,.32,1.275);}
+.dest-name.pop{opacity:1;transform:scale(1) translateY(0);}
+.dest-msg{font-size:13px;line-height:1.7;max-width:320px;margin:0 auto 14px;opacity:0;transition:opacity .8s .8s;color:rgba(255,255,255,0.9);}
+.dest-msg.pop{opacity:.9;}
+.dest-date{font-size:12px;font-weight:600;color:var(--gold-light);letter-spacing:1px;opacity:0;transition:opacity .8s 1s;margin-bottom:5px;}
+.dest-date.pop{opacity:1;}
+.dest-sig{font-size:11px;opacity:0;color:rgba(255,255,255,0.5);letter-spacing:1px;transition:opacity .8s 1.1s;}
+.dest-sig.pop{opacity:.5;}
+
+.scratch-canvas{position:absolute;top:0;left:0;width:100%;height:100%;touch-action:none;z-index:3;}
+.scratch-hint{position:absolute;bottom:14px;left:0;right:0;z-index:4;text-align:center;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(0,0,0,0.5);pointer-events:none;transition:opacity .5s;font-weight:600;}
+.scratch-hint i{margin-right:6px;}
+.scratch-hint.hide{opacity:0;}
+.scratch-progress{position:absolute;bottom:0;left:0;right:0;height:5px;background:rgba(0,0,0,0.1);z-index:5;}
+.scratch-progress-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--teal),var(--teal-dark));transition:width .08s;border-radius:0 3px 3px 0;}
+
+.share-bar{width:100%;margin-top:16px;display:flex;gap:10px;opacity:0;transform:translateY(12px);transition:opacity .7s 1.4s,transform .7s 1.4s;pointer-events:none;}
+.share-bar.show{opacity:1;transform:translateY(0);pointer-events:auto;}
+.share-btn{flex:1;padding:13px 10px;border:none;border-radius:12px;font-family:'Montserrat',sans-serif;font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;cursor:pointer;transition:transform .2s;display:flex;align-items:center;justify-content:center;gap:7px;text-decoration:none;}
+.share-btn:hover{transform:translateY(-2px);}
+.btn-wa{background:#25D366;color:#fff;}
+.btn-book{background:var(--gold);color:#fff;}
+.card-footer{margin-top:14px;text-align:center;color:rgba(255,255,255,0.35);font-size:11px;letter-spacing:1px;}
+#confetti-canvas{position:fixed;inset:0;pointer-events:none;z-index:1000;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(28px);}to{opacity:1;transform:translateY(0);}}
+</style>
+</head>
+<body>
+<canvas id="confetti-canvas"></canvas>
+
+<div id="invalidMsg">
+  <i class="fas fa-plane-slash"></i>
+  <h2>No holiday found!</h2>
+  <p>This link doesn't have a destination. Ask Melita Holidays to resend your surprise link.</p>
+  <a href="https://melitaholidays.com">Visit Melita Holidays</a>
+</div>
+
+<div id="cardScreen">
+  <div class="card-logo">
+    <img src="logo.png" alt="Melita Holidays" onerror="this.style.display='none'">
+  </div>
+  <div class="card-intro">
+    <div class="recipient-name" id="displayName"></div>
+    <div class="card-tagline">✈️ &nbsp;You have a very special surprise waiting...</div>
+  </div>
+  <div class="scratchcard-wrap" id="scratchWrap">
+    <div class="reveal-layer">
+      <div class="reveal-bg" id="revealBg"></div>
+      <div class="reveal-overlay"></div>
+      <div class="reveal-content">
+        <div class="dest-label">Your destination is</div>
+        <div class="dest-name" id="destName"></div>
+        <div class="dest-msg" id="destMsg"></div>
+        <div class="dest-date" id="destDate"></div>
+        <div class="dest-sig">— Melita Holidays ✈️</div>
+      </div>
+    </div>
+    <canvas class="scratch-canvas" id="scratchCanvas"></canvas>
+    <div class="scratch-hint" id="scratchHint"><i class="fas fa-hand-pointer"></i> Scratch to reveal your destination</div>
+    <div class="scratch-progress"><div class="scratch-progress-fill" id="progressFill"></div></div>
+  </div>
+  <div class="share-bar" id="shareBar">
+    <button class="share-btn btn-wa" onclick="shareWA()"><i class="fab fa-whatsapp"></i> Share the excitement!</button>
+    <a class="share-btn btn-book" href="https://melitaholidays.com#form"><i class="fas fa-plane"></i> Plan another trip</a>
+  </div>
+  <div class="card-footer">melitaholidays.com &nbsp;·&nbsp; Your holiday, designed around you</div>
+</div>
+
+<script>
+// ── DESTINATION IMAGES (matched to destination) ──
+const destImages = {
+  'MALDIVES':      'https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=900&q=80&auto=format&fit=crop',
+  'SANTORINI':     'https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=900&q=80&auto=format&fit=crop',
+  'DUBAI':         'https://images.unsplash.com/photo-1518684079-3c830dcef090?w=900&q=80&auto=format&fit=crop',
+  'BARBADOS':      'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=900&q=80&auto=format&fit=crop',
+  'TURKEY':        'https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?w=900&q=80&auto=format&fit=crop',
+  'BALI':          'https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=900&q=80&auto=format&fit=crop',
+  'TENERIFE':      'https://images.unsplash.com/photo-1502904550040-7534597429ae?w=900&q=80&auto=format&fit=crop',
+  'NEW YORK':      'https://images.unsplash.com/photo-1490644658840-3f2e3f8c5625?w=900&q=80&auto=format&fit=crop',
+  'CANCÚN':        'https://images.unsplash.com/photo-1552074284-5e84b979df39?w=900&q=80&auto=format&fit=crop',
+  'CANCUN':        'https://images.unsplash.com/photo-1552074284-5e84b979df39?w=900&q=80&auto=format&fit=crop',
+  'THAILAND':      'https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?w=900&q=80&auto=format&fit=crop',
+  'MAURITIUS':     'https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?w=900&q=80&auto=format&fit=crop',
+  'IBIZA':         'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=900&q=80&auto=format&fit=crop',
+  'CYPRUS':        'https://images.unsplash.com/photo-1562016600-ece13e8ba570?w=900&q=80&auto=format&fit=crop',
+  'LANZAROTE':     'https://images.unsplash.com/photo-1504006833117-8886a355efbf?w=900&q=80&auto=format&fit=crop',
+  'PORTUGAL':      'https://images.unsplash.com/photo-1555881400-74d7acaacd8b?w=900&q=80&auto=format&fit=crop',
+  'ITALY':         'https://images.unsplash.com/photo-1516483638261-f4dbaf036963?w=900&q=80&auto=format&fit=crop',
+  'FLORIDA':       'https://images.unsplash.com/photo-1533106418989-88406c7cc8ca?w=900&q=80&auto=format&fit=crop',
+  'JAMAICA':       'https://images.unsplash.com/photo-1564867904986-3f8bcc5e5e3c?w=900&q=80&auto=format&fit=crop',
+  'GREECE':        'https://images.unsplash.com/photo-1597975014450-d1ba6e3d67fd?w=900&q=80&auto=format&fit=crop',
+  'MOROCCO':       'https://images.unsplash.com/photo-1489493887464-892be6d1daae?w=900&q=80&auto=format&fit=crop',
+  'PARIS':         'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=900&q=80&auto=format&fit=crop',
+  'LONDON':        'https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=900&q=80&auto=format&fit=crop',
+  'AMSTERDAM':     'https://images.unsplash.com/photo-1534351590666-13e3e96b5017?w=900&q=80&auto=format&fit=crop',
+  'BARCELONA':     'https://images.unsplash.com/photo-1583422409516-2895a77efded?w=900&q=80&auto=format&fit=crop',
+  'ROME':          'https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=900&q=80&auto=format&fit=crop',
+  'MIAMI':         'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=900&q=80&auto=format&fit=crop',
+  'HAWAII':        'https://images.unsplash.com/photo-1505852679233-d9fd70aff56d?w=900&q=80&auto=format&fit=crop',
+  'MALDIVES':      'https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=900&q=80&auto=format&fit=crop',
+  'MEXICO':        'https://images.unsplash.com/photo-1518638150340-f706e86654de?w=900&q=80&auto=format&fit=crop',
+  'EGYPT':         'https://images.unsplash.com/photo-1568322445389-f64ac2515020?w=900&q=80&auto=format&fit=crop',
+  'KENYA':         'https://images.unsplash.com/photo-1535941339077-2dd1c7963098?w=900&q=80&auto=format&fit=crop',
+  'MARBELLA':      'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=900&q=80&auto=format&fit=crop',
+  'MAJORCA':       'https://images.unsplash.com/photo-1530789253388-582c481c54b0?w=900&q=80&auto=format&fit=crop',
+  'MALLORCA':      'https://images.unsplash.com/photo-1530789253388-582c481c54b0?w=900&q=80&auto=format&fit=crop',
+  'COSTA RICA':    'https://images.unsplash.com/photo-1518259102261-b40117eabbc9?w=900&q=80&auto=format&fit=crop',
+  'SINGAPORE':     'https://images.unsplash.com/photo-1525625293386-3f8f99389edd?w=900&q=80&auto=format&fit=crop',
+  'JAPAN':         'https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=900&q=80&auto=format&fit=crop',
+  'TOKYO':         'https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=900&q=80&auto=format&fit=crop',
+  'INDIA':         'https://images.unsplash.com/photo-1524492412937-b28074a5d7da?w=900&q=80&auto=format&fit=crop',
+  'CAPE TOWN':     'https://images.unsplash.com/photo-1580060839134-75a5edca2e99?w=900&q=80&auto=format&fit=crop',
+  'AUSTRALIA':     'https://images.unsplash.com/photo-1523482580672-f109ba8cb9be?w=900&q=80&auto=format&fit=crop',
+  'CUBA':          'https://images.unsplash.com/photo-1500759285222-a95626964b34?w=900&q=80&auto=format&fit=crop',
+  'LAPLAND':       'https://images.unsplash.com/photo-1531366936337-7c912a4589a7?w=900&q=80&auto=format&fit=crop',
+  'FINLAND':       'https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=900&q=80&auto=format&fit=crop',
+  'NORWAY':        'https://images.unsplash.com/photo-1513519245088-0e12902e5a38?w=900&q=80&auto=format&fit=crop',
+  'ICELAND':       'https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=900&q=80&auto=format&fit=crop',
+  'DISNEYLAND':    'https://images.unsplash.com/photo-1587204611571-5b28cde61c78?w=900&q=80&auto=format&fit=crop',
+  'DISNEY':        'https://images.unsplash.com/photo-1587204611571-5b28cde61c78?w=900&q=80&auto=format&fit=crop',
+  'CRUISE':        'https://images.unsplash.com/photo-1548574505-5e239809ee19?w=900&q=80&auto=format&fit=crop',
+  'CARIBBEAN':     'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=900&q=80&auto=format&fit=crop',
+};
+const fallback = 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=900&q=80&auto=format&fit=crop';
+
+function getImageForDest(dest){
+  const key = dest.toUpperCase().trim();
+  // Exact match first
+  if(destImages[key]) return destImages[key];
+  // Partial match — check if any key is contained in the destination
+  for(const k of Object.keys(destImages)){
+    if(key.includes(k) || k.includes(key)) return destImages[k];
+  }
+  return fallback;
+}
+
+// ── DECODE ──
+function decodeData(token){
+  try{
+    // Handle URL-safe base64 (- and _ instead of + and /)
+    const b64 = token.replace(/-/g, '+').replace(/_/g, '/');
+    // Add padding if needed
+    const padded = b64 + '=='.slice(0, (4 - b64.length % 4) % 4);
+    const json = decodeURIComponent(escape(atob(padded)));
+    return JSON.parse(json);
+  } catch(e){
+    try{
+      // Fallback for old-style tokens
+      const cleaned = decodeURIComponent(token).replace(/ /g, '+');
+      const json = atob(cleaned);
+      return JSON.parse(json);
+    } catch(e2){
+      return null;
+    }
+  }
+}
+
+let revealed = false, isScratching = false;
+let confettiEnabled = true;
+
+window.addEventListener('DOMContentLoaded', () => {
+  const params = new URLSearchParams(window.location.search);
+  const token  = params.get('s');
+  // confetti toggle — c=0 disables it
+  if(params.get('c') === '0') confettiEnabled = false;
+
+  // Also support old-style URLs just in case
+  const legacyDest = params.get('d');
+  if(legacyDest){
+    const data = {
+      n: params.get('n') || '',
+      d: legacyDest,
+      m: params.get('m') || '',
+      t: params.get('t') || ''
+    };
+    renderCard(data);
+    return;
+  }
+
+  if(!token){
+    document.getElementById('invalidMsg').style.display = 'block';
+    return;
+  }
+
+  const data = decodeData(token);
+  if(!data || !data.d){
+    document.getElementById('invalidMsg').style.display = 'block';
+    return;
+  }
+
+  renderCard(data);
+});
+
+function renderCard(data){
+  const {n: name='', d: dest, m: msg='', t: date=''} = data;
+
+  document.getElementById('displayName').textContent =
+    name ? name + (name.toLowerCase().endsWith('s') ? "'" : "'s") + ' Holiday Surprise'
+         : 'Your Holiday Surprise';
+  document.getElementById('destName').textContent = dest;
+  document.getElementById('destMsg').textContent   = msg;
+  if(date){
+    document.getElementById('destDate').textContent = '✈️  ' + date;
+  } else {
+    document.getElementById('destDate').style.display = 'none';
+  }
+
+  const imgUrl = getImageForDest(dest);
+  // Preload the image so it's ready when revealed
+  const preloadImg = new Image();
+  preloadImg.src = imgUrl;
+  document.getElementById('revealBg').style.backgroundImage = `url('${imgUrl}')`;
+
+  document.getElementById('cardScreen').style.display = 'flex';
+  setTimeout(initScratch, 150);
+}
+
+function initScratch(){
+  const wrap   = document.getElementById('scratchWrap');
+  const canvas = document.getElementById('scratchCanvas');
+  const w = wrap.offsetWidth, h = wrap.offsetHeight;
+  canvas.width = w; canvas.height = h;
+  const ctx = canvas.getContext('2d');
+
+  // Gold gradient background
+  const grad = ctx.createLinearGradient(0,0,w,h);
+  grad.addColorStop(0,'#f5c060');
+  grad.addColorStop(0.4,'#e09a42');
+  grad.addColorStop(0.7,'#c8882e');
+  grad.addColorStop(1,'#e8b050');
+  ctx.fillStyle = grad; ctx.fillRect(0,0,w,h);
+
+  // Subtle shimmer dots
+  ctx.fillStyle='rgba(255,255,255,0.12)';
+  for(let x=15;x<w;x+=22) for(let y=15;y<h;y+=22){ctx.beginPath();ctx.arc(x,y,1.2,0,Math.PI*2);ctx.fill();}
+
+  // Diagonal shine lines
+  ctx.strokeStyle='rgba(255,255,255,0.08)';
+  ctx.lineWidth=8;
+  for(let i=-h;i<w+h;i+=40){
+    ctx.beginPath();ctx.moveTo(i,0);ctx.lineTo(i+h,h);ctx.stroke();
+  }
+
+  // Main text
+  ctx.fillStyle='rgba(255,255,255,0.95)';
+  ctx.font=`900 ${Math.min(14,w*.032)}px Montserrat,sans-serif`;
+  ctx.textAlign='center';
+  ctx.fillText('YOUR HOLIDAY SURPRISE', w/2, h/2-24);
+  ctx.fillStyle='rgba(255,255,255,0.65)';
+  ctx.font=`500 ${Math.min(11,w*.024)}px Poppins,sans-serif`;
+  ctx.fillText('Scratch here to reveal your destination', w/2, h/2+6);
+
+  // Teal coin
+  ctx.beginPath(); ctx.arc(w/2,h/2+48,26,0,Math.PI*2);
+  const cg=ctx.createRadialGradient(w/2-6,h/2+40,3,w/2,h/2+48,26);
+  cg.addColorStop(0,'#3d9ea1'); cg.addColorStop(1,'#2f7f82');
+  ctx.fillStyle=cg; ctx.fill();
+  ctx.fillStyle='rgba(255,255,255,0.9)'; ctx.font='18px sans-serif'; ctx.fillText('✈',w/2,h/2+55);
+
+  const total = w*h; let sc=0;
+
+  function pos(e){
+    const r=canvas.getBoundingClientRect();
+    const sx=canvas.width/r.width, sy=canvas.height/r.height;
+    if(e.touches) return{x:(e.touches[0].clientX-r.left)*sx,y:(e.touches[0].clientY-r.top)*sy};
+    return{x:(e.clientX-r.left)*sx,y:(e.clientY-r.top)*sy};
+  }
+
+  function scratch(e){
+    e.preventDefault();
+    if(!isScratching||revealed) return;
+    const{x,y}=pos(e);
+    ctx.globalCompositeOperation='destination-out';
+    ctx.beginPath(); ctx.arc(x,y,30,0,Math.PI*2); ctx.fill();
+    document.getElementById('scratchHint').classList.add('hide');
+    sc++; if(sc%8===0) check(ctx,w,h,total);
+  }
+
+  canvas.addEventListener('mousedown',  e=>{isScratching=true; scratch(e);});
+  canvas.addEventListener('mousemove',  e=>scratch(e));
+  canvas.addEventListener('mouseup',    ()=>isScratching=false);
+  canvas.addEventListener('mouseleave', ()=>isScratching=false);
+  canvas.addEventListener('touchstart', e=>{isScratching=true; scratch(e);},{passive:false});
+  canvas.addEventListener('touchmove',  e=>scratch(e),{passive:false});
+  canvas.addEventListener('touchend',   ()=>isScratching=false);
+}
+
+function check(ctx,w,h,total){
+  const d=ctx.getImageData(0,0,w,h).data; let t=0;
+  for(let i=3;i<d.length;i+=16) if(d[i]<128) t+=4;
+  const pct=(t/total)*100;
+  document.getElementById('progressFill').style.width=Math.min(pct,100)+'%';
+  if(pct>42&&!revealed) triggerReveal();
+}
+
+function triggerReveal(){
+  revealed=true;
+  const canvas=document.getElementById('scratchCanvas');
+  canvas.style.transition='opacity .9s ease'; canvas.style.opacity='0';
+  setTimeout(()=>canvas.style.display='none',900);
+  document.getElementById('revealBg').classList.add('show');
+  setTimeout(()=>{document.getElementById('destName').classList.add('pop'); document.querySelector('.dest-label').classList.add('pop');},500);
+  setTimeout(()=>document.getElementById('destMsg').classList.add('pop'),900);
+  setTimeout(()=>{document.getElementById('destDate').classList.add('pop'); document.querySelectorAll('.dest-sig').forEach(el=>el.classList.add('pop'));},1100);
+  document.getElementById('scratchHint').style.display='none';
+  document.getElementById('progressFill').style.width='100%';
+  if(confettiEnabled) setTimeout(launchConfetti,600);
+  document.getElementById('shareBar').classList.add('show');
+}
+
+function launchConfetti(){
+  const cv=document.getElementById('confetti-canvas');
+  cv.width=window.innerWidth; cv.height=window.innerHeight;
+  const ctx=cv.getContext('2d');
+  const cols=['#e09a42','#2f7f82','#ffffff','#f0b865','#1a8a8d','#ffd700'];
+  const ps=Array.from({length:160},()=>({x:Math.random()*cv.width,y:-20-Math.random()*220,w:5+Math.random()*9,h:9+Math.random()*14,color:cols[Math.floor(Math.random()*cols.length)],rot:Math.random()*360,rs:(Math.random()-.5)*7,vx:(Math.random()-.5)*4,vy:1.5+Math.random()*4,op:1}));
+  let f=0;
+  function draw(){
+    ctx.clearRect(0,0,cv.width,cv.height); let alive=false;
+    ps.forEach(p=>{if(p.y<cv.height+20)alive=true; p.x+=p.vx; p.y+=p.vy; p.rot+=p.rs; if(p.y>cv.height*.55)p.op-=.01; ctx.save(); ctx.globalAlpha=Math.max(0,p.op); ctx.translate(p.x+p.w/2,p.y+p.h/2); ctx.rotate(p.rot*Math.PI/180); ctx.fillStyle=p.color; ctx.fillRect(-p.w/2,-p.h/2,p.w,p.h); ctx.restore();});
+    if(alive&&f<360) requestAnimationFrame(draw); else ctx.clearRect(0,0,cv.width,cv.height); f++;
+  }
+  draw();
+}
+
+function shareWA(){
+  const dest = document.getElementById('destName').textContent || 'my destination';
+  window.open('https://wa.me/?text='+encodeURIComponent(`🎉 I just found out I'm going to ${dest}! Melita Holidays planned everything — check them out: https://melitaholidays.com`),'_blank');
+}
+</script>
+</body>
+</html>
