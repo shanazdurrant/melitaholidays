@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Melita Holidays</title>
+<link rel="icon" type="image/png" href="logo.png">
+<meta name="description" content="Melita Holidays — personalised travel planning with ATOL & PTS protection. Exclusive deals on beach escapes, city breaks, cruises and group holidays.">
+<meta name="keywords" content="travel agent UK, holiday planning, ATOL protected holidays, city breaks, cruises, beach holidays, group holidays, independent travel agent">
+<meta name="author" content="Melita Holidays">
+<meta property="og:title" content="Melita Holidays — Your Perfect Getaway, Tailored To You">
+<meta property="og:description" content="From all-inclusive escapes to city breaks, personally planned and fully protected.">
+<meta property="og:image" content="https://melitaholidays.com/logo.png">
+<meta property="og:url" content="https://melitaholidays.com">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://melitaholidays.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800;900&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+
+:root{
+  --teal:#2f7f82;
+  --teal-dark:#256c6f;
+  --gold:#e09a42;
+  --cream:#f6f4f2;
+  --white:#ffffff;
+  --text-dark:#2a2a2a;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{overflow-x:hidden;}
+body{font-family:'Poppins',sans-serif;background:#fff;color:var(--text-dark);scroll-behavior:smooth;overflow-x:hidden;}
+
+/* ── LOADING SCREEN ── */
+#loader{position:fixed;inset:0;background:var(--teal);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9999;transition:opacity .6s ease,visibility .6s ease;}
+#loader.hidden{opacity:0;visibility:hidden;}
+#loader img{width:220px;object-fit:contain;animation:loaderPulse 1.5s ease-in-out infinite;}
+#loader .loader-text{margin-top:24px;font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:rgba(255,255,255,0.6);}
+#loader .loader-bar{width:160px;height:3px;background:rgba(255,255,255,0.2);border-radius:2px;margin-top:16px;overflow:hidden;}
+#loader .loader-fill{height:100%;width:0;background:var(--gold);border-radius:2px;animation:loaderFill 1.8s ease forwards;}
+@keyframes loaderPulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.8;transform:scale(.97);}}
+@keyframes loaderFill{0%{width:0;}100%{width:100%;}}
+
+/* ── SCROLL ANIMATIONS ── */
+.reveal{opacity:0;transition:opacity .8s ease,transform .8s ease;}
+.reveal.from-bottom{transform:translateY(50px);}
+.reveal.from-left{transform:translateX(-60px);}
+.reveal.from-right{transform:translateX(60px);}
+.reveal.visible{opacity:1;transform:none;}
+.stagger > *{opacity:0;transform:translateY(30px);transition:opacity .6s ease,transform .6s ease;}
+.stagger.visible > *:nth-child(1){opacity:1;transform:none;transition-delay:.1s;}
+.stagger.visible > *:nth-child(2){opacity:1;transform:none;transition-delay:.2s;}
+.stagger.visible > *:nth-child(3){opacity:1;transform:none;transition-delay:.3s;}
+.stagger.visible > *:nth-child(4){opacity:1;transform:none;transition-delay:.4s;}
+
+/* ── SECTION HEADINGS ── */
+.section-heading{text-align:center;margin-bottom:50px;}
+.section-heading h2{font-family:'Montserrat',sans-serif;font-size:clamp(24px,3vw,36px);font-weight:900;letter-spacing:2px;text-transform:uppercase;color:var(--text-dark);margin-bottom:14px;}
+.section-heading h2 span{color:var(--teal);}
+.section-heading .heading-line{width:60px;height:4px;background:var(--gold);margin:0 auto 16px;border-radius:2px;}
+.section-heading p{font-size:15px;color:#666;max-width:620px;margin:0 auto;line-height:1.7;}
+/* On teal backgrounds */
+.experience .section-heading h2,
+.why .section-heading h2{color:#fff;}
+.experience .section-heading h2 span,
+.why .section-heading h2 span{color:var(--gold);}
+.experience .section-heading p,
+.why .section-heading p{color:rgba(255,255,255,0.75);}
+
+/* ── DIVIDERS ── */
+.divider{height:6px;background:linear-gradient(90deg,var(--teal),var(--gold),var(--teal));}
+
+/* ── NAV ── */
+nav{
+  position:sticky;top:0;z-index:200;
+  background:var(--teal);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:12px 40px;
+  box-shadow:0 2px 16px rgba(0,0,0,0.15);
+}
+.nav-links{display:flex;gap:6px;list-style:none;flex-wrap:wrap;}
+.nav-links a{
+  text-decoration:none;color:rgba(255,255,255,0.85);
+  font-size:12px;font-weight:600;
+  letter-spacing:.5px;text-transform:uppercase;
+  padding:8px 12px;border-radius:6px;
+  transition:all .2s;white-space:nowrap;
+}
+.nav-links a:hover{color:#fff;background:rgba(255,255,255,0.12);}
+.nav-cta{
+  background:var(--gold);color:#fff!important;
+  padding:10px 22px;border-radius:50px;
+  font-size:12px;font-weight:700;
+  text-decoration:none;letter-spacing:.5px;
+  transition:background .2s,transform .2s;
+  box-shadow:0 4px 12px rgba(0,0,0,0.2);
+  white-space:nowrap;flex-shrink:0;
+}
+.nav-cta:hover{background:#c8882e;transform:translateY(-1px);}
+.nav-hamburger{display:none;background:none;border:none;color:#fff;font-size:22px;cursor:pointer;padding:6px;}
+.nav-mobile{display:none;flex-direction:column;gap:4px;padding:10px 20px 16px;background:var(--teal-dark);}
+.nav-mobile a{color:rgba(255,255,255,0.9);text-decoration:none;font-size:13px;font-weight:600;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.1);letter-spacing:.5px;}
+.nav-mobile.open{display:flex;}
+
+/* ── HERO — KEN BURNS ── */
+.hero{position:relative;min-height:95vh;display:flex;align-items:center;overflow:hidden;background:var(--teal);}
+.hero-video-wrap{position:absolute;inset:0;z-index:0;}
+.hero-video-wrap::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(10,60,63,0.82) 0%,rgba(10,60,63,0.5) 60%,rgba(0,0,0,0.3) 100%);z-index:1;}
+.kb-slide{position:absolute;inset:0;background-size:cover;background-position:center;}
+.kb-slide:nth-child(1){
+  background-image:url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1600&q=85');
+  animation:kbSingle 20s ease-in-out infinite alternate;
+}
+.kb-slide:nth-child(2),.kb-slide:nth-child(3),.kb-slide:nth-child(4){display:none;}
+@keyframes kbSingle{
+  0%{transform:scale(1);opacity:1;}
+  100%{transform:scale(1.12);opacity:1;}
+}
+.hero-content{position:relative;z-index:1;padding:80px 60px;color:#fff;max-width:700px;}
+.hero-content img{width:240px;margin-bottom:28px;display:block;filter:drop-shadow(0 4px 16px rgba(0,0,0,0.3));}
+.hero-sub{font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;color:rgba(255,255,255,0.65);letter-spacing:4px;text-transform:uppercase;margin-bottom:16px;}
+.hero-content h1{font-family:'Montserrat',sans-serif;font-size:clamp(32px,5vw,58px);font-weight:900;color:var(--gold);line-height:1.1;margin-bottom:20px;text-transform:uppercase;letter-spacing:1px;text-shadow:0 2px 20px rgba(0,0,0,0.3);}
+.hero-content p{font-size:16px;opacity:.92;margin-bottom:36px;max-width:460px;line-height:1.8;}
+.hero-btns{display:flex;flex-direction:column;gap:14px;max-width:340px;}
+.btn-primary{display:block;padding:18px 32px;border-radius:50px;background:var(--gold);color:#fff;font-weight:700;font-size:15px;text-decoration:none;text-align:center;letter-spacing:.5px;transition:background .2s,transform .2s;box-shadow:0 6px 20px rgba(224,154,66,0.5);}
+.btn-primary:hover{background:#c8882e;transform:translateY(-3px);}
+.btn-outline{display:block;padding:16px 32px;border-radius:50px;border:2px solid rgba(255,255,255,0.5);color:#fff;font-weight:600;font-size:15px;text-decoration:none;text-align:center;transition:all .2s;backdrop-filter:blur(4px);}
+.btn-outline:hover{border-color:#fff;background:rgba(255,255,255,0.12);}
+
+/* ── ABOUT ME ── */
+.about{
+  padding:80px 60px;
+  background:#fff;
+  text-align:center;
+}
+.about-content{max-width:680px;margin:0 auto;}
+.about-img{display:none;}
+.about-badge{display:none;}
+.about-content h2{font-family:'Montserrat',sans-serif;font-size:clamp(20px,2vw,28px);font-weight:900;color:var(--text-dark);letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;}
+.about-content .heading-line{width:50px;height:4px;background:var(--gold);border-radius:2px;margin:0 auto 24px;}
+.about-content p{font-size:15px;color:#555;line-height:1.85;margin-bottom:16px;}
+.about-trust{display:flex;gap:16px;flex-wrap:wrap;margin-top:24px;justify-content:center;}
+.trust-badge{
+  display:flex;align-items:center;gap:8px;
+  background:var(--cream);border-radius:50px;
+  padding:8px 16px;font-size:12px;font-weight:600;color:var(--teal);
+}
+.trust-badge i{color:var(--gold);}
+
+/* ── MARQUEE ── */
+.marquee-section{background:#fff;padding:36px 0;overflow:hidden;border-top:1px solid #eee;border-bottom:1px solid #eee;}
+.marquee-label{text-align:center;font-family:'Montserrat',sans-serif;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#999;margin-bottom:24px;}
+.marquee-track{display:flex;gap:60px;align-items:center;animation:marquee 40s linear infinite;width:max-content;}
+.marquee-track:hover{animation-play-state:paused;}
+@keyframes marquee{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+.supplier-item{display:flex;align-items:center;flex-shrink:0;}
+.supplier-item img{height:44px;width:auto;max-width:140px;object-fit:contain;transition:opacity .3s;}
+.supplier-item:hover img{opacity:.75;}
+.sup-dot{font-size:18px;color:#ddd;flex-shrink:0;margin:0 -10px;}
+
+/* ── GALLERY ── */
+.gallery{display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:240px 240px;gap:4px;overflow:hidden;}
+.gallery-item{overflow:hidden;}
+.gallery-item img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s ease;will-change:transform;}
+.gallery-item:hover img{transform:scale(1.06);}
+.gallery-item:first-child{grid-column:1/3;grid-row:1/3;}
+
+/* ── WHY BOOK ── */
+.why{padding:90px 60px;display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center;background:var(--teal);}
+.why-img{overflow:hidden;border-radius:14px;}
+.why-img img{width:100%;border-radius:14px;object-fit:cover;height:520px;box-shadow:0 12px 40px rgba(0,0,0,0.2);transition:transform .6s ease;will-change:transform;}
+.why-content h2{font-family:'Montserrat',sans-serif;font-size:clamp(22px,2.5vw,32px);font-weight:900;color:#fff;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px;}
+.why-content .heading-line{width:50px;height:4px;background:var(--gold);border-radius:2px;margin-bottom:28px;}
+.why-item{display:flex;gap:16px;margin-bottom:26px;align-items:flex-start;padding-bottom:26px;border-bottom:1px solid rgba(255,255,255,0.15);}
+.why-item:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0;}
+.why-icon{font-size:24px;margin-top:2px;flex-shrink:0;}
+.why-item h3{font-family:'Montserrat',sans-serif;font-size:13px;font-weight:800;margin-bottom:5px;letter-spacing:.5px;text-transform:uppercase;color:#fff;}
+.why-item p{font-size:13px;color:rgba(255,255,255,0.75);line-height:1.6;}
+
+/* ── HOW IT WORKS ── */
+.how{background:var(--cream);padding:90px 60px;text-align:center;}
+.steps-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;max-width:960px;margin:0 auto;}
+.step-card{background:#fff;padding:32px 20px;border-radius:14px;box-shadow:0 4px 24px rgba(0,0,0,0.05);border-top:4px solid var(--gold);transition:transform .3s,box-shadow .3s;}
+.step-card:hover{transform:translateY(-6px);box-shadow:0 12px 36px rgba(0,0,0,0.1);}
+.step-num{font-family:'Montserrat',sans-serif;font-size:42px;font-weight:900;color:var(--teal);opacity:.12;line-height:1;margin-bottom:4px;}
+.step-card i{font-size:28px;color:var(--teal);margin-bottom:14px;display:block;}
+.step-card h3{font-family:'Montserrat',sans-serif;font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;color:var(--text-dark);}
+.step-card p{font-size:13px;color:#777;line-height:1.6;}
+
+/* ── FIND YOUR HOLIDAY (EXPERIENCE) ── */
+.experience{padding:90px 60px;background:var(--teal);}
+.exp-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
+.exp-card{border-radius:14px;overflow:hidden;position:relative;height:320px;cursor:pointer;box-shadow:0 6px 24px rgba(0,0,0,0.2);transition:transform .3s,box-shadow .3s;}
+.exp-card:hover{transform:translateY(-6px);box-shadow:0 14px 40px rgba(0,0,0,0.15);}
+.exp-card img{width:100%;height:100%;object-fit:cover;transition:transform .5s;display:block;}
+.exp-card:hover img{transform:scale(1.07);}
+.exp-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.82) 0%,rgba(0,0,0,0.1) 55%);display:flex;flex-direction:column;justify-content:flex-end;padding:22px;color:#fff;}
+.exp-overlay h3{font-family:'Montserrat',sans-serif;font-size:13px;font-weight:900;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:4px;}
+.exp-tag{font-size:11px;background:var(--gold);display:inline-block;padding:3px 10px;border-radius:20px;font-weight:600;margin-bottom:8px;letter-spacing:.5px;}
+.exp-sub{font-size:11px;opacity:.8;margin-bottom:4px;font-style:italic;}
+.exp-overlay p{font-size:12px;opacity:0;line-height:1.5;transition:opacity .35s ease,max-height .35s ease;max-height:0;overflow:hidden;}
+.exp-card:hover .exp-overlay p{opacity:.9;max-height:80px;}
+
+/* ── REVIEWS ── */
+.reviews{background:var(--cream);padding:90px 60px;}
+.review-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;}
+.review-card{perspective:1000px;height:500px;cursor:pointer;}
+.review-inner{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .75s cubic-bezier(.4,0,.2,1);}
+.review-card:hover .review-inner{transform:rotateY(180deg);}
+.review-front,.review-back{position:absolute;width:100%;height:100%;backface-visibility:hidden;border-radius:14px;overflow:hidden;}
+.review-front{background-size:cover;background-position:center;}
+.review-front .overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.75) 0%,rgba(0,0,0,0.1) 60%);}
+.review-front-content{position:absolute;bottom:0;left:0;right:0;padding:28px;color:#fff;}
+.review-front-content h3{font-family:'Montserrat',sans-serif;font-size:24px;font-weight:900;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;}
+.flip-hint{font-size:11px;opacity:.7;letter-spacing:1px;text-transform:uppercase;display:flex;align-items:center;gap:6px;}
+.flip-hint i{font-size:10px;}
+.review-back{background:var(--teal);transform:rotateY(180deg);padding:28px;display:flex;flex-direction:column;color:#fff;overflow-y:auto;}
+.review-back .stars{color:var(--gold);font-size:20px;margin-bottom:14px;letter-spacing:3px;flex-shrink:0;}
+.review-back p{font-size:13.5px;line-height:1.8;opacity:.92;font-style:italic;}
+.reviewer-name{margin-top:20px;padding-top:16px;flex-shrink:0;border-top:1px solid rgba(255,255,255,0.2);font-family:'Montserrat',sans-serif;font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--gold);}
+.review-card.flipped .review-inner{transform:rotateY(180deg);}
+@media(hover:none){
+  .review-card:hover .review-inner{transform:none;}
+  .review-card.flipped .review-inner{transform:rotateY(180deg);}
+}
+
+/* ── CTA / FORM ── */
+.cta-section{display:grid;grid-template-columns:1fr 1fr;min-height:600px;}
+.cta-left{background:var(--teal);color:#fff;padding:80px 60px;display:flex;flex-direction:column;justify-content:center;}
+.cta-left h2{font-family:'Montserrat',sans-serif;font-size:clamp(22px,2.5vw,32px);font-weight:900;color:var(--gold);margin-bottom:6px;letter-spacing:1.5px;text-transform:uppercase;line-height:1.2;}
+.cta-left .gold-line{width:50px;height:4px;background:var(--gold);border-radius:2px;margin:14px 0 20px;}
+.cta-left .cta-intro{font-size:14px;opacity:.88;margin-bottom:24px;line-height:1.8;}
+.cta-checks{list-style:none;margin-bottom:30px;}
+.cta-checks li{font-size:14px;margin-bottom:10px;opacity:.9;display:flex;align-items:center;gap:8px;}
+.cta-checks li::before{content:'✔';color:var(--gold);font-weight:700;font-size:13px;}
+.form-section{background:var(--cream);padding:60px;display:flex;flex-direction:column;justify-content:center;}
+.form-section iframe{width:100%;height:600px;border:none;border-radius:10px;}
+
+/* ── FOOTER ── */
+footer{background:var(--teal-dark);color:#fff;padding:40px 60px 28px;}
+.footer-atol{display:flex;justify-content:center;align-items:center;padding-bottom:30px;margin-bottom:30px;border-bottom:1px solid rgba(255,255,255,0.12);}
+.footer-atol img{height:80px;object-fit:contain;}
+.footer-top{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:30px;margin-bottom:30px;padding-bottom:30px;border-bottom:1px solid rgba(255,255,255,0.12);}
+.footer-logo img{height:55px;object-fit:contain;}
+.footer-social{display:flex;gap:14px;align-items:center;}
+.social-link{width:44px;height:44px;border-radius:50%;border:2px solid rgba(255,255,255,0.25);display:flex;align-items:center;justify-content:center;color:#fff;font-size:18px;text-decoration:none;transition:all .2s;}
+.social-link:hover{border-color:var(--gold);color:var(--gold);}
+.social-link.whatsapp{background:#25D366;border-color:#25D366;font-size:22px;}
+.social-link.whatsapp:hover{background:#1ebe5d;border-color:#1ebe5d;color:#fff;}
+.footer-bottom{font-size:12px;opacity:.5;text-align:center;}
+.footer-bottom a{opacity:1!important;}
+
+/* ── BACK TO TOP ── */
+#backToTop{position:fixed;bottom:30px;right:30px;z-index:200;width:48px;height:48px;border-radius:50%;background:var(--gold);color:#fff;border:none;cursor:pointer;font-size:18px;box-shadow:0 4px 16px rgba(0,0,0,0.2);opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s,transform .3s,background .2s;display:flex;align-items:center;justify-content:center;}
+#backToTop.visible{opacity:1;visibility:visible;}
+#backToTop:hover{background:#c8882e;transform:translateY(-3px);}
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  nav{padding:12px 20px;}
+  .nav-links{display:none;}
+  .nav-hamburger{display:block;}
+  .hero-content{padding:50px 24px;}
+  .hero-btns{max-width:100%;}
+  .btn-primary,.btn-outline{font-size:14px;padding:15px 20px;}
+  .about{grid-template-columns:1fr;padding:50px 24px;gap:40px;}
+  .about-img{display:none;}
+  .gallery{grid-template-columns:1fr 1fr;grid-template-rows:200px 200px;}
+  .gallery-item:first-child{grid-column:1/3;grid-row:1;}
+  .why{grid-template-columns:1fr;padding:60px 24px;gap:30px;}
+  .why-img{display:none;}
+  .how{padding:60px 24px;}
+  .steps-grid{grid-template-columns:1fr 1fr;}
+  .experience{padding:60px 24px;}
+  .exp-grid{grid-template-columns:1fr 1fr;}
+  .reviews{padding:60px 24px;}
+  .review-grid{grid-template-columns:1fr;}
+  .review-card{height:460px;}
+  .cta-section{grid-template-columns:1fr;}
+  .cta-left{padding:50px 24px;}
+  .form-section{padding:40px 24px;}
+  footer{padding:40px 24px 20px;}
+  .footer-top{flex-direction:column;align-items:flex-start;}
+  .footer-atol img{height:70px;max-width:200px;}
+  #backToTop{bottom:20px;right:20px;}
+  .marquee-section{padding:24px 0;}
+  section, .why, .how, .experience, .reviews, .about{max-width:100%;overflow-x:hidden;}
+}
+
+</style>
+</head>
+<body>
+
+<!-- LOADING SCREEN -->
+<div id="loader">
+  <img src="logo.png" alt="Melita Holidays" onerror="this.outerHTML='<div style=\'font-family:Montserrat,sans-serif;font-weight:900;font-size:32px;color:#e09a42;\'>MELITA HOLIDAYS</div>'">
+  <div class="loader-text">Loading your holiday...</div>
+  <div class="loader-bar"><div class="loader-fill"></div></div>
+</div>
+
+<!-- BACK TO TOP -->
+<button id="backToTop" aria-label="Back to top"><i class="fas fa-chevron-up"></i></button>
+
+<!-- NAV -->
+<nav>
+  <ul class="nav-links">
+    <li><a href="#about">About Me</a></li>
+    <li><a href="#why">Why Melita?</a></li>
+    <li><a href="#how">How It Works</a></li>
+    <li><a href="#holidays">Types of Holidays</a></li>
+    <li><a href="#reviews">Client Experiences</a></li>
+  </ul>
+  <button class="nav-hamburger" id="hamburger" aria-label="Menu"><i class="fas fa-bars"></i></button>
+  <a href="#form" class="nav-cta">Start Planning</a>
+</nav>
+<div class="nav-mobile" id="navMobile">
+  <a href="#about" onclick="closeMenu()">About Me</a>
+  <a href="#why" onclick="closeMenu()">Why Melita?</a>
+  <a href="#how" onclick="closeMenu()">How It Works</a>
+  <a href="#holidays" onclick="closeMenu()">Types of Holidays</a>
+  <a href="#reviews" onclick="closeMenu()">Client Experiences</a>
+  <a href="#form" onclick="closeMenu()">Start Planning</a>
+  <a href="/scratchcard-admin.html" style="opacity:.4;font-size:11px;display:flex;align-items:center;gap:6px;"><i class="fas fa-lock"></i> Admin</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-video-wrap">
+    <div class="kb-slide"></div>
+    <div class="kb-slide"></div>
+    <div class="kb-slide"></div>
+    <div class="kb-slide"></div>
+  </div>
+  <div class="hero-content reveal from-bottom">
+    <img src="logo.png" alt="Melita Holidays" onerror="this.style.display='none'">
+    <div class="hero-sub">Independent Travel Specialists</div>
+    <h1>Your Perfect Getaway,<br>Tailored To You</h1>
+    <p>From all-inclusive escapes to city breaks, personally planned and fully protected.</p>
+    <div class="hero-btns">
+      <a href="#form" class="btn-primary">Let's Start Planning Your Holiday</a>
+    <p style="font-size:13px;opacity:.7;margin-top:10px;margin-bottom:6px;">Already booked? Click below to view and manage your booking.</p>
+      <a href="https://mybooking.thejltgroup.co.uk/login" target="_blank" class="btn-outline">Manage My Booking</a>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ABOUT ME -->
+<section id="about" class="about">
+  <div class="about-img reveal from-left">
+    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=600&q=80" alt="Justine — Your Travel Specialist">
+    <div class="about-badge">
+      <div class="badge-num">200+</div>
+      <div class="badge-label">Trusted<br>Suppliers</div>
+    </div>
+  </div>
+  <div class="about-content reveal from-right">
+    <h2>Meet Your Travel Specialist</h2>
+    <div class="heading-line"></div>
+    <p>Hi, I'm Justine. I specialise in creating personalised holidays, from all-inclusive escapes to tailor-made trips, all designed around you.</p>
+    <p>As part of the JLT Group, with access to 200+ trusted suppliers, you can book with confidence knowing your trip is fully protected.</p>
+    <div class="about-trust">
+      <div class="trust-badge"><i class="fas fa-shield-alt"></i> ATOL Protected</div>
+      <div class="trust-badge"><i class="fas fa-check-circle"></i> PTS Protected</div>
+      <div class="trust-badge"><i class="fas fa-star"></i> JLT Group</div>
+      <div class="trust-badge"><i class="fas fa-globe"></i> 200+ Suppliers</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- MARQUEE -->
+<div class="marquee-section reveal from-bottom">
+  <div class="marquee-label">I work with the world's leading travel brands</div>
+  <div class="marquee-track">
+    <!-- Set 1 -->
+    <div class="supplier-item"><img src="tui.png" alt="TUI"></div>
+    <div class="sup-dot">·</div>
+    <div class="supplier-item"><img src="jet2holidays.png" alt="Jet2 Holidays"></div>
+    <div class="sup-dot">·</div>
+    <div class="supplier-item"><img src="easyjet.png" alt="easyJet"></div>
+    <div class="sup-dot">·</div>
+    <div class="supplier-item"><img src="virginvoyages.png" alt="Virgin Voyages"></div>
+    <div class="sup-dot">·</div>
+    <div class="supplier-item"><img src="royalcaribbean.png" alt="Royal Caribbean"></div>
+    <div class="sup-dot">·</div>
+    <div class="supplier-item"><img src="celebritycruises.png" alt="Celebrity Cruises"></div>
+    <div class="sup-dot">·</div>
+    <div class="supplier-item"><img src="sandals.png" alt="Sandals"></div>
+    <div class="sup-dot">·</div>
+    <div class="supplier-item"><img src="kuoni.png" alt="Kuoni"></div>
+    <div class="sup-dot">·</div>
+    <div class="supplier-item"><img src="ethiad.png" alt="Etihad"></div>
+    <div class="sup-dot">·</div>
+    <div class="supplier-item"><img src="eurostar.png" alt="Eurostar"></div>
+    <div class="sup-dot">·</div>
+    <div class="supplier-item"><img src="holidayextras.png" alt="Holiday Extras"></div>
+    <div class="sup-dot">·</div>
+    <div class="supplier-item"><img src="solmar.png" alt="Solmar"></div>
+    <div class="sup-dot">·</div>
+    <div class="supplier-item"><img src="pandoheritage.png" alt="Pandaw Heritage"></div>
+    <div class="sup-dot">·</div>
+    <div class="supplier-item"><img src="hoseasons.png" alt="Hoseasons"></div>
+    <div class="sup-dot">·</div>
+    <div class="supplier-item"><img src="lapland.png" alt="Lapland"></div>
+    <div class="sup-dot">·</div>
+    <div class="supplier-item"><img src="disneyland.png" alt="Disneyland"></div>
+    <div class="sup-dot">·</div>
+    <!-- Set 2 (duplicate for seamless loop) -->
+    <div class="supplier-item"><img src="tui.png" alt="TUI"></div>
+    <div class="sup-dot">·</div>
+    <div class="supplier-item"><img src="jet2holidays.png" alt="Jet2 Holidays"></div>
+    <div class="sup-dot">·</div>
+    <div class="supplier-item"><img src="easyjet.png" alt="easyJet"></div>
+    <div class="sup-dot">·</div>
+    <div class="supplier-item"><img src="virginvoyages.png" alt="Virgin Voyages"></div>
+    <div class="sup-dot">·</div>
+    <div class="supplier-item"><img src="royalcaribbean.png" alt="Royal Caribbean"></div>
+    <div class="sup-dot">·</div>
+    <div class="supplier-item"><img src="celebritycruises.png" alt="Celebrity Cruises"></div>
+    <div class="sup-dot">·</div>
+    <div class="supplier-item"><img src="sandals.png" alt="Sandals"></div>
+    <div class="sup-dot">·</div>
+    <div class="supplier-item"><img src="kuoni.png" alt="Kuoni"></div>
+    <div class="sup-dot">·</div>
+    <div class="supplier-item"><img src="ethiad.png" alt="Etihad"></div>
+    <div class="sup-dot">·</div>
+    <div class="supplier-item"><img src="eurostar.png" alt="Eurostar"></div>
+    <div class="sup-dot">·</div>
+    <div class="supplier-item"><img src="holidayextras.png" alt="Holiday Extras"></div>
+    <div class="sup-dot">·</div>
+    <div class="supplier-item"><img src="solmar.png" alt="Solmar"></div>
+    <div class="sup-dot">·</div>
+    <div class="supplier-item"><img src="pandoheritage.png" alt="Pandaw Heritage"></div>
+    <div class="sup-dot">·</div>
+    <div class="supplier-item"><img src="hoseasons.png" alt="Hoseasons"></div>
+    <div class="sup-dot">·</div>
+    <div class="supplier-item"><img src="lapland.png" alt="Lapland"></div>
+    <div class="sup-dot">·</div>
+    <div class="supplier-item"><img src="disneyland.png" alt="Disneyland"></div>
+    <div class="sup-dot">·</div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- GALLERY -->
+<div id="destinations" class="gallery">
+  <div class="gallery-item"><img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80" alt="Beach" data-parallax="0.15"></div>
+  <div class="gallery-item"><img src="https://images.unsplash.com/photo-1499678329028-101435549a4e?w=400&q=80" alt="Tropical" data-parallax="0.1"></div>
+  <div class="gallery-item"><img src="https://images.unsplash.com/photo-1568454537842-d933259bb258?w=400&q=80" alt="Cruise" data-parallax="0.12"></div>
+  <div class="gallery-item"><img src="https://images.unsplash.com/photo-1516483638261-f4dbaf036963?w=400&q=80" alt="Italy" data-parallax="0.1"></div>
+  <div class="gallery-item"><img src="https://images.unsplash.com/photo-1506197603052-3cc9c3a201bd?w=400&q=80" alt="Santorini" data-parallax="0.08"></div>
+</div>
+
+<div class="divider"></div>
+
+<!-- WHY BOOK -->
+<section id="why" class="why">
+  <div class="why-img reveal from-left">
+    <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600&q=80" alt="Luxury hotel" data-parallax="0.1">
+  </div>
+  <div class="why-content reveal from-right">
+    <h2>Why Book With<br>Melita Holidays?</h2>
+    <div class="heading-line"></div>
+    <div class="why-item">
+      <span class="why-icon">🤝</span>
+      <div>
+        <h3>Expert Support From Start to Finish</h3>
+        <p>We're with you from enquiry to your return home.</p>
+      </div>
+    </div>
+    <div class="why-item">
+      <span class="why-icon">✨</span>
+      <div>
+        <h3>Personalised Travel Planning</h3>
+        <p>I will take care of everything, from finding the right hotel, to making sure every detail is right for you.</p>
+      </div>
+    </div>
+    <div class="why-item">
+      <span class="why-icon">🔒</span>
+      <div>
+        <h3>Fully Protected Holidays</h3>
+        <p>Book with confidence with ATOL & PTS protection.</p>
+      </div>
+    </div>
+    <div class="why-item">
+      <span class="why-icon">🌍</span>
+      <div>
+        <h3>200+ Trusted Suppliers</h3>
+        <p>Access exclusive deals with leading travel partners.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- HOW IT WORKS -->
+<section id="how" class="how">
+  <div class="section-heading reveal from-bottom">
+    <h2>How It <span>Works</span></h2>
+    <div class="heading-line"></div>
+    <p>Planning your holiday is easy — I handle everything so you don't have to.</p>
+  </div>
+  <div class="steps-grid stagger">
+    <div class="step-card">
+      <div class="step-num">1</div>
+      <i class="fas fa-pencil"></i>
+      <h3>Tell Me What You Are Looking For</h3>
+      <p>Share your destination ideas, budget, and travel style.</p>
+    </div>
+    <div class="step-card">
+      <div class="step-num">2</div>
+      <i class="fas fa-search"></i>
+      <h3>I Will Find The Best Options For You</h3>
+      <p>I create a personalised itinerary tailored just for you.</p>
+    </div>
+    <div class="step-card">
+      <div class="step-num">3</div>
+      <i class="fas fa-check-circle"></i>
+      <h3>You Choose Your Favourite Option</h3>
+      <p>I refine everything until it's perfect.</p>
+    </div>
+    <div class="step-card">
+      <div class="step-num">4</div>
+      <i class="fas fa-plane"></i>
+      <h3>I Will Take Care Of The Rest</h3>
+      <p>Flights, hotels, transfers — everything taken care of.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- FIND YOUR HOLIDAY -->
+<section id="holidays" class="experience">
+  <div class="section-heading reveal from-bottom">
+    <h2>Find Your <span>Perfect Holiday</span></h2>
+    <div class="heading-line"></div>
+    <p>Explore a range of holidays tailored to your style, from all-inclusive beach escapes, to city breaks and beyond.</p>
+  </div>
+  <div class="exp-grid stagger">
+
+    <div class="exp-card">
+      <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&q=80" alt="Beach Escapes">
+      <div class="exp-overlay">
+        <span class="exp-tag">Beach</span>
+        <h3>Beach Escapes</h3>
+        <div class="exp-sub">All-inclusive beach escapes</div>
+        <p>Relax in stunning beachfront resorts where everything is taken care of.</p>
+      </div>
+    </div>
+
+    <div class="exp-card">
+      <img src="https://images.unsplash.com/photo-1534430480872-3498386e7856?w=600&q=80" alt="City Breaks">
+      <div class="exp-overlay">
+        <span class="exp-tag">City</span>
+        <h3>City Breaks</h3>
+        <div class="exp-sub">City breaks</div>
+        <p>Discover iconic cities, culture, food and nightlife.</p>
+      </div>
+    </div>
+
+    <div class="exp-card">
+      <img src="https://images.unsplash.com/photo-1539635278303-d4002c07eae3?w=600&q=80" alt="Group Holidays">
+      <div class="exp-overlay">
+        <span class="exp-tag">Groups</span>
+        <h3>Group Holidays</h3>
+        <div class="exp-sub">Group and celebration trips</div>
+        <p>Perfect for friends and families travelling together.</p>
+      </div>
+    </div>
+
+    <div class="exp-card">
+      <img src="https://images.unsplash.com/photo-1548574505-5e239809ee19?w=600&q=80" alt="Cruises">
+      <div class="exp-overlay">
+        <span class="exp-tag">Cruises</span>
+        <h3>Cruises</h3>
+        <div class="exp-sub">Ocean getaways</div>
+        <p>Experience multiple destinations in one luxury voyage.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- REVIEWS -->
+<section id="reviews" class="reviews">
+  <div class="section-heading reveal from-bottom">
+    <h2>Trips My <span>Clients Loved</span></h2>
+    <div class="heading-line"></div>
+    <p>A few recent trips I have planned, each tailored to the client.</p>
+  </div>
+  <div class="review-grid stagger">
+
+    <!-- TURKEY -->
+    <div class="review-card">
+      <div class="review-inner">
+        <div class="review-front" style="background-image:url(turkey.jpg);background-size:cover;background-position:center;">
+          <div class="overlay"></div>
+          <div class="review-front-content">
+            <h3>Turkey</h3>
+            <div class="flip-hint"><i class="fas fa-sync-alt"></i> <span class="hint-text">Read their story</span></div>
+          </div>
+        </div>
+        <div class="review-back">
+          <div>
+            <div class="stars">★★★★★</div>
+            <p>Booked a 10-day holiday to Turkey in June 2025 with my husband and three-year-old daughter through Melita Holidays.<br><br>
+            Melita Holidays were fantastic from start to finish. We asked a lot of questions while choosing the hotel — whether it was suitable for children, how close it was to the beach, and what the room options were. They were patient, understanding, and very knowledgeable.<br><br>
+            The hotel we were recommended, Adalya Elite Lara, was perfect in every way. Planning a trip can be time consuming, but they took all the stress out of it.</p>
+          </div>
+          <div class="reviewer-name">— Family Holiday, Turkey 2025</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SOUTH INDIA -->
+    <div class="review-card">
+      <div class="review-inner">
+        <div class="review-front" style="background-image:url(india.jpg);background-size:cover;background-position:center;">
+          <div class="overlay"></div>
+          <div class="review-front-content">
+            <h3>South India</h3>
+            <div class="flip-hint"><i class="fas fa-sync-alt"></i> <span class="hint-text">Read their story</span></div>
+          </div>
+        </div>
+        <div class="review-back">
+          <div>
+            <div class="stars">★★★★★</div>
+            <p>A huge thank you to Melita Holidays for an unforgettable holiday to South India, Chennai!<br><br>
+            From booking our flights and hotel, the service was excellent. Easy deposit and payment options made planning a breeze.<br><br>
+            Always available to help — would definitely recommend and book again.</p>
+          </div>
+          <div class="reviewer-name">— South India, Chennai 2025</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DOMINICAN REPUBLIC -->
+    <div class="review-card">
+      <div class="review-inner">
+        <div class="review-front" style="background-image:url(dominican.jpg);background-size:cover;background-position:center;">
+          <div class="overlay"></div>
+          <div class="review-front-content">
+            <h3>Dominican Republic</h3>
+            <div class="flip-hint"><i class="fas fa-sync-alt"></i> <span class="hint-text">Read their story</span></div>
+          </div>
+        </div>
+        <div class="review-back">
+          <div>
+            <div class="stars">★★★★★</div>
+            <p>We are so grateful to Melita Holidays for making our trip to the Dominican Republic so special.<br><br>
+            Everything was handled with care and attention to detail.<br><br>
+            The experience felt truly personal — we cannot thank you enough.</p>
+          </div>
+          <div class="reviewer-name">— Dominican Republic 2025</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- FORM / CTA -->
+<section id="form" class="cta-section">
+  <div class="cta-left reveal from-left">
+    <h2>Ready to Plan Your Next Holiday?</h2>
+    <div class="gold-line"></div>
+    <p class="cta-intro">Have a question or ready to start planning your next getaway? You're in the right place. I make planning simple, personal, and stress-free.</p>
+    <ul class="cta-checks">
+      <li>No obligation enquiry</li>
+      <li>Personalised recommendations</li>
+      <li>Quick response within 48 hours</li>
+    </ul>
+  </div>
+  <div class="form-section reveal from-right">
+    <iframe src="https://form.jotform.com/243554201551347" title="Contact Form"></iframe>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-atol">
+    <img src="ATOL.png" alt="ATOL Protected">
+  </div>
+  <div class="footer-top">
+    <div class="footer-logo">
+      <img src="logo.png" alt="Melita Holidays" onerror="this.outerHTML='<span style=\'font-family:Montserrat,sans-serif;font-weight:900;font-size:20px;color:var(--gold);\'>MELITA HOLIDAYS</span>'">
+    </div>
+    <div class="footer-social">
+      <a href="https://wa.me/447821343925" class="social-link whatsapp" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+      <a href="https://www.facebook.com/people/Melita-Holidays/61572085736517/" class="social-link" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+      <a href="https://www.instagram.com/melitaholidays/" class="social-link" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+    </div>
+  </div>
+  <div class="footer-bottom">© 2026 Melita Holidays. All rights reserved. <a href="/scratchcard-admin.html" style="color:rgba(255,255,255,0.3);margin-left:12px;text-decoration:none;font-size:14px;transition:color .2s;" onmouseover="this.style.color='rgba(255,255,255,0.7)'" onmouseout="this.style.color='rgba(255,255,255,0.3)'"><i class="fas fa-lock"></i></a></div>
+</footer>
+
+<script>
+// ── LOADING SCREEN ──
+window.addEventListener('load', () => {
+  setTimeout(() => document.getElementById('loader').classList.add('hidden'), 2000);
+});
+
+// ── MOBILE NAV ──
+function closeMenu(){document.getElementById('navMobile').classList.remove('open');}
+document.getElementById('hamburger').addEventListener('click', () => {
+  document.getElementById('navMobile').classList.toggle('open');
+});
+
+// ── BACK TO TOP ──
+const btn = document.getElementById('backToTop');
+window.addEventListener('scroll', () => btn.classList.toggle('visible', window.scrollY > 400));
+btn.addEventListener('click', () => window.scrollTo({top:0,behavior:'smooth'}));
+
+// ── SCROLL REVEAL ──
+const revealObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if(e.isIntersecting){e.target.classList.add('visible');revealObs.unobserve(e.target);}});
+},{threshold:0.12});
+document.querySelectorAll('.reveal,.stagger').forEach(el => revealObs.observe(el));
+
+// ── ANIMATED COUNTERS ──
+function animateCounter(el){
+  const target = parseInt(el.dataset.target);
+  const suffix = el.dataset.suffix||'';
+  const duration = 1800;
+  const start = performance.now();
+  function update(now){
+    const progress = Math.min((now-start)/duration,1);
+    const eased = 1-Math.pow(1-progress,3);
+    el.textContent = Math.floor(eased*target)+suffix;
+    if(progress<1) requestAnimationFrame(update);
+    else el.textContent = target+suffix;
+  }
+  requestAnimationFrame(update);
+}
+const statsSection = document.getElementById('stats-section');
+let counted = false;
+if(statsSection){
+  new IntersectionObserver((entries)=>{
+    if(entries[0].isIntersecting&&!counted){
+      counted=true;
+      document.querySelectorAll('.stat-num[data-target]').forEach(animateCounter);
+    }
+  },{threshold:0.1,rootMargin:'0px 0px -50px 0px'}).observe(statsSection);
+}
+
+// ── TAP TO FLIP (mobile) ──
+document.querySelectorAll('.review-card').forEach(card => {
+  card.addEventListener('click', () => {
+    if(window.matchMedia('(hover:none)').matches) card.classList.toggle('flipped');
+  });
+});
+
+// ── PARALLAX ──
+const parallaxImgs = document.querySelectorAll('[data-parallax]');
+function doParallax(){
+  parallaxImgs.forEach(img => {
+    const parent = img.closest('.gallery-item,.why-img');
+    const rect = parent ? parent.getBoundingClientRect() : img.getBoundingClientRect();
+    const speed = parseFloat(img.dataset.parallax);
+    const offset = (rect.top+rect.height/2-window.innerHeight/2)*speed;
+    img.style.transform = `translateY(${offset}px)`;
+  });
+}
+window.addEventListener('scroll', doParallax, {passive:true});
+doParallax();
+</script>
+
+</body>
+</html>
