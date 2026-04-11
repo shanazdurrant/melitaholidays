@@ -233,40 +233,11 @@ select{cursor:pointer;}
 
       <div class="divider-line"></div>
 
-      <button class="btn-primary btn-gold" onclick="saveAndCompose()"><i class="fas fa-envelope"></i> Compose Email</button>
-      <button class="btn-primary btn-wa" onclick="sendWA()" style="margin-top:10px;"><i class="fab fa-whatsapp"></i> Send via WhatsApp</button>
+      <button class="btn-primary btn-wa" onclick="sendWA()"><i class="fab fa-whatsapp"></i> Send via WhatsApp</button>
     </div>
 
     <!-- RIGHT -->
     <div style="display:flex;flex-direction:column;gap:20px;">
-
-      <!-- EMAIL -->
-      <div class="admin-card">
-        <div class="card-title"><i class="fas fa-envelope-open-text"></i> Email Composer</div>
-        <div class="card-sub">Opens your mail app pre-filled and ready to send.</div>
-        <div class="field">
-          <label>Client's Email</label>
-          <input type="email" id="clientEmail" placeholder="client@email.com" oninput="buildEmailPreview()">
-        </div>
-        <div class="field">
-          <label>Subject</label>
-          <input type="text" id="emailSubject" oninput="buildEmailPreview()">
-        </div>
-        <div class="field">
-          <label>Body <span class="opt">(auto-filled, editable)</span></label>
-          <textarea id="emailBody" style="min-height:130px;" oninput="buildEmailPreview()"></textarea>
-        </div>
-        <div class="email-preview" id="emailPreview">
-          <div class="email-header">
-            <div class="email-row"><span class="email-label">From</span><span class="email-val"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b4dec1c7c0dddad1f4d9d1d8ddc0d5dcdbd8ddd0d5cdc79ad7dbd9">[email&#160;protected]</a></span></div>
-            <div class="email-row"><span class="email-label">To</span><span class="email-val" id="previewTo">—</span></div>
-            <div class="email-row"><span class="email-label">Re</span><span class="email-val" id="previewSubject">—</span></div>
-          </div>
-          <div class="email-body-preview" id="previewBody"></div>
-        </div>
-        <button class="btn-primary" style="margin-top:16px;" onclick="openMailApp()"><i class="fas fa-paper-plane"></i> Open in Mail App</button>
-        <div class="flash" id="emailFlash"><i class="fas fa-check-circle"></i> Opening your mail app...</div>
-      </div>
 
       <!-- SAVED + ARCHIVE TABS -->
       <div class="admin-card">
@@ -296,7 +267,7 @@ select{cursor:pointer;}
   </div>
 </div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false">
 const ADMIN_PASSWORD = 'Jhene2019';
 const SESSION_KEY = 'mh_admin_auth';
 const BASE_URL = 'https://melitaholidays.com/scratchcard.html';
@@ -399,39 +370,6 @@ function liveUpdate(){
     box.classList.remove('active');
     note.classList.remove('show');
   }
-  autoFillEmail(url);
-  buildEmailPreview();
-}
-
-function autoFillEmail(url){
-  const name = document.getElementById('clientName').value.trim();
-  const dest  = getDest();
-  if(!dest) return;
-  const subj = name
-    ? `🎉 ${name} — You Have a Holiday Surprise from Melita Holidays!`
-    : `🎉 You Have a Holiday Surprise from Melita Holidays!`;
-  const existSubj = document.getElementById('emailSubject').value;
-  if(!existSubj || existSubj.startsWith('🎉')) document.getElementById('emailSubject').value = subj;
-
-  const greeting = name ? `Hi ${name},` : 'Hi,';
-  const date = document.getElementById('travelDate').value.trim();
-  const dateStr = date ? `\n\n✈️  Travel date: ${date}` : '';
-  const body = `${greeting}\n\nYou have a very special holiday surprise waiting for you from Melita Holidays!\n\nClick the link below to scratch and reveal your destination:${dateStr}\n\n👉 ${url||'[link here]'}\n\nI can't wait for you to see where you're going!\n\nWarm wishes,\nJustine\nMelita Holidays\n📞 07821 343925\n🌐 melitaholidays.com`;
-  const existBody = document.getElementById('emailBody').value;
-  if(!existBody || existBody.startsWith('Hi')) document.getElementById('emailBody').value = body;
-}
-
-function buildEmailPreview(){
-  const email = document.getElementById('clientEmail').value.trim();
-  const subj  = document.getElementById('emailSubject').value.trim();
-  const body  = document.getElementById('emailBody').value.trim();
-  const preview = document.getElementById('emailPreview');
-  if(email||subj||body){
-    preview.classList.add('show');
-    document.getElementById('previewTo').textContent = email||'—';
-    document.getElementById('previewSubject').textContent = subj||'—';
-    document.getElementById('previewBody').textContent = body||'—';
-  }
 }
 
 // ── ACTIONS ──
@@ -462,24 +400,9 @@ function sendWA(){
   resetForm();
 }
 
-function saveAndCompose(){
-  const url = buildUrl();
-  if(!url){alert('Please select a destination first.');return;}
-  document.getElementById('clientEmail').focus();
-  document.getElementById('clientEmail').scrollIntoView({behavior:'smooth',block:'center'});
-}
+function saveAndCompose(){} // removed
 
-function openMailApp(){
-  const to   = document.getElementById('clientEmail').value.trim();
-  const subj = document.getElementById('emailSubject').value.trim();
-  const body = document.getElementById('emailBody').value.trim();
-  if(!to){alert('Please enter the client\'s email address.');return;}
-  window.location.href = `mailto:${to}?subject=${encodeURIComponent(subj)}&body=${encodeURIComponent(body)}`;
-  saveCard('Email', to);
-  const f = document.getElementById('emailFlash');
-  f.classList.add('show');
-  setTimeout(()=>{f.classList.remove('show'); resetForm();}, 3000);
-}
+function openMailApp(){} // removed
 
 function resetForm(){
   document.getElementById('clientName').value = '';
@@ -490,10 +413,6 @@ function resetForm(){
   document.getElementById('personalMsg').value = '';
   document.getElementById('personalMsg').readOnly = false;
   document.getElementById('personalMsg').style.background = '';
-  document.getElementById('clientEmail').value = '';
-  document.getElementById('emailSubject').value = '';
-  document.getElementById('emailBody').value = '';
-  document.getElementById('emailPreview').classList.remove('show');
   activePreset = -1;
   document.querySelectorAll('.preset-btn').forEach(b=>b.classList.remove('active'));
   liveUpdate();
@@ -542,7 +461,7 @@ function renderSaved(){
       </div>
       <div class="saved-actions">
         <button class="saved-btn copy" onclick="navigator.clipboard.writeText('${s.url}')" title="Copy link"><i class="fas fa-copy"></i></button>
-        <button class="saved-btn email" onclick="loadSaved(${s.id})" title="Load email"><i class="fas fa-envelope"></i></button>
+        <button class="saved-btn" style="background:#25D366;color:#fff;" onclick="loadSaved(${s.id})" title="Resend via WhatsApp"><i class="fab fa-whatsapp"></i></button>
         <button class="saved-btn del" onclick="deleteSaved(${s.id})" title="Delete"><i class="fas fa-trash"></i></button>
       </div>
     </div>
@@ -589,11 +508,8 @@ function renderArchive(){
 function loadSaved(id){
   const s = getSaved().find(x=>x.id===id);
   if(!s) return;
-  document.getElementById('emailSubject').value = `🎉 ${s.name} — You Have a Holiday Surprise from Melita Holidays!`;
-  document.getElementById('emailBody').value = `Hi ${s.name},\n\nYou have a very special holiday surprise waiting for you from Melita Holidays!\n\nClick the link below to scratch and reveal your destination:\n\n👉 ${s.url}\n\nI can't wait for you to see where you're going!\n\nWarm wishes,\nJustine\nMelita Holidays\n📞 07821 343925\n🌐 melitaholidays.com`;
-  buildEmailPreview();
-  document.getElementById('clientEmail').focus();
-  document.getElementById('clientEmail').scrollIntoView({behavior:'smooth',block:'center'});
+  // Resend via WhatsApp
+  window.open('https://wa.me/?text='+encodeURIComponent(`You have a very special holiday surprise from Melita Holidays. Click to reveal your destination: ${s.url}`), '_blank');
 }
 
 function deleteSaved(id){
