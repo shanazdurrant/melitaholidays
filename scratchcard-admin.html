@@ -585,11 +585,6 @@ function renderArchive(){
     </div>
   `).join('');
 }
-        <button class="saved-btn del" onclick="deleteSaved(${s.id})" title="Delete"><i class="fas fa-trash"></i></button>
-      </div>
-    </div>
-  `).join('');
-}
 
 function loadSaved(id){
   const s = getSaved().find(x=>x.id===id);
