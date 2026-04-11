@@ -13,7 +13,7 @@
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:'Poppins',sans-serif;background:var(--teal);min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 20px;position:relative;}
 body::before{content:'';position:fixed;inset:0;background:radial-gradient(circle at 15% 15%,rgba(224,154,66,0.15) 0%,transparent 50%),radial-gradient(circle at 85% 85%,rgba(255,255,255,0.05) 0%,transparent 50%);pointer-events:none;}
- 
+
 /* LOGIN */
 #loginScreen{max-width:380px;width:100%;animation:fadeUp .6s ease both;}
 .login-logo{text-align:center;margin-bottom:28px;}
@@ -33,7 +33,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(circle
 .btn-login{width:100%;margin-top:24px;padding:16px;border:none;border-radius:50px;background:linear-gradient(135deg,var(--teal),var(--teal-dark));color:#fff;font-family:'Montserrat',sans-serif;font-size:14px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;box-shadow:0 8px 24px rgba(47,127,130,0.4);transition:transform .2s;}
 .btn-login:hover{transform:translateY(-2px);}
 .login-hint{text-align:center;margin-top:16px;font-size:11px;color:rgba(255,255,255,0.45);}
- 
+
 /* ADMIN */
 #adminScreen{display:none;width:100%;max-width:880px;animation:fadeUp .5s ease both;}
 .admin-topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:28px;flex-wrap:wrap;gap:14px;}
@@ -55,19 +55,19 @@ input[type=text]:focus,input[type=email]:focus,textarea:focus,select:focus{borde
 textarea{resize:vertical;min-height:100px;line-height:1.6;}
 select{cursor:pointer;}
 #customDestInput{display:none;margin-top:8px;}
- 
+
 /* Preset messages */
 .preset-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;}
 .preset-btn{padding:8px 10px;border:2px solid var(--border);border-radius:8px;font-size:11px;font-weight:600;color:var(--text);background:#fafafa;cursor:pointer;text-align:left;line-height:1.4;transition:all .2s;font-family:'Poppins',sans-serif;}
 .preset-btn:hover{border-color:var(--teal);color:var(--teal);background:#f0fafa;}
 .preset-btn.active{border-color:var(--teal);background:#f0fafa;color:var(--teal);}
- 
+
 .divider-line{height:1px;background:var(--border);margin:20px 0;}
 .url-preview{background:#f7f7f7;border-radius:10px;padding:12px 14px;font-size:11px;color:#aaa;border:1px dashed var(--border);min-height:44px;word-break:break-all;line-height:1.5;}
 .url-preview.active{background:#f0fafa;border-color:var(--teal);color:var(--teal);font-weight:500;}
 .encoded-note{font-size:10px;color:#22c55e;margin-top:6px;display:none;align-items:center;gap:4px;}
 .encoded-note.show{display:flex;}
- 
+
 .btn-primary{width:100%;padding:15px;border:none;border-radius:50px;background:linear-gradient(135deg,var(--teal),var(--teal-dark));color:#fff;font-family:'Montserrat',sans-serif;font-size:13px;font-weight:800;letter-spacing:1px;text-transform:uppercase;cursor:pointer;box-shadow:0 6px 20px rgba(47,127,130,0.35);transition:transform .2s;display:flex;align-items:center;justify-content:center;gap:8px;}
 .btn-primary:hover{transform:translateY(-2px);}
 .btn-gold{background:linear-gradient(135deg,var(--gold),#c8882e);box-shadow:0 6px 20px rgba(224,154,66,0.35);}
@@ -75,7 +75,7 @@ select{cursor:pointer;}
 .btn-row{display:flex;gap:10px;margin-top:10px;}
 .btn-row .btn-primary{flex:1;}
 .btn-sm{padding:11px 14px;font-size:11px;}
- 
+
 .email-preview{background:#f7f7f7;border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-top:16px;display:none;}
 .email-preview.show{display:block;}
 .email-header{background:#fff;padding:14px 18px;border-bottom:1px solid var(--border);}
@@ -84,11 +84,11 @@ select{cursor:pointer;}
 .email-label{font-weight:700;color:var(--teal);min-width:36px;font-size:11px;letter-spacing:.5px;text-transform:uppercase;}
 .email-val{color:var(--text);font-weight:500;font-size:12px;}
 .email-body-preview{padding:18px;font-size:13px;color:#555;line-height:1.7;white-space:pre-wrap;max-height:200px;overflow-y:auto;}
- 
+
 .flash{display:none;align-items:center;gap:10px;background:#f0fdf4;border:1px solid #86efac;border-radius:10px;padding:12px 16px;font-size:13px;color:#166534;margin-top:12px;}
 .flash.show{display:flex;animation:fadeUp .3s ease both;}
 .flash i{color:#22c55e;}
- 
+
 .saved-item{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;border-radius:10px;background:#f7f7f7;border:1px solid var(--border);margin-bottom:8px;gap:10px;flex-wrap:wrap;}
 .saved-info{flex:1;min-width:0;}
 .saved-name{font-weight:700;font-size:13px;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
@@ -102,13 +102,25 @@ select{cursor:pointer;}
 .saved-btn:hover{opacity:.85;transform:translateY(-1px);}
 .empty-saved{text-align:center;padding:24px;color:#ccc;font-size:13px;}
 .empty-saved i{font-size:28px;display:block;margin-bottom:8px;}
- 
+
+/* Archive stats */
+.archive-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px;}
+.archive-stat{background:var(--subtle);border-radius:10px;padding:14px;text-align:center;border:1px solid var(--border);}
+.archive-stat .stat-n{font-family:'Montserrat',sans-serif;font-size:26px;font-weight:900;color:var(--teal);}
+.archive-stat .stat-l{font-size:10px;color:#aaa;text-transform:uppercase;letter-spacing:1px;margin-top:2px;}
+/* Tabs */
+.tab-bar{display:flex;gap:0;margin-bottom:20px;border-bottom:2px solid var(--border);}
+.tab-btn{padding:10px 18px;border:none;background:none;font-family:'Poppins',sans-serif;font-size:13px;font-weight:600;color:#aaa;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;transition:all .2s;}
+.tab-btn.active{color:var(--teal);border-bottom-color:var(--teal);}
+.tab-pane{display:none;}
+.tab-pane.active{display:block;}
+
 @keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
-@media(max-width:700px){.admin-grid{grid-template-columns:1fr;}.admin-topbar{flex-direction:column;align-items:flex-start;}.preset-grid{grid-template-columns:1fr;}}
+@media(max-width:700px){.admin-grid{grid-template-columns:1fr;}.admin-topbar{flex-direction:column;align-items:flex-start;}.preset-grid{grid-template-columns:1fr;}.archive-stats{grid-template-columns:1fr 1fr;}}
 </style>
 </head>
 <body>
- 
+
 <!-- LOGIN -->
 <div id="loginScreen">
   <div class="login-logo">
@@ -130,7 +142,7 @@ select{cursor:pointer;}
   </div>
   <div class="login-hint">This page is not publicly listed.</div>
 </div>
- 
+
 <!-- ADMIN -->
 <div id="adminScreen">
   <div class="admin-topbar">
@@ -140,19 +152,19 @@ select{cursor:pointer;}
     </div>
     <button class="btn-logout" onclick="logout()"><i class="fas fa-sign-out-alt"></i>&nbsp; Sign Out</button>
   </div>
- 
+
   <div class="admin-grid">
- 
+
     <!-- LEFT: BUILDER -->
     <div class="admin-card">
       <div class="card-title"><i class="fas fa-gift"></i> Create Scratchcard</div>
       <div class="card-sub">Fill in the details to generate a hidden surprise link.</div>
- 
+
       <div class="field">
         <label>Client's Name</label>
         <input type="text" id="clientName" placeholder="e.g. Sarah & James" maxlength="50" oninput="liveUpdate()">
       </div>
- 
+
       <div class="field">
         <label>Destination</label>
         <select id="destSelect" onchange="handleDest()">
@@ -181,20 +193,20 @@ select{cursor:pointer;}
         </select>
         <input type="text" id="customDestInput" placeholder="Type destination..." maxlength="30" oninput="liveUpdate()">
       </div>
- 
+
       <div class="field">
         <label>Travel Date <span class="opt">(optional)</span></label>
         <input type="text" id="travelDate" placeholder="e.g. July 2025 or Summer 2025" oninput="liveUpdate()">
       </div>
- 
+
       <div class="field">
         <label>Personal Message</label>
         <div class="preset-grid" id="presetGrid"></div>
         <textarea id="personalMsg" placeholder="Choose a preset above or write your own..." oninput="onMsgInput()"></textarea>
       </div>
- 
+
       <div class="divider-line"></div>
- 
+
       <div class="field" style="display:flex;align-items:center;justify-content:space-between;background:#f7f7f7;border-radius:10px;padding:12px 16px;">
         <div>
           <div style="font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--teal);margin-bottom:2px;">🎉 Confetti Animation</div>
@@ -206,28 +218,28 @@ select{cursor:pointer;}
           <div id="toggleThumb" onclick="document.getElementById('confettiToggle').click()" style="position:absolute;top:3px;left:23px;width:18px;height:18px;background:#fff;border-radius:50%;cursor:pointer;transition:left .3s;box-shadow:0 1px 4px rgba(0,0,0,0.2);"></div>
         </div>
       </div>
- 
+
       <div class="field">
         <label>Generated Link <span class="opt">(destination is hidden)</span></label>
         <div class="url-preview" id="urlPreview">Fill in a destination to generate a link...</div>
         <div class="encoded-note" id="encodedNote"><i class="fas fa-shield-alt"></i> Destination is fully encoded — recipient cannot read it</div>
       </div>
- 
+
       <div class="btn-row">
         <button class="btn-primary btn-sm" onclick="copyLink()"><i class="fas fa-copy"></i> Copy Link</button>
         <button class="btn-primary btn-sm" style="background:var(--cream);color:var(--teal);box-shadow:none;border:2px solid var(--border);" onclick="previewCard()"><i class="fas fa-eye"></i> Preview</button>
       </div>
       <div class="flash" id="copyFlash"><i class="fas fa-check-circle"></i> Link copied!</div>
- 
+
       <div class="divider-line"></div>
- 
+
       <button class="btn-primary btn-gold" onclick="saveAndCompose()"><i class="fas fa-envelope"></i> Compose Email</button>
       <button class="btn-primary btn-wa" onclick="sendWA()" style="margin-top:10px;"><i class="fab fa-whatsapp"></i> Send via WhatsApp</button>
     </div>
- 
+
     <!-- RIGHT -->
     <div style="display:flex;flex-direction:column;gap:20px;">
- 
+
       <!-- EMAIL -->
       <div class="admin-card">
         <div class="card-title"><i class="fas fa-envelope-open-text"></i> Email Composer</div>
@@ -255,22 +267,40 @@ select{cursor:pointer;}
         <button class="btn-primary" style="margin-top:16px;" onclick="openMailApp()"><i class="fas fa-paper-plane"></i> Open in Mail App</button>
         <div class="flash" id="emailFlash"><i class="fas fa-check-circle"></i> Opening your mail app...</div>
       </div>
- 
-      <!-- SAVED -->
+
+      <!-- SAVED + ARCHIVE TABS -->
       <div class="admin-card">
-        <div class="card-title"><i class="fas fa-history"></i> Recent Scratchcards</div>
-        <div class="card-sub">Saved in this browser. Destinations are hidden.</div>
-        <div id="savedList"></div>
+        <div class="tab-bar">
+          <button class="tab-btn active" onclick="switchTab('recent')">Recent</button>
+          <button class="tab-btn" onclick="switchTab('archive')">Archive <span id="archiveBadge" style="background:var(--teal);color:#fff;border-radius:10px;padding:1px 7px;font-size:10px;margin-left:4px;">0</span></button>
+        </div>
+
+        <!-- RECENT TAB -->
+        <div class="tab-pane active" id="tab-recent">
+          <div class="card-sub" style="margin-bottom:16px;">Last 5 sent — colour coded by send method.</div>
+          <div id="savedList"></div>
+        </div>
+
+        <!-- ARCHIVE TAB -->
+        <div class="tab-pane" id="tab-archive">
+          <div class="archive-stats">
+            <div class="archive-stat"><div class="stat-n" id="archiveTotal">0</div><div class="stat-l">Total Sent</div></div>
+            <div class="archive-stat"><div class="stat-n" id="archiveWA" style="color:#25D366;">0</div><div class="stat-l">WhatsApp</div></div>
+            <div class="archive-stat"><div class="stat-n" id="archiveEmail" style="color:var(--gold);">0</div><div class="stat-l">Email</div></div>
+            <div class="archive-stat"><div class="stat-n" id="archiveCopied" style="color:var(--teal);">0</div><div class="stat-l">Link Copied</div></div>
+          </div>
+          <div id="archiveList"></div>
+        </div>
       </div>
     </div>
   </div>
 </div>
- 
+
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 const ADMIN_PASSWORD = 'Jhene2019';
 const SESSION_KEY = 'mh_admin_auth';
 const BASE_URL = 'https://melitaholidays.com/scratchcard.html';
- 
+
 // ── PRESET MESSAGES ──
 const PRESETS = [
   { label: 'Big reveal', text: "Your dream destination has been booked — get ready for the holiday of a lifetime!" },
@@ -280,14 +310,14 @@ const PRESETS = [
   { label: 'Celebration', text: "Time to celebrate — your holiday is booked and you deserve every single moment of it!" },
   { label: 'Write my own', text: '' },
 ];
- 
+
 let activePreset = -1;
- 
+
 function renderPresets(){
   const grid = document.getElementById('presetGrid');
   grid.innerHTML = PRESETS.map((p,i) => `<button class="preset-btn" id="preset-${i}" onclick="selectPreset(${i})">${p.label}</button>`).join('');
 }
- 
+
 function selectPreset(i){
   activePreset = i;
   document.querySelectorAll('.preset-btn').forEach((b,j) => b.classList.toggle('active', j===i));
@@ -304,26 +334,26 @@ function selectPreset(i){
   }
   liveUpdate();
 }
- 
+
 function onMsgInput(){
   // If user types, deselect preset
   activePreset = -1;
   document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
   liveUpdate();
 }
- 
+
 function updateToggle(){
   const on = document.getElementById('confettiToggle').checked;
   document.getElementById('toggleTrack').style.background = on ? 'var(--teal)' : '#ddd';
   document.getElementById('toggleThumb').style.left = on ? '23px' : '3px';
 }
- 
+
 // ── ENCODING ──
 // Encodes all data into a single opaque token — no readable params in URL
 function stripEmoji(str){
   return str.replace(/[\u{1F000}-\u{1FFFF}]|[\u{2600}-\u{27FF}]|[\u{2700}-\u{27BF}]|[\u{FE00}-\u{FEFF}]|[\u{1F900}-\u{1F9FF}]|[\u{1FA00}-\u{1FFFF}]|[\u00A9\u00AE\u203C\u2049\u20E3\u2122\u2139\u2194-\u2199\u21A9-\u21AA\u231A-\u231B\u2328\u23CF\u23E9-\u23F3\u23F8-\u23FA\u24C2\u25AA-\u25AB\u25B6\u25C0\u25FB-\u25FE\u2600-\u2604\u260E\u2611\u2614-\u2615\u2618\u261D\u2620\u2622-\u2623\u2626\u262A\u262E-\u262F\u2638-\u263A\u2640\u2642\u2648-\u2653\u265F-\u2660\u2663\u2665-\u2666\u2668\u267B\u267E-\u267F\u2692-\u2697\u2699\u269B-\u269C\u26A0-\u26A1\u26AA-\u26AB\u26B0-\u26B1\u26BD-\u26BE\u26C4-\u26C5\u26CE-\u26CF\u26D1\u26D3-\u26D4\u26E9-\u26EA\u26F0-\u26F5\u26F7-\u26FA\u26FD\u2702\u2705\u2708-\u270D\u270F\u2712\u2714\u2716\u271D\u2721\u2728\u2733-\u2734\u2744\u2747\u274C\u274E\u2753-\u2755\u2757\u2763-\u2764\u2795-\u2797\u27A1\u27B0\u27BF\u2934-\u2935\u2B05-\u2B07\u2B1B-\u2B1C\u2B50\u2B55\u3030\u303D\u3297\u3299]/gu,'').replace(/\s+/g,' ').trim();
 }
- 
+
 function encodeData(name, dest, msg, date){
   const obj = {n: name, d: dest, m: stripEmoji(msg), t: stripEmoji(date)};
   const json = JSON.stringify(obj);
@@ -332,7 +362,7 @@ function encodeData(name, dest, msg, date){
     .replace(/\//g, '_')
     .replace(/=/g, '');
 }
- 
+
 function buildUrl(){
   const name = document.getElementById('clientName').value.trim();
   const dest = getDest();
@@ -343,19 +373,19 @@ function buildUrl(){
   const confetti = document.getElementById('confettiToggle').checked ? '' : '&c=0';
   return BASE_URL + '?s=' + token + confetti;
 }
- 
+
 function getDest(){
   const v = document.getElementById('destSelect').value;
   if(v === 'custom') return document.getElementById('customDestInput').value.trim().toUpperCase();
   return v;
 }
- 
+
 function handleDest(){
   document.getElementById('customDestInput').style.display =
     document.getElementById('destSelect').value === 'custom' ? 'block' : 'none';
   liveUpdate();
 }
- 
+
 function liveUpdate(){
   const url = buildUrl();
   const box = document.getElementById('urlPreview');
@@ -372,7 +402,7 @@ function liveUpdate(){
   autoFillEmail(url);
   buildEmailPreview();
 }
- 
+
 function autoFillEmail(url){
   const name = document.getElementById('clientName').value.trim();
   const dest  = getDest();
@@ -382,7 +412,7 @@ function autoFillEmail(url){
     : `🎉 You Have a Holiday Surprise from Melita Holidays!`;
   const existSubj = document.getElementById('emailSubject').value;
   if(!existSubj || existSubj.startsWith('🎉')) document.getElementById('emailSubject').value = subj;
- 
+
   const greeting = name ? `Hi ${name},` : 'Hi,';
   const date = document.getElementById('travelDate').value.trim();
   const dateStr = date ? `\n\n✈️  Travel date: ${date}` : '';
@@ -390,7 +420,7 @@ function autoFillEmail(url){
   const existBody = document.getElementById('emailBody').value;
   if(!existBody || existBody.startsWith('Hi')) document.getElementById('emailBody').value = body;
 }
- 
+
 function buildEmailPreview(){
   const email = document.getElementById('clientEmail').value.trim();
   const subj  = document.getElementById('emailSubject').value.trim();
@@ -403,53 +433,54 @@ function buildEmailPreview(){
     document.getElementById('previewBody').textContent = body||'—';
   }
 }
- 
+
 // ── ACTIONS ──
 function copyLink(){
   const url = buildUrl();
   if(!url){alert('Please select a destination first.');return;}
   navigator.clipboard.writeText(url).then(()=>{
+    saveCard('Link Copied');
     const f = document.getElementById('copyFlash');
     f.classList.add('show');
     setTimeout(()=>f.classList.remove('show'), 2500);
   });
 }
- 
+
 function previewCard(){
   const url = buildUrl();
   if(!url){alert('Please select a destination first.');return;}
   window.open(url, '_blank');
 }
- 
+
 function sendWA(){
   const url = buildUrl();
   const name = document.getElementById('clientName').value.trim();
   if(!url){alert('Please select a destination first.');return;}
-  const msg = `Hi${name?' '+name:''}! 🎉 You have a very special holiday surprise from Melita Holidays. Click to reveal your destination: ${url}`;
+  const msg = `Hi${name?' '+name:''}! You have a very special holiday surprise from Melita Holidays. Click to reveal your destination: ${url}`;
   window.open('https://wa.me/?text='+encodeURIComponent(msg), '_blank');
-  saveCard();
+  saveCard('WhatsApp');
   resetForm();
 }
- 
+
 function saveAndCompose(){
   const url = buildUrl();
   if(!url){alert('Please select a destination first.');return;}
-  saveCard();
   document.getElementById('clientEmail').focus();
   document.getElementById('clientEmail').scrollIntoView({behavior:'smooth',block:'center'});
 }
- 
+
 function openMailApp(){
   const to   = document.getElementById('clientEmail').value.trim();
   const subj = document.getElementById('emailSubject').value.trim();
   const body = document.getElementById('emailBody').value.trim();
   if(!to){alert('Please enter the client\'s email address.');return;}
   window.location.href = `mailto:${to}?subject=${encodeURIComponent(subj)}&body=${encodeURIComponent(body)}`;
+  saveCard('Email', to);
   const f = document.getElementById('emailFlash');
   f.classList.add('show');
   setTimeout(()=>{f.classList.remove('show'); resetForm();}, 3000);
 }
- 
+
 function resetForm(){
   document.getElementById('clientName').value = '';
   document.getElementById('destSelect').value = '';
@@ -467,33 +498,37 @@ function resetForm(){
   document.querySelectorAll('.preset-btn').forEach(b=>b.classList.remove('active'));
   liveUpdate();
 }
- 
+
 // ── SAVE ──
-function saveCard(){
+function saveCard(method, recipient){
   const url  = buildUrl();
   const dest = getDest();
   const name = document.getElementById('clientName').value.trim();
   const date = document.getElementById('travelDate').value.trim();
   if(!url) return;
-  const saved = getSaved();
-  saved.unshift({
+  const entry = {
     id: Date.now(),
     name: name||'Unknown',
     dest,
     date,
     url,
-    created: new Date().toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'})
-  });
-  if(saved.length > 20) saved.pop();
+    method: method || 'Link Copied',
+    recipient: recipient || '',
+    created: new Date().toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'}),
+    timestamp: new Date().toISOString()
+  };
+  const saved = getSaved();
+  saved.unshift(entry);
   localStorage.setItem('mh_scratchcards', JSON.stringify(saved));
   renderSaved();
+  renderArchive();
 }
- 
+
 function getSaved(){try{return JSON.parse(localStorage.getItem('mh_scratchcards'))||[];}catch{return [];}}
- 
+
 function renderSaved(){
   const list  = document.getElementById('savedList');
-  const saved = getSaved();
+  const saved = getSaved().slice(0,5);
   if(!saved.length){
     list.innerHTML='<div class="empty-saved"><i class="fas fa-gift"></i>No scratchcards yet.</div>';
     return;
@@ -502,7 +537,7 @@ function renderSaved(){
     <div class="saved-item">
       <div class="saved-info">
         <div class="saved-name">${s.name}</div>
-        <div class="saved-dest">✈️ ${s.dest}</div>
+        <div class="saved-dest">✈️ ${s.dest} &nbsp;<span style="font-size:10px;background:${methodColor(s.method)};color:#fff;padding:2px 7px;border-radius:10px;font-weight:700;">${s.method||'Copied'}</span></div>
         <div class="saved-date-label">Created ${s.created}${s.date?' · '+s.date:''}</div>
       </div>
       <div class="saved-actions">
@@ -513,7 +548,49 @@ function renderSaved(){
     </div>
   `).join('');
 }
- 
+
+function methodColor(m){
+  if(m==='WhatsApp') return '#25D366';
+  if(m==='Email') return 'var(--gold)';
+  return 'var(--teal)';
+}
+
+function renderArchive(){
+  const list = document.getElementById('archiveList');
+  if(!list) return;
+  const saved = getSaved();
+  const total = saved.length;
+  const byMethod = saved.reduce((acc,s)=>{acc[s.method||'Copied']=(acc[s.method||'Copied']||0)+1;return acc;},{});
+
+  document.getElementById('archiveTotal').textContent = total;
+  document.getElementById('archiveWA').textContent = byMethod['WhatsApp']||0;
+  document.getElementById('archiveEmail').textContent = byMethod['Email']||0;
+  document.getElementById('archiveCopied').textContent = byMethod['Link Copied']||0;
+
+  if(!saved.length){
+    list.innerHTML='<div class="empty-saved"><i class="fas fa-archive"></i>No scratchcards in archive yet.</div>';
+    return;
+  }
+  list.innerHTML = saved.map(s=>`
+    <div class="saved-item">
+      <div class="saved-info">
+        <div class="saved-name">${s.name}${s.recipient?' <span style="font-size:11px;color:#aaa;">· '+s.recipient+'</span>':''}</div>
+        <div class="saved-dest">✈️ ${s.dest} &nbsp;<span style="font-size:10px;background:${methodColor(s.method)};color:#fff;padding:2px 7px;border-radius:10px;font-weight:700;">${s.method||'Copied'}</span></div>
+        <div class="saved-date-label">Sent ${s.created}${s.date?' · Travel: '+s.date:''}</div>
+      </div>
+      <div class="saved-actions">
+        <button class="saved-btn copy" onclick="navigator.clipboard.writeText('${s.url}')" title="Copy link again"><i class="fas fa-copy"></i></button>
+        <button class="saved-btn del" onclick="deleteSaved(${s.id})" title="Delete from archive"><i class="fas fa-trash"></i></button>
+      </div>
+    </div>
+  `).join('');
+}
+        <button class="saved-btn del" onclick="deleteSaved(${s.id})" title="Delete"><i class="fas fa-trash"></i></button>
+      </div>
+    </div>
+  `).join('');
+}
+
 function loadSaved(id){
   const s = getSaved().find(x=>x.id===id);
   if(!s) return;
@@ -523,13 +600,15 @@ function loadSaved(id){
   document.getElementById('clientEmail').focus();
   document.getElementById('clientEmail').scrollIntoView({behavior:'smooth',block:'center'});
 }
- 
+
 function deleteSaved(id){
-  if(!confirm('Remove this card from history?')) return;
+  if(!confirm('Remove this card from archive?')) return;
   localStorage.setItem('mh_scratchcards', JSON.stringify(getSaved().filter(s=>s.id!==id)));
   renderSaved();
+  renderArchive();
+  document.getElementById('archiveBadge').textContent = getSaved().length;
 }
- 
+
 // ── AUTH ──
 function checkLogin(){
   if(document.getElementById('pwInput').value === ADMIN_PASSWORD){
@@ -540,7 +619,7 @@ function checkLogin(){
     document.getElementById('pwInput').value='';
   }
 }
- 
+
 function logout(){
   sessionStorage.removeItem(SESSION_KEY);
   resetForm();
@@ -548,21 +627,32 @@ function logout(){
   document.getElementById('loginScreen').style.display='block';
   document.getElementById('pwInput').value='';
 }
- 
+
 function togglePw(){
   const inp=document.getElementById('pwInput');
   const ico=document.getElementById('pwIcon');
   inp.type=inp.type==='password'?'text':'password';
   ico.className=inp.type==='password'?'fas fa-eye':'fas fa-eye-slash';
 }
- 
+
+function switchTab(tab){
+  document.querySelectorAll('.tab-pane').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-'+tab).classList.add('active');
+  event.target.classList.add('active');
+  if(tab==='archive') renderArchive();
+}
+
 function showAdmin(){
   document.getElementById('loginScreen').style.display='none';
   document.getElementById('adminScreen').style.display='block';
   renderPresets();
   renderSaved();
+  renderArchive();
+  // Update archive badge
+  document.getElementById('archiveBadge').textContent = getSaved().length;
 }
- 
+
 window.addEventListener('DOMContentLoaded',()=>{
   if(sessionStorage.getItem(SESSION_KEY)==='1') showAdmin();
 });
