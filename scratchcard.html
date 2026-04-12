@@ -27,7 +27,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(circle
 .recipient-name{font-family:'Montserrat',sans-serif;font-size:clamp(16px,4vw,22px);font-weight:900;color:#fff;letter-spacing:1px;margin-bottom:5px;}
 .card-tagline{color:rgba(255,255,255,0.65);font-size:12px;letter-spacing:.5px;}
  
-.scratchcard-wrap{position:relative;width:100%;border-radius:20px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.4);background:#fff;cursor:crosshair;}
+.scratchcard-wrap{position:relative;width:100%;max-width:320px;align-self:center;border-radius:20px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.4);background:#fff;cursor:crosshair;}
 .reveal-layer{
   width:100%;
   background:var(--teal-dark);
@@ -38,7 +38,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(circle
 }
 .reveal-bg{
   width:100%;
-  height:220px;
+  height:160px;
   flex-shrink:0;
   background-size:cover;
   background-position:center;
@@ -56,7 +56,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(circle
   flex-direction:column;
   align-items:center;
   width:100%;
-  padding:20px 24px 24px;
+  padding:16px 20px 20px;
   background:linear-gradient(135deg,var(--teal-dark),#1a5558);
   border-top:3px solid var(--gold);
   flex:1;
@@ -73,7 +73,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(circle
 .dest-sig.pop{opacity:.6;}
  
 .scratch-canvas{position:absolute;top:0;left:0;width:100%;height:100%;touch-action:none;z-index:3;}
-.scratch-hint{position:absolute;bottom:14px;left:0;right:0;z-index:4;text-align:center;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(0,0,0,0.5);pointer-events:none;transition:opacity .5s;font-weight:600;}
+.scratch-hint{position:absolute;bottom:14px;left:0;right:0;z-index:4;text-align:center;font-size:13px;letter-spacing:1px;text-transform:uppercase;color:rgba(0,0,0,0.55);pointer-events:none;transition:opacity .5s;font-weight:700;}
 .scratch-hint i{margin-right:6px;}
 .scratch-hint.hide{opacity:0;}
 .scratch-progress{position:absolute;bottom:0;left:0;right:0;height:5px;background:rgba(0,0,0,0.1);z-index:5;}
@@ -105,15 +105,15 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(circle
     <img src="logo.png" alt="Melita Holidays" onerror="this.style.display='none'">
   </div>
   <div class="card-intro">
-    <div class="recipient-name" id="displayName"></div>
-    <div class="card-tagline">✈️ &nbsp;You have a very special surprise waiting...</div>
+    <div class="recipient-name" id="displayName">You have a very special surprise waiting...</div>
+    <div class="card-tagline" id="cardTagline">Scratch to reveal</div>
   </div>
   <div class="scratchcard-wrap" id="scratchWrap">
     <div class="reveal-layer">
       <div class="reveal-bg" id="revealBg"></div>
       <div class="reveal-overlay"></div>
       <div class="reveal-content">
-        <div class="dest-label">Your destination is</div>
+        <div class="dest-label">You're going to</div>
         <div class="dest-name" id="destName"></div>
         <div class="dest-msg" id="destMsg"></div>
         <div class="dest-date" id="destDate"></div>
@@ -121,12 +121,12 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(circle
       </div>
     </div>
     <canvas class="scratch-canvas" id="scratchCanvas"></canvas>
-    <div class="scratch-hint" id="scratchHint"><i class="fas fa-hand-pointer"></i> Scratch to reveal your destination</div>
+    <div class="scratch-hint" id="scratchHint"><i class="fas fa-plane" style="color:#2f7f82;"></i> Scratch to reveal your destination</div>
     <div class="scratch-progress"><div class="scratch-progress-fill" id="progressFill"></div></div>
   </div>
   <div class="share-bar" id="shareBar">
     <button class="share-btn btn-wa" onclick="shareWA()"><i class="fab fa-whatsapp"></i> Share the excitement!</button>
-    <a class="share-btn btn-book" href="https://melitaholidays.com#form"><i class="fas fa-plane"></i> Plan another trip</a>
+    <a class="share-btn btn-book" href="https://melitaholidays.com#form"><i class="fas fa-plane"></i> Plan your next getaway</a>
   </div>
   <div class="card-footer">melitaholidays.com &nbsp;·&nbsp; Your holiday, designed around you</div>
 </div>
@@ -262,11 +262,13 @@ window.addEventListener('DOMContentLoaded', () => {
 function renderCard(data){
   const {n: name='', d: dest, m: msg='', t: date=''} = data;
  
-  document.getElementById('displayName').textContent =
-    name ? name + (name.toLowerCase().endsWith('s') ? "'" : "'s") + ' Holiday Surprise'
-         : 'Your Holiday Surprise';
+  // Header stays as "You have a very special surprise waiting..." until revealed
+  // Name shown in tagline as "Scratch to reveal" — personalised if name given
+  if(name){
+    document.getElementById('cardTagline').textContent = name + (name.toLowerCase().endsWith('s') ? "'" : "'s") + ' surprise — scratch to reveal!';
+  }
+ 
   document.getElementById('destName').textContent = dest;
-  // Strip emojis from message for clean display
   const cleanMsg = msg.replace(/[\u{1F000}-\u{1FFFF}]|[\u{2600}-\u{27FF}]|[\u{FE00}-\u{FEFF}]|[\u{1F900}-\u{1F9FF}]/gu, '').trim();
   document.getElementById('destMsg').textContent = cleanMsg;
   if(date){
@@ -277,7 +279,6 @@ function renderCard(data){
   }
  
   const imgUrl = getImageForDest(dest);
-  // Preload the image so it's ready when revealed
   const preloadImg = new Image();
   preloadImg.src = imgUrl;
   document.getElementById('revealBg').style.backgroundImage = `url('${imgUrl}')`;
@@ -361,7 +362,7 @@ function check(ctx,w,h,total){
   for(let i=3;i<d.length;i+=16) if(d[i]<128) t+=4;
   const pct=(t/total)*100;
   document.getElementById('progressFill').style.width=Math.min(pct,100)+'%';
-  if(pct>42&&!revealed) triggerReveal();
+  if(pct>85&&!revealed) triggerReveal();
 }
  
 function triggerReveal(){
@@ -370,6 +371,9 @@ function triggerReveal(){
   canvas.style.transition='opacity .9s ease'; canvas.style.opacity='0';
   setTimeout(()=>canvas.style.display='none',900);
   document.getElementById('revealBg').classList.add('show');
+  // Update header text on reveal
+  document.getElementById('displayName').textContent='Your surprise getaway is revealed...';
+  document.getElementById('cardTagline').style.display='none';
   setTimeout(()=>{document.getElementById('destName').classList.add('pop'); document.querySelector('.dest-label').classList.add('pop');},500);
   setTimeout(()=>document.getElementById('destMsg').classList.add('pop'),900);
   setTimeout(()=>{document.getElementById('destDate').classList.add('pop'); document.querySelectorAll('.dest-sig').forEach(el=>el.classList.add('pop'));},1100);
@@ -401,4 +405,3 @@ function shareWA(){
 </script>
 </body>
 </html>
- 
