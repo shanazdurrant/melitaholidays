@@ -22,9 +22,12 @@ body{font-family:'Poppins',sans-serif;background:var(--cream);min-height:100vh;p
 .quote-header-text h2{font-family:'Montserrat',sans-serif;font-size:12px;font-weight:900;letter-spacing:2px;text-transform:uppercase;opacity:.7;margin-bottom:3px;}
 .quote-header-text p{font-size:12px;opacity:.55;}
 
-.quote-hero{background:linear-gradient(135deg,var(--teal-dark),#1a5558);padding:50px 30px 40px;text-align:center;position:relative;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;}
+.quote-hero{background:linear-gradient(135deg,var(--teal-dark),#1a5558);padding:50px 30px 40px;text-align:center;position:relative;overflow:hidden;min-height:280px;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;}
 .quote-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 80% 20%,rgba(224,154,66,0.2) 0%,transparent 60%);}
-.quote-hero h1{font-family:'Montserrat',sans-serif;font-size:clamp(32px,6vw,56px);font-weight:900;color:var(--gold);letter-spacing:2px;text-transform:uppercase;position:relative;margin-bottom:8px;z-index:2;}
+.hero-bg{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transition:opacity 1.4s ease;filter:brightness(0.55);}
+.hero-bg.show{opacity:1;}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.82) 0%,rgba(0,0,0,0.2) 55%,rgba(0,0,0,0) 100%);}
+.quote-hero h1{font-family:'Montserrat',sans-serif;font-size:clamp(32px,6vw,56px);font-weight:900;color:var(--gold);letter-spacing:2px;text-transform:uppercase;position:relative;margin-bottom:8px;z-index:2;text-shadow:0 2px 20px rgba(0,0,0,0.5);}
 .quote-hero .hero-sub{font-size:15px;color:rgba(255,255,255,0.85);position:relative;letter-spacing:.5px;z-index:2;margin-bottom:4px;}
 .quote-hero .client-greeting{font-size:13px;color:rgba(255,255,255,0.65);position:relative;margin-bottom:14px;font-weight:500;z-index:2;letter-spacing:.5px;}
 .stars-hero{color:var(--gold);font-size:18px;letter-spacing:2px;position:relative;z-index:2;margin-bottom:6px;}
@@ -175,6 +178,8 @@ body{font-family:'Poppins',sans-serif;background:var(--cream);min-height:100vh;p
   </div>
 
   <div class="quote-hero">
+    <div class="hero-bg" id="heroBg"></div>
+    <div class="hero-overlay"></div>
     <p class="client-greeting" id="clientGreeting"></p>
     <div class="stars-hero" id="starsHero" style="display:none;"></div>
     <h1 id="heroDestination">Your Holiday</h1>
@@ -269,6 +274,53 @@ function decodeData(token){
 
 var iconMap={'Return Flights':'fa-plane','Transfers':'fa-shuttle-van','ATOL Protected':'fa-shield-alt','Luggage':'fa-suitcase','Hotel':'fa-hotel','Travel Insurance':'fa-heart'};
 
+// Verified destination photo IDs (tested manually)
+var heroImages={
+  'TURKEY':    '1524231757912',
+  'MALDIVES':  '1514282401047',
+  'DUBAI':     '1518684079-3c830dcef090',
+  'SANTORINI': '1570077188670',
+  'BARBADOS':  '1507525428034',
+  'BALI':      '1537996194471',
+  'TENERIFE':  '1459728380853',
+  'NEW YORK':  '1534430480872',
+  'CANCUN':    '1552074284',
+  'THAILAND':  '1552465011',
+  'MAURITIUS': '1516026672322',
+  'IBIZA':     '1502022285700',
+  'CYPRUS':    '1578894381226',
+  'LANZAROTE': '1528702748617',
+  'PORTUGAL':  '1555881400',
+  'ITALY':     '1516483638261',
+  'FLORIDA':   '1506905925346',
+  'JAMAICA':   '1544551741',
+  'GREECE':    '1533105079780',
+  'MOROCCO':   '1489493887464',
+  'SOUTH KOREA':'1538485399081',
+  'JAPAN':     '1540959733332',
+  'PARIS':     '1502602898657',
+  'LAPLAND':   '1531366936337',
+  'DISNEYLAND':'1575783970831',
+  'EGYPT':     '1539768942893',
+  'HAWAII':    '1542259009477',
+  'AUSTRALIA': '1523482580672',
+  'BARCELONA': '1539037116277',
+  'ZANZIBAR':  '1547471080',
+  'CAPE TOWN': '1580060839134',
+};
+
+function getHeroImg(dest){
+  var key=(dest||'').toUpperCase().trim();
+  var id=heroImages[key];
+  if(!id){
+    // partial match
+    var keys=Object.keys(heroImages);
+    for(var i=0;i<keys.length;i++){if(key.indexOf(keys[i])>-1||keys[i].indexOf(key)>-1){id=heroImages[keys[i]];break;}}
+  }
+  if(!id) id='1476514525535'; // fallback scenic
+  return 'https://images.unsplash.com/photo-'+id+'?w=1200&q=80&auto=format&fit=crop';
+}
+
 function stars(n){return '★'.repeat(parseInt(n)||0);}
 
 function initCountdown(str){
@@ -310,7 +362,15 @@ window.addEventListener('DOMContentLoaded',function(){
   document.getElementById('quoteContent').style.display='block';
   document.getElementById('quoteRef').textContent='Ref: MH-'+(d.id?String(d.id).slice(-6):'------');
 
-  // Hero
+  // Hero image
+  var heroBg=document.getElementById('heroBg');
+  var heroUrl=getHeroImg(d.dest||d.hotel||'');
+  var heroImg=new Image();
+  heroImg.onload=function(){heroBg.style.backgroundImage='url(\''+heroUrl+'\')';heroBg.classList.add('show');};
+  heroImg.onerror=function(){/* no image, teal gradient shows */};
+  heroImg.src=heroUrl;
+
+  // Hero text
   if(d.n)document.getElementById('clientGreeting').textContent='Prepared exclusively for '+d.n;
   document.getElementById('heroDestination').textContent=(d.dest||d.hotel).toUpperCase();
   if(d.hotel&&d.dest)document.getElementById('heroHotel').textContent=d.hotel;
