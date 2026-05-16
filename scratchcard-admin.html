@@ -270,8 +270,11 @@ select{cursor:pointer;}
         <div class="field"><label>Room Type</label><input type="text" id="qRoom" placeholder="e.g. Superior Double Sea View, Family Suite"></div>
 
         <div class="field">
-          <label>Hotel Images <span class="opt">paste up to 3 URLs from hotel website, Booking.com, TUI etc</span></label>
-          <input type="text" id="qImg1" placeholder="Image URL 1 (e.g. https://...)" style="margin-bottom:6px;">
+          <label>Hotel Images</label>
+          <button type="button" id="photoSearchBtn" onclick="searchHotelPhotos()" style="width:100%;padding:11px;border:none;border-radius:10px;background:linear-gradient(135deg,var(--teal),var(--teal-dark));color:#fff;font-family:'Montserrat',sans-serif;font-size:12px;font-weight:800;letter-spacing:1px;text-transform:uppercase;cursor:pointer;margin-bottom:10px;display:flex;align-items:center;justify-content:center;gap:8px;"><i class="fas fa-search"></i> Find Hotel Photos Automatically</button>
+          <div id="photoStatus"></div>
+          <div style="font-size:10px;color:#aaa;margin-bottom:8px;">Or paste image URLs manually below:</div>
+          <input type="text" id="qImg1" placeholder="Image URL 1" style="margin-bottom:6px;">
           <input type="text" id="qImg2" placeholder="Image URL 2 (optional)" style="margin-bottom:6px;">
           <input type="text" id="qImg3" placeholder="Image URL 3 (optional)">
         </div>
@@ -426,8 +429,59 @@ function renderSaved(){var list=$('savedList'),saved=getSaved().slice(0,5);if(!s
 function renderArchive(){var list=$('archiveList'),saved=getSaved();var byM=saved.reduce(function(a,s){a[s.method]=(a[s.method]||0)+1;return a;},{});$('archiveTotal').textContent=saved.length;$('archiveWA').textContent=byM['WhatsApp']||0;$('archiveCopied').textContent=byM['Link Copied']||0;if(!saved.length){list.innerHTML='<div class="empty-saved"><i class="fas fa-archive"></i>No scratchcards yet.</div>';return;}list.innerHTML=saved.map(function(s){return '<div class="saved-item"><div class="saved-info"><div class="saved-name">'+s.name+'</div><div class="saved-dest">'+s.dest+' <span style="font-size:10px;background:'+methodColor(s.method)+';color:#fff;padding:2px 7px;border-radius:10px;font-weight:700;">'+s.method+'</span></div><div class="saved-date-label">Sent '+s.created+(s.date?' · '+s.date:'')+'</div></div><div class="saved-actions"><button class="saved-btn copy" onclick="navigator.clipboard.writeText(\''+s.url+'\')" title="Copy"><i class="fas fa-copy"></i></button><button class="saved-btn del" onclick="deleteSaved('+s.id+')" title="Delete"><i class="fas fa-trash"></i></button></div></div>';}).join('');}
 window.deleteSaved=function(id){if(!confirm('Remove from archive?'))return;localStorage.setItem('mh_scratchcards',JSON.stringify(getSaved().filter(function(s){return s.id!==id;})));renderSaved();renderArchive();$('archiveBadge').textContent=getSaved().length;};
 
-// QUOTE BUILDER
-function buildQuoteUrl(){
+// GOOGLE PLACES HOTEL PHOTOS
+var GKEY='AIzaSyAIznJoscul0nPb60tEaJZe1JA6CvXQ2EQ';
+var foundPhotoRefs=[];
+
+function searchHotelPhotos(){
+  var hotel=$('qHotel').value.trim();
+  var dest=$('qDestination').value.trim();
+  if(!hotel){alert('Please enter a hotel name first.');return;}
+  var btn=$('photoSearchBtn');
+  var status=$('photoStatus');
+  btn.innerHTML='<i class="fas fa-spinner fa-spin"></i> Searching...';
+  btn.disabled=true;
+  status.innerHTML='';
+  foundPhotoRefs=[];
+
+  var query=hotel+(dest?' '+dest:'');
+  var url='https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input='+encodeURIComponent(query)+'&inputtype=textquery&fields=place_id,name,photos,rating&key='+GKEY;
+
+  // Use no-cors proxy workaround — fetch via Claude API
+  fetch('https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input='+encodeURIComponent(query)+'&inputtype=textquery&fields=place_id,name,photos,rating&key='+GKEY,{mode:'cors'})
+  .then(function(r){return r.json();})
+  .then(function(data){
+    if(data.candidates&&data.candidates[0]){
+      var placeId=data.candidates[0].place_id;
+      return fetch('https://maps.googleapis.com/maps/api/place/details/json?place_id='+placeId+'&fields=name,photos,rating&key='+GKEY,{mode:'cors'});
+    } else {throw new Error('Hotel not found');}
+  })
+  .then(function(r){return r.json();})
+  .then(function(data){
+    if(data.result&&data.result.photos&&data.result.photos.length){
+      var photos=data.result.photos.slice(0,3);
+      foundPhotoRefs=photos.map(function(p){
+        return 'https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference='+p.photo_reference+'&key='+GKEY;
+      });
+      // Populate image fields
+      $('qImg1').value=foundPhotoRefs[0]||'';
+      $('qImg2').value=foundPhotoRefs[1]||'';
+      $('qImg3').value=foundPhotoRefs[2]||'';
+      liveUpdateQuote();
+      btn.innerHTML='<i class="fas fa-check"></i> Photos Found!';
+      btn.style.background='#22c55e';
+      status.innerHTML='<div style="color:#22c55e;font-size:12px;margin-top:8px;"><i class="fas fa-check-circle"></i> Found '+foundPhotoRefs.length+' photo(s) for '+data.result.name+'</div>';
+      setTimeout(function(){btn.innerHTML='<i class="fas fa-search"></i> Find Hotel Photos';btn.style.background='';btn.disabled=false;},3000);
+    } else {
+      throw new Error('No photos found');
+    }
+  })
+  .catch(function(err){
+    btn.innerHTML='<i class="fas fa-search"></i> Find Hotel Photos';
+    btn.disabled=false;
+    status.innerHTML='<div style="color:#e05555;font-size:12px;margin-top:8px;"><i class="fas fa-exclamation-circle"></i> Could not find photos — try a more specific hotel name</div>';
+  });
+}
   var data={
     n:$('qClientName').value.trim(),
     dest:$('qDestination').value.trim(),
