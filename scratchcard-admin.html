@@ -433,7 +433,7 @@ window.deleteSaved=function(id){if(!confirm('Remove from archive?'))return;local
 var GKEY='AIzaSyAIznJoscul0nPb60tEaJZe1JA6CvXQ2EQ';
 var foundPhotoRefs=[];
 
-function searchHotelPhotos(){
+window.searchHotelPhotos=function(){
   var hotel=$('qHotel').value.trim();
   var dest=$('qDestination').value.trim();
   if(!hotel){alert('Please enter a hotel name first.');return;}
@@ -443,27 +443,20 @@ function searchHotelPhotos(){
   btn.disabled=true;
   status.innerHTML='';
   foundPhotoRefs=[];
-
   var query=hotel+(dest?' '+dest:'');
-  var url='https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input='+encodeURIComponent(query)+'&inputtype=textquery&fields=place_id,name,photos,rating&key='+GKEY;
-
-  // Use no-cors proxy workaround — fetch via Claude API
-  fetch('https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input='+encodeURIComponent(query)+'&inputtype=textquery&fields=place_id,name,photos,rating&key='+GKEY,{mode:'cors'})
+  fetch('https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input='+encodeURIComponent(query)+'&inputtype=textquery&fields=place_id,name,photos,rating&key='+GKEY)
   .then(function(r){return r.json();})
   .then(function(data){
     if(data.candidates&&data.candidates[0]){
       var placeId=data.candidates[0].place_id;
-      return fetch('https://maps.googleapis.com/maps/api/place/details/json?place_id='+placeId+'&fields=name,photos,rating&key='+GKEY,{mode:'cors'});
-    } else {throw new Error('Hotel not found');}
+      return fetch('https://maps.googleapis.com/maps/api/place/details/json?place_id='+placeId+'&fields=name,photos,rating&key='+GKEY);
+    }else{throw new Error('Hotel not found');}
   })
   .then(function(r){return r.json();})
   .then(function(data){
     if(data.result&&data.result.photos&&data.result.photos.length){
       var photos=data.result.photos.slice(0,3);
-      foundPhotoRefs=photos.map(function(p){
-        return 'https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference='+p.photo_reference+'&key='+GKEY;
-      });
-      // Populate image fields
+      foundPhotoRefs=photos.map(function(p){return 'https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference='+p.photo_reference+'&key='+GKEY;});
       $('qImg1').value=foundPhotoRefs[0]||'';
       $('qImg2').value=foundPhotoRefs[1]||'';
       $('qImg3').value=foundPhotoRefs[2]||'';
@@ -472,16 +465,17 @@ function searchHotelPhotos(){
       btn.style.background='#22c55e';
       status.innerHTML='<div style="color:#22c55e;font-size:12px;margin-top:8px;"><i class="fas fa-check-circle"></i> Found '+foundPhotoRefs.length+' photo(s) for '+data.result.name+'</div>';
       setTimeout(function(){btn.innerHTML='<i class="fas fa-search"></i> Find Hotel Photos';btn.style.background='';btn.disabled=false;},3000);
-    } else {
-      throw new Error('No photos found');
-    }
+    }else{throw new Error('No photos');}
   })
-  .catch(function(err){
+  .catch(function(){
     btn.innerHTML='<i class="fas fa-search"></i> Find Hotel Photos';
     btn.disabled=false;
-    status.innerHTML='<div style="color:#e05555;font-size:12px;margin-top:8px;"><i class="fas fa-exclamation-circle"></i> Could not find photos — try a more specific hotel name</div>';
+    status.innerHTML='<div style="color:#e05555;font-size:12px;margin-top:8px;"><i class="fas fa-exclamation-circle"></i> Could not find photos — try a more specific hotel name and destination</div>';
   });
-}
+};
+
+// QUOTE BUILDER
+function buildQuoteUrl(){
   var data={
     n:$('qClientName').value.trim(),
     dest:$('qDestination').value.trim(),
