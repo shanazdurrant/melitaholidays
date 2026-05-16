@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Your Holiday Quote — Melita Holidays</title>
-<!-- v5 -->
+<!-- v6 -->
 <meta name="robots" content="noindex, nofollow">
 <link rel="icon" type="image/png" href="logo.png">
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -223,6 +223,7 @@ body{font-family:'Poppins',sans-serif;background:var(--cream);min-height:100vh;p
     if(d.deposit) rows.push(['Deposit Required','£'+Number(d.deposit).toLocaleString()]);
     if(d.price) rows.push(['__PRICE__','£'+Number(d.price).toLocaleString()]);
 
+    var body=document.getElementById('summaryBody');
     body.innerHTML=rows.length?rows.map(function(r){
       if(r[0]==='__PRICE__') return '<div class="detail-row"><span class="detail-label">Total Price</span><span class="detail-value price">'+r[1]+'</span></div>';
       return '<div class="detail-row"><span class="detail-label">'+r[0]+'</span><span class="detail-value">'+r[1]+'</span></div>';
