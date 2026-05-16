@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your Holiday Quote — Melita Holidays</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/png" href="logo.png">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+:root{--teal:#2f7f82;--teal-dark:#256c6f;--gold:#e09a42;--cream:#f6f4f2;--text:#2a2a2a;--border:#e8e8e8;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Poppins',sans-serif;background:var(--cream);min-height:100vh;padding:0 0 60px;}
+
+/* HEADER */
+.quote-header{background:var(--teal);padding:28px 30px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;}
+.quote-header img{height:52px;object-fit:contain;}
+.quote-header-text{color:#fff;text-align:right;}
+.quote-header-text h2{font-family:'Montserrat',sans-serif;font-size:13px;font-weight:900;letter-spacing:2px;text-transform:uppercase;opacity:.7;margin-bottom:4px;}
+.quote-header-text p{font-size:12px;opacity:.55;}
+
+/* HERO BANNER */
+.quote-hero{background:linear-gradient(135deg,var(--teal-dark),#1a5558);padding:40px 30px;text-align:center;position:relative;overflow:hidden;}
+.quote-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 80% 20%,rgba(224,154,66,0.2) 0%,transparent 60%);}
+.quote-hero h1{font-family:'Montserrat',sans-serif;font-size:clamp(28px,6vw,48px);font-weight:900;color:var(--gold);letter-spacing:2px;text-transform:uppercase;position:relative;margin-bottom:8px;}
+.quote-hero .hero-sub{font-size:14px;color:rgba(255,255,255,0.65);position:relative;letter-spacing:1px;}
+.quote-hero .client-greeting{font-size:16px;color:rgba(255,255,255,0.9);position:relative;margin-bottom:16px;font-weight:500;}
+
+/* MAIN CONTENT */
+.quote-body{max-width:680px;margin:0 auto;padding:30px 20px 0;}
+
+/* SUMMARY CARD */
+.summary-card{background:#fff;border-radius:20px;overflow:hidden;box-shadow:0 8px 40px rgba(0,0,0,0.08);margin-bottom:20px;}
+.summary-header{background:var(--teal);padding:20px 24px;display:flex;align-items:center;gap:14px;}
+.summary-header i{font-size:22px;color:var(--gold);}
+.summary-header div h3{font-family:'Montserrat',sans-serif;font-size:16px;font-weight:900;color:#fff;letter-spacing:.5px;}
+.summary-header div p{font-size:12px;color:rgba(255,255,255,0.65);margin-top:2px;}
+.summary-body{padding:24px;}
+.detail-row{display:flex;align-items:flex-start;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--border);gap:16px;}
+.detail-row:last-child{border-bottom:none;padding-bottom:0;}
+.detail-label{font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#999;flex-shrink:0;min-width:110px;}
+.detail-value{font-size:14px;font-weight:600;color:var(--text);text-align:right;}
+.detail-value.highlight{color:var(--teal);font-size:16px;font-family:'Montserrat',sans-serif;font-weight:900;}
+.detail-value.price{color:var(--gold);font-size:22px;font-family:'Montserrat',sans-serif;font-weight:900;}
+
+/* INCLUSIONS */
+.inclusions-section{background:#fff;border-radius:20px;padding:24px;box-shadow:0 8px 40px rgba(0,0,0,0.08);margin-bottom:20px;}
+.inclusions-section h3{font-family:'Montserrat',sans-serif;font-size:13px;font-weight:900;color:var(--teal);letter-spacing:1px;text-transform:uppercase;margin-bottom:16px;display:flex;align-items:center;gap:8px;}
+.inclusions-section h3 i{color:var(--gold);}
+.inclusions-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
+.inclusion-chip{background:var(--cream);border-radius:10px;padding:12px 10px;text-align:center;font-size:12px;font-weight:600;color:var(--teal);border:1px solid var(--border);}
+.inclusion-chip i{display:block;font-size:18px;margin-bottom:6px;color:var(--gold);}
+
+/* PERSONAL NOTE */
+.note-section{background:linear-gradient(135deg,var(--teal),var(--teal-dark));border-radius:20px;padding:24px;margin-bottom:20px;position:relative;overflow:hidden;}
+.note-section::before{content:'"';position:absolute;top:-10px;left:16px;font-size:120px;color:rgba(255,255,255,0.06);font-family:Georgia,serif;line-height:1;}
+.note-section p{font-size:15px;line-height:1.8;color:rgba(255,255,255,0.9);position:relative;font-style:italic;}
+.note-section .note-sig{font-size:13px;color:var(--gold);font-weight:700;margin-top:14px;position:relative;font-style:normal;}
+
+/* VALIDITY */
+.validity-bar{background:#fff;border-radius:14px;padding:16px 20px;margin-bottom:20px;display:flex;align-items:center;gap:12px;box-shadow:0 4px 20px rgba(0,0,0,0.06);border-left:4px solid var(--gold);}
+.validity-bar i{color:var(--gold);font-size:18px;}
+.validity-bar p{font-size:13px;color:#666;}
+.validity-bar p strong{color:var(--text);}
+
+/* APPROVE SECTION */
+.approve-section{background:#fff;border-radius:20px;padding:28px;box-shadow:0 8px 40px rgba(0,0,0,0.08);margin-bottom:20px;text-align:center;}
+.approve-section h3{font-family:'Montserrat',sans-serif;font-size:16px;font-weight:900;color:var(--text);letter-spacing:.5px;margin-bottom:8px;}
+.approve-section p{font-size:13px;color:#888;margin-bottom:24px;line-height:1.6;}
+.btn-approve{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:18px 40px;border:none;border-radius:50px;background:linear-gradient(135deg,var(--teal),var(--teal-dark));color:#fff;font-family:'Montserrat',sans-serif;font-size:14px;font-weight:800;letter-spacing:1px;text-transform:uppercase;cursor:pointer;box-shadow:0 8px 28px rgba(47,127,130,0.4);transition:transform .2s;width:100%;margin-bottom:12px;}
+.btn-approve:hover{transform:translateY(-2px);}
+.btn-wa-quote{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:16px 40px;border:none;border-radius:50px;background:linear-gradient(135deg,#25D366,#1ebe5d);color:#fff;font-family:'Montserrat',sans-serif;font-size:13px;font-weight:800;letter-spacing:1px;text-transform:uppercase;cursor:pointer;box-shadow:0 6px 20px rgba(37,211,102,0.3);transition:transform .2s;width:100%;}
+.btn-wa-quote:hover{transform:translateY(-2px);}
+.approved-msg{display:none;background:#f0fdf4;border:2px solid #86efac;border-radius:14px;padding:20px;margin-top:16px;text-align:center;}
+.approved-msg.show{display:block;}
+.approved-msg i{font-size:32px;color:#22c55e;display:block;margin-bottom:8px;}
+.approved-msg h4{font-family:'Montserrat',sans-serif;font-size:16px;font-weight:900;color:#166534;margin-bottom:6px;}
+.approved-msg p{font-size:13px;color:#166534;opacity:.8;}
+
+/* FOOTER */
+.quote-footer{text-align:center;padding:30px 20px 0;color:#aaa;font-size:12px;}
+.quote-footer a{color:var(--teal);text-decoration:none;font-weight:600;}
+
+#invalidMsg{text-align:center;padding:80px 30px;color:#999;}
+#invalidMsg i{font-size:48px;display:block;margin-bottom:16px;opacity:.3;}
+</style>
+</head>
+<body>
+
+<div id="invalidMsg" style="display:none;">
+  <i class="fas fa-file-times"></i>
+  <h2 style="font-family:'Montserrat',sans-serif;margin-bottom:8px;">Quote not found</h2>
+  <p>This link doesn't contain a valid quote. Ask Melita Holidays to resend your quote link.</p>
+  <a href="https://melitaholidays.com" style="display:inline-block;margin-top:20px;padding:14px 28px;background:var(--teal);color:#fff;border-radius:50px;font-weight:700;text-decoration:none;">Visit Melita Holidays</a>
+</div>
+
+<div id="quoteContent" style="display:none;">
+  <div class="quote-header">
+    <img src="logo.png" alt="Melita Holidays" onerror="this.style.display='none'">
+    <div class="quote-header-text">
+      <h2>Holiday Quote</h2>
+      <p id="quoteRef">Ref: —</p>
+    </div>
+  </div>
+
+  <div class="quote-hero">
+    <p class="client-greeting" id="clientGreeting"></p>
+    <h1 id="heroDestination">Your Holiday</h1>
+    <p class="hero-sub" id="heroHotel"></p>
+  </div>
+
+  <div class="quote-body">
+
+    <div class="summary-card">
+      <div class="summary-header">
+        <i class="fas fa-plane"></i>
+        <div>
+          <h3>Holiday Summary</h3>
+          <p>Everything included in your personalised quote</p>
+        </div>
+      </div>
+      <div class="summary-body" id="summaryBody"></div>
+    </div>
+
+    <div class="inclusions-section" id="inclusionsSection" style="display:none;">
+      <h3><i class="fas fa-check-circle"></i> What's Included</h3>
+      <div class="inclusions-grid" id="inclusionsGrid"></div>
+    </div>
+
+    <div class="note-section" id="noteSection" style="display:none;">
+      <p id="noteText"></p>
+      <div class="note-sig">— Justine, Melita Holidays</div>
+    </div>
+
+    <div class="validity-bar" id="validityBar" style="display:none;">
+      <i class="fas fa-clock"></i>
+      <p>This quote is valid until <strong id="validUntilText"></strong>. Prices may change after this date.</p>
+    </div>
+
+    <div class="approve-section">
+      <h3>Ready to Book?</h3>
+      <p>If you are happy with this quote and would like to go ahead, tap below and I will get everything booked for you straight away.</p>
+      <button class="btn-approve" id="approveBtn"><i class="fas fa-check"></i> Yes — I Want to Book This!</button>
+      <button class="btn-wa-quote" id="quoteWaBtn"><i class="fab fa-whatsapp"></i> Message Me on WhatsApp</button>
+      <div class="approved-msg" id="approvedMsg">
+        <i class="fas fa-check-circle"></i>
+        <h4>Brilliant — I Will Be in Touch!</h4>
+        <p>Your approval has been noted. Justine from Melita Holidays will be in touch very shortly to confirm your booking.</p>
+      </div>
+    </div>
+
+    <div class="quote-footer">
+      <p>Quote prepared personally by Justine at <a href="https://melitaholidays.com">Melita Holidays</a></p>
+      <p style="margin-top:6px;">All holidays are ATOL &amp; PTS protected &nbsp;·&nbsp; Part of the JLT Group</p>
+    </div>
+  </div>
+</div>
+
+<script data-cfasync="false">
+(function(){
+  function decodeData(token){
+    try{
+      var b64=token.replace(/-/g,'+').replace(/_/g,'/');
+      var padded=b64+'=='.slice(0,(4-b64.length%4)%4);
+      return JSON.parse(decodeURIComponent(escape(atob(padded))));
+    }catch(e){return null;}
+  }
+
+  var iconMap={
+    'Return Flights':'fa-plane','Transfers':'fa-shuttle-van','ATOL Protected':'fa-shield-alt',
+    'Luggage':'fa-suitcase','Hotel':'fa-hotel','Travel Insurance':'fa-heart'
+  };
+
+  window.addEventListener('DOMContentLoaded',function(){
+    var params=new URLSearchParams(window.location.search);
+    var token=params.get('q');
+    if(!token){document.getElementById('invalidMsg').style.display='block';return;}
+    var d=decodeData(token);
+    if(!d||(!d.dest&&!d.hotel)){document.getElementById('invalidMsg').style.display='block';return;}
+
+    document.getElementById('quoteContent').style.display='block';
+
+    // Header ref
+    document.getElementById('quoteRef')='Ref: MH-'+(d.id?String(d.id).slice(-6):'------');
+
+    // Hero
+    if(d.n) document.getElementById('clientGreeting').textContent='Prepared exclusively for '+d.n;
+    document.getElementById('heroDestination').textContent=(d.dest||d.hotel).toUpperCase();
+    if(d.hotel&&d.dest) document.getElementById('heroHotel').textContent=d.hotel;
+
+    // Summary rows
+    var rows=[];
+    if(d.dest) rows.push(['Destination',d.dest]);
+    if(d.hotel) rows.push(['Hotel / Resort',d.hotel]);
+    if(d.board) rows.push(['Board Type',d.board]);
+    if(d.dep&&d.ret) rows.push(['Travel Dates',d.dep+' — '+d.ret]);
+    else if(d.dep) rows.push(['Departure',d.dep]);
+    if(d.dur) rows.push(['Duration',d.dur]);
+    if(d.pax) rows.push(['Passengers',d.pax]);
+    if(d.airport) rows.push(['Departure Airport',d.airport]);
+    if(d.deposit) rows.push(['Deposit Required','£'+Number(d.deposit).toLocaleString()]);
+    if(d.price) rows.push(['__PRICE__','£'+Number(d.price).toLocaleString()]);
+
+    var body=document.getElementById('summaryBody');
+    body.innerHTML=rows.map(function(r){
+      if(r[0]==='__PRICE__') return '<div class="detail-row"><span class="detail-label">Total Price</span><span class="detail-value price">'+r[1]+'</span></div>';
+      return '<div class="detail-row"><span class="detail-label">'+r[0]+'</span><span class="detail-value">'+r[1]+'</span></div>';
+    }).join('');
+
+    // Inclusions
+    if(d.inc&&d.inc.length){
+      document.getElementById('inclusionsSection').style.display='block';
+      document.getElementById('inclusionsGrid').innerHTML=d.inc.map(function(inc){
+        var icon=iconMap[inc]||'fa-check';
+        return '<div class="inclusion-chip"><i class="fas '+icon+'"></i>'+inc+'</div>';
+      }).join('');
+    }
+
+    // Note
+    if(d.note){document.getElementById('noteSection').style.display='block';document.getElementById('noteText').textContent=d.note;}
+
+    // Validity
+    if(d.valid){document.getElementById('validityBar').style.display='flex';document.getElementById('validUntilText').textContent=d.valid;}
+
+    // Approve
+    document.getElementById('approveBtn').addEventListener('click',function(){
+      document.getElementById('approvedMsg').classList.add('show');
+      document.getElementById('approveBtn').style.display='none';
+      // Open WhatsApp with approval message
+      var msg='Hi Justine! I have reviewed my holiday quote'+(d.dest?' to '+d.dest:'')+(d.n?', prepared for '+d.n:'')+' and I would like to go ahead and book. Please get in touch to confirm the booking. Thank you!';
+      window.open('https://wa.me/447821343925?text='+encodeURIComponent(msg),'_blank');
+    });
+
+    document.getElementById('quoteWaBtn').addEventListener('click',function(){
+      var msg='Hi Justine! I have a question about my holiday quote'+(d.dest?' to '+d.dest:'')+(d.n?' for '+d.n:'')+'.';
+      window.open('https://wa.me/447821343925?text='+encodeURIComponent(msg),'_blank');
+    });
+
+    // Page title
+    document.title=(d.dest||d.hotel)+' Holiday Quote — Melita Holidays';
+  });
+})();
+</script>
+</body>
+</html>
