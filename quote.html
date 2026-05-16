@@ -24,11 +24,9 @@ body{font-family:'Poppins',sans-serif;background:var(--cream);min-height:100vh;p
 .quote-header-text p{font-size:12px;opacity:.55;}
 
 /* HERO */
-.quote-hero{background:linear-gradient(135deg,var(--teal-dark),#1a5558);padding:60px 30px 40px;text-align:center;position:relative;overflow:hidden;min-height:300px;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;}
-.quote-hero-bg{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transition:opacity 1.2s ease;filter:brightness(0.65);}
-.quote-hero-bg.loaded{opacity:1;}
-.quote-hero-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.8) 0%,rgba(0,0,0,0.2) 60%,rgba(0,0,0,0.05) 100%);}
-.quote-hero h1{font-family:'Montserrat',sans-serif;font-size:clamp(32px,6vw,56px);font-weight:900;color:var(--gold);letter-spacing:2px;text-transform:uppercase;position:relative;margin-bottom:8px;text-shadow:0 2px 20px rgba(0,0,0,0.5);z-index:2;}
+.quote-hero{background:linear-gradient(135deg,var(--teal-dark),#1a5558);padding:60px 30px 40px;text-align:center;position:relative;overflow:hidden;min-height:220px;display:flex;flex-direction:column;align-items:center;justify-content:center;}
+.quote-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 80% 20%,rgba(224,154,66,0.2) 0%,transparent 60%);}
+.quote-hero h1{font-family:'Montserrat',sans-serif;font-size:clamp(32px,6vw,56px);font-weight:900;color:var(--gold);letter-spacing:2px;text-transform:uppercase;position:relative;margin-bottom:8px;text-shadow:0 2px 20px rgba(0,0,0,0.3);z-index:2;}
 .quote-hero .hero-sub{font-size:15px;color:rgba(255,255,255,0.85);position:relative;letter-spacing:.5px;z-index:2;margin-bottom:4px;}
 .quote-hero .client-greeting{font-size:13px;color:rgba(255,255,255,0.65);position:relative;margin-bottom:16px;font-weight:500;z-index:2;letter-spacing:.5px;}
 
@@ -159,8 +157,6 @@ body{font-family:'Poppins',sans-serif;background:var(--cream);min-height:100vh;p
   </div>
 
   <div class="quote-hero" id="quoteHero">
-    <div class="quote-hero-bg" id="heroBg"></div>
-    <div class="quote-hero-overlay"></div>
     <p class="client-greeting" id="clientGreeting"></p>
     <h1 id="heroDestination">Your Holiday</h1>
     <p class="hero-sub" id="heroHotel"></p>
@@ -239,49 +235,6 @@ body{font-family:'Poppins',sans-serif;background:var(--cream);min-height:100vh;p
   }
 
   // ── DESTINATION IMAGES ──
-  var destImages={
-    'TURKEY':'https://source.unsplash.com/1200x800/?turkey,beach,antalya',
-    'MALDIVES':'https://source.unsplash.com/1200x800/?maldives,overwater,bungalow',
-    'DUBAI':'https://source.unsplash.com/1200x800/?dubai,skyline,burj',
-    'SANTORINI':'https://source.unsplash.com/1200x800/?santorini,greece,whitewashed',
-    'BARBADOS':'https://source.unsplash.com/1200x800/?barbados,caribbean,beach',
-    'BALI':'https://source.unsplash.com/1200x800/?bali,temple,rice,terrace',
-    'TENERIFE':'https://source.unsplash.com/1200x800/?tenerife,canary,islands',
-    'NEW YORK':'https://source.unsplash.com/1200x800/?new,york,manhattan,skyline',
-    'CANCUN':'https://source.unsplash.com/1200x800/?cancun,mexico,beach,turquoise',
-    'THAILAND':'https://source.unsplash.com/1200x800/?thailand,phuket,beach,temple',
-    'MAURITIUS':'https://source.unsplash.com/1200x800/?mauritius,island,beach',
-    'IBIZA':'https://source.unsplash.com/1200x800/?ibiza,spain,beach',
-    'CYPRUS':'https://source.unsplash.com/1200x800/?cyprus,mediterranean,sea',
-    'LANZAROTE':'https://source.unsplash.com/1200x800/?lanzarote,canary,volcanic',
-    'PORTUGAL':'https://source.unsplash.com/1200x800/?portugal,lisbon,algarve',
-    'ITALY':'https://source.unsplash.com/1200x800/?italy,amalfi,coast,colosseum',
-    'FLORIDA':'https://source.unsplash.com/1200x800/?florida,miami,beach,palm',
-    'JAMAICA':'https://source.unsplash.com/1200x800/?jamaica,caribbean,beach,palm',
-    'GREECE':'https://source.unsplash.com/1200x800/?greece,santorini,athens,aegean',
-    'MOROCCO':'https://source.unsplash.com/1200x800/?morocco,marrakech,medina',
-    'SOUTH KOREA':'https://source.unsplash.com/1200x800/?seoul,korea,palace,lantern',
-    'JAPAN':'https://source.unsplash.com/1200x800/?japan,tokyo,kyoto,cherry,blossom',
-    'PARIS':'https://source.unsplash.com/1200x800/?paris,eiffel,tower,france',
-    'LAPLAND':'https://source.unsplash.com/1200x800/?lapland,aurora,snow,finland',
-    'DISNEYLAND':'https://source.unsplash.com/1200x800/?disneyland,castle,paris',
-    'CAPE TOWN':'https://source.unsplash.com/1200x800/?cape,town,table,mountain',
-    'HAWAII':'https://source.unsplash.com/1200x800/?hawaii,beach,volcano,palm',
-    'EGYPT':'https://source.unsplash.com/1200x800/?egypt,pyramids,sphinx,cairo',
-    'AUSTRALIA':'https://source.unsplash.com/1200x800/?australia,sydney,opera,beach',
-    'BARCELONA':'https://source.unsplash.com/1200x800/?barcelona,sagrada,familia,spain',
-    'ZANZIBAR':'https://source.unsplash.com/1200x800/?zanzibar,beach,turquoise,africa',
-    'MARBELLA':'https://source.unsplash.com/1200x800/?marbella,spain,coast,beach',
-  };
-  var fallbackImg='https://source.unsplash.com/1200x800/?beach,tropical,holiday';
-  function getDestImage(dest){
-    var key=(dest||'').toUpperCase().trim();
-    if(destImages[key])return destImages[key];
-    var keys=Object.keys(destImages);
-    for(var i=0;i<keys.length;i++){if(key.indexOf(keys[i])>-1||keys[i].indexOf(key)>-1)return destImages[keys[i]];}
-    return fallbackImg;
-  }
-
   var iconMap={'Return Flights':'fa-plane','Transfers':'fa-shuttle-van','ATOL Protected':'fa-shield-alt','Luggage':'fa-suitcase','Hotel':'fa-hotel','Travel Insurance':'fa-heart'};
 
   // ── COUNTDOWN ──
@@ -356,14 +309,6 @@ body{font-family:'Poppins',sans-serif;background:var(--cream);min-height:100vh;p
 
     document.getElementById('quoteContent').style.display='block';
     document.getElementById('quoteRef').textContent='Ref: MH-'+(d.id?String(d.id).slice(-6):'------');
-
-    // Hero image
-    var imgUrl=getDestImage(d.dest||d.hotel||'');
-    var heroBg=document.getElementById('heroBg');
-    var img=new Image();
-    img.crossOrigin='anonymous';
-    img.onload=function(){heroBg.style.backgroundImage='url(\''+imgUrl+'\')';heroBg.classList.add('loaded');};
-    img.src=imgUrl;
 
     // Hero text
     if(d.n)document.getElementById('clientGreeting').textContent='Prepared exclusively for '+d.n;
