@@ -429,9 +429,21 @@ function renderSaved(){var list=$('savedList'),saved=getSaved().slice(0,5);if(!s
 function renderArchive(){var list=$('archiveList'),saved=getSaved();var byM=saved.reduce(function(a,s){a[s.method]=(a[s.method]||0)+1;return a;},{});$('archiveTotal').textContent=saved.length;$('archiveWA').textContent=byM['WhatsApp']||0;$('archiveCopied').textContent=byM['Link Copied']||0;if(!saved.length){list.innerHTML='<div class="empty-saved"><i class="fas fa-archive"></i>No scratchcards yet.</div>';return;}list.innerHTML=saved.map(function(s){return '<div class="saved-item"><div class="saved-info"><div class="saved-name">'+s.name+'</div><div class="saved-dest">'+s.dest+' <span style="font-size:10px;background:'+methodColor(s.method)+';color:#fff;padding:2px 7px;border-radius:10px;font-weight:700;">'+s.method+'</span></div><div class="saved-date-label">Sent '+s.created+(s.date?' · '+s.date:'')+'</div></div><div class="saved-actions"><button class="saved-btn copy" onclick="navigator.clipboard.writeText(\''+s.url+'\')" title="Copy"><i class="fas fa-copy"></i></button><button class="saved-btn del" onclick="deleteSaved('+s.id+')" title="Delete"><i class="fas fa-trash"></i></button></div></div>';}).join('');}
 window.deleteSaved=function(id){if(!confirm('Remove from archive?'))return;localStorage.setItem('mh_scratchcards',JSON.stringify(getSaved().filter(function(s){return s.id!==id;})));renderSaved();renderArchive();$('archiveBadge').textContent=getSaved().length;};
 
-// GOOGLE PLACES HOTEL PHOTOS
+// GOOGLE PLACES HOTEL PHOTOS — uses Maps JS API (browser safe)
 var GKEY='AIzaSyAIznJoscul0nPb60tEaJZe1JA6CvXQ2EQ';
-var foundPhotoRefs=[];
+var placesServiceReady=false;
+var placesService=null;
+
+function initPlacesService(){
+  if(placesServiceReady) return;
+  // Create a hidden map div required by PlacesService
+  var mapDiv=document.createElement('div');
+  mapDiv.style.display='none';
+  document.body.appendChild(mapDiv);
+  var map=new google.maps.Map(mapDiv,{center:{lat:0,lng:0},zoom:1});
+  placesService=new google.maps.places.PlacesService(map);
+  placesServiceReady=true;
+}
 
 window.searchHotelPhotos=function(){
   var hotel=$('qHotel').value.trim();
@@ -442,36 +454,49 @@ window.searchHotelPhotos=function(){
   btn.innerHTML='<i class="fas fa-spinner fa-spin"></i> Searching...';
   btn.disabled=true;
   status.innerHTML='';
-  foundPhotoRefs=[];
-  var query=hotel+(dest?' '+dest:'');
-  fetch('https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input='+encodeURIComponent(query)+'&inputtype=textquery&fields=place_id,name,photos,rating&key='+GKEY)
-  .then(function(r){return r.json();})
-  .then(function(data){
-    if(data.candidates&&data.candidates[0]){
-      var placeId=data.candidates[0].place_id;
-      return fetch('https://maps.googleapis.com/maps/api/place/details/json?place_id='+placeId+'&fields=name,photos,rating&key='+GKEY);
-    }else{throw new Error('Hotel not found');}
-  })
-  .then(function(r){return r.json();})
-  .then(function(data){
-    if(data.result&&data.result.photos&&data.result.photos.length){
-      var photos=data.result.photos.slice(0,3);
-      foundPhotoRefs=photos.map(function(p){return 'https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photo_reference='+p.photo_reference+'&key='+GKEY;});
-      $('qImg1').value=foundPhotoRefs[0]||'';
-      $('qImg2').value=foundPhotoRefs[1]||'';
-      $('qImg3').value=foundPhotoRefs[2]||'';
-      liveUpdateQuote();
-      btn.innerHTML='<i class="fas fa-check"></i> Photos Found!';
-      btn.style.background='#22c55e';
-      status.innerHTML='<div style="color:#22c55e;font-size:12px;margin-top:8px;"><i class="fas fa-check-circle"></i> Found '+foundPhotoRefs.length+' photo(s) for '+data.result.name+'</div>';
-      setTimeout(function(){btn.innerHTML='<i class="fas fa-search"></i> Find Hotel Photos';btn.style.background='';btn.disabled=false;},3000);
-    }else{throw new Error('No photos');}
-  })
-  .catch(function(){
-    btn.innerHTML='<i class="fas fa-search"></i> Find Hotel Photos';
-    btn.disabled=false;
-    status.innerHTML='<div style="color:#e05555;font-size:12px;margin-top:8px;"><i class="fas fa-exclamation-circle"></i> Could not find photos — try a more specific hotel name and destination</div>';
-  });
+
+  function doSearch(){
+    initPlacesService();
+    var query=hotel+(dest?' '+dest:'');
+    placesService.findPlaceFromQuery({
+      query:query,
+      fields:['place_id','name']
+    },function(results,pStatus){
+      if(pStatus===google.maps.places.PlacesServiceStatus.OK&&results[0]){
+        placesService.getDetails({
+          placeId:results[0].place_id,
+          fields:['name','photos']
+        },function(place,dStatus){
+          btn.innerHTML='<i class="fas fa-search"></i> Find Hotel Photos';
+          btn.disabled=false;
+          if(dStatus===google.maps.places.PlacesServiceStatus.OK&&place.photos&&place.photos.length){
+            var urls=place.photos.slice(0,3).map(function(p){return p.getUrl({maxWidth:900,maxHeight:600});});
+            $('qImg1').value=urls[0]||'';
+            $('qImg2').value=urls[1]||'';
+            $('qImg3').value=urls[2]||'';
+            liveUpdateQuote();
+            status.innerHTML='<div style="color:#22c55e;font-size:12px;margin-top:8px;"><i class="fas fa-check-circle"></i> Found '+urls.length+' photo(s) for '+place.name+'</div>';
+          } else {
+            status.innerHTML='<div style="color:#e05555;font-size:12px;margin-top:8px;"><i class="fas fa-exclamation-circle"></i> Hotel found but no photos available — try manual URL</div>';
+          }
+        });
+      } else {
+        btn.innerHTML='<i class="fas fa-search"></i> Find Hotel Photos';
+        btn.disabled=false;
+        status.innerHTML='<div style="color:#e05555;font-size:12px;margin-top:8px;"><i class="fas fa-exclamation-circle"></i> Hotel not found — try including the city e.g. "Hilton Paris Opera"</div>';
+      }
+    });
+  }
+
+  // Load Maps JS API if not already loaded
+  if(typeof google!=='undefined'&&google.maps&&google.maps.places){
+    doSearch();
+  } else {
+    var s=document.createElement('script');
+    s.src='https://maps.googleapis.com/maps/api/js?key='+GKEY+'&libraries=places&callback=_mapsReady';
+    window._mapsReady=function(){delete window._mapsReady; doSearch();};
+    document.head.appendChild(s);
+  }
 };
 
 // QUOTE BUILDER
