@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Melita — Admin</title>
+<!-- admin-v2 -->
 <meta name="robots" content="noindex, nofollow">
 <link rel="icon" type="image/png" href="logo.png">
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -235,21 +236,82 @@ select{cursor:pointer;}
       <div class="admin-card">
         <div class="card-title"><i class="fas fa-file-invoice"></i> Build a Quote</div>
         <div class="card-sub">Fill in the holiday details to generate a branded client quote link.</div>
+
         <div class="field"><label>Client Name</label><input type="text" id="qClientName" placeholder="e.g. The Johnson Family"></div>
         <div class="field"><label>Destination</label><input type="text" id="qDestination" placeholder="e.g. Maldives, Turkey, Jamaica"></div>
+
         <div class="field"><label>Hotel / Resort</label><input type="text" id="qHotel" placeholder="e.g. Adalya Elite Lara"></div>
-        <div class="field">
-          <label>Board Type</label>
-          <select id="qBoard">
-            <option value="">— Select —</option>
-            <option value="All Inclusive">All Inclusive</option>
-            <option value="Full Board">Full Board</option>
-            <option value="Half Board">Half Board</option>
-            <option value="Bed and Breakfast">Bed and Breakfast</option>
-            <option value="Room Only">Room Only</option>
-            <option value="Self Catering">Self Catering</option>
-          </select>
+        <div class="price-row">
+          <div class="field">
+            <label>Star Rating</label>
+            <select id="qStars">
+              <option value="">— Select —</option>
+              <option value="5">5 Star</option>
+              <option value="4">4 Star</option>
+              <option value="3">3 Star</option>
+              <option value="4+">4 Star Plus</option>
+              <option value="5+">5 Star Deluxe</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Board Type</label>
+            <select id="qBoard">
+              <option value="">— Select —</option>
+              <option value="All Inclusive">All Inclusive</option>
+              <option value="Full Board">Full Board</option>
+              <option value="Half Board">Half Board</option>
+              <option value="Bed and Breakfast">Bed and Breakfast</option>
+              <option value="Room Only">Room Only</option>
+              <option value="Self Catering">Self Catering</option>
+            </select>
+          </div>
         </div>
+
+        <div class="field"><label>Room Type</label><input type="text" id="qRoom" placeholder="e.g. Superior Double Sea View, Family Suite"></div>
+
+        <div class="field">
+          <label>Hotel Images <span class="opt">paste up to 3 URLs from hotel website, Booking.com, TUI etc</span></label>
+          <input type="text" id="qImg1" placeholder="Image URL 1 (e.g. https://...)" style="margin-bottom:6px;">
+          <input type="text" id="qImg2" placeholder="Image URL 2 (optional)" style="margin-bottom:6px;">
+          <input type="text" id="qImg3" placeholder="Image URL 3 (optional)">
+        </div>
+
+        <div class="field"><label>Hotel Description <span class="opt">optional — shown in hotel section</span></label><textarea id="qHotelDesc" placeholder="e.g. A stunning 5-star resort set right on the beach at Lara Bay, offering world-class dining, award-winning spa facilities and an incredible waterpark."></textarea></div>
+
+        <div class="field">
+          <label>Hotel Facilities <span class="opt">comma separated</span></label>
+          <input type="text" id="qFacilities" placeholder="e.g. Waterpark, Spa, Sandy Beach, Kids Club, 5 Restaurants">
+        </div>
+
+        <div class="divider-line"></div>
+        <div class="card-title" style="margin-bottom:12px;"><i class="fas fa-plane-departure"></i> Flight Details</div>
+
+        <div class="price-row">
+          <div class="field"><label>Outbound Flight No.</label><input type="text" id="qFlightOut" placeholder="e.g. EZY4617"></div>
+          <div class="field"><label>Airline</label><input type="text" id="qAirline" placeholder="e.g. easyJet"></div>
+        </div>
+        <div class="price-row">
+          <div class="field"><label>Departs (outbound)</label><input type="text" id="qDepTime" placeholder="e.g. 06:30"></div>
+          <div class="field"><label>Arrives (outbound)</label><input type="text" id="qArrTime" placeholder="e.g. 12:45"></div>
+        </div>
+        <div class="price-row">
+          <div class="field"><label>Return Flight No.</label><input type="text" id="qFlightRet" placeholder="e.g. EZY4618"></div>
+          <div class="field"><label>Flight Type</label>
+            <select id="qFlightType">
+              <option value="Direct">Direct</option>
+              <option value="1 Stop">1 Stop</option>
+              <option value="2 Stops">2 Stops</option>
+            </select>
+          </div>
+        </div>
+        <div class="price-row">
+          <div class="field"><label>Departs (return)</label><input type="text" id="qRetDepTime" placeholder="e.g. 14:00"></div>
+          <div class="field"><label>Arrives (return)</label><input type="text" id="qRetArrTime" placeholder="e.g. 16:15"></div>
+        </div>
+
+        <div class="divider-line"></div>
+        <div class="card-title" style="margin-bottom:12px;"><i class="fas fa-calendar"></i> Booking Details</div>
+
         <div class="price-row">
           <div class="field"><label>Departure Date</label><input type="text" id="qDeparture" placeholder="e.g. 12 Aug 2026"></div>
           <div class="field"><label>Return Date</label><input type="text" id="qReturn" placeholder="e.g. 19 Aug 2026"></div>
@@ -263,6 +325,7 @@ select{cursor:pointer;}
           <div class="field"><label>Total Price (£)</label><input type="number" id="qPrice" placeholder="e.g. 3499"></div>
           <div class="field"><label>Deposit (£) <span class="opt">optional</span></label><input type="number" id="qDeposit" placeholder="e.g. 350"></div>
         </div>
+
         <div class="field">
           <label>What's Included</label>
           <div class="inclusions-grid" id="inclusionsGrid">
@@ -274,8 +337,10 @@ select{cursor:pointer;}
             <div class="inclusion-item" data-val="Travel Insurance"><i class="fas fa-heart"></i> Travel Insurance</div>
           </div>
         </div>
+
         <div class="field"><label>Personal Note <span class="opt">optional</span></label><textarea id="qNote" placeholder="e.g. I have hand-picked this hotel for your family — the beach is right on your doorstep."></textarea></div>
         <div class="field"><label>Quote Valid Until <span class="opt">optional</span></label><input type="text" id="qValidUntil" placeholder="e.g. 30 May 2026"></div>
+
         <div class="divider-line"></div>
         <div class="field">
           <label>Generated Quote Link</label>
@@ -363,7 +428,38 @@ window.deleteSaved=function(id){if(!confirm('Remove from archive?'))return;local
 
 // QUOTE BUILDER
 function buildQuoteUrl(){
-  var data={n:$('qClientName').value.trim(),dest:$('qDestination').value.trim(),hotel:$('qHotel').value.trim(),board:$('qBoard').value,dep:$('qDeparture').value.trim(),ret:$('qReturn').value.trim(),pax:$('qPassengers').value.trim(),dur:$('qDuration').value.trim(),airport:$('qAirport').value.trim(),price:$('qPrice').value.trim(),deposit:$('qDeposit').value.trim(),inc:selectedInclusions,note:$('qNote').value.trim(),valid:$('qValidUntil').value.trim(),id:Date.now()};
+  var data={
+    n:$('qClientName').value.trim(),
+    dest:$('qDestination').value.trim(),
+    hotel:$('qHotel').value.trim(),
+    stars:$('qStars').value,
+    board:$('qBoard').value,
+    room:$('qRoom').value.trim(),
+    img1:$('qImg1').value.trim(),
+    img2:$('qImg2').value.trim(),
+    img3:$('qImg3').value.trim(),
+    hotelDesc:$('qHotelDesc').value.trim(),
+    facilities:$('qFacilities').value.trim(),
+    flightOut:$('qFlightOut').value.trim(),
+    airline:$('qAirline').value.trim(),
+    depTime:$('qDepTime').value.trim(),
+    arrTime:$('qArrTime').value.trim(),
+    flightRet:$('qFlightRet').value.trim(),
+    flightType:$('qFlightType').value,
+    retDepTime:$('qRetDepTime').value.trim(),
+    retArrTime:$('qRetArrTime').value.trim(),
+    dep:$('qDeparture').value.trim(),
+    ret:$('qReturn').value.trim(),
+    pax:$('qPassengers').value.trim(),
+    dur:$('qDuration').value.trim(),
+    airport:$('qAirport').value.trim(),
+    price:$('qPrice').value.trim(),
+    deposit:$('qDeposit').value.trim(),
+    inc:selectedInclusions,
+    note:$('qNote').value.trim(),
+    valid:$('qValidUntil').value.trim(),
+    id:Date.now()
+  };
   if(!data.dest&&!data.hotel)return null;
   var b64=btoa(unescape(encodeURIComponent(JSON.stringify(data)))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=/g,'');
   return Q_BASE+'?q='+b64;
@@ -401,8 +497,10 @@ window.addEventListener('DOMContentLoaded',function(){
   $('tabArchiveBtn').addEventListener('click',function(){switchInnerTab('archive');});
   $('mainTabScratch').addEventListener('click',function(){switchMainTab('Scratch');});
   $('mainTabQuote').addEventListener('click',function(){switchMainTab('Quote');});
-  ['qClientName','qDestination','qHotel','qDeparture','qReturn','qPassengers','qDuration','qAirport','qPrice','qDeposit','qNote','qValidUntil'].forEach(function(id){$(id).addEventListener('input',liveUpdateQuote);});
+  ['qClientName','qDestination','qHotel','qRoom','qImg1','qImg2','qImg3','qHotelDesc','qFacilities','qFlightOut','qAirline','qDepTime','qArrTime','qFlightRet','qRetDepTime','qRetArrTime','qDeparture','qReturn','qPassengers','qDuration','qAirport','qPrice','qDeposit','qNote','qValidUntil'].forEach(function(id){$(id).addEventListener('input',liveUpdateQuote);});
   $('qBoard').addEventListener('change',liveUpdateQuote);
+  $('qStars').addEventListener('change',liveUpdateQuote);
+  $('qFlightType').addEventListener('change',liveUpdateQuote);
   $('qCopyBtn').addEventListener('click',qCopyLink);
   $('qPreviewBtn').addEventListener('click',qPreview);
   $('qWaBtn').addEventListener('click',qSendWA);
