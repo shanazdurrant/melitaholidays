@@ -32,15 +32,6 @@ body{font-family:'Poppins',sans-serif;background:var(--cream);min-height:100vh;p
 .quote-hero .client-greeting{font-size:13px;color:rgba(255,255,255,0.65);position:relative;margin-bottom:14px;font-weight:500;z-index:2;letter-spacing:.5px;}
 .stars-hero{color:var(--gold);font-size:18px;letter-spacing:2px;position:relative;z-index:2;margin-bottom:6px;}
 
-.countdown-bar{background:linear-gradient(135deg,#1a1a1a,#2a2a2a);padding:14px 24px;display:flex;align-items:center;justify-content:center;gap:20px;flex-wrap:wrap;}
-.countdown-label{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.5);}
-.countdown-units{display:flex;gap:12px;align-items:center;}
-.countdown-unit{text-align:center;}
-.countdown-unit .num{font-family:'Montserrat',sans-serif;font-size:22px;font-weight:900;color:var(--gold);line-height:1;}
-.countdown-unit .unit-label{font-size:9px;color:rgba(255,255,255,0.4);letter-spacing:1px;text-transform:uppercase;margin-top:2px;}
-.countdown-sep{font-size:18px;color:rgba(255,255,255,0.2);font-weight:900;margin-bottom:8px;}
-.countdown-expired{font-size:13px;color:#ef4444;font-weight:700;text-align:center;padding:12px;background:#1a1a1a;}
-
 .deposit-cta{background:linear-gradient(135deg,var(--gold),#c8882e);padding:18px 24px;text-align:center;}
 .deposit-cta p{color:#fff;font-size:15px;font-weight:700;}
 .deposit-cta p span{font-size:22px;font-family:'Montserrat',sans-serif;font-weight:900;}
@@ -186,8 +177,10 @@ body{font-family:'Poppins',sans-serif;background:var(--cream);min-height:100vh;p
     <p class="hero-sub" id="heroHotel"></p>
   </div>
 
-  <div id="countdownBar" style="display:none;"></div>
-  <div id="depositCta" style="display:none;" class="deposit-cta"></div>
+  <div style="background:#1a1a1a;padding:12px 24px;display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;">
+    <i class="fas fa-bolt" style="color:var(--gold);font-size:13px;"></i>
+    <p style="color:rgba(255,255,255,0.75);font-size:12px;margin:0;text-align:center;">All quotes are live and subject to availability — prices may change at any time. Book to secure your price.</p>
+  </div>
 
   <div class="quote-body" id="quoteBody">
 
@@ -327,22 +320,6 @@ function getHeroImg(dest){
 
 function stars(n){return '★'.repeat(parseInt(n)||0);}
 
-function initCountdown(str){
-  var bar=document.getElementById('countdownBar');
-  var target=new Date(str.replace(/(\d+)\s(\w+)\s(\d+)/,'$2 $1 $3'));
-  if(isNaN(target.getTime()))return;
-  target.setHours(23,59,59);
-  function pad(n){return n<10?'0'+n:n;}
-  function update(){
-    var diff=target-new Date();
-    if(diff<=0){bar.innerHTML='<div class="countdown-expired"><i class="fas fa-clock"></i> This quote has expired. Please contact Melita Holidays for an updated price.</div>';bar.style.display='block';return;}
-    var d=Math.floor(diff/86400000),h=Math.floor((diff%86400000)/3600000),m=Math.floor((diff%3600000)/60000),s=Math.floor((diff%60000)/1000);
-    bar.style.display='block';
-    bar.innerHTML='<div class="countdown-bar"><span class="countdown-label">Quote expires in</span><div class="countdown-units"><div class="countdown-unit"><div class="num">'+pad(d)+'</div><div class="unit-label">Days</div></div><span class="countdown-sep">:</span><div class="countdown-unit"><div class="num">'+pad(h)+'</div><div class="unit-label">Hrs</div></div><span class="countdown-sep">:</span><div class="countdown-unit"><div class="num">'+pad(m)+'</div><div class="unit-label">Min</div></div><span class="countdown-sep">:</span><div class="countdown-unit"><div class="num">'+pad(s)+'</div><div class="unit-label">Sec</div></div></div></div>';
-  }
-  update();setInterval(update,1000);
-}
-
 function generatePDF(d){
   var btn=document.getElementById('pdfBtn');
   btn.innerHTML='<i class="fas fa-spinner fa-spin"></i> Generating...';btn.disabled=true;
@@ -380,9 +357,6 @@ window.addEventListener('DOMContentLoaded',function(){
   if(d.hotel&&d.dest)document.getElementById('heroHotel').textContent=d.hotel;
   if(d.stars){var sh=document.getElementById('starsHero');sh.textContent=stars(d.stars);sh.style.display='block';}
 
-  // Countdown
-  if(d.valid)initCountdown(d.valid);
-
   // Deposit CTA
   if(d.deposit&&d.price){
     var cta=document.getElementById('depositCta');cta.style.display='block';
@@ -390,6 +364,10 @@ window.addEventListener('DOMContentLoaded',function(){
   }
 
   // Hotel section
+  if(d.hotelImg){
+    var gallery=document.getElementById('hotelGallery');
+    gallery.innerHTML='<div class="hotel-gallery one"><img src="'+d.hotelImg+'" alt="Hotel" style="width:100%;border-radius:10px;max-height:220px;object-fit:cover;"></div>';
+  }
   if(d.stars||d.board){
     var rr=document.getElementById('hotelRating');rr.style.display='flex';
     rr.innerHTML=(d.stars?'<span class="stars">'+stars(d.stars)+'</span><span class="rating-label">'+d.stars+' Star</span>':'')+(d.board?'<span class="rating-label" style="margin-left:12px;background:var(--teal);color:#fff;padding:3px 10px;border-radius:20px;font-size:11px;">'+d.board+'</span>':'');
@@ -408,7 +386,7 @@ window.addEventListener('DOMContentLoaded',function(){
   }
 
   // Hide hotel section if nothing to show
-  if(!d.stars&&!d.board&&!d.hotelDesc&&!d.facilities&&!d.room&&!d.hotelUrl)
+  if(!d.hotelImg&&!d.stars&&!d.board&&!d.hotelDesc&&!d.facilities&&!d.room&&!d.hotelUrl)
     document.getElementById('hotelSection').style.display='none';
 
   // Booking summary
@@ -448,6 +426,19 @@ window.addEventListener('DOMContentLoaded',function(){
 
   // Note
   if(d.note){document.getElementById('noteSection').style.display='block';document.getElementById('noteText').textContent=d.note;}
+
+  // Quote type — hide sections not relevant
+  if(d.qt==='hotel') document.getElementById('flightSection').style.display='none';
+  if(d.qt==='flight'){
+    document.getElementById('hotelSection').style.display='none';
+    document.getElementById('inclusionsSection').style.display='none';
+  }
+
+  // T&Cs bar
+  var tcBar=document.createElement('div');
+  tcBar.style.cssText='background:#fff;border-radius:14px;padding:14px 18px;margin-bottom:20px;display:flex;align-items:center;gap:12px;box-shadow:0 4px 20px rgba(0,0,0,0.06);border-left:4px solid var(--teal);';
+  tcBar.innerHTML='<i class="fas fa-file-contract" style="color:var(--teal);font-size:16px;flex-shrink:0;"></i><p style="font-size:12px;color:#666;margin:0;">This quote is subject to <a href="https://hub.thejltgroup.co.uk/bookingterms" target="_blank" style="color:var(--teal);font-weight:700;text-decoration:none;">JLT Group Booking Terms &amp; Conditions</a>. All prices are correct at time of quoting and subject to availability.</p>';
+  document.querySelector('.approve-section').before(tcBar);
 
   document.title=(d.dest||d.hotel)+' Quote — Melita Holidays';
 
