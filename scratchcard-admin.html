@@ -621,7 +621,8 @@ function buildQuoteUrl(){
     if(Array.isArray(v)&&v.length===0) return;
     data[k]=v;
   });
-  var b64=btoa(unescape(encodeURIComponent(JSON.stringify(data)))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=/g,'');
+  var json=JSON.stringify(data);
+  var b64=btoa(unescape(encodeURIComponent(json))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=/g,'');
   return Q_BASE+'?q='+b64;
 }
 
