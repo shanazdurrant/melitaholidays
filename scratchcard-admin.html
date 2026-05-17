@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Melita — Admin</title>
-<!-- admin-v5 -->
 <meta name="robots" content="noindex, nofollow">
 <link rel="icon" type="image/png" href="logo.png">
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -13,6 +12,7 @@
 :root{--teal:#2f7f82;--teal-dark:#256c6f;--gold:#e09a42;--cream:#f6f4f2;--text:#2a2a2a;--border:#e8e8e8;--subtle:#f7f7f7;}
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:'Poppins',sans-serif;background:var(--teal);min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding:40px 20px;}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(circle at 15% 15%,rgba(224,154,66,0.15) 0%,transparent 50%);pointer-events:none;}
 #loginScreen{max-width:380px;width:100%;margin:auto;animation:fadeUp .6s ease both;}
 .login-logo{text-align:center;margin-bottom:28px;}
 .login-logo img{height:65px;object-fit:contain;}
@@ -31,8 +31,9 @@ body{font-family:'Poppins',sans-serif;background:var(--teal);min-height:100vh;di
 .btn-login{width:100%;margin-top:24px;padding:16px;border:none;border-radius:50px;background:linear-gradient(135deg,var(--teal),var(--teal-dark));color:#fff;font-family:'Montserrat',sans-serif;font-size:14px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;box-shadow:0 8px 24px rgba(47,127,130,0.4);transition:transform .2s;}
 .btn-login:hover{transform:translateY(-2px);}
 .login-hint{text-align:center;margin-top:16px;font-size:11px;color:rgba(255,255,255,0.45);}
-#adminScreen{display:none;width:100%;max-width:980px;animation:fadeUp .5s ease both;}
+#adminScreen{display:none;width:100%;max-width:960px;animation:fadeUp .5s ease both;}
 .admin-topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:14px;}
+.topbar-btns{display:flex;gap:10px;align-items:center;}
 .btn-topbar{background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);color:rgba(255,255,255,0.8);padding:9px 18px;border-radius:50px;font-size:12px;font-weight:600;cursor:pointer;transition:all .2s;font-family:'Poppins',sans-serif;text-decoration:none;display:flex;align-items:center;gap:6px;}
 .btn-topbar:hover{background:rgba(255,255,255,0.2);color:#fff;}
 .main-tabs{display:flex;gap:0;margin-bottom:24px;background:rgba(255,255,255,0.1);border-radius:14px;padding:6px;}
@@ -40,71 +41,72 @@ body{font-family:'Poppins',sans-serif;background:var(--teal);min-height:100vh;di
 .main-tab.active{background:#fff;color:var(--teal);box-shadow:0 4px 16px rgba(0,0,0,0.12);}
 .main-section{display:none;}
 .main-section.active{display:block;}
-.two-col{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start;}
+.admin-grid,.quote-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start;}
 .admin-card{background:#fff;border-radius:20px;padding:28px;box-shadow:0 12px 40px rgba(0,0,0,0.15);}
 .card-title{font-family:'Montserrat',sans-serif;font-size:13px;font-weight:900;color:var(--teal);letter-spacing:1px;text-transform:uppercase;margin-bottom:4px;display:flex;align-items:center;gap:8px;}
 .card-title i{color:var(--gold);}
 .card-sub{font-size:12px;color:#aaa;margin-bottom:20px;}
-.field{margin-bottom:14px;}
-.field label{display:block;font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--teal);margin-bottom:5px;}
-.field label .opt{font-weight:400;text-transform:none;letter-spacing:0;color:#bbb;font-size:10px;}
-.field input[type=text],.field input[type=number],.field input[type=date],.field input[type=time],.field textarea,.field select{width:100%;padding:10px 12px;border:2px solid var(--border);border-radius:10px;font-family:'Poppins',sans-serif;font-size:13px;color:var(--text);outline:none;background:#fafafa;transition:border-color .2s;}
-.field input:focus,.field textarea:focus,.field select:focus{border-color:var(--teal);background:#fff;}
-.field textarea{resize:vertical;min-height:70px;line-height:1.6;}
-.half{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
-.section-label{font-family:'Montserrat',sans-serif;font-size:11px;font-weight:900;color:var(--teal);letter-spacing:1px;text-transform:uppercase;margin:16px 0 10px;display:flex;align-items:center;gap:6px;padding-top:14px;border-top:1px solid var(--border);}
-.section-label i{color:var(--gold);}
-.qt-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;}
-.qt-option{display:flex;align-items:center;justify-content:center;gap:6px;padding:10px;border:2px solid var(--border);border-radius:10px;cursor:pointer;font-size:12px;font-weight:700;color:#888;background:#fafafa;transition:all .2s;user-select:none;}
-.qt-option.active{border-color:var(--teal);color:var(--teal);background:#f0fafa;}
-.inc-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px;}
-.inc-item{display:flex;align-items:center;gap:7px;padding:8px 10px;border:2px solid var(--border);border-radius:8px;cursor:pointer;font-size:12px;font-weight:600;color:#666;background:#fafafa;transition:all .2s;user-select:none;}
-.inc-item.active{border-color:var(--teal);color:var(--teal);background:#f0fafa;}
-.pay-row{display:grid;grid-template-columns:1fr 1fr auto;gap:8px;margin-bottom:8px;align-items:center;}
-.pay-row input{padding:9px;border:2px solid var(--border);border-radius:8px;font-family:'Poppins',sans-serif;font-size:13px;width:100%;}
-.btn-add-pay{width:100%;padding:9px;border:2px dashed var(--border);border-radius:10px;background:none;color:var(--teal);font-family:'Poppins',sans-serif;font-size:12px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;margin-top:4px;}
-.divider{height:1px;background:var(--border);margin:14px 0;}
-.url-box{background:#f7f7f7;border-radius:10px;padding:11px 13px;font-size:11px;color:#aaa;border:1px dashed var(--border);min-height:38px;word-break:break-all;line-height:1.5;}
-.url-box.active{background:#f0fafa;border-color:var(--teal);color:var(--teal);font-weight:500;}
+.field{margin-bottom:16px;}
+label{display:block;font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--teal);margin-bottom:6px;}
+label .opt{font-weight:400;text-transform:none;letter-spacing:0;color:#bbb;font-size:10px;}
+input[type=text],input[type=number],textarea,select{width:100%;padding:11px 13px;border:2px solid var(--border);border-radius:10px;font-family:'Poppins',sans-serif;font-size:13px;color:var(--text);outline:none;background:#fafafa;transition:border-color .2s;}
+input[type=text]:focus,input[type=number]:focus,textarea:focus,select:focus{border-color:var(--teal);background:#fff;}
+textarea{resize:vertical;min-height:80px;line-height:1.6;}
+select{cursor:pointer;}
+.divider-line{height:1px;background:var(--border);margin:16px 0;}
+.url-preview{background:#f7f7f7;border-radius:10px;padding:11px 13px;font-size:11px;color:#aaa;border:1px dashed var(--border);min-height:40px;word-break:break-all;line-height:1.5;}
+.url-preview.active{background:#f0fafa;border-color:var(--teal);color:var(--teal);font-weight:500;}
+.encoded-note{font-size:10px;color:#22c55e;margin-top:6px;display:none;align-items:center;gap:4px;}
+.encoded-note.show{display:flex;}
+.btn-primary{width:100%;padding:13px;border:none;border-radius:50px;background:linear-gradient(135deg,var(--teal),var(--teal-dark));color:#fff;font-family:'Montserrat',sans-serif;font-size:12px;font-weight:800;letter-spacing:1px;text-transform:uppercase;cursor:pointer;box-shadow:0 6px 20px rgba(47,127,130,0.35);transition:transform .2s;display:flex;align-items:center;justify-content:center;gap:8px;}
+.btn-primary:hover{transform:translateY(-2px);}
+.btn-wa{background:linear-gradient(135deg,#25D366,#1ebe5d);box-shadow:0 6px 20px rgba(37,211,102,0.3);}
 .btn-row{display:flex;gap:10px;margin-top:10px;}
-.btn{flex:1;padding:12px;border:none;border-radius:50px;font-family:'Montserrat',sans-serif;font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:7px;transition:transform .2s;}
-.btn:hover{transform:translateY(-1px);}
-.btn-teal{background:linear-gradient(135deg,var(--teal),var(--teal-dark));color:#fff;box-shadow:0 5px 18px rgba(47,127,130,0.35);}
-.btn-outline{background:#fff;color:var(--teal);border:2px solid var(--border);}
-.btn-wa{background:linear-gradient(135deg,#25D366,#1ebe5d);color:#fff;box-shadow:0 5px 18px rgba(37,211,102,0.3);}
-.btn-del{background:#fee2e2;color:#dc2626;border:none;padding:9px 12px;border-radius:8px;cursor:pointer;font-size:12px;}
-.flash{display:none;align-items:center;gap:8px;background:#f0fdf4;border:1px solid #86efac;border-radius:10px;padding:10px 13px;font-size:12px;color:#166534;margin-top:10px;}
-.flash.show{display:flex;}
-.saved-item{display:flex;align-items:center;justify-content:space-between;padding:11px 13px;border-radius:10px;background:#f7f7f7;border:1px solid var(--border);margin-bottom:8px;gap:10px;flex-wrap:wrap;}
-.saved-info .s-name{font-weight:700;font-size:13px;color:var(--text);}
-.saved-info .s-dest{font-size:11px;color:var(--teal);font-weight:600;margin-top:2px;}
-.saved-info .s-date{font-size:10px;color:#bbb;margin-top:2px;}
-.saved-actions{display:flex;gap:6px;}
-.sbtn{padding:7px 11px;border:none;border-radius:8px;font-size:11px;font-weight:700;cursor:pointer;}
-.sbtn-copy{background:var(--teal);color:#fff;}
-.sbtn-del{background:#fee2e2;color:#dc2626;}
-.empty{text-align:center;padding:24px;color:#ccc;font-size:13px;}
-.empty i{font-size:28px;display:block;margin-bottom:8px;}
-.stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px;}
-.stat{background:var(--subtle);border-radius:10px;padding:12px;text-align:center;border:1px solid var(--border);}
-.stat .n{font-family:'Montserrat',sans-serif;font-size:24px;font-weight:900;color:var(--teal);}
-.stat .l{font-size:10px;color:#aaa;text-transform:uppercase;letter-spacing:1px;margin-top:2px;}
-.itab-bar{display:flex;border-bottom:2px solid var(--border);margin-bottom:14px;}
-.itab{padding:9px 16px;border:none;background:none;font-family:'Poppins',sans-serif;font-size:12px;font-weight:600;color:#aaa;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;transition:all .2s;}
-.itab.active{color:var(--teal);border-bottom-color:var(--teal);}
-.ipane{display:none;}
-.ipane.active{display:block;}
-.qbadge{font-size:10px;padding:2px 8px;border-radius:10px;font-weight:700;display:inline-block;margin-left:6px;}
-.qbadge-p{background:#fef3c7;color:#92400e;}
-.qbadge-a{background:#d1fae5;color:#065f46;}
-/* SCRATCHCARD */
+.btn-row .btn-primary{flex:1;}
+.btn-sm{padding:10px 12px;font-size:11px;}
+.flash{display:none;align-items:center;gap:10px;background:#f0fdf4;border:1px solid #86efac;border-radius:10px;padding:10px 13px;font-size:12px;color:#166534;margin-top:10px;}
+.flash.show{display:flex;animation:fadeUp .3s ease both;}
+.flash i{color:#22c55e;}
+#customDestInput{display:none;margin-top:8px;}
 .preset-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:10px;}
 .preset-btn{padding:7px 9px;border:2px solid var(--border);border-radius:8px;font-size:11px;font-weight:600;color:var(--text);background:#fafafa;cursor:pointer;text-align:left;transition:all .2s;font-family:'Poppins',sans-serif;}
 .preset-btn:hover,.preset-btn.active{border-color:var(--teal);color:var(--teal);background:#f0fafa;}
-.enc-note{font-size:10px;color:#22c55e;margin-top:6px;display:none;align-items:center;gap:4px;}
-.enc-note.show{display:flex;}
+.saved-item,.quote-saved-item{display:flex;align-items:center;justify-content:space-between;padding:11px 13px;border-radius:10px;background:#f7f7f7;border:1px solid var(--border);margin-bottom:8px;gap:10px;flex-wrap:wrap;}
+.saved-info{flex:1;min-width:0;}
+.saved-name{font-weight:700;font-size:13px;color:var(--text);}
+.saved-dest{font-size:11px;color:var(--teal);font-weight:600;text-transform:uppercase;margin-top:2px;}
+.saved-date-label{font-size:10px;color:#bbb;margin-top:2px;}
+.saved-actions{display:flex;gap:6px;flex-shrink:0;}
+.saved-btn{padding:7px 11px;border:none;border-radius:8px;font-size:11px;font-weight:700;cursor:pointer;transition:all .2s;font-family:'Poppins',sans-serif;}
+.saved-btn.copy{background:var(--teal);color:#fff;}
+.saved-btn.del{background:#fee2e2;color:#dc2626;}
+.saved-btn:hover{opacity:.85;}
+.empty-saved{text-align:center;padding:24px;color:#ccc;font-size:13px;}
+.empty-saved i{font-size:28px;display:block;margin-bottom:8px;}
+.archive-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px;}
+.archive-stat{background:var(--subtle);border-radius:10px;padding:12px;text-align:center;border:1px solid var(--border);}
+.archive-stat .stat-n{font-family:'Montserrat',sans-serif;font-size:24px;font-weight:900;color:var(--teal);}
+.archive-stat .stat-l{font-size:10px;color:#aaa;text-transform:uppercase;letter-spacing:1px;margin-top:2px;}
+.inner-tab-bar{display:flex;gap:0;margin-bottom:16px;border-bottom:2px solid var(--border);}
+.inner-tab-btn{padding:9px 16px;border:none;background:none;font-family:'Poppins',sans-serif;font-size:12px;font-weight:600;color:#aaa;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;transition:all .2s;}
+.inner-tab-btn.active{color:var(--teal);border-bottom-color:var(--teal);}
+.inner-tab-pane{display:none;}
+.inner-tab-pane.active{display:block;}
+.inclusions-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px;}
+.inclusion-item{display:flex;align-items:center;gap:7px;padding:8px 10px;border:2px solid var(--border);border-radius:8px;cursor:pointer;transition:all .2s;font-size:12px;font-weight:600;color:#666;background:#fafafa;user-select:none;}
+.inclusion-item.active{border-color:var(--teal);color:var(--teal);background:#f0fafa;}
+.price-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.quote-badge{font-size:10px;padding:2px 8px;border-radius:10px;font-weight:700;display:inline-block;margin-left:6px;}
+.badge-pending{background:#fef3c7;color:#92400e;}
+.badge-approved{background:#d1fae5;color:#065f46;}
 @keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
-@media(max-width:700px){.two-col{grid-template-columns:1fr;}.qt-grid{grid-template-columns:1fr;}.half{grid-template-columns:1fr;}.inc-grid{grid-template-columns:1fr;}.main-tab span{display:none;}}
+@media(max-width:700px){
+  .admin-grid,.quote-grid{grid-template-columns:1fr;}
+  .admin-topbar{flex-direction:column;align-items:flex-start;}
+  .preset-grid,.inclusions-grid,.price-row{grid-template-columns:1fr;}
+  .archive-stats{grid-template-columns:1fr 1fr;}
+  .main-tab span{display:none;}
+}
 </style>
 </head>
 <body>
@@ -121,7 +123,7 @@ body{font-family:'Poppins',sans-serif;background:var(--teal);min-height:100vh;di
     <label>Password</label>
     <div class="pw-wrap">
       <input type="password" id="pwInput" placeholder="Enter password">
-      <button class="pw-toggle" id="pwToggle" type="button"><i class="fas fa-eye" id="pwIcon"></i></button>
+      <button class="pw-toggle" id="pwToggleBtn" type="button"><i class="fas fa-eye" id="pwIcon"></i></button>
     </div>
     <div class="login-error" id="loginError"><i class="fas fa-exclamation-circle"></i> Incorrect password.</div>
     <button class="btn-login" id="loginBtn" type="button"><i class="fas fa-unlock-alt"></i>&nbsp; Sign In</button>
@@ -132,25 +134,24 @@ body{font-family:'Poppins',sans-serif;background:var(--teal);min-height:100vh;di
 <!-- ADMIN -->
 <div id="adminScreen">
   <div class="admin-topbar">
-    <div style="display:flex;align-items:center;gap:12px;">
-      <img src="logo.png" alt="Melita" style="height:42px;object-fit:contain;" onerror="this.style.display='none'">
-      <span style="font-family:'Montserrat',sans-serif;font-size:15px;font-weight:900;color:#fff;letter-spacing:1px;text-transform:uppercase;">Melita Admin <span style="font-size:9px;opacity:.4;">v5</span></span>
+    <div style="display:flex;align-items:center;gap:14px;">
+      <img src="logo.png" alt="Melita" style="height:44px;object-fit:contain;" onerror="this.style.display='none'">
+      <span style="font-family:'Montserrat',sans-serif;font-size:15px;font-weight:900;color:#fff;letter-spacing:1px;text-transform:uppercase;">Melita Admin</span>
     </div>
-    <div style="display:flex;gap:10px;">
+    <div class="topbar-btns">
       <a href="https://melitaholidays.com" class="btn-topbar"><i class="fas fa-home"></i> Main Site</a>
       <button class="btn-topbar" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Sign Out</button>
     </div>
   </div>
 
-  <!-- MAIN TABS -->
   <div class="main-tabs">
     <button class="main-tab active" id="mainTabScratch"><i class="fas fa-star"></i> <span>Scratchcard</span></button>
     <button class="main-tab" id="mainTabQuote"><i class="fas fa-file-invoice"></i> <span>Quote Builder</span></button>
   </div>
 
-  <!-- ═══ SCRATCHCARD SECTION ═══ -->
+  <!-- SCRATCHCARD -->
   <div class="main-section active" id="sectionScratch">
-    <div class="two-col">
+    <div class="admin-grid">
       <div class="admin-card">
         <div class="card-title"><i class="fas fa-gift"></i> Create Scratchcard</div>
         <div class="card-sub">Fill in the details to generate a hidden surprise link.</div>
@@ -169,11 +170,11 @@ body{font-family:'Poppins',sans-serif;background:var(--teal);min-height:100vh;di
             <option value="PORTUGAL">Portugal</option><option value="ITALY">Italy</option>
             <option value="FLORIDA">Florida</option><option value="JAMAICA">Jamaica</option>
             <option value="GREECE">Greece</option><option value="MOROCCO">Morocco</option>
-            <option value="JAPAN">Japan</option><option value="PARIS">Paris</option>
-            <option value="LAPLAND">Lapland</option><option value="DISNEYLAND">Disneyland</option>
-            <option value="custom">Type your own...</option>
+            <option value="SOUTH KOREA">South Korea</option><option value="JAPAN">Japan</option>
+            <option value="PARIS">Paris</option><option value="LAPLAND">Lapland</option>
+            <option value="DISNEYLAND">Disneyland</option><option value="custom">Type your own...</option>
           </select>
-          <input type="text" id="customDestInput" placeholder="Type destination..." maxlength="30" style="margin-top:6px;display:none;">
+          <input type="text" id="customDestInput" placeholder="Type destination..." maxlength="30">
         </div>
         <div class="field"><label>Travel Date <span class="opt">(optional)</span></label><input type="text" id="travelDate" placeholder="e.g. July 2026"></div>
         <div class="field">
@@ -186,40 +187,41 @@ body{font-family:'Poppins',sans-serif;background:var(--teal);min-height:100vh;di
             <div style="font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--teal);margin-bottom:2px;">Confetti Animation</div>
             <div style="font-size:11px;color:#aaa;">Show confetti on reveal</div>
           </div>
-          <div style="position:relative;width:44px;height:24px;flex-shrink:0;">
+          <div style="position:relative;display:inline-block;width:44px;height:24px;flex-shrink:0;">
             <input type="checkbox" id="confettiToggle" checked style="opacity:0;width:0;height:0;position:absolute;">
             <div id="toggleTrack" style="position:absolute;inset:0;background:var(--teal);border-radius:24px;cursor:pointer;transition:background .3s;"></div>
             <div id="toggleThumb" style="position:absolute;top:3px;left:23px;width:18px;height:18px;background:#fff;border-radius:50%;cursor:pointer;transition:left .3s;box-shadow:0 1px 4px rgba(0,0,0,0.2);"></div>
           </div>
         </div>
-        <div class="divider"></div>
+        <div class="divider-line"></div>
         <div class="field">
           <label>Generated Link <span class="opt">(destination hidden)</span></label>
-          <div class="url-box" id="scUrlBox">Fill in a destination to generate a link...</div>
-          <div class="enc-note" id="encNote"><i class="fas fa-shield-alt"></i> Destination is fully encoded</div>
+          <div class="url-preview" id="urlPreview">Fill in a destination to generate a link...</div>
+          <div class="encoded-note" id="encodedNote"><i class="fas fa-shield-alt"></i> Destination is fully encoded</div>
         </div>
         <div class="btn-row">
-          <button class="btn btn-teal" id="scCopyBtn"><i class="fas fa-copy"></i> Copy</button>
-          <button class="btn btn-outline" id="scPreviewBtn"><i class="fas fa-eye"></i> Preview</button>
+          <button class="btn-primary btn-sm" id="copyBtn"><i class="fas fa-copy"></i> Copy Link</button>
+          <button class="btn-primary btn-sm" id="previewBtn" style="background:var(--cream);color:var(--teal);box-shadow:none;border:2px solid var(--border);"><i class="fas fa-eye"></i> Preview</button>
         </div>
-        <div class="flash" id="scCopyFlash"><i class="fas fa-check-circle"></i> Link copied!</div>
-        <div class="divider"></div>
-        <button class="btn btn-wa" id="scWaBtn" style="width:100%;padding:14px;"><i class="fab fa-whatsapp"></i> Send via WhatsApp</button>
+        <div class="flash" id="copyFlash"><i class="fas fa-check-circle"></i> Link copied!</div>
+        <div class="divider-line"></div>
+        <button class="btn-primary btn-wa" id="waBtn"><i class="fab fa-whatsapp"></i> Send via WhatsApp</button>
       </div>
+
       <div class="admin-card">
-        <div class="itab-bar">
-          <button class="itab active" id="itabRecent">Recent</button>
-          <button class="itab" id="itabArchive">Archive <span id="archiveBadge" style="background:var(--teal);color:#fff;border-radius:10px;padding:1px 7px;font-size:10px;margin-left:4px;">0</span></button>
+        <div class="inner-tab-bar">
+          <button class="inner-tab-btn active" id="tabRecentBtn">Recent</button>
+          <button class="inner-tab-btn" id="tabArchiveBtn">Archive <span id="archiveBadge" style="background:var(--teal);color:#fff;border-radius:10px;padding:1px 7px;font-size:10px;margin-left:4px;">0</span></button>
         </div>
-        <div class="ipane active" id="ipaneRecent">
-          <div class="card-sub" style="margin-bottom:12px;">Last 5 sent.</div>
+        <div class="inner-tab-pane active" id="tab-recent">
+          <div class="card-sub" style="margin-bottom:14px;">Last 5 sent — colour coded by method.</div>
           <div id="savedList"></div>
         </div>
-        <div class="ipane" id="ipaneArchive">
-          <div class="stat-grid">
-            <div class="stat"><div class="n" id="archTotal">0</div><div class="l">Total</div></div>
-            <div class="stat"><div class="n" id="archWA" style="color:#25D366;">0</div><div class="l">WhatsApp</div></div>
-            <div class="stat"><div class="n" id="archCopy" style="color:var(--teal);">0</div><div class="l">Copied</div></div>
+        <div class="inner-tab-pane" id="tab-archive">
+          <div class="archive-stats">
+            <div class="archive-stat"><div class="stat-n" id="archiveTotal">0</div><div class="stat-l">Total</div></div>
+            <div class="archive-stat"><div class="stat-n" id="archiveWA" style="color:#25D366;">0</div><div class="stat-l">WhatsApp</div></div>
+            <div class="archive-stat"><div class="stat-n" id="archiveCopied" style="color:var(--teal);">0</div><div class="stat-l">Copied</div></div>
           </div>
           <div id="archiveList"></div>
         </div>
@@ -227,210 +229,75 @@ body{font-family:'Poppins',sans-serif;background:var(--teal);min-height:100vh;di
     </div>
   </div>
 
-  <!-- ═══ QUOTE BUILDER SECTION ═══ -->
+  <!-- QUOTE BUILDER -->
   <div class="main-section" id="sectionQuote">
-    <div class="two-col">
-
-      <!-- QUOTE FORM -->
+    <div class="quote-grid">
       <div class="admin-card">
         <div class="card-title"><i class="fas fa-file-invoice"></i> Build a Quote</div>
-        <div class="card-sub">Fill in the details to generate a personalised client quote.</div>
-
-        <!-- CLIENT -->
-        <div class="field"><label>Client Name</label><input type="text" id="qName" placeholder="e.g. The Johnson Family"></div>
-
-        <!-- QUOTE TYPE -->
+        <div class="card-sub">Fill in the holiday details to generate a branded client quote link.</div>
+        <div class="field"><label>Client Name</label><input type="text" id="qClientName" placeholder="e.g. The Johnson Family"></div>
+        <div class="field"><label>Destination</label><input type="text" id="qDestination" placeholder="e.g. Maldives, Turkey, Jamaica"></div>
+        <div class="field"><label>Hotel / Resort</label><input type="text" id="qHotel" placeholder="e.g. Adalya Elite Lara"></div>
         <div class="field">
-          <label>Quote Type</label>
-          <div class="qt-grid">
-            <div class="qt-option active" data-qt="both"><input type="radio" name="qt" value="both" checked style="display:none;"> <i class="fas fa-plane"></i>&nbsp; Flights + Hotel</div>
-            <div class="qt-option" data-qt="hotel"><input type="radio" name="qt" value="hotel" style="display:none;"> <i class="fas fa-hotel"></i>&nbsp; Hotel Only</div>
-            <div class="qt-option" data-qt="flight"><input type="radio" name="qt" value="flight" style="display:none;"> <i class="fas fa-plane-departure"></i>&nbsp; Flights Only</div>
-          </div>
-        </div>
-
-        <!-- DESTINATION -->
-        <div class="field">
-          <label>Destination</label>
-          <select id="qDestDrop">
-            <option value="">— Select destination —</option>
-            <option>Turkey</option><option>Maldives</option><option>Dubai</option>
-            <option>Santorini</option><option>Barbados</option><option>Bali</option>
-            <option>Tenerife</option><option>New York</option><option>Cancun</option>
-            <option>Thailand</option><option>Mauritius</option><option>Ibiza</option>
-            <option>Cyprus</option><option>Lanzarote</option><option>Portugal</option>
-            <option>Italy</option><option>Florida</option><option>Jamaica</option>
-            <option>Greece</option><option>Morocco</option><option>South Korea</option>
-            <option>Japan</option><option>Paris</option><option>Lapland</option>
-            <option>Egypt</option><option>Hawaii</option><option>Cape Town</option>
-            <option>Australia</option><option>Barcelona</option><option>Zanzibar</option>
-            <option>Cuba</option><option>Disneyland Paris</option><option>Kenya</option>
-            <option value="other">Other (type below)</option>
+          <label>Board Type</label>
+          <select id="qBoard">
+            <option value="">— Select —</option>
+            <option value="All Inclusive">All Inclusive</option>
+            <option value="Full Board">Full Board</option>
+            <option value="Half Board">Half Board</option>
+            <option value="Bed and Breakfast">Bed and Breakfast</option>
+            <option value="Room Only">Room Only</option>
+            <option value="Self Catering">Self Catering</option>
           </select>
-          <input type="text" id="qDestText" placeholder="Type destination..." style="margin-top:6px;display:none;">
         </div>
-
-        <!-- HOTEL SECTION -->
-        <div id="qHotelSection">
-          <div class="section-label"><i class="fas fa-hotel"></i> Hotel Details</div>
-          <div class="field"><label>Hotel / Resort</label><input type="text" id="qHotel" placeholder="e.g. Adalya Elite Lara"></div>
-          <div class="half">
-            <div class="field">
-              <label>Star Rating</label>
-              <select id="qStars">
-                <option value="">— Select —</option>
-                <option>3 Star</option><option>4 Star</option><option>4 Star Plus</option>
-                <option>5 Star</option><option>5 Star Deluxe</option>
-              </select>
-            </div>
-            <div class="field">
-              <label>Board Type</label>
-              <select id="qBoard">
-                <option value="">— Select —</option>
-                <option>All Inclusive</option><option>Full Board</option>
-                <option>Half Board</option><option>Bed and Breakfast</option>
-                <option>Room Only</option><option>Self Catering</option>
-              </select>
-            </div>
-          </div>
-          <div class="field"><label>Room Type</label><input type="text" id="qRoom" placeholder="e.g. Superior Double Sea View"></div>
-          <div class="field"><label>Hotel Website <span class="opt">optional</span></label><input type="text" id="qHotelUrl" placeholder="e.g. https://www.hotel.com"></div>
-          <div class="field"><label>Hotel Description <span class="opt">optional</span></label><textarea id="qHotelDesc" placeholder="e.g. A stunning 5-star resort set right on the beach..."></textarea></div>
-          <div class="field"><label>Facilities <span class="opt">comma separated</span></label><input type="text" id="qFacilities" placeholder="e.g. Waterpark, Spa, Sandy Beach, Kids Club"></div>
+        <div class="price-row">
+          <div class="field"><label>Departure Date</label><input type="text" id="qDeparture" placeholder="e.g. 12 Aug 2026"></div>
+          <div class="field"><label>Return Date</label><input type="text" id="qReturn" placeholder="e.g. 19 Aug 2026"></div>
         </div>
-
-        <!-- FLIGHT SECTION -->
-        <div id="qFlightSection">
-          <div class="section-label"><i class="fas fa-plane-departure"></i> Flight Details</div>
-          <div class="half">
-            <div class="field"><label>Outbound Flight No.</label><input type="text" id="qFlightOut" placeholder="e.g. EZY4617"></div>
-            <div class="field"><label>Airline</label><input type="text" id="qAirline" placeholder="e.g. easyJet"></div>
-          </div>
-          <div class="half">
-            <div class="field"><label>Departs (outbound)</label><input type="time" id="qDepTime"></div>
-            <div class="field"><label>Arrives (outbound)</label><input type="time" id="qArrTime"></div>
-          </div>
-          <div class="half">
-            <div class="field"><label>Return Flight No.</label><input type="text" id="qFlightRet" placeholder="e.g. EZY4618"></div>
-            <div class="field">
-              <label>Flight Type</label>
-              <select id="qFlightType">
-                <option>Direct</option><option>1 Stop</option><option>2 Stops</option>
-              </select>
-            </div>
-          </div>
-          <div class="half">
-            <div class="field"><label>Departs (return)</label><input type="time" id="qRetDep"></div>
-            <div class="field"><label>Arrives (return)</label><input type="time" id="qRetArr"></div>
-          </div>
+        <div class="price-row">
+          <div class="field"><label>Passengers</label><input type="text" id="qPassengers" placeholder="e.g. 2 Adults, 1 Child"></div>
+          <div class="field"><label>Duration</label><input type="text" id="qDuration" placeholder="e.g. 7 nights"></div>
         </div>
-
-        <!-- BOOKING DETAILS -->
-        <div class="section-label"><i class="fas fa-calendar"></i> Booking Details</div>
-        <div class="half">
-          <div class="field"><label>Departure Date</label><input type="date" id="qDepDate"></div>
-          <div class="field"><label>Return Date</label><input type="date" id="qRetDate"></div>
-        </div>
-        <div class="half">
-          <div class="field"><label>Duration <span class="opt">auto-calculated</span></label><input type="text" id="qDuration" placeholder="e.g. 7 nights" readonly style="background:#f0f0f0;"></div>
-          <div class="field"><label>Passengers</label><input type="text" id="qPax" placeholder="e.g. 2 Adults, 1 Child"></div>
-        </div>
-
-        <!-- AIRPORT -->
-        <div class="field">
-          <label>Departure Airport</label>
-          <select id="qAirportDrop">
-            <option value="">— Select airport —</option>
-            <optgroup label="London">
-              <option>London Heathrow (LHR)</option><option>London Gatwick (LGW)</option>
-              <option>London Stansted (STN)</option><option>London Luton (LTN)</option>
-              <option>London City (LCY)</option><option>London Southend (SEN)</option>
-            </optgroup>
-            <optgroup label="England">
-              <option>Manchester (MAN)</option><option>Birmingham (BHX)</option>
-              <option>Bristol (BRS)</option><option>Leeds Bradford (LBA)</option>
-              <option>Liverpool (LPL)</option><option>Newcastle (NCL)</option>
-              <option>East Midlands (EMA)</option><option>Southampton (SOU)</option>
-              <option>Exeter (EXT)</option><option>Doncaster Sheffield (DSA)</option>
-            </optgroup>
-            <optgroup label="Scotland">
-              <option>Glasgow (GLA)</option><option>Edinburgh (EDI)</option>
-              <option>Aberdeen (ABZ)</option><option>Inverness (INV)</option>
-            </optgroup>
-            <optgroup label="Wales & N. Ireland">
-              <option>Cardiff (CWL)</option><option>Belfast International (BFS)</option>
-              <option>Belfast City (BHD)</option>
-            </optgroup>
-            <option value="other">Other (type below)</option>
-          </select>
-          <input type="text" id="qAirportText" placeholder="Type airport..." style="margin-top:6px;display:none;">
-        </div>
-
-        <!-- PRICING -->
-        <div class="section-label"><i class="fas fa-pound-sign"></i> Pricing</div>
-        <div class="half">
+        <div class="field"><label>Departure Airport</label><input type="text" id="qAirport" placeholder="e.g. London Gatwick"></div>
+        <div class="price-row">
           <div class="field"><label>Total Price (£)</label><input type="number" id="qPrice" placeholder="e.g. 3499"></div>
-          <div class="field"><label>Deposit (£)</label><input type="number" id="qDeposit" placeholder="e.g. 350"></div>
+          <div class="field"><label>Deposit (£) <span class="opt">optional</span></label><input type="number" id="qDeposit" placeholder="e.g. 350"></div>
         </div>
-        <div class="half">
-          <div class="field"><label>Deposit Due Date</label><input type="date" id="qDepositDate"></div>
-          <div class="field"><label>Final Payment Date</label><input type="date" id="qFinalDate"></div>
-        </div>
-
-        <!-- PAYMENT SCHEDULE -->
-        <div class="field">
-          <label>Payment Schedule <span class="opt">for dynamic packages</span></label>
-          <div id="paymentRows"></div>
-          <button type="button" class="btn-add-pay" id="addPayBtn"><i class="fas fa-plus"></i> Add Payment Instalment</button>
-        </div>
-
-        <!-- INCLUSIONS -->
         <div class="field">
           <label>What's Included</label>
-          <div class="inc-grid">
-            <div class="inc-item" data-inc="Return Flights"><i class="fas fa-plane"></i> Return Flights</div>
-            <div class="inc-item" data-inc="Transfers"><i class="fas fa-shuttle-van"></i> Transfers</div>
-            <div class="inc-item" data-inc="ATOL Protected"><i class="fas fa-shield-alt"></i> ATOL Protected</div>
-            <div class="inc-item" data-inc="Luggage"><i class="fas fa-suitcase"></i> Luggage</div>
-            <div class="inc-item" data-inc="Hotel"><i class="fas fa-hotel"></i> Hotel</div>
-            <div class="inc-item" data-inc="Travel Insurance"><i class="fas fa-heart"></i> Travel Insurance</div>
+          <div class="inclusions-grid" id="inclusionsGrid">
+            <div class="inclusion-item" data-val="Return Flights"><i class="fas fa-plane"></i> Return Flights</div>
+            <div class="inclusion-item" data-val="Transfers"><i class="fas fa-shuttle-van"></i> Transfers</div>
+            <div class="inclusion-item" data-val="ATOL Protected"><i class="fas fa-shield-alt"></i> ATOL Protected</div>
+            <div class="inclusion-item" data-val="Luggage"><i class="fas fa-suitcase"></i> Luggage</div>
+            <div class="inclusion-item" data-val="Hotel"><i class="fas fa-hotel"></i> Hotel</div>
+            <div class="inclusion-item" data-val="Travel Insurance"><i class="fas fa-heart"></i> Travel Insurance</div>
           </div>
         </div>
-
-        <!-- NOTE & T&CS -->
-        <div class="field"><label>Personal Note <span class="opt">optional</span></label><textarea id="qNote" placeholder="e.g. I have hand-picked this hotel for your family..."></textarea></div>
-
-        <div class="field">
-          <div style="display:flex;align-items:center;gap:8px;padding:10px 12px;background:#f0fafa;border-radius:10px;border:1px solid var(--border);">
-            <i class="fas fa-file-contract" style="color:var(--teal);"></i>
-            <span style="font-size:12px;color:var(--teal);font-weight:600;flex:1;">JLT Group T&amp;Cs included automatically</span>
-            <a href="https://hub.thejltgroup.co.uk/bookingterms" target="_blank" style="font-size:11px;color:#aaa;text-decoration:none;"><i class="fas fa-external-link-alt"></i> Preview</a>
-          </div>
-        </div>
-
-        <div class="divider"></div>
+        <div class="field"><label>Personal Note <span class="opt">optional</span></label><textarea id="qNote" placeholder="e.g. I have hand-picked this hotel for your family — the beach is right on your doorstep."></textarea></div>
+        <div class="field"><label>Quote Valid Until <span class="opt">optional</span></label><input type="text" id="qValidUntil" placeholder="e.g. 30 May 2026"></div>
+        <div class="divider-line"></div>
         <div class="field">
           <label>Generated Quote Link</label>
-          <div class="url-box" id="qUrlBox">Fill in the details above to generate a quote link...</div>
+          <div class="url-preview" id="qUrlPreview">Fill in the details above to generate a quote link...</div>
         </div>
         <div class="btn-row">
-          <button class="btn btn-teal" id="qCopyBtn"><i class="fas fa-copy"></i> Copy</button>
-          <button class="btn btn-outline" id="qPreviewBtn"><i class="fas fa-eye"></i> Preview</button>
+          <button class="btn-primary btn-sm" id="qCopyBtn"><i class="fas fa-copy"></i> Copy Link</button>
+          <button class="btn-primary btn-sm" id="qPreviewBtn" style="background:var(--cream);color:var(--teal);box-shadow:none;border:2px solid var(--border);"><i class="fas fa-eye"></i> Preview</button>
         </div>
         <div class="flash" id="qCopyFlash"><i class="fas fa-check-circle"></i> Quote link copied!</div>
-        <div class="divider"></div>
-        <button class="btn btn-wa" id="qWaBtn" style="width:100%;padding:14px;"><i class="fab fa-whatsapp"></i> Send Quote via WhatsApp</button>
+        <div class="divider-line"></div>
+        <button class="btn-primary btn-wa" id="qWaBtn"><i class="fab fa-whatsapp"></i> Send Quote via WhatsApp</button>
       </div>
 
-      <!-- QUOTE ARCHIVE -->
       <div class="admin-card">
         <div class="card-title"><i class="fas fa-folder-open"></i> Quote Archive</div>
-        <div class="card-sub">All quotes sent.</div>
-        <div class="stat-grid" style="grid-template-columns:1fr 1fr;">
-          <div class="stat"><div class="n" id="qTotal">0</div><div class="l">Total</div></div>
-          <div class="stat"><div class="n" id="qApproved" style="color:#22c55e;">0</div><div class="l">Approved</div></div>
+        <div class="card-sub">All quotes sent — copy any link to resend.</div>
+        <div class="archive-stats" style="grid-template-columns:1fr 1fr;">
+          <div class="archive-stat"><div class="stat-n" id="qTotal">0</div><div class="stat-l">Total Quotes</div></div>
+          <div class="archive-stat"><div class="stat-n" id="qApproved" style="color:#22c55e;">0</div><div class="stat-l">Approved</div></div>
         </div>
-        <div id="quoteArchiveList"><div class="empty"><i class="fas fa-file-invoice"></i>No quotes yet.</div></div>
+        <div id="quoteArchiveList"><div class="empty-saved"><i class="fas fa-file-invoice"></i>No quotes yet.</div></div>
       </div>
     </div>
   </div>
@@ -439,57 +306,10 @@ body{font-family:'Poppins',sans-serif;background:var(--teal);min-height:100vh;di
 
 <script data-cfasync="false">
 (function(){
-'use strict';
-
-var PW = atob('SmhlbmUyMDE5');
-var SK = 'mh_admin_auth';
-var SC_BASE = 'https:/'+'/melitaholidays.com/scratchcard.html';
-var Q_BASE  = 'https:/'+'/melitaholidays.com/quote.html';
-
-function $(id){ return document.getElementById(id); }
-function val(id){ var el=$(id); return el ? el.value.trim() : ''; }
-function fmtDate(v){
-  if(!v) return '';
-  var d=new Date(v);
-  if(isNaN(d.getTime())) return v;
-  return d.toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'});
-}
-function flash(id){ var f=$(id); f.classList.add('show'); setTimeout(function(){ f.classList.remove('show'); },2500); }
-
-// AUTH
-function checkLogin(){
-  if($('pwInput').value===PW){ sessionStorage.setItem(SK,'1'); showAdmin(); }
-  else { $('loginError').classList.add('show'); $('pwInput').value=''; }
-}
-function logout(){ sessionStorage.removeItem(SK); location.reload(); }
-function togglePw(){
-  var i=$('pwInput'),ic=$('pwIcon');
-  i.type=i.type==='password'?'text':'password';
-  ic.className=i.type==='password'?'fas fa-eye':'fas fa-eye-slash';
-}
-function showAdmin(){
-  $('loginScreen').style.display='none';
-  $('adminScreen').style.display='block';
-  renderPresets(); renderSaved(); renderArchive(); renderQuoteArchive();
-  $('archiveBadge').textContent=getSaved().length;
-}
-
-// TABS
-function switchMain(tab){
-  document.querySelectorAll('.main-tab').forEach(function(b){b.classList.remove('active');});
-  document.querySelectorAll('.main-section').forEach(function(s){s.classList.remove('active');});
-  $('mainTab'+tab).classList.add('active');
-  $('section'+tab).classList.add('active');
-}
-function switchInner(tab){
-  document.querySelectorAll('.itab').forEach(function(b){b.classList.remove('active');});
-  document.querySelectorAll('.ipane').forEach(function(p){p.classList.remove('active');});
-  $('itab'+tab).classList.add('active');
-  $('ipane'+tab).classList.add('active');
-  if(tab==='Archive') renderArchive();
-}
-
-// SCRATCHCARD
+var PW=atob('SmhlbmUyMDE5');
+var SK='mh_admin_auth';
+var SC_BASE='https:/'+'/melitaholidays.com/scratchcard.html';
+var Q_BASE='https:/'+'/melitaholidays.com/quote.html';
 var PRESETS=[
   {label:'Big reveal',text:'Your dream destination has been booked - get ready for the holiday of a lifetime!'},
   {label:'Gift reveal',text:'Someone very special has booked you the most incredible holiday. We hope you love where you are going!'},
@@ -499,219 +319,97 @@ var PRESETS=[
   {label:'Write my own',text:''}
 ];
 var activePreset=-1;
-function stripEmoji(s){ return (s||'').replace(/[\u{1F000}-\u{1FFFF}\u{2600}-\u{27FF}]/gu,'').replace(/\s+/g,' ').trim(); }
-function getDest(){ var v=$('destSelect').value; return v==='custom'?$('customDestInput').value.trim().toUpperCase():v; }
-function buildScUrl(){
-  var dest=getDest(); if(!dest) return null;
-  var p={n:stripEmoji(val('clientName')),d:dest,m:stripEmoji(val('personalMsg')),t:stripEmoji(val('travelDate'))};
-  var b64=btoa(unescape(encodeURIComponent(JSON.stringify(p)))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=/g,'');
-  return SC_BASE+'?s='+b64+($('confettiToggle').checked?'':'&c=0');
+var selectedInclusions=[];
+function $(id){return document.getElementById(id);}
+
+// AUTH
+function checkLogin(){if($('pwInput').value===PW){sessionStorage.setItem(SK,'1');showAdmin();}else{$('loginError').classList.add('show');$('pwInput').value='';}}
+function logout(){sessionStorage.removeItem(SK);$('adminScreen').style.display='none';$('loginScreen').style.display='block';$('pwInput').value='';}
+function togglePw(){var i=$('pwInput'),c=$('pwIcon');i.type=i.type==='password'?'text':'password';c.className=i.type==='password'?'fas fa-eye':'fas fa-eye-slash';}
+function showAdmin(){$('loginScreen').style.display='none';$('adminScreen').style.display='block';renderPresets();renderSaved();renderArchive();renderQuoteArchive();$('archiveBadge').textContent=getSaved().length;}
+
+// MAIN TABS
+function switchMainTab(tab){document.querySelectorAll('.main-tab').forEach(function(b){b.classList.remove('active');});document.querySelectorAll('.main-section').forEach(function(s){s.classList.remove('active');});$('mainTab'+tab).classList.add('active');$('section'+tab).classList.add('active');}
+
+// INNER TABS
+function switchInnerTab(tab){document.querySelectorAll('.inner-tab-pane').forEach(function(p){p.classList.remove('active');});$('tabRecentBtn').classList.toggle('active',tab==='recent');$('tabArchiveBtn').classList.toggle('active',tab==='archive');$('tab-'+tab).classList.add('active');if(tab==='archive')renderArchive();}
+
+// SCRATCHCARD
+function stripEmoji(s){return(s||'').replace(/[\u{1F000}-\u{1FFFF}\u{2600}-\u{27FF}\u{FE00}-\u{FEFF}]/gu,'').replace(/\s+/g,' ').trim();}
+function handleDest(){var v=$('destSelect').value;$('customDestInput').style.display=v==='custom'?'block':'none';liveUpdate();}
+function getDest(){var v=$('destSelect').value;return v==='custom'?$('customDestInput').value.trim().toUpperCase():v;}
+function buildUrl(){
+  var name=stripEmoji($('clientName').value.trim()),dest=getDest(),msg=stripEmoji($('personalMsg').value.trim()),date=stripEmoji($('travelDate').value.trim()),confetti=$('confettiToggle').checked;
+  if(!dest)return null;
+  var b64=btoa(unescape(encodeURIComponent(JSON.stringify({n:name,d:dest,m:msg,t:date})))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=/g,'');
+  return SC_BASE+'?s='+b64+(confetti?'':'&c=0');
 }
-function scUpdate(){
-  var url=buildScUrl(),box=$('scUrlBox'),note=$('encNote');
-  if(url){box.textContent=url;box.classList.add('active');note.classList.add('show');}
-  else{box.textContent='Fill in a destination to generate a link...';box.classList.remove('active');note.classList.remove('show');}
-}
-function renderPresets(){
-  var g=$('presetGrid');g.innerHTML='';
-  PRESETS.forEach(function(p,i){
-    var b=document.createElement('button');b.className='preset-btn';b.textContent=p.label;
-    b.addEventListener('click',function(){selectPreset(i);});g.appendChild(b);
-  });
-}
-function selectPreset(i){
-  activePreset=i;
-  document.querySelectorAll('.preset-btn').forEach(function(b,j){b.classList.toggle('active',j===i);});
-  var ta=$('personalMsg');
-  if(PRESETS[i].text){ta.value=PRESETS[i].text;ta.readOnly=true;ta.style.background='#f0fafa';}
-  else{ta.value='';ta.readOnly=false;ta.style.background='';ta.focus();}
-  scUpdate();
-}
-function toggleConfetti(){
-  var cb=$('confettiToggle');cb.checked=!cb.checked;
-  $('toggleTrack').style.background=cb.checked?'var(--teal)':'#ddd';
-  $('toggleThumb').style.left=cb.checked?'23px':'3px';
-  scUpdate();
-}
-function scCopy(){
-  var url=buildScUrl();if(!url){alert('Please select a destination first.');return;}
-  navigator.clipboard.writeText(url).then(function(){saveCard('Link Copied');flash('scCopyFlash');});
-}
-function scPreview(){var url=buildScUrl();if(!url){alert('Please select a destination first.');return;}window.open(url,'_blank');}
-function scWA(){
-  var url=buildScUrl(),name=val('clientName');
-  if(!url){alert('Please select a destination first.');return;}
-  window.open('https://wa.me/?text='+encodeURIComponent('Hi'+(name?' '+name:'')+'! You have a very special holiday surprise from Melita Holidays. Click to reveal: '+url),'_blank');
-  saveCard('WhatsApp');
-  ['clientName','customDestInput','travelDate','personalMsg'].forEach(function(id){$(id).value='';});
-  $('destSelect').value='';$('customDestInput').style.display='none';
-  $('personalMsg').readOnly=false;$('personalMsg').style.background='';
-  activePreset=-1;document.querySelectorAll('.preset-btn').forEach(function(b){b.classList.remove('active');});
-  scUpdate();
-}
-function saveCard(method){
-  var url=buildScUrl();if(!url)return;
-  var s=getSaved();
-  s.unshift({id:Date.now(),name:val('clientName')||'Unknown',dest:getDest(),date:val('travelDate'),url:url,method:method,created:new Date().toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'})});
-  localStorage.setItem('mh_sc',JSON.stringify(s));
-  renderSaved();renderArchive();$('archiveBadge').textContent=getSaved().length;
-}
-function getSaved(){try{return JSON.parse(localStorage.getItem('mh_sc'))||[];}catch(e){return[];}}
-function mCol(m){return m==='WhatsApp'?'#25D366':'var(--teal)';}
-function siHtml(s){return '<div class="saved-item"><div class="saved-info"><div class="s-name">'+s.name+'</div><div class="s-dest">'+s.dest+' <span style="font-size:10px;background:'+mCol(s.method)+';color:#fff;padding:2px 7px;border-radius:10px;font-weight:700;">'+s.method+'</span></div><div class="s-date">'+s.created+(s.date?' · '+s.date:'')+'</div></div><div class="saved-actions"><button class="sbtn sbtn-copy" onclick="navigator.clipboard.writeText(\''+s.url+'\')"><i class="fas fa-copy"></i></button><button class="sbtn sbtn-del" onclick="delCard('+s.id+')"><i class="fas fa-trash"></i></button></div></div>';}
-function renderSaved(){var s=getSaved().slice(0,5);$('savedList').innerHTML=s.length?s.map(siHtml).join(''):'<div class="empty"><i class="fas fa-gift"></i>No scratchcards yet.</div>';}
-function renderArchive(){
-  var s=getSaved(),bm=s.reduce(function(a,x){a[x.method]=(a[x.method]||0)+1;return a;},{});
-  $('archTotal').textContent=s.length;$('archWA').textContent=bm['WhatsApp']||0;$('archCopy').textContent=bm['Link Copied']||0;
-  $('archiveList').innerHTML=s.length?s.map(siHtml).join(''):'<div class="empty"><i class="fas fa-archive"></i>No scratchcards yet.</div>';
-}
-window.delCard=function(id){if(!confirm('Remove?'))return;localStorage.setItem('mh_sc',JSON.stringify(getSaved().filter(function(s){return s.id!==id;})));renderSaved();renderArchive();$('archiveBadge').textContent=getSaved().length;};
+function liveUpdate(){var url=buildUrl(),box=$('urlPreview'),note=$('encodedNote');if(url){box.textContent=url;box.classList.add('active');note.classList.add('show');}else{box.textContent='Fill in a destination to generate a link...';box.classList.remove('active');note.classList.remove('show');}}
+function renderPresets(){var grid=$('presetGrid');grid.innerHTML='';PRESETS.forEach(function(p,i){var btn=document.createElement('button');btn.className='preset-btn';btn.textContent=p.label;btn.addEventListener('click',function(){selectPreset(i);});grid.appendChild(btn);});}
+function selectPreset(i){activePreset=i;document.querySelectorAll('.preset-btn').forEach(function(b,j){b.classList.toggle('active',j===i);});var ta=$('personalMsg');if(PRESETS[i].text){ta.value=PRESETS[i].text;ta.readOnly=true;ta.style.background='#f0fafa';}else{ta.value='';ta.readOnly=false;ta.style.background='';ta.focus();}liveUpdate();}
+function toggleConfetti(){var cb=$('confettiToggle');cb.checked=!cb.checked;$('toggleTrack').style.background=cb.checked?'var(--teal)':'#ddd';$('toggleThumb').style.left=cb.checked?'23px':'3px';liveUpdate();}
+function copyLink(){var url=buildUrl();if(!url){alert('Please select a destination first.');return;}navigator.clipboard.writeText(url).then(function(){saveCard('Link Copied');showFlash('copyFlash');});}
+function previewCard(){var url=buildUrl();if(!url){alert('Please select a destination first.');return;}window.open(url,'_blank');}
+function sendWA(){var url=buildUrl(),name=$('clientName').value.trim();if(!url){alert('Please select a destination first.');return;}window.open('https://wa.me/?text='+encodeURIComponent('Hi'+(name?' '+name:'')+'! You have a very special holiday surprise from Melita Holidays. Click to reveal your destination: '+url),'_blank');saveCard('WhatsApp');resetScratchForm();}
+function resetScratchForm(){['clientName','customDestInput','travelDate','personalMsg'].forEach(function(id){$(id).value='';});$('destSelect').value='';$('customDestInput').style.display='none';$('personalMsg').readOnly=false;$('personalMsg').style.background='';activePreset=-1;document.querySelectorAll('.preset-btn').forEach(function(b){b.classList.remove('active');});liveUpdate();}
+
+// SCRATCHCARD ARCHIVE
+function saveCard(method){var url=buildUrl(),dest=getDest(),name=$('clientName').value.trim(),date=$('travelDate').value.trim();if(!url)return;var saved=getSaved();saved.unshift({id:Date.now(),name:name||'Unknown',dest:dest,date:date,url:url,method:method||'Link Copied',created:new Date().toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'})});localStorage.setItem('mh_scratchcards',JSON.stringify(saved));renderSaved();renderArchive();$('archiveBadge').textContent=getSaved().length;}
+function getSaved(){try{return JSON.parse(localStorage.getItem('mh_scratchcards'))||[];}catch(e){return[];}}
+function methodColor(m){return m==='WhatsApp'?'#25D366':'var(--teal)';}
+function renderSaved(){var list=$('savedList'),saved=getSaved().slice(0,5);if(!saved.length){list.innerHTML='<div class="empty-saved"><i class="fas fa-gift"></i>No scratchcards yet.</div>';return;}list.innerHTML=saved.map(function(s){return '<div class="saved-item"><div class="saved-info"><div class="saved-name">'+s.name+'</div><div class="saved-dest">'+s.dest+' <span style="font-size:10px;background:'+methodColor(s.method)+';color:#fff;padding:2px 7px;border-radius:10px;font-weight:700;">'+s.method+'</span></div><div class="saved-date-label">'+s.created+(s.date?' · '+s.date:'')+'</div></div><div class="saved-actions"><button class="saved-btn copy" onclick="navigator.clipboard.writeText(\''+s.url+'\')" title="Copy"><i class="fas fa-copy"></i></button><button class="saved-btn del" onclick="deleteSaved('+s.id+')" title="Delete"><i class="fas fa-trash"></i></button></div></div>';}).join('');}
+function renderArchive(){var list=$('archiveList'),saved=getSaved();var byM=saved.reduce(function(a,s){a[s.method]=(a[s.method]||0)+1;return a;},{});$('archiveTotal').textContent=saved.length;$('archiveWA').textContent=byM['WhatsApp']||0;$('archiveCopied').textContent=byM['Link Copied']||0;if(!saved.length){list.innerHTML='<div class="empty-saved"><i class="fas fa-archive"></i>No scratchcards yet.</div>';return;}list.innerHTML=saved.map(function(s){return '<div class="saved-item"><div class="saved-info"><div class="saved-name">'+s.name+'</div><div class="saved-dest">'+s.dest+' <span style="font-size:10px;background:'+methodColor(s.method)+';color:#fff;padding:2px 7px;border-radius:10px;font-weight:700;">'+s.method+'</span></div><div class="saved-date-label">Sent '+s.created+(s.date?' · '+s.date:'')+'</div></div><div class="saved-actions"><button class="saved-btn copy" onclick="navigator.clipboard.writeText(\''+s.url+'\')" title="Copy"><i class="fas fa-copy"></i></button><button class="saved-btn del" onclick="deleteSaved('+s.id+')" title="Delete"><i class="fas fa-trash"></i></button></div></div>';}).join('');}
+window.deleteSaved=function(id){if(!confirm('Remove from archive?'))return;localStorage.setItem('mh_scratchcards',JSON.stringify(getSaved().filter(function(s){return s.id!==id;})));renderSaved();renderArchive();$('archiveBadge').textContent=getSaved().length;};
 
 // QUOTE BUILDER
-var selectedInc=[];
-var payments=[];
-var quoteType='both';
-
-function getQDest(){var v=$('qDestDrop').value;return v==='other'?val('qDestText'):(v||val('qDestText'));}
-function getQAirport(){var v=$('qAirportDrop').value;return v==='other'?val('qAirportText'):(v||val('qAirportText'));}
-
 function buildQuoteUrl(){
-  var dest=getQDest(),hotel=val('qHotel');
-  if(!dest&&!hotel) return null;
-  var sched=payments.filter(function(p){return p.amt&&p.date;}).map(function(p){return {a:p.amt,d:fmtDate(p.date)};});
-  var raw={
-    qt:quoteType,n:val('qName'),dest:dest,hotel:hotel,
-    stars:val('qStars'),board:val('qBoard'),room:val('qRoom'),
-    hu:val('qHotelUrl'),hd:val('qHotelDesc'),fac:val('qFacilities'),
-    fo:val('qFlightOut'),al:val('qAirline'),dt:val('qDepTime'),at:val('qArrTime'),
-    fr:val('qFlightRet'),ft:val('qFlightType'),rdt:val('qRetDep'),rat:val('qRetArr'),
-    dep:fmtDate(val('qDepDate')),ret:fmtDate(val('qRetDate')),
-    dur:val('qDuration'),pax:val('qPax'),air:getQAirport(),
-    pr:val('qPrice'),dp:val('qDeposit'),
-    ddate:fmtDate(val('qDepositDate')),fdate:fmtDate(val('qFinalDate')),
-    sched:sched.length?sched:undefined,
-    inc:selectedInc.length?selectedInc:undefined,
-    note:val('qNote'),id:Date.now()
-  };
-  var data={};
-  Object.keys(raw).forEach(function(k){
-    var v=raw[k];
-    if(v===undefined||v===null||v==='') return;
-    if(Array.isArray(v)&&v.length===0) return;
-    data[k]=v;
-  });
+  var data={n:$('qClientName').value.trim(),dest:$('qDestination').value.trim(),hotel:$('qHotel').value.trim(),board:$('qBoard').value,dep:$('qDeparture').value.trim(),ret:$('qReturn').value.trim(),pax:$('qPassengers').value.trim(),dur:$('qDuration').value.trim(),airport:$('qAirport').value.trim(),price:$('qPrice').value.trim(),deposit:$('qDeposit').value.trim(),inc:selectedInclusions,note:$('qNote').value.trim(),valid:$('qValidUntil').value.trim(),id:Date.now()};
+  if(!data.dest&&!data.hotel)return null;
   var b64=btoa(unescape(encodeURIComponent(JSON.stringify(data)))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=/g,'');
   return Q_BASE+'?q='+b64;
 }
-
-function qUpdate(){
-  var url=buildQuoteUrl(),box=$('qUrlBox');
-  if(url){box.textContent=url;box.classList.add('active');}
-  else{box.textContent='Fill in the details above to generate a quote link...';box.classList.remove('active');}
-}
-function qCopy(){var url=buildQuoteUrl();if(!url){alert('Fill in at least a destination or hotel.');return;}navigator.clipboard.writeText(url).then(function(){saveQuote();flash('qCopyFlash');});}
-function qPreview(){var url=buildQuoteUrl();if(!url){alert('Fill in at least a destination or hotel.');return;}window.open(url,'_blank');}
-function qWA(){
-  var url=buildQuoteUrl(),name=val('qName');
-  if(!url){alert('Fill in at least a destination or hotel.');return;}
-  window.open('https://wa.me/?text='+encodeURIComponent('Hi'+(name?' '+name:'')+'! Here is your personalised holiday quote from Melita Holidays: '+url),'_blank');
-  saveQuote();
-}
-
-function setQuoteType(qt){
-  quoteType=qt;
-  document.querySelectorAll('.qt-option').forEach(function(el){el.classList.toggle('active',el.getAttribute('data-qt')===qt);});
-  $('qHotelSection').style.display=qt==='flight'?'none':'block';
-  $('qFlightSection').style.display=qt==='hotel'?'none':'block';
-  qUpdate();
-}
-function onDestDrop(){var v=$('qDestDrop').value;$('qDestText').style.display=v==='other'?'block':'none';if(v!=='other')$('qDestText').value='';qUpdate();}
-function onAirportDrop(){var v=$('qAirportDrop').value;$('qAirportText').style.display=v==='other'?'block':'none';if(v!=='other')$('qAirportText').value='';qUpdate();}
-function calcDuration(){
-  var dep=val('qDepDate'),ret=val('qRetDate');
-  if(dep&&ret){var n=Math.round((new Date(ret)-new Date(dep))/86400000);if(n>0)$('qDuration').value=n+' night'+(n>1?'s':'');}
-  qUpdate();
-}
-function renderPayments(){
-  var div=$('paymentRows');div.innerHTML='';
-  payments.forEach(function(p,i){
-    var row=document.createElement('div');row.className='pay-row';
-    row.innerHTML='<input type="number" placeholder="Amount £" value="'+p.amt+'" oninput="updPay('+i+',\'amt\',this.value)">'
-      +'<input type="date" value="'+p.date+'" oninput="updPay('+i+',\'date\',this.value)">'
-      +'<button class="btn-del" onclick="delPay('+i+')"><i class="fas fa-trash"></i></button>';
-    div.appendChild(row);
-  });
-  qUpdate();
-}
-window.updPay=function(i,f,v){payments[i][f]=v;qUpdate();};
-window.delPay=function(i){payments.splice(i,1);renderPayments();};
-function initInclusions(){
-  document.querySelectorAll('.inc-item').forEach(function(el){
-    el.addEventListener('click',function(){
-      var v=el.getAttribute('data-inc'),idx=selectedInc.indexOf(v);
-      if(idx>-1){selectedInc.splice(idx,1);el.classList.remove('active');}
-      else{selectedInc.push(v);el.classList.add('active');}
-      qUpdate();
-    });
-  });
-}
-function saveQuote(){
-  var url=buildQuoteUrl();if(!url)return;
-  var qs=getQuotes();
-  qs.unshift({id:Date.now(),name:val('qName')||'Unknown',dest:getQDest(),hotel:val('qHotel'),price:val('qPrice'),url:url,status:'Pending',created:new Date().toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'})});
-  localStorage.setItem('mh_quotes',JSON.stringify(qs));renderQuoteArchive();
-}
+function liveUpdateQuote(){var url=buildQuoteUrl(),box=$('qUrlPreview');if(url){box.textContent=url;box.classList.add('active');}else{box.textContent='Fill in the details above to generate a quote link...';box.classList.remove('active');}}
+function qCopyLink(){var url=buildQuoteUrl();if(!url){alert('Please fill in at least a destination or hotel.');return;}navigator.clipboard.writeText(url).then(function(){saveQuote();showFlash('qCopyFlash');});}
+function qPreview(){var url=buildQuoteUrl();if(!url){alert('Please fill in at least a destination or hotel.');return;}window.open(url,'_blank');}
+function qSendWA(){var url=buildQuoteUrl(),name=$('qClientName').value.trim();if(!url){alert('Please fill in at least a destination or hotel.');return;}window.open('https://wa.me/?text='+encodeURIComponent('Hi'+(name?' '+name:'')+'! Here is your personalised holiday quote from Melita Holidays. Take a look and let me know what you think: '+url),'_blank');saveQuote();showFlash('qCopyFlash');}
+function saveQuote(){var url=buildQuoteUrl();if(!url)return;var quotes=getQuotes();quotes.unshift({id:Date.now(),name:$('qClientName').value.trim()||'Unknown',dest:$('qDestination').value.trim(),hotel:$('qHotel').value.trim(),price:$('qPrice').value.trim(),url:url,status:'Pending',created:new Date().toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'})});localStorage.setItem('mh_quotes',JSON.stringify(quotes));renderQuoteArchive();}
 function getQuotes(){try{return JSON.parse(localStorage.getItem('mh_quotes'))||[];}catch(e){return[];}}
-function renderQuoteArchive(){
-  var qs=getQuotes(),approved=qs.filter(function(q){return q.status==='Approved';}).length;
-  $('qTotal').textContent=qs.length;$('qApproved').textContent=approved;
-  $('quoteArchiveList').innerHTML=qs.length?qs.map(function(q){
-    var badge=q.status==='Approved'?'<span class="qbadge qbadge-a">Approved</span>':'<span class="qbadge qbadge-p">Pending</span>';
-    return '<div class="saved-item"><div class="saved-info"><div class="s-name">'+q.name+badge+'</div><div class="s-dest">'+(q.dest||q.hotel||'')+(q.price?' · £'+q.price:'')+'</div><div class="s-date">'+q.created+'</div></div><div class="saved-actions"><button class="sbtn sbtn-copy" onclick="navigator.clipboard.writeText(\''+q.url+'\')" title="Copy"><i class="fas fa-copy"></i></button><button class="sbtn sbtn-del" onclick="delQuote('+q.id+')" title="Delete"><i class="fas fa-trash"></i></button></div></div>';
-  }).join(''):'<div class="empty"><i class="fas fa-file-invoice"></i>No quotes yet.</div>';
-}
-window.delQuote=function(id){if(!confirm('Remove?'))return;localStorage.setItem('mh_quotes',JSON.stringify(getQuotes().filter(function(q){return q.id!==id;})));renderQuoteArchive();};
+function renderQuoteArchive(){var list=$('quoteArchiveList'),quotes=getQuotes();var approved=quotes.filter(function(q){return q.status==='Approved';}).length;$('qTotal').textContent=quotes.length;$('qApproved').textContent=approved;if(!quotes.length){list.innerHTML='<div class="empty-saved"><i class="fas fa-file-invoice"></i>No quotes yet.</div>';return;}list.innerHTML=quotes.map(function(q){var badge=q.status==='Approved'?'<span class="quote-badge badge-approved">Approved</span>':'<span class="quote-badge badge-pending">Pending</span>';return '<div class="quote-saved-item"><div class="saved-info"><div class="saved-name">'+q.name+badge+'</div><div class="saved-dest">'+(q.dest||q.hotel)+(q.price?' · £'+q.price:'')+'</div><div class="saved-date-label">Sent '+q.created+'</div></div><div class="saved-actions"><button class="saved-btn copy" onclick="navigator.clipboard.writeText(\''+q.url+'\')" title="Copy quote link"><i class="fas fa-copy"></i></button><button class="saved-btn del" onclick="deleteQuote('+q.id+')" title="Delete"><i class="fas fa-trash"></i></button></div></div>';}).join('');}
+window.deleteQuote=function(id){if(!confirm('Remove this quote?'))return;localStorage.setItem('mh_quotes',JSON.stringify(getQuotes().filter(function(q){return q.id!==id;})));renderQuoteArchive();};
 
-// INIT
+function showFlash(id){var f=$(id);f.classList.add('show');setTimeout(function(){f.classList.remove('show');},2500);}
+
+// INCLUSIONS
+function initInclusions(){document.querySelectorAll('.inclusion-item').forEach(function(el){el.addEventListener('click',function(){var val=el.getAttribute('data-val');var idx=selectedInclusions.indexOf(val);if(idx>-1){selectedInclusions.splice(idx,1);el.classList.remove('active');}else{selectedInclusions.push(val);el.classList.add('active');}liveUpdateQuote();});});}
+
+// EVENTS
 window.addEventListener('DOMContentLoaded',function(){
   $('loginBtn').addEventListener('click',checkLogin);
   $('pwInput').addEventListener('keydown',function(e){if(e.key==='Enter')checkLogin();});
-  $('pwToggle').addEventListener('click',togglePw);
+  $('pwToggleBtn').addEventListener('click',togglePw);
   $('logoutBtn').addEventListener('click',logout);
-  $('mainTabScratch').addEventListener('click',function(){switchMain('Scratch');});
-  $('mainTabQuote').addEventListener('click',function(){switchMain('Quote');});
-  $('itabRecent').addEventListener('click',function(){switchInner('Recent');});
-  $('itabArchive').addEventListener('click',function(){switchInner('Archive');});
-  $('destSelect').addEventListener('change',function(){$('customDestInput').style.display=$('destSelect').value==='custom'?'block':'none';scUpdate();});
-  $('clientName').addEventListener('input',scUpdate);
-  $('travelDate').addEventListener('input',scUpdate);
-  $('personalMsg').addEventListener('input',function(){activePreset=-1;document.querySelectorAll('.preset-btn').forEach(function(b){b.classList.remove('active');});scUpdate();});
-  $('scCopyBtn').addEventListener('click',scCopy);
-  $('scPreviewBtn').addEventListener('click',scPreview);
-  $('scWaBtn').addEventListener('click',scWA);
+  $('destSelect').addEventListener('change',handleDest);
+  $('clientName').addEventListener('input',liveUpdate);
+  $('travelDate').addEventListener('input',liveUpdate);
+  $('personalMsg').addEventListener('input',function(){activePreset=-1;document.querySelectorAll('.preset-btn').forEach(function(b){b.classList.remove('active');});liveUpdate();});
+  $('copyBtn').addEventListener('click',copyLink);
+  $('previewBtn').addEventListener('click',previewCard);
+  $('waBtn').addEventListener('click',sendWA);
   $('toggleTrack').addEventListener('click',toggleConfetti);
   $('toggleThumb').addEventListener('click',toggleConfetti);
-  document.querySelectorAll('.qt-option').forEach(function(el){el.addEventListener('click',function(){setQuoteType(el.getAttribute('data-qt'));});});
-  $('qDestDrop').addEventListener('change',onDestDrop);
-  $('qDestText').addEventListener('input',qUpdate);
-  $('qAirportDrop').addEventListener('change',onAirportDrop);
-  $('qAirportText').addEventListener('input',qUpdate);
-  $('qDepDate').addEventListener('change',calcDuration);
-  $('qRetDate').addEventListener('change',calcDuration);
-  ['qName','qHotel','qRoom','qHotelUrl','qHotelDesc','qFacilities','qFlightOut','qAirline','qDepTime','qArrTime','qFlightRet','qRetDep','qRetArr','qPax','qPrice','qDeposit','qNote'].forEach(function(id){$(id).addEventListener('input',qUpdate);});
-  ['qStars','qBoard','qFlightType'].forEach(function(id){$(id).addEventListener('change',qUpdate);});
-  $('qDepositDate').addEventListener('change',qUpdate);
-  $('qFinalDate').addEventListener('change',qUpdate);
-  $('addPayBtn').addEventListener('click',function(){payments.push({amt:'',date:''});renderPayments();});
-  initInclusions();
-  $('qCopyBtn').addEventListener('click',qCopy);
+  $('tabRecentBtn').addEventListener('click',function(){switchInnerTab('recent');});
+  $('tabArchiveBtn').addEventListener('click',function(){switchInnerTab('archive');});
+  $('mainTabScratch').addEventListener('click',function(){switchMainTab('Scratch');});
+  $('mainTabQuote').addEventListener('click',function(){switchMainTab('Quote');});
+  ['qClientName','qDestination','qHotel','qDeparture','qReturn','qPassengers','qDuration','qAirport','qPrice','qDeposit','qNote','qValidUntil'].forEach(function(id){$(id).addEventListener('input',liveUpdateQuote);});
+  $('qBoard').addEventListener('change',liveUpdateQuote);
+  $('qCopyBtn').addEventListener('click',qCopyLink);
   $('qPreviewBtn').addEventListener('click',qPreview);
-  $('qWaBtn').addEventListener('click',qWA);
-  if(sessionStorage.getItem(SK)==='1') showAdmin();
+  $('qWaBtn').addEventListener('click',qSendWA);
+  initInclusions();
+  if(sessionStorage.getItem(SK)==='1')showAdmin();
 });
-
 })();
-
 </script>
 </body>
 </html>
