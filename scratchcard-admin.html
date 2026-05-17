@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Melita — Admin</title>
-<!-- admin-v2 -->
 <meta name="robots" content="noindex, nofollow">
 <link rel="icon" type="image/png" href="logo.png">
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -236,111 +235,21 @@ select{cursor:pointer;}
       <div class="admin-card">
         <div class="card-title"><i class="fas fa-file-invoice"></i> Build a Quote</div>
         <div class="card-sub">Fill in the holiday details to generate a branded client quote link.</div>
-
         <div class="field"><label>Client Name</label><input type="text" id="qClientName" placeholder="e.g. The Johnson Family"></div>
-
-        <div class="field">
-          <label>Quote Type</label>
-          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;">
-            <label id="qt-both" style="display:flex;align-items:center;justify-content:center;gap:6px;padding:10px;border:2px solid var(--teal);border-radius:10px;cursor:pointer;background:#f0fafa;font-size:12px;font-weight:700;color:var(--teal);letter-spacing:0;text-transform:none;">
-              <input type="radio" name="quoteType" id="qtBoth" value="both" checked style="accent-color:var(--teal);"> Flights + Hotel
-            </label>
-            <label id="qt-hotel" style="display:flex;align-items:center;justify-content:center;gap:6px;padding:10px;border:2px solid var(--border);border-radius:10px;cursor:pointer;background:#fafafa;font-size:12px;font-weight:700;color:#888;letter-spacing:0;text-transform:none;">
-              <input type="radio" name="quoteType" id="qtHotel" value="hotel" style="accent-color:var(--teal);"> Hotel Only
-            </label>
-            <label id="qt-flight" style="display:flex;align-items:center;justify-content:center;gap:6px;padding:10px;border:2px solid var(--border);border-radius:10px;cursor:pointer;background:#fafafa;font-size:12px;font-weight:700;color:#888;letter-spacing:0;text-transform:none;">
-              <input type="radio" name="quoteType" id="qtFlight" value="flight" style="accent-color:var(--teal);"> Flights Only
-            </label>
-          </div>
-        </div>
         <div class="field"><label>Destination</label><input type="text" id="qDestination" placeholder="e.g. Maldives, Turkey, Jamaica"></div>
-
-        <div id="hotelFieldsSection">
         <div class="field"><label>Hotel / Resort</label><input type="text" id="qHotel" placeholder="e.g. Adalya Elite Lara"></div>
-        <div class="price-row">
-          <div class="field">
-            <label>Star Rating</label>
-            <select id="qStars">
-              <option value="">— Select —</option>
-              <option value="5">5 Star</option>
-              <option value="4">4 Star</option>
-              <option value="3">3 Star</option>
-              <option value="4+">4 Star Plus</option>
-              <option value="5+">5 Star Deluxe</option>
-            </select>
-          </div>
-          <div class="field">
-            <label>Board Type</label>
-            <select id="qBoard">
-              <option value="">— Select —</option>
-              <option value="All Inclusive">All Inclusive</option>
-              <option value="Full Board">Full Board</option>
-              <option value="Half Board">Half Board</option>
-              <option value="Bed and Breakfast">Bed and Breakfast</option>
-              <option value="Room Only">Room Only</option>
-              <option value="Self Catering">Self Catering</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="field"><label>Room Type</label><input type="text" id="qRoom" placeholder="e.g. Superior Double Sea View, Family Suite"></div>
-
         <div class="field">
-          <label>Hotel Image <span class="opt">optional — upload a photo of the hotel</span></label>
-          <div id="imgUploadArea" style="border:2px dashed var(--border);border-radius:10px;padding:20px;text-align:center;cursor:pointer;background:#fafafa;transition:all .2s;" onclick="document.getElementById('imgFileInput').click()">
-            <i class="fas fa-cloud-upload-alt" style="font-size:24px;color:var(--teal);margin-bottom:8px;display:block;"></i>
-            <div style="font-size:12px;font-weight:600;color:var(--teal);">Click to upload a hotel photo</div>
-            <div style="font-size:11px;color:#aaa;margin-top:4px;">JPG, PNG or WEBP — from your phone or computer</div>
-          </div>
-          <input type="file" id="imgFileInput" accept="image/*" style="display:none;">
-          <div id="imgPreview" style="display:none;margin-top:10px;position:relative;">
-            <img id="imgPreviewEl" style="width:100%;border-radius:10px;max-height:160px;object-fit:cover;" alt="Hotel preview">
-            <button onclick="clearImage()" style="position:absolute;top:6px;right:6px;background:rgba(0,0,0,0.5);border:none;border-radius:50%;width:26px;height:26px;color:#fff;cursor:pointer;font-size:12px;" title="Remove image"><i class="fas fa-times"></i></button>
-          </div>
+          <label>Board Type</label>
+          <select id="qBoard">
+            <option value="">— Select —</option>
+            <option value="All Inclusive">All Inclusive</option>
+            <option value="Full Board">Full Board</option>
+            <option value="Half Board">Half Board</option>
+            <option value="Bed and Breakfast">Bed and Breakfast</option>
+            <option value="Room Only">Room Only</option>
+            <option value="Self Catering">Self Catering</option>
+          </select>
         </div>
-        <div class="field"><label>Hotel Website <span class="opt">optional — clients can view more photos here</span></label><input type="text" id="qHotelUrl" placeholder="e.g. https://www.adalyaelitelara.com"></div>
-
-        <div class="field"><label>Hotel Description <span class="opt">optional — shown in hotel section</span></label><textarea id="qHotelDesc" placeholder="e.g. A stunning 5-star resort set right on the beach at Lara Bay, offering world-class dining, award-winning spa facilities and an incredible waterpark."></textarea></div>
-
-        <div class="field">
-          <label>Hotel Facilities <span class="opt">comma separated</span></label>
-          <input type="text" id="qFacilities" placeholder="e.g. Waterpark, Spa, Sandy Beach, Kids Club, 5 Restaurants">
-        </div>
-
-        </div><!-- end hotelFieldsSection -->
-
-        <div class="divider-line"></div>
-        <div class="card-title" style="margin-bottom:12px;"><i class="fas fa-plane-departure"></i> Flight Details</div>
-        <div id="flightFieldsSection">
-
-        <div class="price-row">
-          <div class="field"><label>Outbound Flight No.</label><input type="text" id="qFlightOut" placeholder="e.g. EZY4617"></div>
-          <div class="field"><label>Airline</label><input type="text" id="qAirline" placeholder="e.g. easyJet"></div>
-        </div>
-        <div class="price-row">
-          <div class="field"><label>Departs (outbound)</label><input type="text" id="qDepTime" placeholder="e.g. 06:30"></div>
-          <div class="field"><label>Arrives (outbound)</label><input type="text" id="qArrTime" placeholder="e.g. 12:45"></div>
-        </div>
-        <div class="price-row">
-          <div class="field"><label>Return Flight No.</label><input type="text" id="qFlightRet" placeholder="e.g. EZY4618"></div>
-          <div class="field"><label>Flight Type</label>
-            <select id="qFlightType">
-              <option value="Direct">Direct</option>
-              <option value="1 Stop">1 Stop</option>
-              <option value="2 Stops">2 Stops</option>
-            </select>
-          </div>
-        </div>
-        <div class="price-row">
-          <div class="field"><label>Departs (return)</label><input type="text" id="qRetDepTime" placeholder="e.g. 14:00"></div>
-          <div class="field"><label>Arrives (return)</label><input type="text" id="qRetArrTime" placeholder="e.g. 16:15"></div>
-        </div>
-
-        </div><!-- end flightFieldsSection -->
-
-        <div class="divider-line"></div>
-        <div class="card-title" style="margin-bottom:12px;"><i class="fas fa-calendar"></i> Booking Details</div>
-
         <div class="price-row">
           <div class="field"><label>Departure Date</label><input type="text" id="qDeparture" placeholder="e.g. 12 Aug 2026"></div>
           <div class="field"><label>Return Date</label><input type="text" id="qReturn" placeholder="e.g. 19 Aug 2026"></div>
@@ -354,7 +263,6 @@ select{cursor:pointer;}
           <div class="field"><label>Total Price (£)</label><input type="number" id="qPrice" placeholder="e.g. 3499"></div>
           <div class="field"><label>Deposit (£) <span class="opt">optional</span></label><input type="number" id="qDeposit" placeholder="e.g. 350"></div>
         </div>
-
         <div class="field">
           <label>What's Included</label>
           <div class="inclusions-grid" id="inclusionsGrid">
@@ -366,16 +274,11 @@ select{cursor:pointer;}
             <div class="inclusion-item" data-val="Travel Insurance"><i class="fas fa-heart"></i> Travel Insurance</div>
           </div>
         </div>
-
         <div class="field"><label>Personal Note <span class="opt">optional</span></label><textarea id="qNote" placeholder="e.g. I have hand-picked this hotel for your family — the beach is right on your doorstep."></textarea></div>
+        <div class="field"><label>Quote Valid Until <span class="opt">optional</span></label><input type="text" id="qValidUntil" placeholder="e.g. 30 May 2026"></div>
+        <div class="divider-line"></div>
         <div class="field">
-          <label>Terms & Conditions</label>
-          <div style="display:flex;align-items:center;gap:8px;padding:10px 12px;background:#f0fafa;border-radius:10px;border:1px solid var(--border);">
-            <i class="fas fa-file-contract" style="color:var(--teal);"></i>
-            <span style="font-size:12px;color:var(--teal);font-weight:600;flex:1;">JLT Group Booking Terms included automatically</span>
-            <a href="https://hub.thejltgroup.co.uk/bookingterms" target="_blank" style="font-size:11px;color:#aaa;text-decoration:none;"><i class="fas fa-external-link-alt"></i> Preview</a>
-          </div>
-        </div>
+          <label>Generated Quote Link</label>
           <div class="url-preview" id="qUrlPreview">Fill in the details above to generate a quote link...</div>
         </div>
         <div class="btn-row">
@@ -458,104 +361,9 @@ function renderSaved(){var list=$('savedList'),saved=getSaved().slice(0,5);if(!s
 function renderArchive(){var list=$('archiveList'),saved=getSaved();var byM=saved.reduce(function(a,s){a[s.method]=(a[s.method]||0)+1;return a;},{});$('archiveTotal').textContent=saved.length;$('archiveWA').textContent=byM['WhatsApp']||0;$('archiveCopied').textContent=byM['Link Copied']||0;if(!saved.length){list.innerHTML='<div class="empty-saved"><i class="fas fa-archive"></i>No scratchcards yet.</div>';return;}list.innerHTML=saved.map(function(s){return '<div class="saved-item"><div class="saved-info"><div class="saved-name">'+s.name+'</div><div class="saved-dest">'+s.dest+' <span style="font-size:10px;background:'+methodColor(s.method)+';color:#fff;padding:2px 7px;border-radius:10px;font-weight:700;">'+s.method+'</span></div><div class="saved-date-label">Sent '+s.created+(s.date?' · '+s.date:'')+'</div></div><div class="saved-actions"><button class="saved-btn copy" onclick="navigator.clipboard.writeText(\''+s.url+'\')" title="Copy"><i class="fas fa-copy"></i></button><button class="saved-btn del" onclick="deleteSaved('+s.id+')" title="Delete"><i class="fas fa-trash"></i></button></div></div>';}).join('');}
 window.deleteSaved=function(id){if(!confirm('Remove from archive?'))return;localStorage.setItem('mh_scratchcards',JSON.stringify(getSaved().filter(function(s){return s.id!==id;})));renderSaved();renderArchive();$('archiveBadge').textContent=getSaved().length;};
 
-// IMAGE UPLOAD
-var uploadedImageData = '';
-
-window.clearImage = function(){
-  uploadedImageData = '';
-  document.getElementById('imgPreview').style.display = 'none';
-  document.getElementById('imgUploadArea').style.display = 'block';
-  document.getElementById('imgFileInput').value = '';
-  liveUpdateQuote();
-};
-
-function initImageUpload(){
-  var input = document.getElementById('imgFileInput');
-  input.addEventListener('change', function(){
-    var file = input.files[0];
-    if(!file) return;
-    var reader = new FileReader();
-    reader.onload = function(e){
-      // Compress the image before storing
-      var img = new Image();
-      img.onload = function(){
-        var canvas = document.createElement('canvas');
-        var maxW = 900, maxH = 600;
-        var ratio = Math.min(maxW/img.width, maxH/img.height, 1);
-        canvas.width = img.width * ratio;
-        canvas.height = img.height * ratio;
-        canvas.getContext('2d').drawImage(img, 0, 0, canvas.width, canvas.height);
-        uploadedImageData = canvas.toDataURL('image/jpeg', 0.75);
-        document.getElementById('imgPreviewEl').src = uploadedImageData;
-        document.getElementById('imgPreview').style.display = 'block';
-        document.getElementById('imgUploadArea').style.display = 'none';
-        liveUpdateQuote();
-      };
-      img.src = e.target.result;
-    };
-    reader.readAsDataURL(file);
-  });
-}
-
-// QUOTE TYPE
-function getQuoteType(){
-  var radios=document.querySelectorAll('input[name="quoteType"]');
-  for(var i=0;i<radios.length;i++){if(radios[i].checked)return radios[i].value;}
-  return 'both';
-}
-function initQuoteType(){
-  document.querySelectorAll('input[name="quoteType"]').forEach(function(radio){
-    radio.addEventListener('change',function(){
-      // Update label styling
-      document.querySelectorAll('input[name="quoteType"]').forEach(function(r){
-        var lbl=r.parentElement;
-        if(r.checked){lbl.style.borderColor='var(--teal)';lbl.style.background='#f0fafa';lbl.style.color='var(--teal)';}
-        else{lbl.style.borderColor='var(--border)';lbl.style.background='#fafafa';lbl.style.color='#888';}
-      });
-      // Show/hide sections
-      var type=radio.value;
-      var hotelFields=document.getElementById('hotelFieldsSection');
-      var flightFields=document.getElementById('flightFieldsSection');
-      if(hotelFields) hotelFields.style.display=(type==='flight')?'none':'block';
-      if(flightFields) flightFields.style.display=(type==='hotel')?'none':'block';
-      liveUpdateQuote();
-    });
-  });
-}
-
 // QUOTE BUILDER
 function buildQuoteUrl(){
-  var data={
-    qt:getQuoteType(),
-    n:$('qClientName').value.trim(),
-    dest:$('qDestination').value.trim(),
-    hotel:$('qHotel').value.trim(),
-    stars:$('qStars').value,
-    board:$('qBoard').value,
-    room:$('qRoom').value.trim(),
-    hotelUrl:$('qHotelUrl').value.trim(),
-    hotelImg:uploadedImageData,
-    hotelDesc:$('qHotelDesc').value.trim(),
-    facilities:$('qFacilities').value.trim(),
-    flightOut:$('qFlightOut').value.trim(),
-    airline:$('qAirline').value.trim(),
-    depTime:$('qDepTime').value.trim(),
-    arrTime:$('qArrTime').value.trim(),
-    flightRet:$('qFlightRet').value.trim(),
-    flightType:$('qFlightType').value,
-    retDepTime:$('qRetDepTime').value.trim(),
-    retArrTime:$('qRetArrTime').value.trim(),
-    dep:$('qDeparture').value.trim(),
-    ret:$('qReturn').value.trim(),
-    pax:$('qPassengers').value.trim(),
-    dur:$('qDuration').value.trim(),
-    airport:$('qAirport').value.trim(),
-    price:$('qPrice').value.trim(),
-    deposit:$('qDeposit').value.trim(),
-    inc:selectedInclusions,
-    note:$('qNote').value.trim(),
-    id:Date.now()
-  };
+  var data={n:$('qClientName').value.trim(),dest:$('qDestination').value.trim(),hotel:$('qHotel').value.trim(),board:$('qBoard').value,dep:$('qDeparture').value.trim(),ret:$('qReturn').value.trim(),pax:$('qPassengers').value.trim(),dur:$('qDuration').value.trim(),airport:$('qAirport').value.trim(),price:$('qPrice').value.trim(),deposit:$('qDeposit').value.trim(),inc:selectedInclusions,note:$('qNote').value.trim(),valid:$('qValidUntil').value.trim(),id:Date.now()};
   if(!data.dest&&!data.hotel)return null;
   var b64=btoa(unescape(encodeURIComponent(JSON.stringify(data)))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=/g,'');
   return Q_BASE+'?q='+b64;
@@ -593,16 +401,12 @@ window.addEventListener('DOMContentLoaded',function(){
   $('tabArchiveBtn').addEventListener('click',function(){switchInnerTab('archive');});
   $('mainTabScratch').addEventListener('click',function(){switchMainTab('Scratch');});
   $('mainTabQuote').addEventListener('click',function(){switchMainTab('Quote');});
-  ['qClientName','qDestination','qHotel','qRoom','qHotelUrl','qHotelDesc','qFacilities','qFlightOut','qAirline','qDepTime','qArrTime','qFlightRet','qRetDepTime','qRetArrTime','qDeparture','qReturn','qPassengers','qDuration','qAirport','qPrice','qDeposit','qNote'].forEach(function(id){$(id).addEventListener('input',liveUpdateQuote);});
+  ['qClientName','qDestination','qHotel','qDeparture','qReturn','qPassengers','qDuration','qAirport','qPrice','qDeposit','qNote','qValidUntil'].forEach(function(id){$(id).addEventListener('input',liveUpdateQuote);});
   $('qBoard').addEventListener('change',liveUpdateQuote);
-  $('qStars').addEventListener('change',liveUpdateQuote);
-  $('qFlightType').addEventListener('change',liveUpdateQuote);
   $('qCopyBtn').addEventListener('click',qCopyLink);
   $('qPreviewBtn').addEventListener('click',qPreview);
   $('qWaBtn').addEventListener('click',qSendWA);
   initInclusions();
-  initImageUpload();
-  initQuoteType();
   if(sessionStorage.getItem(SK)==='1')showAdmin();
 });
 })();
