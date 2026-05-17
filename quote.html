@@ -202,6 +202,7 @@ body{font-family:'Poppins',sans-serif;background:var(--cream);min-height:100vh;p
         <div id="hotelRating" style="display:none;" class="hotel-rating"></div>
         <div id="hotelDescEl" style="display:none;" class="hotel-desc"></div>
         <div id="facilitiesEl" style="display:none;" class="facilities-grid"></div>
+        <div id="hotelUrlBtn" style="display:none;margin-top:16px;"></div>
       </div>
     </div>
 
@@ -389,12 +390,6 @@ window.addEventListener('DOMContentLoaded',function(){
   }
 
   // Hotel section
-  var imgs=[d.img1,d.img2,d.img3].filter(Boolean);
-  var gallery=document.getElementById('hotelGallery');
-  if(imgs.length){
-    var cls=imgs.length===1?'one':imgs.length===2?'two':'three';
-    gallery.innerHTML='<div class="hotel-gallery '+cls+'">'+imgs.map(function(u){return '<img src="'+u+'" alt="Hotel" onerror="this.parentNode.removeChild(this)">';}).join('')+'</div>';
-  }
   if(d.stars||d.board){
     var rr=document.getElementById('hotelRating');rr.style.display='flex';
     rr.innerHTML=(d.stars?'<span class="stars">'+stars(d.stars)+'</span><span class="rating-label">'+d.stars+' Star</span>':'')+(d.board?'<span class="rating-label" style="margin-left:12px;background:var(--teal);color:#fff;padding:3px 10px;border-radius:20px;font-size:11px;">'+d.board+'</span>':'');
@@ -407,8 +402,13 @@ window.addEventListener('DOMContentLoaded',function(){
   // Update hotel section header
   document.getElementById('hotelSectionTitle').textContent=d.hotel||'Hotel Information';
   if(d.dest)document.getElementById('hotelSectionSub').textContent=d.dest;
+  if(d.hotelUrl){
+    var hb=document.getElementById('hotelUrlBtn');hb.style.display='block';
+    hb.innerHTML='<a href="'+d.hotelUrl+'" target="_blank" rel="noopener" style="display:flex;align-items:center;justify-content:center;gap:8px;padding:13px 20px;border:2px solid var(--teal);border-radius:50px;color:var(--teal);font-family:Montserrat,sans-serif;font-size:12px;font-weight:800;letter-spacing:1px;text-transform:uppercase;text-decoration:none;transition:all .2s;" onmouseover="this.style.background=\'var(--teal)\';this.style.color=\'#fff\'" onmouseout="this.style.background=\'transparent\';this.style.color=\'var(--teal)\'"><i class="fas fa-external-link-alt"></i> View Hotel Website &amp; Photos</a>';
+  }
+
   // Hide hotel section if nothing to show
-  if(!imgs.length&&!d.stars&&!d.board&&!d.hotelDesc&&!d.facilities&&!d.room)
+  if(!d.stars&&!d.board&&!d.hotelDesc&&!d.facilities&&!d.room&&!d.hotelUrl)
     document.getElementById('hotelSection').style.display='none';
 
   // Booking summary
