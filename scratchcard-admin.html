@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Melita — Admin</title>
-<!-- admin-v3 -->
 <meta name="robots" content="noindex, nofollow">
 <link rel="icon" type="image/png" href="logo.png">
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -236,182 +235,34 @@ select{cursor:pointer;}
       <div class="admin-card">
         <div class="card-title"><i class="fas fa-file-invoice"></i> Build a Quote</div>
         <div class="card-sub">Fill in the holiday details to generate a branded client quote link.</div>
-
         <div class="field"><label>Client Name</label><input type="text" id="qClientName" placeholder="e.g. The Johnson Family"></div>
-
-        <div class="field">
-          <label>Quote Type</label>
-          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;">
-            <label id="qt-both" style="display:flex;align-items:center;justify-content:center;gap:6px;padding:10px;border:2px solid var(--teal);border-radius:10px;cursor:pointer;background:#f0fafa;font-size:12px;font-weight:700;color:var(--teal);letter-spacing:0;text-transform:none;">
-              <input type="radio" name="quoteType" id="qtBoth" value="both" checked style="accent-color:var(--teal);"> Flights + Hotel
-            </label>
-            <label id="qt-hotel" style="display:flex;align-items:center;justify-content:center;gap:6px;padding:10px;border:2px solid var(--border);border-radius:10px;cursor:pointer;background:#fafafa;font-size:12px;font-weight:700;color:#888;letter-spacing:0;text-transform:none;">
-              <input type="radio" name="quoteType" id="qtHotel" value="hotel" style="accent-color:var(--teal);"> Hotel Only
-            </label>
-            <label id="qt-flight" style="display:flex;align-items:center;justify-content:center;gap:6px;padding:10px;border:2px solid var(--border);border-radius:10px;cursor:pointer;background:#fafafa;font-size:12px;font-weight:700;color:#888;letter-spacing:0;text-transform:none;">
-              <input type="radio" name="quoteType" id="qtFlight" value="flight" style="accent-color:var(--teal);"> Flights Only
-            </label>
-          </div>
-        </div>
         <div class="field"><label>Destination</label><input type="text" id="qDestination" placeholder="e.g. Maldives, Turkey, Jamaica"></div>
-
-        <div id="hotelFieldsSection">
         <div class="field"><label>Hotel / Resort</label><input type="text" id="qHotel" placeholder="e.g. Adalya Elite Lara"></div>
-        <div class="price-row">
-          <div class="field">
-            <label>Star Rating</label>
-            <select id="qStars">
-              <option value="">— Select —</option>
-              <option value="5">5 Star</option>
-              <option value="4">4 Star</option>
-              <option value="3">3 Star</option>
-              <option value="4+">4 Star Plus</option>
-              <option value="5+">5 Star Deluxe</option>
-            </select>
-          </div>
-          <div class="field">
-            <label>Board Type</label>
-            <select id="qBoard">
-              <option value="">— Select —</option>
-              <option value="All Inclusive">All Inclusive</option>
-              <option value="Full Board">Full Board</option>
-              <option value="Half Board">Half Board</option>
-              <option value="Bed and Breakfast">Bed and Breakfast</option>
-              <option value="Room Only">Room Only</option>
-              <option value="Self Catering">Self Catering</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="field"><label>Room Type</label><input type="text" id="qRoom" placeholder="e.g. Superior Double Sea View, Family Suite"></div>
-
-        <div class="field"><label>Hotel Website <span class="opt">optional — clients can view more photos here</span></label><input type="text" id="qHotelUrl" placeholder="e.g. https://www.adalyaelitelara.com"></div>
-
-        <div class="field"><label>Hotel Description <span class="opt">optional — shown in hotel section</span></label><textarea id="qHotelDesc" placeholder="e.g. A stunning 5-star resort set right on the beach at Lara Bay, offering world-class dining, award-winning spa facilities and an incredible waterpark."></textarea></div>
-
         <div class="field">
-          <label>Hotel Facilities <span class="opt">comma separated</span></label>
-          <input type="text" id="qFacilities" placeholder="e.g. Waterpark, Spa, Sandy Beach, Kids Club, 5 Restaurants">
-        </div>
-
-        <div class="field">
-          <label>Destination</label>
-          <select id="qDestSelect" onchange="handleDestSelect()">
-            <option value="">— Select a destination —</option>
-            <option>Turkey</option><option>Maldives</option><option>Dubai</option>
-            <option>Santorini</option><option>Barbados</option><option>Bali</option>
-            <option>Tenerife</option><option>New York</option><option>Cancun</option>
-            <option>Thailand</option><option>Mauritius</option><option>Ibiza</option>
-            <option>Cyprus</option><option>Lanzarote</option><option>Portugal</option>
-            <option>Italy</option><option>Florida</option><option>Jamaica</option>
-            <option>Greece</option><option>Morocco</option><option>South Korea</option>
-            <option>Japan</option><option>Paris</option><option>Lapland</option>
-            <option>Egypt</option><option>Hawaii</option><option>Cape Town</option>
-            <option>Australia</option><option>Barcelona</option><option>Zanzibar</option>
-            <option>Cuba</option><option>Disneyland Paris</option><option>Kenya</option>
-            <option value="other">Other (type below)</option>
+          <label>Board Type</label>
+          <select id="qBoard">
+            <option value="">— Select —</option>
+            <option value="All Inclusive">All Inclusive</option>
+            <option value="Full Board">Full Board</option>
+            <option value="Half Board">Half Board</option>
+            <option value="Bed and Breakfast">Bed and Breakfast</option>
+            <option value="Room Only">Room Only</option>
+            <option value="Self Catering">Self Catering</option>
           </select>
-          <input type="text" id="qDestination" placeholder="Type destination..." style="margin-top:6px;display:none;">
-        </div>
-
-        </div><!-- end hotelFieldsSection -->
-
-        <div class="divider-line"></div>
-        <div class="card-title" style="margin-bottom:12px;"><i class="fas fa-plane-departure"></i> Flight Details</div>
-        <div id="flightFieldsSection">
-
-        <div class="price-row">
-          <div class="field"><label>Outbound Flight No.</label><input type="text" id="qFlightOut" placeholder="e.g. EZY4617"></div>
-          <div class="field"><label>Airline</label><input type="text" id="qAirline" placeholder="e.g. easyJet"></div>
         </div>
         <div class="price-row">
-          <div class="field"><label>Departs (outbound)</label><input type="time" id="qDepTime"></div>
-          <div class="field"><label>Arrives (outbound)</label><input type="time" id="qArrTime"></div>
-        </div>
-        <div class="price-row">
-          <div class="field"><label>Return Flight No.</label><input type="text" id="qFlightRet" placeholder="e.g. EZY4618"></div>
-          <div class="field"><label>Flight Type</label>
-            <select id="qFlightType">
-              <option value="Direct">Direct</option>
-              <option value="1 Stop">1 Stop</option>
-              <option value="2 Stops">2 Stops</option>
-            </select>
-          </div>
-        </div>
-        <div class="price-row">
-          <div class="field"><label>Departs (return)</label><input type="time" id="qRetDepTime"></div>
-          <div class="field"><label>Arrives (return)</label><input type="time" id="qRetArrTime"></div>
-        </div>
-
-        </div><!-- end flightFieldsSection -->
-
-        <div class="divider-line"></div>
-        <div class="card-title" style="margin-bottom:12px;"><i class="fas fa-calendar"></i> Booking Details</div>
-
-        <div class="price-row">
-          <div class="field"><label>Departure Date</label><input type="date" id="qDeparture"></div>
-          <div class="field"><label>Return Date</label><input type="date" id="qReturn"></div>
+          <div class="field"><label>Departure Date</label><input type="text" id="qDeparture" placeholder="e.g. 12 Aug 2026"></div>
+          <div class="field"><label>Return Date</label><input type="text" id="qReturn" placeholder="e.g. 19 Aug 2026"></div>
         </div>
         <div class="price-row">
           <div class="field"><label>Passengers</label><input type="text" id="qPassengers" placeholder="e.g. 2 Adults, 1 Child"></div>
           <div class="field"><label>Duration</label><input type="text" id="qDuration" placeholder="e.g. 7 nights"></div>
         </div>
-        <div class="field">
-          <label>Departure Airport</label>
-          <select id="qAirportSelect" onchange="handleAirportSelect()">
-            <option value="">— Select airport —</option>
-            <optgroup label="London">
-              <option>London Heathrow (LHR)</option>
-              <option>London Gatwick (LGW)</option>
-              <option>London Stansted (STN)</option>
-              <option>London Luton (LTN)</option>
-              <option>London City (LCY)</option>
-              <option>London Southend (SEN)</option>
-            </optgroup>
-            <optgroup label="England">
-              <option>Manchester (MAN)</option>
-              <option>Birmingham (BHX)</option>
-              <option>Bristol (BRS)</option>
-              <option>Leeds Bradford (LBA)</option>
-              <option>Liverpool John Lennon (LPL)</option>
-              <option>Newcastle (NCL)</option>
-              <option>East Midlands (EMA)</option>
-              <option>Southampton (SOU)</option>
-              <option>Exeter (EXT)</option>
-              <option>Doncaster Sheffield (DSA)</option>
-              <option>Humberside (HUY)</option>
-            </optgroup>
-            <optgroup label="Scotland">
-              <option>Glasgow (GLA)</option>
-              <option>Edinburgh (EDI)</option>
-              <option>Aberdeen (ABZ)</option>
-              <option>Inverness (INV)</option>
-            </optgroup>
-            <optgroup label="Wales & N. Ireland">
-              <option>Cardiff (CWL)</option>
-              <option>Belfast International (BFS)</option>
-              <option>Belfast City (BHD)</option>
-            </optgroup>
-            <option value="other">Other (type below)</option>
-          </select>
-          <input type="text" id="qAirport" placeholder="Type airport..." style="margin-top:6px;display:none;">
-        </div>
+        <div class="field"><label>Departure Airport</label><input type="text" id="qAirport" placeholder="e.g. London Gatwick"></div>
         <div class="price-row">
           <div class="field"><label>Total Price (£)</label><input type="number" id="qPrice" placeholder="e.g. 3499"></div>
           <div class="field"><label>Deposit (£) <span class="opt">optional</span></label><input type="number" id="qDeposit" placeholder="e.g. 350"></div>
         </div>
-
-        <div class="price-row">
-          <div class="field"><label>Deposit Due Date <span class="opt">optional</span></label><input type="date" id="qDepositDate"></div>
-          <div class="field"><label>Final Payment Date <span class="opt">optional</span></label><input type="date" id="qFinalDate"></div>
-        </div>
-
-        <div class="field">
-          <label>Payment Schedule <span class="opt">optional — for dynamic packages</span></label>
-          <div id="paymentSchedule"></div>
-          <button type="button" id="addPaymentBtn" style="width:100%;padding:9px;border:2px dashed var(--border);border-radius:10px;background:none;color:var(--teal);font-family:'Poppins',sans-serif;font-size:12px;font-weight:600;cursor:pointer;margin-top:6px;display:flex;align-items:center;justify-content:center;gap:6px;"><i class="fas fa-plus"></i> Add Payment Instalment</button>
-        </div>
-
         <div class="field">
           <label>What's Included</label>
           <div class="inclusions-grid" id="inclusionsGrid">
@@ -423,16 +274,11 @@ select{cursor:pointer;}
             <div class="inclusion-item" data-val="Travel Insurance"><i class="fas fa-heart"></i> Travel Insurance</div>
           </div>
         </div>
-
         <div class="field"><label>Personal Note <span class="opt">optional</span></label><textarea id="qNote" placeholder="e.g. I have hand-picked this hotel for your family — the beach is right on your doorstep."></textarea></div>
+        <div class="field"><label>Quote Valid Until <span class="opt">optional</span></label><input type="text" id="qValidUntil" placeholder="e.g. 30 May 2026"></div>
+        <div class="divider-line"></div>
         <div class="field">
-          <label>Terms & Conditions</label>
-          <div style="display:flex;align-items:center;gap:8px;padding:10px 12px;background:#f0fafa;border-radius:10px;border:1px solid var(--border);">
-            <i class="fas fa-file-contract" style="color:var(--teal);"></i>
-            <span style="font-size:12px;color:var(--teal);font-weight:600;flex:1;">JLT Group Booking Terms included automatically</span>
-            <a href="https://hub.thejltgroup.co.uk/bookingterms" target="_blank" style="font-size:11px;color:#aaa;text-decoration:none;"><i class="fas fa-external-link-alt"></i> Preview</a>
-          </div>
-        </div>
+          <label>Generated Quote Link</label>
           <div class="url-preview" id="qUrlPreview">Fill in the details above to generate a quote link...</div>
         </div>
         <div class="btn-row">
@@ -515,116 +361,9 @@ function renderSaved(){var list=$('savedList'),saved=getSaved().slice(0,5);if(!s
 function renderArchive(){var list=$('archiveList'),saved=getSaved();var byM=saved.reduce(function(a,s){a[s.method]=(a[s.method]||0)+1;return a;},{});$('archiveTotal').textContent=saved.length;$('archiveWA').textContent=byM['WhatsApp']||0;$('archiveCopied').textContent=byM['Link Copied']||0;if(!saved.length){list.innerHTML='<div class="empty-saved"><i class="fas fa-archive"></i>No scratchcards yet.</div>';return;}list.innerHTML=saved.map(function(s){return '<div class="saved-item"><div class="saved-info"><div class="saved-name">'+s.name+'</div><div class="saved-dest">'+s.dest+' <span style="font-size:10px;background:'+methodColor(s.method)+';color:#fff;padding:2px 7px;border-radius:10px;font-weight:700;">'+s.method+'</span></div><div class="saved-date-label">Sent '+s.created+(s.date?' · '+s.date:'')+'</div></div><div class="saved-actions"><button class="saved-btn copy" onclick="navigator.clipboard.writeText(\''+s.url+'\')" title="Copy"><i class="fas fa-copy"></i></button><button class="saved-btn del" onclick="deleteSaved('+s.id+')" title="Delete"><i class="fas fa-trash"></i></button></div></div>';}).join('');}
 window.deleteSaved=function(id){if(!confirm('Remove from archive?'))return;localStorage.setItem('mh_scratchcards',JSON.stringify(getSaved().filter(function(s){return s.id!==id;})));renderSaved();renderArchive();$('archiveBadge').textContent=getSaved().length;};
 
-// IMAGE UPLOAD
-
-// DROPDOWN HANDLERS
-window.handleDestSelect=function(){
-  var v=$('qDestSelect').value;
-  var txt=$('qDestination');
-  if(v==='other'){txt.style.display='block';txt.value='';txt.focus();}
-  else{txt.style.display='none';txt.value=v;}
-  liveUpdateQuote();
-};
-window.handleAirportSelect=function(){
-  var v=$('qAirportSelect').value;
-  var txt=$('qAirport');
-  if(v==='other'){txt.style.display='block';txt.value='';txt.focus();}
-  else{txt.style.display='none';txt.value=v;}
-  liveUpdateQuote();
-};
-
-// PAYMENT SCHEDULE
-var paymentRows=[];
-function renderPaymentRows(){
-  var div=$('paymentSchedule');
-  div.innerHTML=paymentRows.map(function(r,i){
-    return '<div style="display:grid;grid-template-columns:1fr 1fr auto;gap:8px;margin-bottom:8px;align-items:center;">'
-      +'<input type="number" placeholder="Amount £" value="'+r.amt+'" oninput="updatePayment('+i+',\'amt\',this.value)" style="padding:9px;border:2px solid var(--border);border-radius:8px;font-family:Poppins,sans-serif;font-size:13px;">'
-      +'<input type="date" value="'+r.date+'" oninput="updatePayment('+i+',\'date\',this.value)" style="padding:9px;border:2px solid var(--border);border-radius:8px;font-family:Poppins,sans-serif;font-size:13px;">'
-      +'<button onclick="removePayment('+i+')" style="padding:9px 12px;border:none;border-radius:8px;background:#fee2e2;color:#dc2626;cursor:pointer;font-size:12px;"><i class="fas fa-trash"></i></button>'
-      +'</div>';
-  }).join('');
-  liveUpdateQuote();
-}
-window.updatePayment=function(i,field,val){paymentRows[i][field]=val;liveUpdateQuote();};
-window.removePayment=function(i){paymentRows.splice(i,1);renderPaymentRows();};
-
-// FORMAT DATE for display
-function fmtDate(val){
-  if(!val) return '';
-  var d=new Date(val);
-  if(isNaN(d.getTime())) return val;
-  return d.toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'});
-}
-
-// QUOTE TYPE
-function getQuoteType(){
-  var radios=document.querySelectorAll('input[name="quoteType"]');
-  for(var i=0;i<radios.length;i++){if(radios[i].checked)return radios[i].value;}
-  return 'both';
-}
-function initQuoteType(){
-  document.querySelectorAll('input[name="quoteType"]').forEach(function(radio){
-    radio.addEventListener('change',function(){
-      // Update label styling
-      document.querySelectorAll('input[name="quoteType"]').forEach(function(r){
-        var lbl=r.parentElement;
-        if(r.checked){lbl.style.borderColor='var(--teal)';lbl.style.background='#f0fafa';lbl.style.color='var(--teal)';}
-        else{lbl.style.borderColor='var(--border)';lbl.style.background='#fafafa';lbl.style.color='#888';}
-      });
-      // Show/hide sections
-      var type=radio.value;
-      var hotelFields=document.getElementById('hotelFieldsSection');
-      var flightFields=document.getElementById('flightFieldsSection');
-      if(hotelFields) hotelFields.style.display=(type==='flight')?'none':'block';
-      if(flightFields) flightFields.style.display=(type==='hotel')?'none':'block';
-      liveUpdateQuote();
-    });
-  });
-}
-
 // QUOTE BUILDER
 function buildQuoteUrl(){
-  var raw={
-    qt:getQuoteType(),
-    n:$('qClientName').value.trim(),
-    dest:$('qDestination').value.trim()||$('qDestSelect').value,
-    hotel:$('qHotel').value.trim(),
-    stars:$('qStars').value,
-    board:$('qBoard').value,
-    room:$('qRoom').value.trim(),
-    hu:$('qHotelUrl').value.trim(),
-    hd:$('qHotelDesc').value.trim(),
-    fac:$('qFacilities').value.trim(),
-    fo:$('qFlightOut').value.trim(),
-    al:$('qAirline').value.trim(),
-    dt:$('qDepTime').value,
-    at:$('qArrTime').value,
-    fr:$('qFlightRet').value.trim(),
-    ft:$('qFlightType').value,
-    rdt:$('qRetDepTime').value,
-    rat:$('qRetArrTime').value,
-    dep:fmtDate($('qDeparture').value),
-    ret:fmtDate($('qReturn').value),
-    pax:$('qPassengers').value.trim(),
-    dur:$('qDuration').value.trim(),
-    air:$('qAirport').value.trim()||$('qAirportSelect').value,
-    pr:$('qPrice').value.trim(),
-    dp:$('qDeposit').value.trim(),
-    ddate:fmtDate($('qDepositDate').value),
-    fdate:fmtDate($('qFinalDate').value),
-    sched:paymentRows.filter(function(r){return r.amt&&r.date;}).map(function(r){return {a:r.amt,d:fmtDate(r.date)};});
-    inc:selectedInclusions.length?selectedInclusions:undefined,
-    note:$('qNote').value.trim(),
-    id:Date.now()
-  };
-  var data={};
-  Object.keys(raw).forEach(function(k){
-    var v=raw[k];
-    if(v===undefined||v===null||v==='') return;
-    if(Array.isArray(v)&&v.length===0) return;
-    data[k]=v;
-  });
+  var data={n:$('qClientName').value.trim(),dest:$('qDestination').value.trim(),hotel:$('qHotel').value.trim(),board:$('qBoard').value,dep:$('qDeparture').value.trim(),ret:$('qReturn').value.trim(),pax:$('qPassengers').value.trim(),dur:$('qDuration').value.trim(),airport:$('qAirport').value.trim(),price:$('qPrice').value.trim(),deposit:$('qDeposit').value.trim(),inc:selectedInclusions,note:$('qNote').value.trim(),valid:$('qValidUntil').value.trim(),id:Date.now()};
   if(!data.dest&&!data.hotel)return null;
   var b64=btoa(unescape(encodeURIComponent(JSON.stringify(data)))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=/g,'');
   return Q_BASE+'?q='+b64;
@@ -662,34 +401,12 @@ window.addEventListener('DOMContentLoaded',function(){
   $('tabArchiveBtn').addEventListener('click',function(){switchInnerTab('archive');});
   $('mainTabScratch').addEventListener('click',function(){switchMainTab('Scratch');});
   $('mainTabQuote').addEventListener('click',function(){switchMainTab('Quote');});
-  ['qClientName','qDestination','qHotel','qRoom','qHotelUrl','qHotelDesc','qFacilities','qFlightOut','qAirline','qDepTime','qArrTime','qFlightRet','qRetDepTime','qRetArrTime','qDeparture','qReturn','qPassengers','qDuration','qAirport','qPrice','qDeposit','qNote'].forEach(function(id){$(id).addEventListener('input',liveUpdateQuote);});
+  ['qClientName','qDestination','qHotel','qDeparture','qReturn','qPassengers','qDuration','qAirport','qPrice','qDeposit','qNote','qValidUntil'].forEach(function(id){$(id).addEventListener('input',liveUpdateQuote);});
   $('qBoard').addEventListener('change',liveUpdateQuote);
-  $('qStars').addEventListener('change',liveUpdateQuote);
-  $('qFlightType').addEventListener('change',liveUpdateQuote);
-  $('qDestSelect').addEventListener('change',handleDestSelect);
-  $('qAirportSelect').addEventListener('change',handleAirportSelect);
-  $('addPaymentBtn').addEventListener('click',function(){
-    paymentRows.push({amt:'',date:''});
-    renderPaymentRows();
-  });
-  $('qDepositDate').addEventListener('change',liveUpdateQuote);
-  $('qFinalDate').addEventListener('change',liveUpdateQuote);
-  $('qDeparture').addEventListener('change',function(){
-    // Auto-fill duration if return date set
-    var dep=$('qDeparture').value,ret=$('qReturn').value;
-    if(dep&&ret){var nights=Math.round((new Date(ret)-new Date(dep))/(86400000));if(nights>0)$('qDuration').value=nights+' night'+(nights>1?'s':'');}
-    liveUpdateQuote();
-  });
-  $('qReturn').addEventListener('change',function(){
-    var dep=$('qDeparture').value,ret=$('qReturn').value;
-    if(dep&&ret){var nights=Math.round((new Date(ret)-new Date(dep))/(86400000));if(nights>0)$('qDuration').value=nights+' night'+(nights>1?'s':'');}
-    liveUpdateQuote();
-  });
   $('qCopyBtn').addEventListener('click',qCopyLink);
   $('qPreviewBtn').addEventListener('click',qPreview);
   $('qWaBtn').addEventListener('click',qSendWA);
   initInclusions();
-  initQuoteType();
   if(sessionStorage.getItem(SK)==='1')showAdmin();
 });
 })();
