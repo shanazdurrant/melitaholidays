@@ -251,18 +251,24 @@ body{font-family:'Poppins',sans-serif;background:var(--cream);min-height:100vh;p
 (function(){
 
 function decodeData(token){
-  try{var d=JSON.parse(atob(token));if(d&&typeof d==='object')return d;}catch(e){}
-  try{
-    var b=atob(token);
-    var d2=JSON.parse(decodeURIComponent(b.split('').map(function(c){return '%'+('00'+c.charCodeAt(0).toString(16)).slice(-2);}).join('')));
-    if(d2&&typeof d2==='object')return d2;
-  }catch(e){}
+  // Method 1: URL-safe base64 with UTF-8 (what admin produces)
   try{
     var b64=token.replace(/-/g,'+').replace(/_/g,'/');
-    while(b64.length%4)b64+='=';
-    var b2=atob(b64);
-    var d3=JSON.parse(decodeURIComponent(b2.split('').map(function(c){return '%'+('00'+c.charCodeAt(0).toString(16)).slice(-2);}).join('')));
-    if(d3&&typeof d3==='object')return d3;
+    while(b64.length%4) b64+='=';
+    var json=decodeURIComponent(atob(b64).split('').map(function(c){return '%'+('00'+c.charCodeAt(0).toString(16)).slice(-2);}).join(''));
+    var d=JSON.parse(json);
+    if(d&&typeof d==='object') return d;
+  }catch(e){}
+  // Method 2: standard base64 direct
+  try{
+    var d2=JSON.parse(atob(token));
+    if(d2&&typeof d2==='object') return d2;
+  }catch(e){}
+  // Method 3: standard base64 with UTF-8
+  try{
+    var json3=decodeURIComponent(atob(token).split('').map(function(c){return '%'+('00'+c.charCodeAt(0).toString(16)).slice(-2);}).join(''));
+    var d3=JSON.parse(json3);
+    if(d3&&typeof d3==='object') return d3;
   }catch(e){}
   return null;
 }
@@ -342,11 +348,6 @@ window.addEventListener('DOMContentLoaded',function(){
   if(!d||(!d.dest&&!d.hotel)){document.getElementById('invalidMsg').style.display='block';return;}
 
   document.getElementById('quoteContent').style.display='block';
-  // DEBUG - remove after testing
-  var dbg=document.createElement('div');
-  dbg.style.cssText='background:#fef;border:1px solid red;padding:10px;font-size:11px;word-break:break-all;margin:10px;border-radius:8px;';
-  dbg.textContent='DEBUG: dest='+d.dest+' hotel='+d.hotel+' room='+d.room+' dep='+d.dep+' pr='+d.pr+' sched='+(d.sched?d.sched.length:0);
-  document.body.insertBefore(dbg,document.body.firstChild);
   document.getElementById('quoteRef').textContent='Ref: MH-'+(d.id?String(d.id).slice(-6):'------');
 
   // Hero image
