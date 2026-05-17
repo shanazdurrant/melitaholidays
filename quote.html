@@ -342,6 +342,11 @@ window.addEventListener('DOMContentLoaded',function(){
   if(!d||(!d.dest&&!d.hotel)){document.getElementById('invalidMsg').style.display='block';return;}
 
   document.getElementById('quoteContent').style.display='block';
+  // DEBUG - remove after testing
+  var dbg=document.createElement('div');
+  dbg.style.cssText='background:#fef;border:1px solid red;padding:10px;font-size:11px;word-break:break-all;margin:10px;border-radius:8px;';
+  dbg.textContent='DEBUG: dest='+d.dest+' hotel='+d.hotel+' room='+d.room+' dep='+d.dep+' pr='+d.pr+' sched='+(d.sched?d.sched.length:0);
+  document.body.insertBefore(dbg,document.body.firstChild);
   document.getElementById('quoteRef').textContent='Ref: MH-'+(d.id?String(d.id).slice(-6):'------');
 
   // Hero image
