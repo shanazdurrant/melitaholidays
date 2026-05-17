@@ -630,13 +630,32 @@ function qUpdate(){
   if(url){box.textContent=url;box.classList.add('active');}
   else{box.textContent='Fill in the details above to generate a quote link...';box.classList.remove('active');}
 }
-function qCopy(){var url=buildQuoteUrl();if(!url){alert('Fill in at least a destination or hotel.');return;}navigator.clipboard.writeText(url).then(function(){saveQuote();flash('qCopyFlash');});}
+function shortenAndCopy(url, callback){
+  fetch('https://tinyurl.com/api-create.php?url='+encodeURIComponent(url))
+    .then(function(r){return r.text();})
+    .then(function(short){callback(short);})
+    .catch(function(){callback(url);});
+}
+function qCopy(){
+  var url=buildQuoteUrl();if(!url){alert('Fill in at least a destination or hotel.');return;}
+  var box=$('qUrlBox');
+  box.textContent='Shortening link...';
+  shortenAndCopy(url,function(short){
+    box.textContent=short;box.classList.add('active');
+    navigator.clipboard.writeText(short).then(function(){saveQuote(short);flash('qCopyFlash');});
+  });
+}
 function qPreview(){var url=buildQuoteUrl();if(!url){alert('Fill in at least a destination or hotel.');return;}window.open(url,'_blank');}
 function qWA(){
   var url=buildQuoteUrl(),name=val('qName');
   if(!url){alert('Fill in at least a destination or hotel.');return;}
-  window.open('https://wa.me/?text='+encodeURIComponent('Hi'+(name?' '+name:'')+'! Here is your personalised holiday quote from Melita Holidays: '+url),'_blank');
-  saveQuote();
+  var box=$('qUrlBox');
+  box.textContent='Shortening link...';
+  shortenAndCopy(url,function(short){
+    box.textContent=short;box.classList.add('active');
+    window.open('https://wa.me/?text='+encodeURIComponent('Hi'+(name?' '+name:'')+'! Here is your personalised holiday quote from Melita Holidays: '+short),'_blank');
+    saveQuote(short);
+  });
 }
 
 function setQuoteType(qt){
@@ -677,8 +696,8 @@ function initInclusions(){
     });
   });
 }
-function saveQuote(){
-  var url=buildQuoteUrl();if(!url)return;
+function saveQuote(shortUrl){
+  var url=shortUrl||buildQuoteUrl();if(!url)return;
   var qs=getQuotes();
   qs.unshift({id:Date.now(),name:val('qName')||'Unknown',dest:getQDest(),hotel:val('qHotel'),price:val('qPrice'),url:url,status:'Pending',created:new Date().toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'})});
   localStorage.setItem('mh_quotes',JSON.stringify(qs));renderQuoteArchive();
