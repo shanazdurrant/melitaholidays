@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your Holiday Quote — Melita Holidays</title>
+<!-- quote-v6-FINAL -->
+<!-- v9 -->
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/png" href="logo.png">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<style>
+:root{--teal:#2f7f82;--teal-dark:#256c6f;--gold:#e09a42;--cream:#f6f4f2;--text:#2a2a2a;--border:#e8e8e8;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Poppins',sans-serif;background:var(--cream);min-height:100vh;padding:0 0 60px;}
+
+.quote-header{background:var(--teal);padding:22px 30px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;}
+.quote-header img{height:48px;object-fit:contain;}
+.quote-header-text{color:#fff;text-align:right;}
+.quote-header-text h2{font-family:'Montserrat',sans-serif;font-size:12px;font-weight:900;letter-spacing:2px;text-transform:uppercase;opacity:.7;margin-bottom:3px;}
+.quote-header-text p{font-size:12px;opacity:.55;}
+
+.quote-hero{background:linear-gradient(135deg,var(--teal-dark),#1a5558);padding:50px 30px 40px;text-align:center;position:relative;overflow:hidden;min-height:280px;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;}
+.quote-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 80% 20%,rgba(224,154,66,0.2) 0%,transparent 60%);}
+.hero-bg{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transition:opacity 1.4s ease;filter:brightness(0.55);}
+.hero-bg.show{opacity:1;}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.82) 0%,rgba(0,0,0,0.2) 55%,rgba(0,0,0,0) 100%);}
+.quote-hero h1{font-family:'Montserrat',sans-serif;font-size:clamp(32px,6vw,56px);font-weight:900;color:var(--gold);letter-spacing:2px;text-transform:uppercase;position:relative;margin-bottom:8px;z-index:2;text-shadow:0 2px 20px rgba(0,0,0,0.5);}
+.quote-hero .hero-sub{font-size:15px;color:rgba(255,255,255,0.85);position:relative;letter-spacing:.5px;z-index:2;margin-bottom:4px;}
+.quote-hero .client-greeting{font-size:13px;color:rgba(255,255,255,0.65);position:relative;margin-bottom:14px;font-weight:500;z-index:2;letter-spacing:.5px;}
+.stars-hero{color:var(--gold);font-size:18px;letter-spacing:2px;position:relative;z-index:2;margin-bottom:6px;}
+
+.deposit-cta{background:linear-gradient(135deg,var(--gold),#c8882e);padding:18px 24px;text-align:center;}
+.deposit-cta p{color:#fff;font-size:15px;font-weight:700;}
+.deposit-cta p span{font-size:22px;font-family:'Montserrat',sans-serif;font-weight:900;}
+
+.quote-body{max-width:720px;margin:0 auto;padding:28px 20px 0;}
+
+/* SECTION CARDS */
+.section-card{background:#fff;border-radius:20px;overflow:hidden;box-shadow:0 8px 40px rgba(0,0,0,0.07);margin-bottom:20px;}
+.section-head{background:var(--teal);padding:16px 22px;display:flex;align-items:center;gap:12px;}
+.section-head i{font-size:18px;color:var(--gold);}
+.section-head h3{font-family:'Montserrat',sans-serif;font-size:14px;font-weight:900;color:#fff;letter-spacing:.5px;}
+.section-head p{font-size:11px;color:rgba(255,255,255,0.6);margin-top:2px;}
+.section-body{padding:20px 22px;}
+
+/* HOTEL GALLERY */
+.hotel-gallery{display:grid;gap:8px;margin-bottom:18px;}
+.hotel-gallery.one{grid-template-columns:1fr;}
+.hotel-gallery.two{grid-template-columns:1fr 1fr;}
+.hotel-gallery.three{grid-template-columns:2fr 1fr;grid-template-rows:160px 160px;}
+.hotel-gallery img{width:100%;height:100%;object-fit:cover;border-radius:10px;display:block;}
+.hotel-gallery.three img:first-child{grid-row:1/3;}
+.hotel-rating{display:flex;align-items:center;gap:10px;margin-bottom:14px;}
+.stars{color:var(--gold);font-size:16px;letter-spacing:1px;}
+.rating-label{font-size:12px;color:#888;font-weight:600;}
+.hotel-desc{font-size:14px;color:#555;line-height:1.8;margin-bottom:16px;}
+.facilities-grid{display:flex;flex-wrap:wrap;gap:8px;}
+.facility-tag{background:var(--cream);border:1px solid var(--border);border-radius:20px;padding:5px 12px;font-size:12px;font-weight:600;color:var(--teal);}
+
+/* DETAIL ROWS */
+.detail-row{display:flex;align-items:flex-start;justify-content:space-between;padding:11px 0;border-bottom:1px solid var(--border);gap:16px;}
+.detail-row:last-child{border-bottom:none;padding-bottom:0;}
+.detail-label{font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#aaa;flex-shrink:0;min-width:130px;}
+.detail-value{font-size:14px;font-weight:600;color:var(--text);text-align:right;}
+.detail-value.price{color:var(--gold);font-size:24px;font-family:'Montserrat',sans-serif;font-weight:900;}
+
+/* FLIGHT */
+.flight-card{background:var(--cream);border-radius:12px;padding:16px 18px;margin-bottom:12px;border:1px solid var(--border);}
+.flight-card:last-child{margin-bottom:0;}
+.flight-direction{font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--teal);margin-bottom:12px;display:flex;align-items:center;gap:6px;}
+.flight-route{display:flex;align-items:center;gap:10px;margin-bottom:10px;}
+.flight-city{font-family:'Montserrat',sans-serif;font-size:16px;font-weight:900;color:var(--text);}
+.flight-arrow{flex:1;border-top:2px dashed var(--border);position:relative;margin:0 10px;}
+.flight-arrow::after{content:'▶';position:absolute;right:-8px;top:-11px;font-size:12px;color:var(--teal);}
+.flight-meta{display:flex;gap:16px;flex-wrap:wrap;}
+.flight-chip{display:flex;align-items:center;gap:5px;font-size:12px;color:#666;font-weight:500;}
+.flight-chip i{color:var(--teal);font-size:11px;}
+.flight-num{font-family:'Montserrat',sans-serif;font-size:13px;font-weight:800;color:var(--teal);}
+
+/* INCLUSIONS */
+.inclusions-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
+.inclusion-chip{background:var(--cream);border-radius:10px;padding:12px 8px;text-align:center;font-size:11px;font-weight:600;color:var(--teal);border:1px solid var(--border);}
+.inclusion-chip i{display:block;font-size:16px;margin-bottom:5px;color:var(--gold);}
+
+/* NOTE */
+.note-section{background:linear-gradient(135deg,var(--teal),var(--teal-dark));border-radius:20px;padding:24px;margin-bottom:20px;position:relative;overflow:hidden;}
+.note-section::before{content:'"';position:absolute;top:-10px;left:16px;font-size:100px;color:rgba(255,255,255,0.06);font-family:Georgia,serif;line-height:1;}
+.note-section p{font-size:14px;line-height:1.8;color:rgba(255,255,255,0.9);position:relative;font-style:italic;}
+.note-section .note-sig{font-size:13px;color:var(--gold);font-weight:700;margin-top:12px;position:relative;font-style:normal;}
+
+/* APPROVE */
+.approve-section{background:#fff;border-radius:20px;padding:28px;box-shadow:0 8px 40px rgba(0,0,0,0.08);margin-bottom:20px;text-align:center;}
+.approve-section h3{font-family:'Montserrat',sans-serif;font-size:16px;font-weight:900;color:var(--text);letter-spacing:.5px;margin-bottom:8px;}
+.approve-section p{font-size:13px;color:#888;margin-bottom:22px;line-height:1.6;}
+.btn-approve{display:flex;align-items:center;justify-content:center;gap:10px;padding:18px;border:none;border-radius:50px;background:linear-gradient(135deg,var(--teal),var(--teal-dark));color:#fff;font-family:'Montserrat',sans-serif;font-size:14px;font-weight:800;letter-spacing:1px;text-transform:uppercase;cursor:pointer;box-shadow:0 8px 28px rgba(47,127,130,0.4);transition:transform .2s;width:100%;margin-bottom:10px;}
+.btn-approve:hover{transform:translateY(-2px);}
+.btn-wa-quote,.btn-share{display:flex;align-items:center;justify-content:center;gap:10px;padding:15px;border:none;border-radius:50px;color:#fff;font-family:'Montserrat',sans-serif;font-size:13px;font-weight:800;letter-spacing:1px;text-transform:uppercase;cursor:pointer;transition:transform .2s;width:100%;margin-bottom:10px;}
+.btn-wa-quote{background:linear-gradient(135deg,#25D366,#1ebe5d);box-shadow:0 6px 20px rgba(37,211,102,0.3);}
+.btn-share{background:none;border:2px solid #25D366;color:#25D366;}
+.btn-share:hover{background:#25D366;color:#fff;}
+.btn-email-quote,.btn-pdf{display:flex;align-items:center;justify-content:center;gap:10px;padding:14px;border:2px solid var(--border);border-radius:50px;background:#fff;color:#666;font-family:'Montserrat',sans-serif;font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;cursor:pointer;transition:all .2s;width:100%;margin-bottom:10px;text-decoration:none;}
+.btn-email-quote:hover{border-color:var(--teal);color:var(--teal);}
+.btn-pdf:hover{border-color:var(--gold);color:var(--gold);}
+.btn-divider{display:flex;align-items:center;gap:10px;margin:6px 0;color:#ddd;font-size:11px;}
+.btn-divider::before,.btn-divider::after{content:'';flex:1;height:1px;background:var(--border);}
+
+/* APPROVED SCREEN */
+#approvedScreen{display:none;position:fixed;inset:0;background:var(--teal);z-index:1000;flex-direction:column;align-items:center;justify-content:center;padding:40px 24px;text-align:center;animation:fadeUp .5s ease both;}
+#approvedScreen.show{display:flex;}
+.approved-icon{font-size:72px;margin-bottom:24px;animation:bounceIn .6s ease both .2s;}
+.approved-icon i{color:var(--gold);}
+#approvedScreen h1{font-family:'Montserrat',sans-serif;font-size:clamp(24px,5vw,40px);font-weight:900;color:#fff;margin-bottom:14px;}
+#approvedScreen p{font-size:15px;color:rgba(255,255,255,0.75);line-height:1.8;max-width:440px;margin-bottom:28px;}
+.next-steps{background:rgba(255,255,255,0.1);border-radius:16px;padding:24px;max-width:440px;width:100%;margin-bottom:28px;text-align:left;}
+.next-steps h3{font-family:'Montserrat',sans-serif;font-size:12px;font-weight:900;color:var(--gold);letter-spacing:2px;text-transform:uppercase;margin-bottom:16px;}
+.next-step{display:flex;align-items:flex-start;gap:12px;margin-bottom:12px;}
+.next-step:last-child{margin-bottom:0;}
+.step-num{background:var(--gold);color:#fff;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:900;flex-shrink:0;margin-top:1px;}
+.next-step p{font-size:13px;color:rgba(255,255,255,0.8);line-height:1.5;}
+.btn-back-home{padding:16px 32px;border:2px solid rgba(255,255,255,0.3);border-radius:50px;background:transparent;color:#fff;font-family:'Montserrat',sans-serif;font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;cursor:pointer;transition:all .2s;text-decoration:none;display:inline-flex;align-items:center;gap:8px;}
+.btn-back-home:hover{background:rgba(255,255,255,0.1);}
+
+.quote-footer{text-align:center;padding:28px 20px 0;color:#aaa;font-size:12px;}
+.quote-footer a{color:var(--teal);text-decoration:none;font-weight:600;}
+
+#invalidMsg{text-align:center;padding:80px 30px;color:#999;}
+#invalidMsg i{font-size:48px;display:block;margin-bottom:16px;opacity:.3;}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+@keyframes bounceIn{0%{transform:scale(0);}60%{transform:scale(1.15);}100%{transform:scale(1);}}
+@media(max-width:500px){.inclusions-grid{grid-template-columns:1fr 1fr;}.hotel-gallery.three{grid-template-columns:1fr;grid-template-rows:auto;}.hotel-gallery.three img:first-child{grid-row:auto;}}
+</style>
+</head>
+<body>
+
+<!-- APPROVED SCREEN -->
+<div id="approvedScreen">
+  <div class="approved-icon"><i class="fas fa-check-circle"></i></div>
+  <h1>Thank You!</h1>
+  <p>That's brilliant news! Melita Holidays will be in touch shortly to discuss the next steps and help secure your holiday.</p>
+  <div class="next-steps">
+    <h3>What Happens Next</h3>
+    <div class="next-step"><div class="step-num">1</div><p>We'll contact you to confirm the holiday details and arrange payment of your approved deposit</p></div>
+    <div class="next-step"><div class="step-num">2</div><p>Traveller names and any additional information needed for the booking will be collected</p></div>
+    <div class="next-step"><div class="step-num">3</div><p>Your holiday will then be booked and secured</p></div>
+    <div class="next-step"><div class="step-num">4</div><p>You'll receive your booking confirmation and financial protection documents</p></div>
+  </div>
+  <a href="https://melitaholidays.com" class="btn-back-home"><i class="fas fa-home"></i> Visit Melita Holidays</a>
+</div>
+
+<div id="invalidMsg" style="display:none;">
+  <i class="fas fa-file-circle-xmark"></i>
+  <h2 style="font-family:'Montserrat',sans-serif;margin-bottom:8px;">Quote not found</h2>
+  <p>This link does not contain a valid quote. Ask Melita Holidays to resend your quote link.</p>
+  <a href="https://melitaholidays.com" style="display:inline-block;margin-top:20px;padding:14px 28px;background:var(--teal);color:#fff;border-radius:50px;font-weight:700;text-decoration:none;">Visit Melita Holidays</a>
+</div>
+
+<div id="quoteContent" style="display:none;">
+
+  <div class="quote-header">
+    <img src="logo.png" alt="Melita Holidays" onerror="this.style.display='none'">
+    <div class="quote-header-text">
+      <h2>Holiday Quote</h2>
+      <p id="quoteRef">Ref: —</p>
+    </div>
+  </div>
+
+  <div class="quote-hero">
+    <div class="hero-bg" id="heroBg"></div>
+    <div class="hero-overlay"></div>
+    <p class="client-greeting" id="clientGreeting"></p>
+    <div class="stars-hero" id="starsHero" style="display:none;"></div>
+    <h1 id="heroDestination">Your Holiday</h1>
+    <p class="hero-sub" id="heroHotel"></p>
+  </div>
+
+  <div style="background:#1a1a1a;padding:12px 24px;display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;">
+    <i class="fas fa-bolt" style="color:var(--gold);font-size:13px;"></i>
+    <p style="color:rgba(255,255,255,0.75);font-size:12px;margin:0;text-align:center;">All quotes are live and subject to availability — prices may change at any time. Book to secure your price.</p>
+  </div>
+
+  <div class="quote-body" id="quoteBody">
+
+    <!-- HOTEL INFO -->
+    <div class="section-card" id="hotelSection">
+      <div class="section-head">
+        <i class="fas fa-hotel"></i>
+        <div><h3 id="hotelSectionTitle">Hotel Information</h3><p id="hotelSectionSub"></p></div>
+      </div>
+      <div class="section-body">
+        <div id="hotelGallery"></div>
+        <div id="hotelRating" style="display:none;" class="hotel-rating"></div>
+        <div id="hotelDescEl" style="display:none;" class="hotel-desc"></div>
+        <div id="facilitiesEl" style="display:none;" class="facilities-grid"></div>
+        <div id="hotelUrlBtn" style="display:none;margin-top:16px;"></div>
+      </div>
+    </div>
+
+    <!-- BOOKING SUMMARY -->
+    <div class="section-card">
+      <div class="section-head"><i class="fas fa-calendar-check"></i><div><h3>Booking Summary</h3><p>Your personalised holiday details</p></div></div>
+      <div class="section-body" id="summaryBody"></div>
+    </div>
+
+    <!-- FLIGHTS -->
+    <div class="section-card" id="flightSection" style="display:none;">
+      <div class="section-head"><i class="fas fa-plane"></i><div><h3>Flight Details</h3><p id="flightSub"></p></div></div>
+      <div class="section-body">
+        <div id="outboundFlight"></div>
+        <div id="returnFlight"></div>
+      </div>
+    </div>
+
+    <!-- INCLUSIONS -->
+    <div class="section-card" id="inclusionsSection" style="display:none;">
+      <div class="section-head"><i class="fas fa-check-circle"></i><div><h3>What's Included</h3></div></div>
+      <div class="section-body"><div class="inclusions-grid" id="inclusionsGrid"></div></div>
+    </div>
+
+    <!-- NOTE -->
+    <div class="note-section" id="noteSection" style="display:none;">
+      <p id="noteText"></p>
+      <div class="note-sig">— Justine, Melita Holidays</div>
+    </div>
+
+    <!-- APPROVE -->
+    <div class="approve-section">
+      <h3>Ready to Book?</h3>
+      <p>If you are happy with this quote and would like to go ahead, tap below and I will get everything booked for you straight away.</p>
+      <button class="btn-approve" id="approveBtn"><i class="fas fa-check"></i> Yes — I Want to Book This!</button>
+      <div class="btn-divider">or</div>
+      <button class="btn-wa-quote" id="quoteWaBtn"><i class="fab fa-whatsapp"></i> Message Me on WhatsApp</button>
+      <a class="btn-email-quote" id="quoteEmailBtn"><i class="fas fa-envelope"></i> Prefer to Email?</a>
+      <div class="btn-divider">share and save</div>
+      <button class="btn-share" id="shareBtn"><i class="fab fa-whatsapp"></i> Share This Quote</button>
+      <button class="btn-pdf" id="pdfBtn"><i class="fas fa-file-pdf"></i> Save as PDF</button>
+    </div>
+
+    <div class="quote-footer">
+      <p>Quote prepared personally by Justine at <a href="https://melitaholidays.com">Melita Holidays</a></p>
+      <p style="margin-top:6px;">All holidays are ATOL &amp; PTS protected &nbsp;·&nbsp; Part of the JLT Group</p>
+    </div>
+  </div>
+</div>
+
+<script data-cfasync="false">
+(function(){
+
+function decodeData(token){
+  // Method 1: URL-safe base64 with UTF-8 (what admin produces)
+  try{
+    var b64=token.replace(/-/g,'+').replace(/_/g,'/');
+    while(b64.length%4) b64+='=';
+    var json=decodeURIComponent(atob(b64).split('').map(function(c){return '%'+('00'+c.charCodeAt(0).toString(16)).slice(-2);}).join(''));
+    var d=JSON.parse(json);
+    if(d&&typeof d==='object') return d;
+  }catch(e){}
+  // Method 2: standard base64 direct
+  try{
+    var d2=JSON.parse(atob(token));
+    if(d2&&typeof d2==='object') return d2;
+  }catch(e){}
+  // Method 3: standard base64 with UTF-8
+  try{
+    var json3=decodeURIComponent(atob(token).split('').map(function(c){return '%'+('00'+c.charCodeAt(0).toString(16)).slice(-2);}).join(''));
+    var d3=JSON.parse(json3);
+    if(d3&&typeof d3==='object') return d3;
+  }catch(e){}
+  return null;
+}
+
+var iconMap={'Return Flights':'fa-plane','Transfers':'fa-shuttle-van','ATOL Protected':'fa-shield-alt','Luggage':'fa-suitcase','Hotel':'fa-hotel','Travel Insurance':'fa-heart'};
+
+// Verified destination photo IDs (tested manually)
+var heroImages={
+  'TURKEY':     'https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?w=1200&q=80&auto=format&fit=crop',
+  'MALDIVES':   'https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=1200&q=80&auto=format&fit=crop',
+  'DUBAI':      'https://images.unsplash.com/photo-1518684079-3c830dcef090?w=1200&q=80&auto=format&fit=crop',
+  'SANTORINI':  'https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=1200&q=80&auto=format&fit=crop',
+  'BARBADOS':   'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1200&q=80&auto=format&fit=crop',
+  'BALI':       'https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=1200&q=80&auto=format&fit=crop',
+  'TENERIFE':   'https://images.unsplash.com/photo-1559827291-72ee739d0d9a?w=1200&q=80&auto=format&fit=crop',
+  'NEW YORK':   'https://images.unsplash.com/photo-1534430480872-3498386e7856?w=1200&q=80&auto=format&fit=crop',
+  'CANCUN':     'https://images.unsplash.com/photo-1552074284-5e84b979df39?w=1200&q=80&auto=format&fit=crop',
+  'THAILAND':   'https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=1200&q=80&auto=format&fit=crop',
+  'MAURITIUS':  'https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?w=1200&q=80&auto=format&fit=crop',
+  'IBIZA':      'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200&q=80&auto=format&fit=crop',
+  'CYPRUS':     'https://images.unsplash.com/photo-1562016600-ece13e8ba570?w=1200&q=80&auto=format&fit=crop',
+  'LANZAROTE':  'https://images.unsplash.com/photo-1586861635167-e5223aadc9fe?w=1200&q=80&auto=format&fit=crop',
+  'PORTUGAL':   'https://images.unsplash.com/photo-1555881400-74d7acaacd8b?w=1200&q=80&auto=format&fit=crop',
+  'ITALY':      'https://images.unsplash.com/photo-1516483638261-f4dbaf036963?w=1200&q=80&auto=format&fit=crop',
+  'FLORIDA':    'https://images.unsplash.com/photo-1533106418989-88406c7cc8ca?w=1200&q=80&auto=format&fit=crop',
+  'JAMAICA':    'https://images.unsplash.com/photo-1598935898639-81586f7d2129?w=1200&q=80&auto=format&fit=crop',
+  'GREECE':     'https://images.unsplash.com/photo-1533105079780-92b9be482077?w=1200&q=80&auto=format&fit=crop',
+  'MOROCCO':    'https://images.unsplash.com/photo-1489493887464-892be6d1daae?w=1200&q=80&auto=format&fit=crop',
+  'SOUTH KOREA':'https://images.unsplash.com/photo-1538485399081-7191377e8241?w=1200&q=80&auto=format&fit=crop',
+  'JAPAN':      'https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=1200&q=80&auto=format&fit=crop',
+  'PARIS':      'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=1200&q=80&auto=format&fit=crop',
+  'LAPLAND':    'https://images.unsplash.com/photo-1531366936337-7c912a4589a7?w=1200&q=80&auto=format&fit=crop',
+  'DISNEYLAND': 'https://images.unsplash.com/photo-1590333748338-d629e4564ad9?w=1200&q=80&auto=format&fit=crop',
+  'EGYPT':      'https://images.unsplash.com/photo-1539768942893-daf53e448371?w=1200&q=80&auto=format&fit=crop',
+  'HAWAII':     'https://images.unsplash.com/photo-1542259009477-d625272157b7?w=1200&q=80&auto=format&fit=crop',
+  'AUSTRALIA':  'https://images.unsplash.com/photo-1523482580672-f109ba8cb9be?w=1200&q=80&auto=format&fit=crop',
+  'BARCELONA':  'https://images.unsplash.com/photo-1539037116277-4db20889f2d4?w=1200&q=80&auto=format&fit=crop',
+  'ZANZIBAR':   'https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=1200&q=80&auto=format&fit=crop',
+  'CAPE TOWN':  'https://images.unsplash.com/photo-1580060839134-75a5edca2e99?w=1200&q=80&auto=format&fit=crop',
+  'KENYA':      'https://images.unsplash.com/photo-1521450023073-a0b9a893b00c?w=1200&q=80&auto=format&fit=crop',
+  'CUBA':       'https://images.unsplash.com/photo-1500759285222-a95626964b34?w=1200&q=80&auto=format&fit=crop',
+  'PORTUGAL':   'https://images.unsplash.com/photo-1555881400-74d7acaacd8b?w=1200&q=80&auto=format&fit=crop',
+  'MARBELLA':   'https://images.unsplash.com/photo-1591991731833-b4807cf7ef0a?w=1200&q=80&auto=format&fit=crop',
+};
+var heroFallback='https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=1200&q=80&auto=format&fit=crop';
+
+function getHeroImg(dest){
+  var key=(dest||'').toUpperCase().trim();
+  if(heroImages[key]) return heroImages[key];
+  var keys=Object.keys(heroImages);
+  for(var i=0;i<keys.length;i++){
+    if(key.indexOf(keys[i])>-1||keys[i].indexOf(key)>-1) return heroImages[keys[i]];
+  }
+  return heroFallback;
+}
+
+function stars(n){return '★'.repeat(parseInt(n)||0);}
+
+function generatePDF(d){
+  var btn=document.getElementById('pdfBtn');
+  btn.innerHTML='<i class="fas fa-spinner fa-spin"></i> Generating...';btn.disabled=true;
+  html2canvas(document.getElementById('quoteBody'),{scale:2,useCORS:true,backgroundColor:'#f6f4f2'}).then(function(canvas){
+    var pdf=new window.jspdf.jsPDF({orientation:'portrait',unit:'mm',format:'a4'});
+    var w=pdf.internal.pageSize.getWidth(),h=(canvas.height*w)/canvas.width;
+    var pages=Math.ceil(h/297);
+    for(var i=0;i<pages;i++){if(i>0)pdf.addPage();pdf.addImage(canvas.toDataURL('image/jpeg',0.92),'JPEG',0,-(i*297),w,h);}
+    pdf.save('Melita-Quote-'+(d.dest||'Holiday')+'.pdf');
+    btn.innerHTML='<i class="fas fa-file-pdf"></i> Save as PDF';btn.disabled=false;
+  }).catch(function(){btn.innerHTML='<i class="fas fa-file-pdf"></i> Save as PDF';btn.disabled=false;alert('PDF failed. Try your browser print function.');});
+}
+
+window.addEventListener('DOMContentLoaded',function(){
+  var params=new URLSearchParams(window.location.search);
+  var token=params.get('q');
+  if(!token){document.getElementById('invalidMsg').style.display='block';return;}
+  var d=decodeData(token);
+  if(!d||(!d.dest&&!d.hotel)){document.getElementById('invalidMsg').style.display='block';return;}
+
+  document.getElementById('quoteContent').style.display='block';
+  document.getElementById('quoteRef').textContent='Ref: MH-'+(d.id?String(d.id).slice(-6):'------');
+
+  // Hero image
+  var heroBg=document.getElementById('heroBg');
+  var heroUrl=getHeroImg(d.dest||d.hotel||'');
+  var heroImg=new Image();
+  heroImg.onload=function(){heroBg.style.backgroundImage='url(\''+heroUrl+'\')';heroBg.classList.add('show');};
+  heroImg.onerror=function(){/* no image, teal gradient shows */};
+  heroImg.src=heroUrl;
+
+  // Hero text
+  if(d.n)document.getElementById('clientGreeting').textContent='Prepared exclusively for '+d.n;
+  document.getElementById('heroDestination').textContent=(d.dest||d.hotel).toUpperCase();
+  if(d.hotel&&d.dest)document.getElementById('heroHotel').textContent=d.hotel;
+  if(d.stars){var sh=document.getElementById('starsHero');sh.textContent=stars(d.stars);sh.style.display='block';}
+
+  // Deposit CTA
+  if(d.dp&&d.pr){
+    var cta=document.getElementById('depositCta');cta.style.display='block';
+    cta.innerHTML='<p>Book now for just <span>£'+Number(d.dp).toLocaleString()+'</span> deposit &nbsp;·&nbsp; Balance of £'+Number(Number(d.pr)-Number(d.dp)).toLocaleString()+' due'+(d.fdate?' by '+d.fdate:' closer to departure')+'</p>';
+  }
+
+  // Hotel section
+  if(d.stars||d.board){
+    var rr=document.getElementById('hotelRating');rr.style.display='flex';
+    rr.innerHTML=(d.stars?'<span class="stars">'+stars(d.stars)+'</span><span class="rating-label">'+d.stars+' Star</span>':'')+(d.board?'<span class="rating-label" style="margin-left:12px;background:var(--teal);color:#fff;padding:3px 10px;border-radius:20px;font-size:11px;">'+d.board+'</span>':'');
+  }
+  if(d.hd){var hd=document.getElementById('hotelDescEl');hd.style.display='block';hd.textContent=d.hd;}
+  if(d.fac){
+    var fac=document.getElementById('facilitiesEl');fac.style.display='flex';
+    fac.innerHTML=d.fac.split(',').map(function(f){return '<span class="facility-tag">'+f.trim()+'</span>';}).join('');
+  }
+  // Update hotel section header
+  document.getElementById('hotelSectionTitle').textContent=d.hotel||'Hotel Information';
+  if(d.dest)document.getElementById('hotelSectionSub').textContent=d.dest;
+  if(d.hu){
+    var hb=document.getElementById('hotelUrlBtn');hb.style.display='block';
+    hb.innerHTML='<a href="'+d.hu+'" target="_blank" rel="noopener" style="display:flex;align-items:center;justify-content:center;gap:8px;padding:13px 20px;border:2px solid var(--teal);border-radius:50px;color:var(--teal);font-family:Montserrat,sans-serif;font-size:12px;font-weight:800;letter-spacing:1px;text-transform:uppercase;text-decoration:none;transition:all .2s;" onmouseover="this.style.background=\'var(--teal)\';this.style.color=\'#fff\'" onmouseout="this.style.background=\'transparent\';this.style.color=\'var(--teal)\'"><i class="fas fa-external-link-alt"></i> View Hotel Website &amp; Photos</a>';
+  }
+
+  // Hide hotel section if nothing to show
+  if(!d.stars&&!d.board&&!d.hd&&!d.fac&&!d.room&&!d.hu)
+    document.getElementById('hotelSection').style.display='none';
+
+  // Booking summary
+  var rows=[];
+  if(d.room)rows.push(['Room Type',d.room]);
+  if(d.dep&&d.ret)rows.push(['Travel Dates',d.dep+' — '+d.ret]);
+  else if(d.dep)rows.push(['Departure',d.dep]);
+  if(d.dur)rows.push(['Duration',d.dur]);
+  if(d.pax)rows.push(['Passengers',d.pax]);
+  if(d.air)rows.push(['Departure Airport',d.air]);
+  if(d.dp)rows.push(['Deposit','£'+Number(d.dp).toLocaleString()+(d.ddate?' — due '+d.ddate:'')]);
+  if(d.fdate)rows.push(['Final Payment Due',d.fdate]);
+  if(d.pr)rows.push(['__PRICE__','£'+Number(d.pr).toLocaleString()]);
+  document.getElementById('summaryBody').innerHTML=rows.map(function(r){
+    if(r[0]==='__PRICE__')return '<div class="detail-row"><span class="detail-label">Total Price</span><span class="detail-value price">'+r[1]+'</span></div>';
+    return '<div class="detail-row"><span class="detail-label">'+r[0]+'</span><span class="detail-value">'+r[1]+'</span></div>';
+  }).join('');
+
+  // Payment schedule
+  if(d.sched&&d.sched.length){
+    var schedCard=document.createElement('div');
+    schedCard.className='section-card';
+    schedCard.style.marginBottom='20px';
+    var schedBody='';
+    d.sched.forEach(function(p,i){
+      schedBody+='<div class="detail-row"><span class="detail-label">Payment '+(i+1)+(p.d?' — due '+p.d:'')+'</span><span class="detail-value" style="color:var(--teal);font-weight:700;">£'+Number(p.a).toLocaleString()+'</span></div>';
+    });
+    schedCard.innerHTML='<div class="section-head"><i class="fas fa-calendar-alt"></i><div><h3>Payment Schedule</h3><p>Your agreed payment plan</p></div></div><div class="section-body">'+schedBody+'</div>';
+    document.getElementById('quoteBody').insertBefore(schedCard, document.querySelector('.approve-section'));
+  }
+
+  // Flights
+  if(d.fo||d.al||d.dt){
+    document.getElementById('flightSection').style.display='block';
+    if(d.al)document.getElementById('flightSub').textContent=d.al+(d.ft?' · '+d.ft:'');
+    function flightCard(dir,fnum,dep,arr,depTime,arrTime){
+      return '<div class="flight-card"><div class="flight-direction"><i class="fas fa-plane'+(dir==='return'?'-arrival':'-departure')+'"></i> '+dir.toUpperCase()+'</div><div class="flight-route"><span class="flight-city">'+dep+'</span><div class="flight-arrow"></div><span class="flight-city">'+arr+'</span></div><div class="flight-meta">'+(fnum?'<span class="flight-chip flight-num"><i class="fas fa-ticket-alt"></i> '+fnum+'</span>':'')+(depTime?'<span class="flight-chip"><i class="fas fa-clock"></i> Departs '+depTime+'</span>':'')+(arrTime?'<span class="flight-chip"><i class="fas fa-clock"></i> Arrives '+arrTime+'</span>':'')+'</div></div>';
+    }
+    var depFrom=d.air||'UK';var depTo=d.dest||'Destination';
+    document.getElementById('outboundFlight').innerHTML=flightCard('outbound',d.fo,depFrom,depTo,d.dt,d.at);
+    if(d.fr||d.rdt){
+      document.getElementById('returnFlight').innerHTML=flightCard('return',d.fr,depTo,depFrom,d.rdt,d.rat);
+    }
+  }
+
+  // Inclusions
+  if(d.inc&&d.inc.length){
+    document.getElementById('inclusionsSection').style.display='block';
+    document.getElementById('inclusionsGrid').innerHTML=d.inc.map(function(i){return '<div class="inclusion-chip"><i class="fas '+(iconMap[i]||'fa-check')+'"></i>'+i+'</div>';}).join('');
+  }
+
+  // Note
+  if(d.note){document.getElementById('noteSection').style.display='block';document.getElementById('noteText').textContent=d.note;}
+
+  // Quote type
+  if(d.qt==='hotel') document.getElementById('flightSection').style.display='none';
+  if(d.qt==='flight'){
+    document.getElementById('hotelSection').style.display='none';
+    document.getElementById('inclusionsSection').style.display='none';
+  }
+
+  // T&Cs — insert before approve section
+  var tcBar=document.createElement('div');
+  tcBar.style.cssText='background:#fff;border-radius:14px;padding:14px 18px;margin-bottom:20px;display:flex;align-items:center;gap:12px;box-shadow:0 4px 20px rgba(0,0,0,0.06);border-left:4px solid var(--teal);';
+  tcBar.innerHTML='<i class="fas fa-file-contract" style="color:var(--teal);font-size:16px;flex-shrink:0;"></i><p style="font-size:12px;color:#666;margin:0;">This quote is subject to <a href="https://hub.thejltgroup.co.uk/bookingterms" target="_blank" style="color:var(--teal);font-weight:700;text-decoration:none;">JLT Group Booking Terms &amp; Conditions</a>. All prices are correct at time of quoting and subject to availability.</p>';
+  document.getElementById('quoteBody').insertBefore(tcBar, document.querySelector('.approve-section'));
+
+  document.title=(d.dest||d.hotel)+' Quote — Melita Holidays';
+
+  var dest=d.dest||'',name=d.n||'',quoteUrl=window.location.href;
+
+  document.getElementById('approveBtn').addEventListener('click',function(){
+    window.open('https://wa.me/447821343925?text='+encodeURIComponent('Hi Justine! I have reviewed my holiday quote'+(dest?' to '+dest:'')+(name?', for '+name:'')+' and I would like to go ahead and book. Please get in touch to confirm. Thank you!'),'_blank');
+    document.getElementById('approvedScreen').classList.add('show');
+  });
+  document.getElementById('quoteWaBtn').addEventListener('click',function(){
+    window.open('https://wa.me/447821343925?text='+encodeURIComponent('Hi Justine! I have a question about my holiday quote'+(dest?' to '+dest:'')+(name?' for '+name:'')+'.'), '_blank');
+  });
+  document.getElementById('quoteEmailBtn').href='mailto:justine@melitaholidays.com?subject='+encodeURIComponent('Holiday Quote'+(dest?' — '+dest:'')+(name?' for '+name:''))+'&body='+encodeURIComponent('Hi Justine,\n\nI have reviewed my holiday quote'+(dest?' to '+dest:'')+(name?' for '+name:'')+'.\n\n[Your message here]\n\nKind regards');
+  document.getElementById('shareBtn').addEventListener('click',function(){
+    var msg='Take a look at this holiday quote from Melita Holidays'+(dest?' to '+dest:'')+'! '+quoteUrl;
+    if(navigator.share)navigator.share({title:'Holiday Quote — Melita Holidays',url:quoteUrl});
+    else window.open('https://wa.me/?text='+encodeURIComponent(msg),'_blank');
+  });
+  document.getElementById('pdfBtn').addEventListener('click',function(){generatePDF(d);});
+});
+
+})();
+</script>
+</body>
+</html>
