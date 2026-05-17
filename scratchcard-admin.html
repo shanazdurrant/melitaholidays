@@ -631,9 +631,12 @@ function qUpdate(){
   else{box.textContent='Fill in the details above to generate a quote link...';box.classList.remove('active');}
 }
 function shortenAndCopy(url, callback){
-  fetch('https://tinyurl.com/api-create.php?url='+encodeURIComponent(url))
+  fetch('https://is.gd/create.php?format=simple&url='+encodeURIComponent(url))
     .then(function(r){return r.text();})
-    .then(function(short){callback(short);})
+    .then(function(short){
+      if(short&&short.startsWith('https://is.gd/')) callback(short);
+      else callback(url);
+    })
     .catch(function(){callback(url);});
 }
 function qCopy(){
