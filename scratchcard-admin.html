@@ -242,10 +242,11 @@ body{font-family:'Poppins',sans-serif;background:var(--teal);min-height:100vh;di
         <div class="f"><label>Client Name</label><input type="text" id="qName" placeholder="e.g. The Johnson Family"></div>
 
         <div class="f"><label>Quote Type</label>
-          <div class="qt-row">
+          <div class="qt-row" style="grid-template-columns:1fr 1fr;">
             <div class="qt-opt on" data-qt="both"><i class="fas fa-plane"></i> Flights + Hotel</div>
             <div class="qt-opt" data-qt="hotel"><i class="fas fa-hotel"></i> Hotel Only</div>
             <div class="qt-opt" data-qt="flight"><i class="fas fa-plane-departure"></i> Flights Only</div>
+            <div class="qt-opt" data-qt="cruise"><i class="fas fa-ship"></i> Flight + Cruise + Hotel</div>
           </div>
         </div>
 
@@ -289,8 +290,23 @@ body{font-family:'Poppins',sans-serif;background:var(--teal);min-height:100vh;di
         <!-- FLIGHT SECTION -->
         <div id="qFlightSec">
           <div class="sec-label"><i class="fas fa-plane-departure"></i> Flight Details</div>
+
+          <!-- OVERALL FLIGHT TIME -->
           <div class="half">
-            <div class="f"><label>Outbound Flight No.</label><input type="text" id="qFlightOut" placeholder="e.g. EZY4617"></div>
+            <div class="f"><label>Total Flight Time (outbound)</label><input type="text" id="qTotalTime" placeholder="e.g. 11h 30m"></div>
+            <div class="f"><label>Flight Type</label>
+              <select id="qFlightType">
+                <option value="Direct">Direct</option>
+                <option value="1 Stop">1 Stop</option>
+                <option value="2 Stops">2 Stops</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- OUTBOUND -->
+          <div class="sec-label" style="border:none;padding:0;margin:8px 0 8px;font-size:10px;"><i class="fas fa-plane-departure"></i> Outbound Flight</div>
+          <div class="half">
+            <div class="f"><label>Flight No.</label><input type="text" id="qFlightOut" placeholder="e.g. BA9484"></div>
             <div class="f"><label>Airline</label>
               <select id="qAirlineDrop">
                 <option value="">— Select —</option>
@@ -312,40 +328,81 @@ body{font-family:'Poppins',sans-serif;background:var(--teal);min-height:100vh;di
             </div>
           </div>
           <div class="half">
-            <div class="f"><label>Departs (outbound)</label><input type="time" id="qDepTime"></div>
-            <div class="f"><label>Arrives (outbound)</label><input type="time" id="qArrTime"></div>
+            <div class="f"><label>Departs</label><input type="time" id="qDepTime"></div>
+            <div class="f"><label>Arrives</label><input type="time" id="qArrTime"></div>
+          </div>
+
+          <!-- STOP 1 (outbound) -->
+          <div class="stop-fields" id="stop1Fields">
+            <div class="sec-label" style="border:none;padding:0;margin:4px 0 8px;font-size:10px;"><i class="fas fa-map-marker-alt"></i> Stop 1</div>
+            <div class="half">
+              <div class="f"><label>Stop Airport</label><input type="text" id="qStop1" placeholder="e.g. Dubai (DXB)"></div>
+              <div class="f"><label>Stop Flight No.</label><input type="text" id="qStop1fn" placeholder="e.g. EK001"></div>
+            </div>
+            <div class="half">
+              <div class="f"><label>Departs Stop</label><input type="time" id="qStop1dep"></div>
+              <div class="f"><label>Arrives Dest.</label><input type="time" id="qStop1arr"></div>
+            </div>
+            <div class="half">
+              <div class="f"><label>Stop Airline</label><input type="text" id="qStop1al" placeholder="e.g. Emirates"></div>
+              <div class="f"><label>Layover <span class="opt">auto-calc</span></label><input type="text" id="qStop1t" placeholder="e.g. 2h 30m" readonly style="background:#f0f0f0;"></div>
+            </div>
+          </div>
+
+          <!-- STOP 2 (outbound) -->
+          <div class="stop-fields" id="stop2Fields" style="display:none;">
+            <div class="sec-label" style="border:none;padding:0;margin:4px 0 8px;font-size:10px;"><i class="fas fa-map-marker-alt"></i> Stop 2</div>
+            <div class="half">
+              <div class="f"><label>Stop Airport</label><input type="text" id="qStop2" placeholder="e.g. Singapore (SIN)"></div>
+              <div class="f"><label>Stop Flight No.</label><input type="text" id="qStop2fn" placeholder="e.g. SQ321"></div>
+            </div>
+            <div class="half">
+              <div class="f"><label>Departs Stop</label><input type="time" id="qStop2dep"></div>
+              <div class="f"><label>Arrives Dest.</label><input type="time" id="qStop2arr"></div>
+            </div>
+            <div class="half">
+              <div class="f"><label>Stop Airline</label><input type="text" id="qStop2al" placeholder="e.g. Singapore Airlines"></div>
+              <div class="f"><label>Layover <span class="opt">auto-calc</span></label><input type="text" id="qStop2t" placeholder="e.g. 1h 45m" readonly style="background:#f0f0f0;"></div>
+            </div>
+          </div>
+
+          <!-- RETURN -->
+          <div class="sec-label" style="border:none;padding:0;margin:8px 0 8px;font-size:10px;"><i class="fas fa-plane-arrival"></i> Return Flight</div>
+          <div class="half">
+            <div class="f"><label>Flight No.</label><input type="text" id="qFlightRet" placeholder="e.g. BA9485"></div>
+            <div class="f"><label>Return Airline <span class="opt">if different</span></label><input type="text" id="qRetAirline" placeholder="e.g. British Airways"></div>
           </div>
           <div class="half">
-            <div class="f"><label>Return Flight No.</label><input type="text" id="qFlightRet" placeholder="e.g. EZY4618"></div>
-            <div class="f"><label>Flight Type</label>
-              <select id="qFlightType">
-                <option value="Direct">Direct</option>
-                <option value="1 Stop">1 Stop</option>
-                <option value="2 Stops">2 Stops</option>
-              </select>
-            </div>
+            <div class="f"><label>Departs</label><input type="time" id="qRetDep"></div>
+            <div class="f"><label>Arrives</label><input type="time" id="qRetArr"></div>
           </div>
-          <div class="half">
-            <div class="f"><label>Departs (return)</label><input type="time" id="qRetDep"></div>
-            <div class="f"><label>Arrives (return)</label><input type="time" id="qRetArr"></div>
-          </div>
-          <!-- STOP FIELDS -->
-          <div class="stop-fields" id="stopFields">
-            <div class="sec-label" style="border:none;padding:0;margin:0 0 10px;"><i class="fas fa-map-marker-alt"></i> Stop Details (Outbound)</div>
+
+          <!-- RETURN STOP -->
+          <div class="stop-fields" id="retStop1Fields">
+            <div class="sec-label" style="border:none;padding:0;margin:4px 0 8px;font-size:10px;"><i class="fas fa-map-marker-alt"></i> Return Stop</div>
             <div class="half">
-              <div class="f"><label>Stop 1 Airport</label><input type="text" id="qStop1" placeholder="e.g. Dubai (DXB)"></div>
-              <div class="f"><label>Layover Time</label><input type="text" id="qStop1t" placeholder="e.g. 2h 30m"></div>
+              <div class="f"><label>Stop Airport</label><input type="text" id="qRStop1" placeholder="e.g. Dubai (DXB)"></div>
+              <div class="f"><label>Stop Flight No.</label><input type="text" id="qRStop1fn" placeholder="e.g. EK002"></div>
             </div>
-            <div class="half" id="stop2row" style="display:none;">
-              <div class="f"><label>Stop 2 Airport</label><input type="text" id="qStop2" placeholder="e.g. Singapore (SIN)"></div>
-              <div class="f"><label>Layover Time</label><input type="text" id="qStop2t" placeholder="e.g. 1h 45m"></div>
-            </div>
-            <div class="sec-label" style="border:none;padding:0;margin:10px 0;"><i class="fas fa-map-marker-alt"></i> Stop Details (Return)</div>
             <div class="half">
-              <div class="f"><label>Return Stop Airport</label><input type="text" id="qRStop1" placeholder="e.g. Dubai (DXB)"></div>
-              <div class="f"><label>Layover Time</label><input type="text" id="qRStop1t" placeholder="e.g. 2h 30m"></div>
+              <div class="f"><label>Departs Stop</label><input type="time" id="qRStop1dep"></div>
+              <div class="f"><label>Arrives Home</label><input type="time" id="qRStop1arr"></div>
+            </div>
+            <div class="half">
+              <div class="f"><label>Stop Airline</label><input type="text" id="qRStop1al" placeholder="e.g. Emirates"></div>
+              <div class="f"><label>Layover <span class="opt">auto-calc</span></label><input type="text" id="qRStop1t" placeholder="e.g. 2h 30m" readonly style="background:#f0f0f0;"></div>
             </div>
           </div>
+        </div>
+
+        <!-- CRUISE SECTION -->
+        <div id="qCruiseSec" style="display:none;">
+          <div class="sec-label"><i class="fas fa-ship"></i> Cruise Details</div>
+          <div class="f"><label>Cruise Line</label><input type="text" id="qCruiseLine" placeholder="e.g. Royal Caribbean, P&O, Celebrity"></div>
+          <div class="f"><label>Ship Name</label><input type="text" id="qShip" placeholder="e.g. Harmony of the Seas"></div>
+          <div class="f"><label>Cabin Type</label><input type="text" id="qCabin" placeholder="e.g. Balcony Stateroom, Interior"></div>
+          <div class="f"><label>Embarkation Port</label><input type="text" id="qEmbarks" placeholder="e.g. Southampton, Barcelona"></div>
+          <div class="f"><label>Itinerary / Ports of Call <span class="opt">optional</span></label><textarea id="qItinerary" placeholder="e.g. Barcelona → Palma → Ibiza → Marseille → Genoa"></textarea></div>
         </div>
 
         <!-- BOOKING DETAILS -->
@@ -405,11 +462,17 @@ body{font-family:'Poppins',sans-serif;background:var(--teal);min-height:100vh;di
         <div class="f"><label>What's Included</label>
           <div class="inc-row">
             <div class="inc-opt" data-inc="Return Flights"><i class="fas fa-plane"></i> Return Flights</div>
-            <div class="inc-opt" data-inc="Transfers"><i class="fas fa-shuttle-van"></i> Transfers</div>
             <div class="inc-opt" data-inc="ATOL Protected"><i class="fas fa-shield-alt"></i> ATOL Protected</div>
-            <div class="inc-opt" data-inc="Luggage"><i class="fas fa-suitcase"></i> Luggage</div>
+            <div class="inc-opt" data-inc="PTS Protected"><i class="fas fa-certificate"></i> PTS Protected</div>
             <div class="inc-opt" data-inc="Hotel"><i class="fas fa-hotel"></i> Hotel</div>
-            <div class="inc-opt" data-inc="Travel Insurance"><i class="fas fa-heart"></i> Travel Insurance</div>
+            <div class="inc-opt" data-inc="Cruise"><i class="fas fa-ship"></i> Cruise</div>
+            <div class="inc-opt" data-inc="Private Transfers"><i class="fas fa-car"></i> Private Transfers</div>
+            <div class="inc-opt" data-inc="Shared Transfers"><i class="fas fa-shuttle-van"></i> Shared Transfers</div>
+            <div class="inc-opt" data-inc="Hand Luggage"><i class="fas fa-briefcase"></i> Hand Luggage</div>
+            <div class="inc-opt" data-inc="Hold Luggage"><i class="fas fa-suitcase"></i> Hold Luggage</div>
+            <div class="inc-opt" data-inc="In-Flight Meal"><i class="fas fa-utensils"></i> In-Flight Meal</div>
+            <div class="inc-opt" data-inc="Car Hire"><i class="fas fa-car-side"></i> Car Hire</div>
+            <div class="inc-opt" data-inc="Attraction Tickets"><i class="fas fa-ticket-alt"></i> Attraction Tickets</div>
           </div>
         </div>
 
@@ -564,23 +627,29 @@ function fmtDate(val){if(!val)return '';var d=new Date(val);if(isNaN(d.getTime()
 
 function buildQUrl(){
   var dest=getQDest(),hotel=v('qHotel');
-  if(!dest&&!hotel)return null;
+  if(!dest&&!hotel&&!v('qCruiseLine'))return null;
   var sched=pays.filter(function(p){return p.a&&p.d;}).map(function(p){return {a:p.a,d:fmtDate(p.d)};});
   var raw={
     qt:qType,n:v('qName'),dest:dest,hotel:hotel,
     stars:v('qStars'),board:v('qBoard'),room:v('qRoom'),
     hu:v('qHotelUrl'),hd:v('qHotelDesc'),fac:v('qFac'),
-    fo:v('qFlightOut'),al:getQAirline(),
-    dt:v('qDepTime'),at:v('qArrTime'),
-    fr:v('qFlightRet'),ft:v('qFlightType'),
-    rdt:v('qRetDep'),rat:v('qRetArr'),
-    stop1:v('qStop1'),stop1t:v('qStop1t'),
-    stop2:v('qStop2'),stop2t:v('qStop2t'),
-    rstop1:v('qRStop1'),rstop1t:v('qRStop1t'),
-    dep:fmtDate(v('qDepDate')),ret:fmtDate(v('qRetDate')),
-    dur:v('qDur'),pax:v('qPax'),air:getQAir(),
-    pr:v('qPrice'),dp:v('qDeposit'),
-    ddate:fmtDate(v('qDepositDate')),fdate:fmtDate(v('qFinalDate')),
+    // cruise
+    cruiseLine:v('qCruiseLine'),ship:v('qShip'),cabin:v('qCabin'),
+    embarks:v('qEmbarks'),itin:v('qItinerary'),
+    // flights
+    totalTime:v('qTotalTime'),ft:v('qFlightType'),
+    fo:v('qFlightOut'),al:getQAirline(),dt:v('qDepTime'),at:v('qArrTime'),
+    // stop 1
+    stop1:v('qStop1'),stop1fn:v('qStop1fn'),stop1dep:v('qStop1dep'),stop1arr:v('qStop1arr'),stop1al:v('qStop1al'),stop1t:v('qStop1t'),
+    // stop 2
+    stop2:v('qStop2'),stop2fn:v('qStop2fn'),stop2dep:v('qStop2dep'),stop2arr:v('qStop2arr'),stop2al:v('qStop2al'),stop2t:v('qStop2t'),
+    // return
+    fr:v('qFlightRet'),ral:v('qRetAirline'),rdt:v('qRetDep'),rat:v('qRetArr'),
+    // return stop
+    rstop1:v('qRStop1'),rstop1fn:v('qRStop1fn'),rstop1dep:v('qRStop1dep'),rstop1arr:v('qRStop1arr'),rstop1al:v('qRStop1al'),rstop1t:v('qRStop1t'),
+    // booking
+    dep:fmtDate(v('qDepDate')),ret:fmtDate(v('qRetDate')),dur:v('qDur'),pax:v('qPax'),air:getQAir(),
+    pr:v('qPrice'),dp:v('qDeposit'),ddate:fmtDate(v('qDepositDate')),fdate:fmtDate(v('qFinalDate')),
     sched:sched.length?sched:undefined,
     inc:selInc.length?selInc:undefined,
     note:v('qNote'),id:Date.now()
@@ -608,15 +677,27 @@ function qWA(){
 function setQType(t){
   qType=t;
   document.querySelectorAll('.qt-opt').forEach(function(el){el.classList.toggle('on',el.getAttribute('data-qt')===t);});
-  e('qHotelSec').style.display=t==='flight'?'none':'block';
-  e('qFlightSec').style.display=t==='hotel'?'none':'block';
+  e('qHotelSec').style.display=(t==='flight')?'none':'block';
+  e('qFlightSec').style.display=(t==='hotel')?'none':'block';
+  e('qCruiseSec').style.display=(t==='cruise')?'block':'none';
+  qUpdate();
+}
+function calcLayover(depId, arrId, outId){
+  var dep=v(depId), arr=v(arrId);
+  if(!dep||!arr) return;
+  var dm=parseInt(dep.split(':')[0])*60+parseInt(dep.split(':')[1]);
+  var am=parseInt(arr.split(':')[0])*60+parseInt(arr.split(':')[1]);
+  var diff=am-dm; if(diff<0) diff+=1440;
+  var h=Math.floor(diff/60),m=diff%60;
+  e(outId).value=h+'h '+(m<10?'0':'')+m+'m';
   qUpdate();
 }
 function onFlightType(){
   var ft=v('qFlightType');
-  var sf=e('stopFields'),s2=e('stop2row');
-  sf.classList.toggle('show',ft!=='Direct');
-  if(s2)s2.style.display=ft==='2 Stops'?'grid':'none';
+  var s1=e('stop1Fields'),s2=e('stop2Fields'),rs=e('retStop1Fields');
+  s1.classList.toggle('show',ft!=='Direct');
+  s2.style.display=ft==='2 Stops'?'block':'none';
+  rs.classList.toggle('show',ft!=='Direct');
   qUpdate();
 }
 function renderPays(){
@@ -695,7 +776,13 @@ window.addEventListener('DOMContentLoaded',function(){
   }
   e('qDepDate').onchange=calcDur;e('qRetDate').onchange=calcDur;
   // All other inputs
-  ['qName','qHotel','qRoom','qHotelUrl','qHotelDesc','qFac','qFlightOut','qDepTime','qArrTime','qFlightRet','qRetDep','qRetArr','qStop1','qStop1t','qStop2','qStop2t','qRStop1','qRStop1t','qPax','qPrice','qDeposit','qNote'].forEach(function(id){e(id).oninput=qUpdate;});
+  ['qName','qHotel','qRoom','qHotelUrl','qHotelDesc','qFac','qFlightOut','qDepTime','qArrTime','qFlightRet','qRetDep','qRetArr','qStop1','qStop1fn','qStop1dep','qStop1arr','qStop1al','qStop2','qStop2fn','qStop2dep','qStop2arr','qStop2al','qRStop1','qRStop1fn','qRStop1dep','qRStop1arr','qRStop1al','qPax','qPrice','qDeposit','qNote','qTotalTime','qRetAirline','qCruiseLine','qShip','qCabin','qEmbarks','qItinerary'].forEach(function(id){if(e(id))e(id).oninput=qUpdate;});
+  // Layover auto-calc: arrives at stop → departs stop
+  if(e('qArrTime')) e('qArrTime').onchange=function(){calcLayover('qArrTime','qStop1dep','qStop1t');};
+  if(e('qStop1arr')) e('qStop1arr').onchange=function(){calcLayover('qStop1arr','qStop2dep','qStop2t');qUpdate();};
+  if(e('qStop1dep')) e('qStop1dep').onchange=function(){calcLayover('qArrTime','qStop1dep','qStop1t');qUpdate();};
+  if(e('qRetArr')) e('qRetArr').onchange=function(){calcLayover('qRetArr','qRStop1dep','qRStop1t');qUpdate();};
+  if(e('qRStop1dep')) e('qRStop1dep').onchange=function(){calcLayover('qRetArr','qRStop1dep','qRStop1t');qUpdate();};
   ['qStars','qBoard'].forEach(function(id){e(id).onchange=qUpdate;});
   e('qDepositDate').onchange=qUpdate;e('qFinalDate').onchange=qUpdate;
   // Payments
