@@ -127,73 +127,6 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(circle
 
 <script>
 // ── DESTINATION IMAGES (keyword-based — always returns correct destination photo) ──
-const destImages = {
-  'MALDIVES':      'https://source.unsplash.com/900x600/?maldives,overwater,bungalow',
-  'SANTORINI':     'https://source.unsplash.com/900x600/?santorini,whitewashed,aegean',
-  'DUBAI':         'https://source.unsplash.com/900x600/?dubai,burj,khalifa,skyline',
-  'BARBADOS':      'https://source.unsplash.com/900x600/?barbados,caribbean,beach',
-  'TURKEY':        'https://source.unsplash.com/900x600/?turkey,antalya,beach,coast',
-  'BALI':          'https://source.unsplash.com/900x600/?bali,temple,rice,terrace',
-  'TENERIFE':      'https://source.unsplash.com/900x600/?tenerife,canary,islands',
-  'NEW YORK':      'https://source.unsplash.com/900x600/?new,york,manhattan,skyline',
-  'CANCÚN':        'https://source.unsplash.com/900x600/?cancun,mexico,turquoise,beach',
-  'CANCUN':        'https://source.unsplash.com/900x600/?cancun,mexico,turquoise,beach',
-  'THAILAND':      'https://source.unsplash.com/900x600/?thailand,phuket,temple,beach',
-  'MAURITIUS':     'https://source.unsplash.com/900x600/?mauritius,island,lagoon',
-  'IBIZA':         'https://source.unsplash.com/900x600/?ibiza,spain,beach,sunset',
-  'CYPRUS':        'https://source.unsplash.com/900x600/?cyprus,mediterranean,beach',
-  'LANZAROTE':     'https://source.unsplash.com/900x600/?lanzarote,volcanic,canary',
-  'PORTUGAL':      'https://source.unsplash.com/900x600/?portugal,algarve,coast,lisbon',
-  'ITALY':         'https://source.unsplash.com/900x600/?italy,amalfi,coast,rome',
-  'FLORIDA':       'https://source.unsplash.com/900x600/?florida,miami,beach,palm',
-  'JAMAICA':       'https://source.unsplash.com/900x600/?jamaica,caribbean,beach,palm',
-  'GREECE':        'https://source.unsplash.com/900x600/?greece,santorini,aegean,blue',
-  'MOROCCO':       'https://source.unsplash.com/900x600/?morocco,marrakech,medina,sahara',
-  'SOUTH KOREA':   'https://source.unsplash.com/900x600/?seoul,korea,palace,lantern',
-  'KOREA':         'https://source.unsplash.com/900x600/?seoul,korea,palace,lantern',
-  'SEOUL':         'https://source.unsplash.com/900x600/?seoul,korea,palace,lantern',
-  'PARIS':         'https://source.unsplash.com/900x600/?paris,eiffel,tower,france',
-  'LONDON':        'https://source.unsplash.com/900x600/?london,tower,bridge,thames',
-  'AMSTERDAM':     'https://source.unsplash.com/900x600/?amsterdam,canal,netherlands',
-  'BARCELONA':     'https://source.unsplash.com/900x600/?barcelona,sagrada,familia,spain',
-  'ROME':          'https://source.unsplash.com/900x600/?rome,colosseum,italy,forum',
-  'MIAMI':         'https://source.unsplash.com/900x600/?miami,beach,florida,art,deco',
-  'HAWAII':        'https://source.unsplash.com/900x600/?hawaii,beach,volcano,palm',
-  'MEXICO':        'https://source.unsplash.com/900x600/?mexico,beach,pyramid,cenote',
-  'EGYPT':         'https://source.unsplash.com/900x600/?egypt,pyramids,sphinx,cairo',
-  'KENYA':         'https://source.unsplash.com/900x600/?kenya,safari,elephant,savanna',
-  'MARBELLA':      'https://source.unsplash.com/900x600/?marbella,spain,coast,beach',
-  'MAJORCA':       'https://source.unsplash.com/900x600/?mallorca,beach,mediterranean',
-  'MALLORCA':      'https://source.unsplash.com/900x600/?mallorca,beach,mediterranean',
-  'COSTA RICA':    'https://source.unsplash.com/900x600/?costa,rica,rainforest,beach',
-  'SINGAPORE':     'https://source.unsplash.com/900x600/?singapore,skyline,gardens,bay',
-  'JAPAN':         'https://source.unsplash.com/900x600/?japan,kyoto,cherry,blossom,fuji',
-  'TOKYO':         'https://source.unsplash.com/900x600/?tokyo,japan,shibuya,skyline',
-  'INDIA':         'https://source.unsplash.com/900x600/?india,taj,mahal,rajasthan',
-  'CAPE TOWN':     'https://source.unsplash.com/900x600/?cape,town,table,mountain',
-  'AUSTRALIA':     'https://source.unsplash.com/900x600/?australia,sydney,opera,beach',
-  'CUBA':          'https://source.unsplash.com/900x600/?cuba,havana,caribbean,beach',
-  'LAPLAND':       'https://source.unsplash.com/900x600/?lapland,aurora,snow,reindeer',
-  'FINLAND':       'https://source.unsplash.com/900x600/?finland,aurora,lake,snow',
-  'NORWAY':        'https://source.unsplash.com/900x600/?norway,fjord,aurora,mountain',
-  'ICELAND':       'https://source.unsplash.com/900x600/?iceland,aurora,waterfall,geyser',
-  'DISNEYLAND':    'https://source.unsplash.com/900x600/?disneyland,castle,theme,park',
-  'DISNEY':        'https://source.unsplash.com/900x600/?disneyland,castle,theme,park',
-  'CRUISE':        'https://source.unsplash.com/900x600/?cruise,ship,ocean,sea',
-  'CARIBBEAN':     'https://source.unsplash.com/900x600/?caribbean,beach,turquoise,palm',
-  'ZANZIBAR':      'https://source.unsplash.com/900x600/?zanzibar,beach,dhow,africa',
-};
-const fallback = 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=900&q=80&auto=format&fit=crop';
-
-function getImageForDest(dest){
-  const key = dest.toUpperCase().trim();
-  // Exact match first
-  if(destImages[key]) return destImages[key];
-  // Partial match — check if any key is contained in the destination
-  for(const k of Object.keys(destImages)){
-    if(key.includes(k) || k.includes(key)) return destImages[k];
-  }
-  return fallback;
 }
 
 // ── DECODE ──
@@ -272,10 +205,43 @@ function renderCard(data){
     document.getElementById('destDate').style.display = 'none';
   }
 
-  const imgUrl = getImageForDest(dest);
-  const preloadImg = new Image();
-  preloadImg.src = imgUrl;
-  document.getElementById('revealBg').style.backgroundImage = `url('${imgUrl}')`;
+  // Set destination background image
+  var destImgs={
+    'MALDIVES':'https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=900&q=80&auto=format&fit=crop',
+    'SANTORINI':'https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=900&q=80&auto=format&fit=crop',
+    'DUBAI':'https://images.unsplash.com/photo-1518684079-3c830dcef090?w=900&q=80&auto=format&fit=crop',
+    'BARBADOS':'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=900&q=80&auto=format&fit=crop',
+    'TURKEY':'https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?w=900&q=80&auto=format&fit=crop',
+    'BALI':'https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=900&q=80&auto=format&fit=crop',
+    'TENERIFE':'https://images.unsplash.com/photo-1559827291-72ee739d0d9a?w=900&q=80&auto=format&fit=crop',
+    'NEW YORK':'https://images.unsplash.com/photo-1534430480872-3498386e7856?w=900&q=80&auto=format&fit=crop',
+    'CANCUN':'https://images.unsplash.com/photo-1552074284-5e84b979df39?w=900&q=80&auto=format&fit=crop',
+    'THAILAND':'https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=900&q=80&auto=format&fit=crop',
+    'MAURITIUS':'https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?w=900&q=80&auto=format&fit=crop',
+    'IBIZA':'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=900&q=80&auto=format&fit=crop',
+    'CYPRUS':'https://images.unsplash.com/photo-1562016600-ece13e8ba570?w=900&q=80&auto=format&fit=crop',
+    'LANZAROTE':'https://images.unsplash.com/photo-1586861635167-e5223aadc9fe?w=900&q=80&auto=format&fit=crop',
+    'PORTUGAL':'https://images.unsplash.com/photo-1555881400-74d7acaacd8b?w=900&q=80&auto=format&fit=crop',
+    'ITALY':'https://images.unsplash.com/photo-1516483638261-f4dbaf036963?w=900&q=80&auto=format&fit=crop',
+    'FLORIDA':'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=900&q=80&auto=format&fit=crop',
+    'JAMAICA':'https://images.unsplash.com/photo-1598935898639-81586f7d2129?w=900&q=80&auto=format&fit=crop',
+    'GREECE':'https://images.unsplash.com/photo-1533105079780-92b9be482077?w=900&q=80&auto=format&fit=crop',
+    'MOROCCO':'https://images.unsplash.com/photo-1489493887464-892be6d1daae?w=900&q=80&auto=format&fit=crop',
+    'JAPAN':'https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=900&q=80&auto=format&fit=crop',
+    'PARIS':'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=900&q=80&auto=format&fit=crop',
+    'LAPLAND':'https://images.unsplash.com/photo-1531366936337-7c912a4589a7?w=900&q=80&auto=format&fit=crop',
+    'DISNEYLAND':'https://images.unsplash.com/photo-1590333748338-d629e4564ad9?w=900&q=80&auto=format&fit=crop',
+    'EGYPT':'https://images.unsplash.com/photo-1539768942893-daf53e448371?w=900&q=80&auto=format&fit=crop',
+    'HAWAII':'https://images.unsplash.com/photo-1542259009477-d625272157b7?w=900&q=80&auto=format&fit=crop',
+    'AUSTRALIA':'https://images.unsplash.com/photo-1523482580672-f109ba8cb9be?w=900&q=80&auto=format&fit=crop',
+    'BARCELONA':'https://images.unsplash.com/photo-1539037116277-4db20889f2d4?w=900&q=80&auto=format&fit=crop',
+    'CAPE TOWN':'https://images.unsplash.com/photo-1580060839134-75a5edca2e99?w=900&q=80&auto=format&fit=crop',
+  };
+  var imgUrl = destImgs[dest] || 'https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=900&q=80&auto=format&fit=crop';
+  var bg = document.getElementById('revealBg');
+  bg.style.backgroundImage = 'url(\''+imgUrl+'\')';
+  bg.style.backgroundSize = 'cover';
+  bg.style.backgroundPosition = 'center';
 
   document.getElementById('cardScreen').style.display = 'flex';
   setTimeout(initScratch, 150);
