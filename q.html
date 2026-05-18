@@ -293,7 +293,7 @@ var heroImages={
   'LANZAROTE':  'https://images.unsplash.com/photo-1586861635167-e5223aadc9fe?w=1200&q=80&auto=format&fit=crop',
   'PORTUGAL':   'https://images.unsplash.com/photo-1555881400-74d7acaacd8b?w=1200&q=80&auto=format&fit=crop',
   'ITALY':      'https://images.unsplash.com/photo-1516483638261-f4dbaf036963?w=1200&q=80&auto=format&fit=crop',
-  'FLORIDA':    'https://images.unsplash.com/photo-1533106418989-88406c7cc8ca?w=1200&q=80&auto=format&fit=crop',
+  'FLORIDA':   'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&q=80&auto=format&fit=crop',
   'JAMAICA':    'https://images.unsplash.com/photo-1598935898639-81586f7d2129?w=1200&q=80&auto=format&fit=crop',
   'GREECE':     'https://images.unsplash.com/photo-1533105079780-92b9be482077?w=1200&q=80&auto=format&fit=crop',
   'MOROCCO':    'https://images.unsplash.com/photo-1489493887464-892be6d1daae?w=1200&q=80&auto=format&fit=crop',
@@ -422,12 +422,12 @@ window.addEventListener('DOMContentLoaded',function(){
   }
 
   // Flights
+  function flightCard(dir,fnum,dep,arr,depTime,arrTime){
+    return '<div class="flight-card"><div class="flight-direction"><i class="fas fa-plane'+(dir==='return'?'-arrival':'-departure')+'"></i> '+dir.toUpperCase()+'</div><div class="flight-route"><span class="flight-city">'+dep+'</span><div class="flight-arrow"></div><span class="flight-city">'+arr+'</span></div><div class="flight-meta">'+(fnum?'<span class="flight-chip flight-num"><i class="fas fa-ticket-alt"></i> '+fnum+'</span>':'')+(depTime?'<span class="flight-chip"><i class="fas fa-clock"></i> Departs '+depTime+'</span>':'')+(arrTime?'<span class="flight-chip"><i class="fas fa-clock"></i> Arrives '+arrTime+'</span>':'')+'</div></div>';
+  }
   if(d.fo||d.al||d.dt){
     document.getElementById('flightSection').style.display='block';
     if(d.al)document.getElementById('flightSub').textContent=d.al+(d.ft?' · '+d.ft:'');
-    function flightCard(dir,fnum,dep,arr,depTime,arrTime){
-      return '<div class="flight-card"><div class="flight-direction"><i class="fas fa-plane'+(dir==='return'?'-arrival':'-departure')+'"></i> '+dir.toUpperCase()+'</div><div class="flight-route"><span class="flight-city">'+dep+'</span><div class="flight-arrow"></div><span class="flight-city">'+arr+'</span></div><div class="flight-meta">'+(fnum?'<span class="flight-chip flight-num"><i class="fas fa-ticket-alt"></i> '+fnum+'</span>':'')+(depTime?'<span class="flight-chip"><i class="fas fa-clock"></i> Departs '+depTime+'</span>':'')+(arrTime?'<span class="flight-chip"><i class="fas fa-clock"></i> Arrives '+arrTime+'</span>':'')+'</div></div>';
-    }
     var depFrom=d.air||'UK';var depTo=d.dest||'Destination';
     document.getElementById('outboundFlight').innerHTML=flightCard('outbound',d.fo,depFrom,depTo,d.dt,d.at);
     if(d.fr||d.rdt){
