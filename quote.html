@@ -179,6 +179,12 @@ body{font-family:'Poppins',sans-serif;background:var(--cream);padding:0 0 60px;}
       <div class="card-body" id="hotelCardBody"></div>
     </div>
 
+    <!-- CRUISE -->
+    <div class="card" id="cruiseCard" style="display:none;">
+      <div class="card-head"><i class="fas fa-ship"></i><div><h3 id="cruiseTitle">Cruise Details</h3><p id="cruiseSub"></p></div></div>
+      <div class="card-body" id="cruiseBody"></div>
+    </div>
+
     <!-- BOOKING SUMMARY -->
     <div class="card">
       <div class="card-head"><i class="fas fa-calendar-check"></i><div><h3>Booking Summary</h3><p>Your personalised holiday details</p></div></div>
@@ -238,44 +244,60 @@ body{font-family:'Poppins',sans-serif;background:var(--cream);padding:0 0 60px;}
 <script>
 // ── DESTINATION IMAGES ──
 var IMGS={
-  'MALDIVES':'https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=1200&q=80&auto=format&fit=crop',
-  'SANTORINI':'https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=1200&q=80&auto=format&fit=crop',
-  'DUBAI':'https://images.unsplash.com/photo-1518684079-3c830dcef090?w=1200&q=80&auto=format&fit=crop',
-  'BARBADOS':'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1200&q=80&auto=format&fit=crop',
-  'TURKEY':'https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?w=1200&q=80&auto=format&fit=crop',
-  'BALI':'https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=1200&q=80&auto=format&fit=crop',
-  'TENERIFE':'https://images.unsplash.com/photo-1559827291-72ee739d0d9a?w=1200&q=80&auto=format&fit=crop',
-  'NEW YORK':'https://images.unsplash.com/photo-1534430480872-3498386e7856?w=1200&q=80&auto=format&fit=crop',
-  'CANCUN':'https://images.unsplash.com/photo-1552074284-5e84b979df39?w=1200&q=80&auto=format&fit=crop',
-  'THAILAND':'https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=1200&q=80&auto=format&fit=crop',
-  'MAURITIUS':'https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?w=1200&q=80&auto=format&fit=crop',
-  'IBIZA':'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200&q=80&auto=format&fit=crop',
-  'CYPRUS':'https://images.unsplash.com/photo-1562016600-ece13e8ba570?w=1200&q=80&auto=format&fit=crop',
-  'LANZAROTE':'https://images.unsplash.com/photo-1586861635167-e5223aadc9fe?w=1200&q=80&auto=format&fit=crop',
-  'PORTUGAL':'https://images.unsplash.com/photo-1555881400-74d7acaacd8b?w=1200&q=80&auto=format&fit=crop',
-  'ITALY':'https://images.unsplash.com/photo-1516483638261-f4dbaf036963?w=1200&q=80&auto=format&fit=crop',
-  'FLORIDA':'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&q=80&auto=format&fit=crop',
-  'JAMAICA':'https://images.unsplash.com/photo-1598935898639-81586f7d2129?w=1200&q=80&auto=format&fit=crop',
-  'GREECE':'https://images.unsplash.com/photo-1533105079780-92b9be482077?w=1200&q=80&auto=format&fit=crop',
-  'MOROCCO':'https://images.unsplash.com/photo-1489493887464-892be6d1daae?w=1200&q=80&auto=format&fit=crop',
-  'SOUTH KOREA':'https://images.unsplash.com/photo-1538485399081-7191377e8241?w=1200&q=80&auto=format&fit=crop',
-  'JAPAN':'https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=1200&q=80&auto=format&fit=crop',
-  'PARIS':'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=1200&q=80&auto=format&fit=crop',
-  'LAPLAND':'https://images.unsplash.com/photo-1531366936337-7c912a4589a7?w=1200&q=80&auto=format&fit=crop',
-  'DISNEYLAND':'https://images.unsplash.com/photo-1590333748338-d629e4564ad9?w=1200&q=80&auto=format&fit=crop',
-  'DISNEYLAND PARIS':'https://images.unsplash.com/photo-1590333748338-d629e4564ad9?w=1200&q=80&auto=format&fit=crop',
-  'EGYPT':'https://images.unsplash.com/photo-1539768942893-daf53e448371?w=1200&q=80&auto=format&fit=crop',
-  'HAWAII':'https://images.unsplash.com/photo-1542259009477-d625272157b7?w=1200&q=80&auto=format&fit=crop',
-  'AUSTRALIA':'https://images.unsplash.com/photo-1523482580672-f109ba8cb9be?w=1200&q=80&auto=format&fit=crop',
-  'BARCELONA':'https://images.unsplash.com/photo-1539037116277-4db20889f2d4?w=1200&q=80&auto=format&fit=crop',
-  'ZANZIBAR':'https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=1200&q=80&auto=format&fit=crop',
-  'CAPE TOWN':'https://images.unsplash.com/photo-1580060839134-75a5edca2e99?w=1200&q=80&auto=format&fit=crop',
-  'KENYA':'https://images.unsplash.com/photo-1521450023073-a0b9a893b00c?w=1200&q=80&auto=format&fit=crop',
-  'CUBA':'https://images.unsplash.com/photo-1500759285222-a95626964b34?w=1200&q=80&auto=format&fit=crop'
+  'MALDIVES':'maldives.jpg',
+  'SANTORINI':'santorini.jpg',
+  'DUBAI':'dubai.jpg',
+  'BARBADOS':'barbados.jpg',
+  'TURKEY':'turkey.jpg',
+  'BALI':'bali.jpg',
+  'TENERIFE':'tenerife.jpg',
+  'NEW YORK':'newyork.jpg',
+  'CANCUN':'cancun.jpg',
+  'THAILAND':'thailand.jpg',
+  'MAURITIUS':'mauritius.jpg',
+  'IBIZA':'ibiza.jpg',
+  'CYPRUS':'cyprus.jpg',
+  'LANZAROTE':'lanzarote.jpg',
+  'PORTUGAL':'portugal.jpg',
+  'ITALY':'italy.jpg',
+  'FLORIDA':'florida.jpg',
+  'JAMAICA':'jamaica.jpg',
+  'GREECE':'greece.jpg',
+  'MOROCCO':'morocco.jpg',
+  'SOUTH KOREA':'southkorea.jpg',
+  'JAPAN':'japan.jpg',
+  'PARIS':'paris.jpg',
+  'LAPLAND':'lapland.jpg',
+  'DISNEYLAND':'disneyland.jpg',
+  'DISNEYLAND PARIS':'disneyland.jpg',
+  'EGYPT':'egypt.jpg',
+  'HAWAII':'hawaii.jpg',
+  'AUSTRALIA':'australia.jpg',
+  'BARCELONA':'barcelona.jpg',
+  'ZANZIBAR':'zanzibar.jpg',
+  'CAPE TOWN':'capetown.jpg',
+  'CUBA':'cuba.jpg',
+  'KENYA':'kenya.jpg',
 };
 var FALLBACK='https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=1200&q=80&auto=format&fit=crop';
 
-var INC_ICONS={'Return Flights':'fa-plane','Transfers':'fa-shuttle-van','ATOL Protected':'fa-shield-alt','Luggage':'fa-suitcase','Hotel':'fa-hotel','Travel Insurance':'fa-heart'};
+var INC_ICONS={
+  'Return Flights':'fa-plane',
+  'ATOL Protected':'fa-shield-alt',
+  'PTS Protected':'fa-certificate',
+  'Hotel':'fa-hotel',
+  'Cruise':'fa-ship',
+  'Private Transfers':'fa-car',
+  'Shared Transfers':'fa-shuttle-van',
+  'Hand Luggage':'fa-briefcase',
+  'Hold Luggage':'fa-suitcase',
+  'In-Flight Meal':'fa-utensils',
+  'Car Hire':'fa-car-side',
+  'Attraction Tickets':'fa-ticket-alt',
+  'Travel Insurance':'fa-heart',
+  'Transfers':'fa-shuttle-van',
+  'Luggage':'fa-suitcase'
+};
 
 function el(id){return document.getElementById(id);}
 function show(id){el(id).style.display='block';}
@@ -337,6 +359,20 @@ window.addEventListener('DOMContentLoaded',function(){
     el('hotelCardBody').innerHTML=hb;
   }
 
+  // Cruise card
+  if(d.cruiseLine||d.ship){
+    show('cruiseCard');
+    el('cruiseTitle').textContent=d.ship||(d.cruiseLine+' Cruise');
+    if(d.cruiseLine) el('cruiseSub').textContent=d.cruiseLine;
+    var cb='';
+    if(d.cruiseLine) cb+=row('Cruise Line',d.cruiseLine);
+    if(d.ship) cb+=row('Ship',d.ship);
+    if(d.cabin) cb+=row('Cabin Type',d.cabin);
+    if(d.embarks) cb+=row('Embarkation Port',d.embarks);
+    if(d.itin) cb+=row('Itinerary',d.itin);
+    el('cruiseBody').innerHTML=cb;
+  }
+
   // Booking summary
   var sb='';
   if(d.dep&&d.ret) sb+=row('Travel Dates',d.dep+' — '+d.ret);
@@ -358,37 +394,42 @@ window.addEventListener('DOMContentLoaded',function(){
   }
 
   // Flights
-  if(d.fo||d.fr||d.al||d.dt){
-    show('flightCard');
-    if(d.al) el('flightSub').textContent=d.al+(d.ft?' · '+d.ft:'');
-    var from=d.air||'UK', to=d.dest||'Destination';
-    var fb='';
-    // Outbound
-    fb+='<div class="flight-card">';
-    fb+='<div class="flight-dir"><i class="fas fa-plane-departure"></i> OUTBOUND</div>';
-    fb+='<div class="flight-route"><span class="flight-city">'+from+'</span><div class="flight-line"></div><span class="flight-city">'+to+'</span></div>';
-    fb+='<div class="flight-meta">';
-    if(d.fo) fb+='<span class="fc"><i class="fas fa-ticket-alt"></i> '+d.fo+'</span>';
-    if(d.dt) fb+='<span class="fc"><i class="fas fa-clock"></i> Departs '+d.dt+'</span>';
-    if(d.at) fb+='<span class="fc"><i class="fas fa-clock"></i> Arrives '+d.at+'</span>';
-    fb+='</div>';
-    if(d.stop1) fb+='<div class="stop-info"><strong>Stop:</strong> '+d.stop1+(d.stop1t?' ('+d.stop1t+' layover)':'')+'</div>';
-    if(d.stop2) fb+='<div class="stop-info"><strong>Stop 2:</strong> '+d.stop2+(d.stop2t?' ('+d.stop2t+' layover)':'')+'</div>';
-    fb+='</div>';
-    // Return
-    if(d.fr||d.rdt){
-      fb+='<div class="flight-card">';
-      fb+='<div class="flight-dir"><i class="fas fa-plane-arrival"></i> RETURN</div>';
-      fb+='<div class="flight-route"><span class="flight-city">'+to+'</span><div class="flight-line"></div><span class="flight-city">'+from+'</span></div>';
-      fb+='<div class="flight-meta">';
-      if(d.fr) fb+='<span class="fc"><i class="fas fa-ticket-alt"></i> '+d.fr+'</span>';
-      if(d.rdt) fb+='<span class="fc"><i class="fas fa-clock"></i> Departs '+d.rdt+'</span>';
-      if(d.rat) fb+='<span class="fc"><i class="fas fa-clock"></i> Arrives '+d.rat+'</span>';
-      fb+='</div>';
-      if(d.rstop1) fb+='<div class="stop-info"><strong>Stop:</strong> '+d.rstop1+(d.rstop1t?' ('+d.rstop1t+' layover)':'')+'</div>';
-      fb+='</div>';
+  function flightCard(dir,fnum,dep,arr,depTime,arrTime,airline,stops){
+    var h='<div class="flight-card">';
+    h+='<div class="flight-dir"><i class="fas fa-plane'+(dir==='return'?'-arrival':'-departure')+'"></i> '+dir.toUpperCase()+'</div>';
+    h+='<div class="flight-route"><span class="flight-city">'+dep+'</span><div class="flight-line"></div><span class="flight-city">'+arr+'</span></div>';
+    h+='<div class="flight-meta">';
+    if(fnum) h+='<span class="fc"><i class="fas fa-ticket-alt"></i> '+fnum+'</span>';
+    if(airline) h+='<span class="fc"><i class="fas fa-plane"></i> '+airline+'</span>';
+    if(depTime) h+='<span class="fc"><i class="fas fa-clock"></i> Departs '+depTime+'</span>';
+    if(arrTime) h+='<span class="fc"><i class="fas fa-clock"></i> Arrives '+arrTime+'</span>';
+    h+='</div>';
+    if(stops&&stops.length){
+      stops.forEach(function(s){
+        h+='<div class="stop-info"><strong>Stop: '+s.airport+'</strong>';
+        if(s.fn) h+=' · '+s.fn;
+        if(s.al) h+=' · '+s.al;
+        if(s.t) h+=' · Layover: '+s.t;
+        if(s.dep&&s.arr) h+='<br><span style="font-size:11px;color:#888;">Departs '+s.dep+' · Arrives '+s.arr+'</span>';
+        h+='</div>';
+      });
     }
-    el('flightBody').innerHTML=fb;
+    h+='</div>';
+    return h;
+  }
+
+  if(d.fo||d.fr||d.al||d.dt||d.totalTime){
+    show('flightCard');
+    var fsub=d.al||(d.ft||'');
+    if(d.totalTime) fsub+=(fsub?' · ':'')+d.totalTime+' total';
+    if(fsub) el('flightSub').textContent=fsub;
+    var from=d.air||'UK', to=d.dest||'Destination';
+    var outStops=[];
+    if(d.stop1) outStops.push({airport:d.stop1,fn:d.stop1fn,al:d.stop1al,t:d.stop1t,dep:d.stop1dep,arr:d.stop1arr});
+    if(d.stop2) outStops.push({airport:d.stop2,fn:d.stop2fn,al:d.stop2al,t:d.stop2t,dep:d.stop2dep,arr:d.stop2arr});
+    var retStops=[];
+    if(d.rstop1) retStops.push({airport:d.rstop1,fn:d.rstop1fn,al:d.rstop1al,t:d.rstop1t,dep:d.rstop1dep,arr:d.rstop1arr});
+    el('flightBody').innerHTML=flightCard('outbound',d.fo,from,to,d.dt,d.at,d.al,outStops)+(d.fr||d.rdt?flightCard('return',d.fr,to,from,d.rdt,d.rat,d.ral||d.al,retStops):'');
   }
 
   // Inclusions
@@ -403,8 +444,9 @@ window.addEventListener('DOMContentLoaded',function(){
   if(d.note){show('noteCard');el('noteText').textContent=d.note;}
 
   // Quote type visibility
-  if(d.qt==='flight'){hide('hotelCard');hide('incCard');}
+  if(d.qt==='flight'){hide('hotelCard');}
   if(d.qt==='hotel'){hide('flightCard');}
+  if(d.qt==='cruise'){/* show everything */}
 
   // Page title
   document.title=(d.dest||'Holiday')+' Quote — Melita Holidays';
