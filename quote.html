@@ -134,6 +134,7 @@ body{font-family:'Poppins',sans-serif;background:var(--cream);min-height:100vh;p
 @keyframes bounceIn{0%{transform:scale(0);}60%{transform:scale(1.15);}100%{transform:scale(1);}}
 @media(max-width:500px){.inclusions-grid{grid-template-columns:1fr 1fr;}.hotel-gallery.three{grid-template-columns:1fr;grid-template-rows:auto;}.hotel-gallery.three img:first-child{grid-row:auto;}}
 </style>
+<script src="destinations.js"></script>
 </head>
 <body>
 
@@ -352,7 +353,7 @@ window.addEventListener('DOMContentLoaded',function(){
 
   // Hero image
   var heroBg=document.getElementById('heroBg');
-  var heroUrl=getHeroImg(d.dest||d.hotel||'');
+  var heroUrl=(window.DEST_IMAGES&&window.DEST_IMAGES[(d.dest||'').toUpperCase()])||heroFallback;
   var heroImg=new Image();
   heroImg.onload=function(){heroBg.style.backgroundImage='url(\''+heroUrl+'\')';heroBg.classList.add('show');};
   heroImg.onerror=function(){/* no image, teal gradient shows */};
