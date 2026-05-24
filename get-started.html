@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Get Started · Moments by Shanaz</title>
+  <link rel="icon" href="favicon.png"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400;500&display=swap"/>
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box;}
+    :root{
+      --cream:#faf8f4;--warm:#f5f0e8;--border:#e8e0d0;
+      --char:#2c2825;--mid:#6b6460;--soft:#9c9490;
+      --gold:#b8924a;--gold-l:rgba(184,146,74,.12);
+    }
+    body{background:var(--cream);font-family:'Jost',sans-serif;color:var(--char);min-height:100vh;display:flex;flex-direction:column;}
+
+    /* NAV */
+    nav{display:flex;align-items:center;justify-content:space-between;padding:0 40px;height:60px;border-bottom:1px solid var(--border);background:var(--cream);position:sticky;top:0;z-index:10;}
+    .nav-logo{display:flex;align-items:center;gap:12px;text-decoration:none;}
+    .nav-logo img{height:36px;width:36px;object-fit:contain;border-radius:50%;}
+    .nav-logo span{font-size:10px;letter-spacing:.25em;text-transform:uppercase;color:var(--mid);}
+    .nav-back{font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--soft);text-decoration:none;transition:color .2s;}
+    .nav-back:hover{color:var(--gold);}
+
+    /* MAIN */
+    main{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:60px 24px;}
+
+    /* STEP WRAPPER */
+    .step-wrap{width:100%;max-width:600px;}
+
+    /* STEP HEADER */
+    .step-header{text-align:center;margin-bottom:40px;}
+    .step-eyebrow{font-size:10px;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:12px;}
+    .step-title{font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:300;line-height:1.2;margin-bottom:10px;}
+    .step-title em{font-style:italic;color:var(--gold);}
+    .step-sub{font-size:12px;color:var(--mid);line-height:1.9;max-width:420px;margin:0 auto;}
+
+    /* PRODUCT CARDS */
+    .product-grid{display:grid;grid-template-columns:1fr;gap:12px;margin-bottom:8px;}
+    .product-card{background:var(--warm);border:1px solid var(--border);border-radius:6px;padding:20px 24px;cursor:pointer;transition:all .25s;display:flex;align-items:center;gap:20px;user-select:none;}
+    .product-card:hover{border-color:var(--gold);background:var(--gold-l);}
+    .product-card.sel{border-color:var(--gold);background:var(--gold-l);}
+    .product-card .pc-icon{font-size:28px;flex-shrink:0;width:44px;text-align:center;}
+    .product-card .pc-text{}
+    .product-card .pc-name{font-size:13px;font-weight:500;color:var(--char);margin-bottom:3px;}
+    .product-card .pc-desc{font-size:11px;color:var(--soft);line-height:1.6;}
+    .product-card.sel .pc-name{color:var(--gold);}
+    .product-card .pc-check{margin-left:auto;width:20px;height:20px;border-radius:50%;border:1px solid var(--border);flex-shrink:0;transition:all .2s;display:flex;align-items:center;justify-content:center;}
+    .product-card.sel .pc-check{background:var(--gold);border-color:var(--gold);}
+    .pc-check-svg{display:none;}
+    .product-card.sel .pc-check-svg{display:block;}
+
+    /* PASSWORD GATE */
+    .pw-gate{display:none;margin-top:32px;animation:fadeUp .4s ease both;}
+    .pw-gate.vis{display:block;}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
+    .pw-card{background:var(--warm);border:1px solid var(--border);border-radius:6px;padding:28px 28px;}
+    .pw-label{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--mid);margin-bottom:16px;}
+    .pw-hint{font-size:12px;color:var(--soft);margin-bottom:20px;line-height:1.8;}
+    .pw-hint strong{color:var(--char);}
+    .pw-row{display:flex;gap:10px;}
+    .pw-input{flex:1;background:var(--cream);border:1px solid var(--border);border-radius:4px;padding:12px 16px;font-family:'Jost',sans-serif;font-size:14px;letter-spacing:.08em;color:var(--char);outline:none;transition:border-color .2s;}
+    .pw-input:focus{border-color:var(--gold);}
+    .pw-input.error{border-color:#c0392b;animation:shake .3s ease;}
+    @keyframes shake{0%,100%{transform:translateX(0);}25%{transform:translateX(-6px);}75%{transform:translateX(6px);}}}
+    .pw-btn{background:var(--char);color:var(--cream);border:none;border-radius:4px;padding:12px 24px;font-family:'Jost',sans-serif;font-size:11px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;cursor:pointer;transition:background .2s;white-space:nowrap;}
+    .pw-btn:hover{background:var(--gold);}
+    .pw-error{font-size:11px;color:#c0392b;margin-top:10px;display:none;}
+    .pw-error.vis{display:block;}
+
+    /* CONTINUE BTN (product selection) */
+    .continue-btn{width:100%;background:var(--char);color:var(--cream);border:none;border-radius:5px;padding:16px;font-family:'Jost',sans-serif;font-size:11px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;cursor:pointer;transition:background .2s;margin-top:20px;display:none;}
+    .continue-btn.vis{display:block;}
+    .continue-btn:hover{background:var(--gold);}
+
+    /* FOOTER */
+    footer{text-align:center;padding:24px;border-top:1px solid var(--border);font-size:11px;color:var(--soft);}
+    footer a{color:var(--gold);text-decoration:none;}
+
+    @media(max-width:500px){
+      nav{padding:0 20px;}
+      main{padding:40px 16px;}
+      .pw-row{flex-direction:column;}
+      .step-title{font-size:1.7rem;}
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">
+    <img src="logo-main.png" alt="Moments by Shanaz"/>
+    <span>Moments by Shanaz</span>
+  </a>
+  <a href="/" class="nav-back">← Back to home</a>
+</nav>
+
+<main>
+  <div class="step-wrap">
+
+    <!-- HEADER -->
+    <div class="step-header">
+      <p class="step-eyebrow">Already purchased on Etsy?</p>
+      <h1 class="step-title">Let's make your <em>moment</em></h1>
+      <p class="step-sub">Select what you purchased, then enter the password from your Etsy confirmation PDF to access your personalisation form.</p>
+    </div>
+
+    <!-- PRODUCT SELECTOR -->
+    <div class="product-grid">
+
+      <div class="product-card" onclick="selectProduct(this,'scratchcard')" data-product="scratchcard">
+        <div class="pc-icon">✨</div>
+        <div class="pc-text">
+          <div class="pc-name">Digital Scratchcard</div>
+          <div class="pc-desc">Proposal, gender reveal, holiday surprise, birthday &amp; more</div>
+        </div>
+        <div class="pc-check">
+          <svg class="pc-check-svg" width="10" height="10" viewBox="0 0 10 10" fill="none">
+            <path d="M2 5l2.5 2.5L8 3" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+      </div>
+
+      <div class="product-card" onclick="selectProduct(this,'invitation')" data-product="invitation">
+        <div class="pc-icon">💌</div>
+        <div class="pc-text">
+          <div class="pc-name">Digital Invitation</div>
+          <div class="pc-desc">Preset styles or fully bespoke — weddings, birthdays, kids parties &amp; more</div>
+        </div>
+        <div class="pc-check">
+          <svg class="pc-check-svg" width="10" height="10" viewBox="0 0 10 10" fill="none">
+            <path d="M2 5l2.5 2.5L8 3" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+      </div>
+
+      <div class="product-card" onclick="selectProduct(this,'physical')" data-product="physical">
+        <div class="pc-icon">🎁</div>
+        <div class="pc-text">
+          <div class="pc-name">Physical Keepsake</div>
+          <div class="pc-desc">Personalised glassware, clothing, sunglasses &amp; more</div>
+        </div>
+        <div class="pc-check">
+          <svg class="pc-check-svg" width="10" height="10" viewBox="0 0 10 10" fill="none">
+            <path d="M2 5l2.5 2.5L8 3" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- PASSWORD GATE -->
+    <div class="pw-gate" id="pwGate">
+      <div class="pw-card">
+        <p class="pw-label">Enter your access password</p>
+        <p class="pw-hint">Your password is in the <strong>PDF you received from Etsy</strong> immediately after purchase. Check your Etsy confirmation email if you can't find it.</p>
+        <div class="pw-row">
+          <input type="password" class="pw-input" id="pwInput" placeholder="Enter password"
+                 onkeydown="if(event.key==='Enter') checkPassword()"/>
+          <button class="pw-btn" onclick="checkPassword()">Access form →</button>
+        </div>
+        <p class="pw-error" id="pwError">Incorrect password — please check your PDF and try again.</p>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <p>Can't find your PDF? <a href="mailto:hello@momentsbyshanaz.co.uk">Email me</a> and I'll help straight away.</p>
+</footer>
+
+<script>
+  // ── PASSWORDS ──────────────────────────────────────────────
+  // These are set monthly via the admin password manager
+  // Format: lowercase, no spaces
+  const PASSWORDS = {
+    scratchcard: 'scratch2026',
+    invitation:  'invite2026',
+    physical:    'keepsake2026',
+  };
+
+  // ── DESTINATIONS ───────────────────────────────────────────
+  const DESTINATIONS = {
+    scratchcard: '/order.html',
+    invitation:  '/invitation.html',
+    physical:    '/shop.html',
+  };
+
+  // ── STATE ──────────────────────────────────────────────────
+  let selectedProduct = null;
+
+  // ── PRODUCT SELECTION ──────────────────────────────────────
+  function selectProduct(el, product) {
+    document.querySelectorAll('.product-card').forEach(c => c.classList.remove('sel'));
+    el.classList.add('sel');
+    selectedProduct = product;
+
+    const gate = document.getElementById('pwGate');
+    gate.classList.add('vis');
+    document.getElementById('pwInput').value = '';
+    document.getElementById('pwError').classList.remove('vis');
+    document.getElementById('pwInput').classList.remove('error');
+
+    // Scroll to password gate smoothly
+    setTimeout(() => gate.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 60);
+    setTimeout(() => document.getElementById('pwInput').focus(), 300);
+  }
+
+  // ── PASSWORD CHECK ─────────────────────────────────────────
+  function checkPassword() {
+    if (!selectedProduct) return;
+
+    const input = document.getElementById('pwInput');
+    const error = document.getElementById('pwError');
+    const entered = input.value.trim().toLowerCase();
+    const correct = PASSWORDS[selectedProduct].toLowerCase();
+
+    input.classList.remove('error');
+    error.classList.remove('vis');
+
+    if (entered === correct) {
+      // Set a session token so the destination page knows they're authorised
+      sessionStorage.setItem('mbs_auth_' + selectedProduct, 'true');
+      sessionStorage.setItem('mbs_auth_ts', Date.now());
+      input.value = '✓ Correct — taking you there…';
+      input.style.color = 'var(--gold)';
+      input.style.borderColor = 'var(--gold)';
+      setTimeout(() => {
+        window.location.href = DESTINATIONS[selectedProduct];
+      }, 800);
+    } else {
+      input.classList.add('error');
+      error.classList.add('vis');
+      input.value = '';
+      setTimeout(() => input.classList.remove('error'), 400);
+    }
+  }
+</script>
+
+</body>
+</html>
